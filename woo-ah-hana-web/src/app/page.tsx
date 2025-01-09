@@ -32,7 +32,7 @@ export default function Home() {
       <Card>
         <CardHeader>안녕</CardHeader>
         <CardContent>안녕</CardContent>
-        <CardFooter><ExampleDialog></ExampleDialog></CardFooter>
+        <CardFooter><ExampleDialog/></CardFooter>
       </Card>
     </div>
   );
@@ -42,13 +42,11 @@ function ExampleDialog(){
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <AchromaticButton>DialogTrigger</AchromaticButton>
       </DialogTrigger>
       <DialogContent title="다이얼로그 이름">
         <div className="p-5 text-center">
-          <p>기본 다이얼로그입니다.</p>
-          <p>기본 다이얼로그입니다.</p>
           <p>기본 다이얼로그입니다.</p>
           <p>기본 다이얼로그입니다.</p>
           <p>기본 다이얼로그입니다.</p>
