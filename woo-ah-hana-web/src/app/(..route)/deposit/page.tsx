@@ -26,7 +26,7 @@ export default function Deposit() {
         </Card>
       </div>
       <div>
-        <AchromaticButton className='w-full px-5'>다음</AchromaticButton>
+        <AchromaticButton className='w-full px-5 h-14 text-xl'>확인</AchromaticButton>
       </div>
     </div>
   );
