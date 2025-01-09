@@ -38,7 +38,7 @@
 
 | **김미강** | **김채운** | **김상현** |👑 **윤영헌** | **최선정** | **함형주** |
 | :------: |  :------: | :------: | :------: | :------: | :------: |
-| [<img src="https://avatars.githubusercontent.com/u/113813881?v=4" height=150 width=150> <br/> @mkngkm](https://github.com/mkngkm) | [<img src="" height=150 width=150> <br/> @김채운]() | [<img src="https://avatars.githubusercontent.com/u/114604135?v=4" height=150 width=150> <br/> @ddingorang](https://github.com/ddingorang)| [<img src="https://avatars.githubusercontent.com/u/107925716?v=4" height=150 width=150> <br/> @yoounyoungheon](https://github.com/yoounyoungheon)| [<img src="https://avatars.githubusercontent.com/u/128480236?v=4" height=150 width=150> <br/> @Choeseonjeong](https://github.com/Choeseonjeong)| [<img src="https://avatars.githubusercontent.com/u/108785508?v=4" height=150 width=150> <br/> @xzhhj01](https://github.com/xzhhj01)
+| [<img src="https://avatars.githubusercontent.com/u/113813881?v=4" height=150 width=150> <br/> @mkngkm](https://github.com/mkngkm) | [<img src="" height=150 width=150> <br/> @codnscodns](https://github.com/codnscodns) | [<img src="https://avatars.githubusercontent.com/u/114604135?v=4" height=150 width=150> <br/> @ddingorang](https://github.com/ddingorang)| [<img src="https://avatars.githubusercontent.com/u/107925716?v=4" height=150 width=150> <br/> @yoounyoungheon](https://github.com/yoounyoungheon)| [<img src="https://avatars.githubusercontent.com/u/128480236?v=4" height=150 width=150> <br/> @Choeseonjeong](https://github.com/Choeseonjeong)| [<img src="https://avatars.githubusercontent.com/u/108785508?v=4" height=150 width=150> <br/> @xzhhj01](https://github.com/xzhhj01)
 
 </div>
 
