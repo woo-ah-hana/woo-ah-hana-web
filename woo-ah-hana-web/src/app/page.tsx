@@ -13,7 +13,7 @@ export default function Home() {
       <Card>
         <CardHeader>안녕</CardHeader>
         <CardContent>안녕</CardContent>
-        <CardFooter><AchromaticButton variant={'outline'}>안녕</AchromaticButton></CardFooter>
+        <CardFooter><AchromaticButton variant={'ghost'}>안녕</AchromaticButton></CardFooter>
       </Card>
 
       <Card>
