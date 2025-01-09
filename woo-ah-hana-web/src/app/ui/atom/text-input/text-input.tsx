@@ -37,7 +37,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
       <div
         className={cn(
           'relative flex w-full min-w-[10rem] items-center rounded-lg border outline-none transition duration-100',
-          'shadow-sm',
+          'shadow-md',
           getInputColors(disabled, error),
           'has-[:focus]:ring-2',
           'has-[:focus]:border-blue-400 has-[:focus]:ring-blue-200',
@@ -52,7 +52,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
           value={value}
           type={type}
           className={cn(
-            'w-full rounded-lg border-none bg-transparent py-2 text-sm transition duration-100 focus:outline-none focus:ring-0',
+            'w-full rounded-lg border-none bg-transparent py-2 text-lg transition duration-100 focus:outline-none focus:ring-0',
             'text-black-1',
             '[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none',
             Icon ? 'pl-2' : 'pl-3',
