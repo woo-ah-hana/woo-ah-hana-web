@@ -1,6 +1,14 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 
 export default function DepositCheck() {
+  const router = useRouter();
+
+  const handleNavigation = () => {
+    router.push('/deposit/complete');
+  }
   return (
     <div className='h-screen p-10 flex flex-col justify-between'>
       <div className='mt-20 text-2xl align-center justify-center text-center flex flex-col gap-4'>
@@ -23,7 +31,7 @@ export default function DepositCheck() {
           </div>
         </div>
         <div>
-          <AchromaticButton className='w-full px-5 h-14 text-xl'>옮기기</AchromaticButton>
+          <AchromaticButton className='w-full px-5 h-14 text-xl' onClick={handleNavigation}>옮기기</AchromaticButton>
         </div>
       </div>
     </div>

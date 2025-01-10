@@ -1,8 +1,15 @@
+'use client'
+import { useRouter } from 'next/navigation';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import TextInput from '@/app/ui/atom/text-input/text-input';
-import { Card, CardContent, CardHeader } from '@/app/ui/molecule/card';
+import { Card } from '@/app/ui/molecule/card';
 
 export default function Deposit() {
+  const router = useRouter();
+
+  const handleNavigation = () => {
+    router.push('/deposit/check');
+  }
   return (
     <div className='p-10 h-screen flex flex-col justify-between'>
       <div className='flex flex-col gap-12'>
@@ -26,7 +33,7 @@ export default function Deposit() {
         </Card>
       </div>
       <div>
-        <AchromaticButton className='w-full px-5 h-14 text-xl'>확인</AchromaticButton>
+        <AchromaticButton className='w-full px-5 h-14 text-xl' onClick={handleNavigation}>확인</AchromaticButton>
       </div>
     </div>
   );
