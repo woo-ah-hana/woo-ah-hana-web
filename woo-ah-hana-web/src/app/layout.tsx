@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from 'next/font/local';
 import "./globals.css";
 import { cn } from "./utils/style/helper";
+import 'antd/dist/reset.css';
 
 const globalFont = localFont({
   src: './PretendardVariable.woff2',

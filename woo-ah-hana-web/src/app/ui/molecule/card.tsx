@@ -4,6 +4,9 @@ import { cn } from '@/app/utils/style/helper';
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
   <div
     ref={ref}
+    style={{
+      boxShadow: '0 3px 8px rgba(0.6, 0, 0, 0.2)',
+    }}
     className={cn(
       'rounded-xl border border-slate-200 bg-white text-slate-950 shadow',
       className,
