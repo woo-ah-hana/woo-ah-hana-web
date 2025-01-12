@@ -1,5 +1,5 @@
 import AchromaticButton from "../atom/button/achromatic-button";
-import { Dialog, DialogContent, DialogTrigger } from "../molecule/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "../molecule/dialog/dialog";
 
 export function ExampleDialog(){
 
