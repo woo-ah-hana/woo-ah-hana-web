@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className='h-screen p-10 flex flex-col justify-between'>
       <div className="justify-items-center">
-        <Image src={Logo} alt={"우아하나로고"} width={300} height={300}></Image>
+        <Image src={Logo} alt={"우아하나로고"} width={300} height={300} priority/>
       </div>
       <LoginForm/>
     </div>
