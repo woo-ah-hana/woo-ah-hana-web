@@ -1,18 +1,18 @@
-"use server"
+'use server'
+import { FormState } from "@/app/ui/molecule/form/form-root";
 import { API_PATH } from "@/app/utils/http/api-query";
 import { HttpError } from "@/app/utils/http/http-error";
 import { httpErrorHandler } from "@/app/utils/http/http-error-handler";
-import { FormState } from "@/app/utils/type/type";
 import { AxiosError } from "axios";
 import { cookies } from "next/headers";
 import { z } from 'zod';
 
-export const LogInFormSchema = z.object({
+const LogInFormSchema = z.object({
   username: z.string(),
   password: z.string(),
 });
 
-export type LogInRequestBody = z.infer<typeof LogInFormSchema>;
+type LogInRequestBody = z.infer<typeof LogInFormSchema>;
 
 
 export async function authenticate(prevState: FormState, formData: FormData):Promise<FormState> {
@@ -33,6 +33,7 @@ export async function authenticate(prevState: FormState, formData: FormData):Pro
   const body: LogInRequestBody = { ...validatedFields.data };
 
   try{
+    console.log(`${API_PATH}/member/login`)
     const response = await fetch(`${API_PATH}/member/login`, {
       method: 'POST',
       headers: {

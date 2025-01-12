@@ -18,7 +18,7 @@ interface FormRootProps {
   onSuccess?: ()=>void;
   onSubmit?: ()=>void;
   action: (prevState: FormState, formData: FormData) => Promise<FormState> | FormState;
-  failMessageControl: 'alert' | 'toast';
+  failMessageControl: 'alert';
 }
 
 export function FormRoot({
