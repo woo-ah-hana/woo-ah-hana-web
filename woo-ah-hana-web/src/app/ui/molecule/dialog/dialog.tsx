@@ -8,9 +8,8 @@ export const DialogTrigger = DialogPrimitive.Trigger;
 
 export const DialogContent = React.forwardRef<
   React.ComponentRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<
-    typeof DialogPrimitive.Content>
-    & { title?: string; description?: string; titleClassName?:string; descriptionClassName?:string }
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+  & { title?: string; description?: string; titleClassName?:string; descriptionClassName?:string }
   >(({ children, className, title, description, titleClassName, descriptionClassName, ...props }, forwardedRef) => (
   <DialogPrimitive.Portal>
     <DialogPrimitive.Overlay className="fixed inset-0 bg-black/50" />

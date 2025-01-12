@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Card } from '@/app/ui/molecule/card';
+import { Card } from '@/app/ui/molecule/card/card';
 import IconTransfer from '../assets/img/icon-transfer2.png';
 import IconSchedule from '../assets/img/icon-schedule.png';
 import IconMemory from '../assets/img/icon-memory.png';

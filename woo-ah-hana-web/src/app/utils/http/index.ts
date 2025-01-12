@@ -1,10 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
 import { cookies } from 'next/headers';
 
-export interface APIResponseType{
+export interface APIResponseType<T>{
   isSuccess: boolean,
   isFailure: boolean
-  data: unknown
+  data: T
 }
 
 export const instance = axios.create({

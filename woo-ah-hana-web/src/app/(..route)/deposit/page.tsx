@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import TextInput from '@/app/ui/atom/text-input/text-input';
-import { Card } from '@/app/ui/molecule/card';
+import { Card } from '@/app/ui/molecule/card/card';
 
 export default function Deposit() {
   const router = useRouter();

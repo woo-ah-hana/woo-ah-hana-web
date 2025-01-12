@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { Menu, MenuProps } from 'antd';
-import Bankbook from '@/app/components/bankbook';
-import CardMenu from '@/app/components/card-menu';
+import Bankbook from '@/app/ui/components/bankbook';
+import CardMenu from '@/app/ui/components/card-menu';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
