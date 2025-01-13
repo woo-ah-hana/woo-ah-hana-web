@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Menu, MenuProps } from 'antd';
 import Bankbook from '@/app/ui/components/bankbook';
 import CardMenu from '@/app/ui/components/card-menu';
+import { useRouter } from 'next/navigation';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -64,17 +65,20 @@ const GroupMenu: React.FC<{ onMenuSelect: (key: string) => void }> = ({
 
 export default function Home() {
   const [selectedGroup, setSelectedGroup] = useState('group1');
+  const router = useRouter();
 
   const renderContent = () => {
     const group = groupData.find((g) => g.key === selectedGroup);
     if (!group) return null;
 
     return (
-      <Bankbook
-        title={group.title}
-        accountNumber={group.accountNumber}
-        balance={group.balance}
-      />
+      <div onClick={()=> router.push(`/account-log`)}>
+        <Bankbook
+          title={group.title}
+          accountNumber={group.accountNumber}
+          balance={group.balance}
+        />
+      </div>
     );
   };
 
