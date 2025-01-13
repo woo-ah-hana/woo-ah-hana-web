@@ -1,4 +1,4 @@
-import LoginForm from "./ui/components/login-form";
+import LoginForm from "./ui/components/auth/login-form";
 import Image from "next/image";
 import Logo from '@/app/assets/img/logo.png';
 
