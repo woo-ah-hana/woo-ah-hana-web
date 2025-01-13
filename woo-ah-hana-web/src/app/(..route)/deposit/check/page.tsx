@@ -11,7 +11,7 @@ export default function DepositCheck() {
   }
   return (
     <div className='h-screen p-10 flex flex-col justify-between'>
-      <div className='mt-20 text-2xl align-center justify-center text-center flex flex-col gap-4'>
+      <div className='mt-10 text-2xl align-center justify-center text-center flex flex-col gap-4'>
         <h1>토스 뱅크 통장으로</h1>
         <h1>
           <span className='text-3xl'>10000</span> 원을
