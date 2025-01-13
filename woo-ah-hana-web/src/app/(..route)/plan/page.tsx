@@ -2,8 +2,8 @@ import { PlanListItem } from "@/app/ui/components/plan/plan-list-item";
 import IconMemory from '@/app/assets/img/icon-closing.png'
 import { getPlans } from "@/app/business/plan/plan.service";
 
-export default async function Home(){
-  const getPlansResponse = await getPlans('3fa85f64-5717-4562-b3fc-2c963f66afa6')
+export default async function Home({searchParams}:{searchParams: { [key: string]: string | string[] | undefined }}){
+  const getPlansResponse = await getPlans(searchParams.id as string)
   const plans = getPlansResponse.data;
   console.log(plans);
 
@@ -11,6 +11,7 @@ export default async function Home(){
     return (
       <main key={index}>
         <PlanListItem 
+          planId={item.getId()}
           icons={IconMemory.src}
           title={item.getTitle()}
           category={item.getCategory()}
