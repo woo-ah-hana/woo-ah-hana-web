@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Card, CardContent, CardHeader } from '@/app/ui/molecule/card';
+import { Card, CardContent, CardHeader } from '@/app/ui/molecule/card/card';
 import CardMenu from './card-menu';
 
 type Props = {
