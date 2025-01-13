@@ -65,6 +65,7 @@ export async function authenticate(prevState: FormState, formData: FormData):Pro
       message: "로그인에 성공했습니다.",
     };
   } catch(error){
+    // TODO: 백엔드와 예외 메세지 처리 합의
     console.log(error)
     if(error instanceof Error && error instanceof AxiosError){
       const exception = await httpErrorHandler(error);
@@ -79,7 +80,7 @@ export async function authenticate(prevState: FormState, formData: FormData):Pro
         isSuccess: false,
         isFailure: true,
         validationError: {},
-        message: '알 수 없는 오류가 발생했습니다.'
+        message: '아이디와 비밀번호가 맞지 않습니다.'
       }
     }
   }
