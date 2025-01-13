@@ -8,11 +8,11 @@ import IconMemory from '../../assets/img/icon-memory.png';
 import IconManagement from '../../assets/img/icon-management.png';
 import IconClosing from '../../assets/img/icon-closing.png';
 import IconFeeCheck from '../../assets/img/icon-fee-check.png';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 type MenuItem = {
-  label: string;
-  icon: string;
+  label: React.ReactNode;
+  icon: StaticImageData;
   onClick?: () => void;
 };
 
@@ -86,7 +86,7 @@ const CardMenu: React.FC = () => {
           onClick={item.onClick}
           className='aspect-square flex justify-between p-4 cursor-pointer shadow hover:shadow-lg transition'
         >
-          <div className='flex flex-col w-full text-[20px] font-semibold text-gray-800'>
+          <div className='flex flex-col w-full text-[20px]'>
             <div className='h-1/2'>{item.label}</div>
             <div className='h-1/2 flex justify-end items-end'>
               <Image

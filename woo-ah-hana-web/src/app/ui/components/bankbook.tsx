@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader } from '@/app/ui/molecule/card/card';
-import CardMenu from './card-menu';
 
 type Props = {
   title: string; // 모임통장 이름
@@ -15,7 +14,7 @@ const Bankbook: React.FC<Props> = ({ title, accountNumber, balance }) => (
 style={{
     boxShadow: '2px 5px 8px rgba(0, 0, 0, 0.4)',
   }}
-className='bg-wooahMain text-white'>
+className='bg-wooahMain text-white border-wooahMain'>
     <div className='flex justify-between'>
       <CardHeader>{title}</CardHeader>
       <CardHeader>{accountNumber}</CardHeader>

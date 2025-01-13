@@ -12,8 +12,8 @@ export default function Deposit() {
   }
   return (
     <div className='p-10 h-screen flex flex-col justify-between'>
-      <div className='flex flex-col gap-12'>
-        <div className='border-none shadow-none mt-20'>
+      <div className='flex flex-col gap-10'>
+        <div className='border-none shadow-none mt-10'>
           <h1 className='text-2xl'>
             하나은행 통장<span className='text-lg'>에서</span>
           </h1>

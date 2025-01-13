@@ -8,7 +8,7 @@ const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false });
 export default function DepositComplete() {
   return (
     <div className='h-screen p-10 flex flex-col justify-between'>
-      <div className='mt-20 text-2xl align-center justify-center text-center flex flex-col gap-4'>
+      <div className='mt-10 text-2xl align-center justify-center text-center flex flex-col gap-4'>
         <h1>토스 뱅크 통장으로</h1>
         <h1>
           <span className='text-3xl'>10000</span> 원을
@@ -25,7 +25,7 @@ export default function DepositComplete() {
         </div>
       </div>
       <AchromaticButton className='w-full px-5 h-14 text-xl'>
-        옮기기
+        확인
       </AchromaticButton>
     </div>
   );
