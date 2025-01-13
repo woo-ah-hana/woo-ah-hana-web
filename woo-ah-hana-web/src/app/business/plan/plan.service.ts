@@ -16,6 +16,7 @@ interface GetPlanListDto{
 
 export async function getPlans(communityId: string):Promise<APIResponseType<Plan[]>> {
   const response = await instance.get(`${API_PATH}/plan/list/${communityId}`);
+
   if(response.status==500){
     throw new InternetServerError(
       {
@@ -57,5 +58,4 @@ export async function getPlans(communityId: string):Promise<APIResponseType<Plan
       }
     )
   }
-    
 }

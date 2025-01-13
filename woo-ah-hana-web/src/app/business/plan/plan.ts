@@ -41,4 +41,13 @@ export class Plan{
       id, communityId, title, startDate, endDate, category, locations, memberIds
     )
   }
+
+  public getId(){return this.id}
+  public getCommunityId(){return this.communityId}
+  public getTitle(){return this.title}
+  public getStartDate(){return this.startDate}
+  public getEndDate(){return this.endDate}
+  public getCategory(){return this.category}
+  public getLocations(){return this.locations}
+  public getMemberIds(){return this.memberIds}
 }
