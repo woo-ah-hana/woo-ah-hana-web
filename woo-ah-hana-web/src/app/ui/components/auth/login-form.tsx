@@ -1,6 +1,7 @@
 'use client'
 import { authenticate } from "@/app/business/auth/login.service";
-import Form from "../molecule/form/form-index";
+import Form from "../../molecule/form/form-index";
+
 
 export default function LoginForm(){
 
