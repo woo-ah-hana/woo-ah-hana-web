@@ -24,7 +24,7 @@ export default function AccountManagement() {
           balance={23450000}
           footer={
             <div className='w-[100%] flex justify-between'>
-              <AchromaticButton variant={'outline'} className='w-[45%]'>자동이체</AchromaticButton>
+              <AchromaticButton variant={'secondary'} className='w-[45%]'>자동이체</AchromaticButton>
               <AchromaticButton variant={'secondary'} className='w-[45%]'>계좌변경</AchromaticButton>
             </div>
           }

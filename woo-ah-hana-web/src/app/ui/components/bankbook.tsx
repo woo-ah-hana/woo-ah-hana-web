@@ -21,10 +21,10 @@ className='bg-wooahMain text-white border-wooahMain'>
       <CardHeader>{title}</CardHeader>
       <CardHeader>{accountNumber}</CardHeader>
     </div>
-    <div className='flex justify-center items-center flex-grow text-2xl mb-5 mt-2'>
-      <CardContent className='flex justify-center items-center gap-1 text-[26px]'>
+    <div className='flex flex-col justify-center items-center text-2xl mb-5 mt-2'>
+      <div className='flex justify-center items-center gap-1 text-[26px]'>
         {balance} <span className='text-[20px]'> 원</span>
-      </CardContent>
+      </div>
     </div>
     {footer && 
     <CardFooter className='flex justify-center items-center'>
