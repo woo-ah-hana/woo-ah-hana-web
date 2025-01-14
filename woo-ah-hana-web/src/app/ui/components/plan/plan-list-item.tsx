@@ -15,7 +15,7 @@ export function PlanListItem({icons, title, category, startDate, endDate, locati
   return (
     <main>
       <Link href={`plan/detail?id=${planId}`}>
-        <Card className="grid grid-cols-[1fr_1fr_2fr] gap-2">
+        <Card className="grid grid-cols-[1fr_2fr_2fr] gap-2">
             <div className="p-2 flex justify-center items-center">
             <Image src={icons} alt="" width={50} height={50}/>
             </div>
@@ -24,9 +24,7 @@ export function PlanListItem({icons, title, category, startDate, endDate, locati
             <p className="text-sm text-slate-500">{`# ${category}`}</p>
             </div>
             <div className="grid grid-cols-1">
-                <p className="text-sm mt-2"><strong>{locations.map((item)=>{
-                    return item
-                })}</strong></p>
+                <p className="text-sm mt-2"><strong>{locations[0]}</strong></p>
                 {/* TODO: 날짜 표기 방식 논의 필요 */}
                 <p className="text-sm text-slate-500">{startDate.substring(5,10)}~{endDate.substring(5,10)}</p>
             </div>

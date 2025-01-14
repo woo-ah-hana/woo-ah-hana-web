@@ -14,6 +14,46 @@ interface GetPlanListDto{
     locations: string[];
 }
 
+export async function getPlan(planId: string):Promise<APIResponseType<Plan>> {
+  const response = await instance.get(`${API_PATH}/plan/${planId}`);
+
+  if(response.status==500){
+    throw new InternetServerError(
+      {
+        message: '서버가 불안정합니다. 잠시후 시도해주세요.',
+        statusCode: response.status,
+        response: response.data
+      }
+    )
+  }
+  try{
+    const data: Plan = Plan.create(
+      response.data.id,
+      response.data.communityId,
+      response.data.title,
+      response.data.startDate,
+      response.data.endDate,
+      response.data.category,
+      response.data.locations,
+      response.data.memberIds
+    );
+    
+    return {
+      isSuccess: true,
+      isFailure: false,
+      data: data
+    }
+  }catch(error){
+    console.log(error)
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+  
+}
+
 export async function getPlans(communityId: string):Promise<APIResponseType<Plan[]>> {
   const response = await instance.get(`${API_PATH}/plan/list/${communityId}`);
 
