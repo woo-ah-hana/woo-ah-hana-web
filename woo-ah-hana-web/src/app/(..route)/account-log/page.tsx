@@ -85,7 +85,7 @@ export default function AccountLog() {
           title={'맛집탐방'}
           accountNumber={'12-3456-456-789'}
           balance={23400000}
-          footer={<div mb-5></div>}
+          footer={<div></div>}
         />
         <List
           className='mt-5 text-[15px]'
