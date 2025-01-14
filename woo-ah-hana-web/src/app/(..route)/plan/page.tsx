@@ -8,7 +8,6 @@ import Link from "next/link";
 export default async function Home({searchParams}:{searchParams: { [key: string]: string | string[] | undefined }}){
   const getPlansResponse = await getPlans(searchParams.id as string)
   const plans = getPlansResponse.data;
-  console.log(plans)
 
   // TODO: Icon은 랜덤 ?
   const PlansView: React.ReactNode[] | undefined = plans?.map((item, index)=>{
