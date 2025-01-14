@@ -9,6 +9,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
   const getPlansResponse = await getPlans(searchParams.id as string)
   const plans = getPlansResponse.data;
 
+  // TODO: Icon은 랜덤 ?
   const PlansView: React.ReactNode[] | undefined = plans?.map((item, index)=>{
     return (
       <main key={index}>
