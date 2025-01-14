@@ -1,15 +1,17 @@
 'use client';
 
 import React from 'react';
-import { Card, CardContent, CardHeader } from '@/app/ui/molecule/card/card';
+import { Card, CardContent, CardFooter, CardHeader } from '@/app/ui/molecule/card/card';
+import AchromaticButton from '../atom/button/achromatic-button';
 
 type Props = {
   title: string; // 모임통장 이름
   accountNumber: string; // 계좌번호
   balance: number; // 잔액
+  footer?: React.ReactNode;
 };
 
-const Bankbook: React.FC<Props> = ({ title, accountNumber, balance }) => (
+const Bankbook: React.FC<Props> = ({ title, accountNumber, balance, footer }) => (
 <Card 
 style={{
     boxShadow: '2px 5px 8px rgba(0, 0, 0, 0.4)',
@@ -19,11 +21,16 @@ className='bg-wooahMain text-white border-wooahMain'>
       <CardHeader>{title}</CardHeader>
       <CardHeader>{accountNumber}</CardHeader>
     </div>
-    <div className='flex justify-center items-center flex-grow text-2xl mb-7 mt-2'>
+    <div className='flex justify-center items-center flex-grow text-2xl mb-5 mt-2'>
       <CardContent className='flex justify-center items-center gap-1 text-[26px]'>
         {balance} <span className='text-[20px]'> 원</span>
       </CardContent>
     </div>
+    {footer && 
+    <CardFooter className='flex justify-center items-center'>
+      {footer}
+      </CardFooter>
+      }
   </Card>
 );
 
