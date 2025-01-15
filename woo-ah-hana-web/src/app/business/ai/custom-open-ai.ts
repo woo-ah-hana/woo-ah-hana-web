@@ -7,19 +7,19 @@ export class CustomAI {
     return new CustomAI();
   }
 
-  async makeActivePlan(searchData: NaverSearchResult[]):Promise<ActivePlan[]>{
+  async makeActivePlan(searchData: NaverSearchResult[], startDate: string, endDate: string):Promise<ActivePlan[]>{
     const content: string = `
-    
-    요청 데이터: ${searchData}
+    요청 데이터: ${JSON.stringify(searchData)}
 
     1. 요청 데이터 리스트의 아이템 중 link에 들어가서 정보를 확인하고
     2. 위치정보를 고려해서(mapx, mapy)
     3. 여행일정을 아래의 JSON 객체 리스트 형식으로 출력해줘.
-    4. 여행기간: 2019-01-13 ~ 2019-01-15
-    5. 응답 데이터는 리스트야. 추가적인 답변은 하지말아줘.
-    6. 응답 형식: [{date: string, schedule:string, time:string, description: string, address: string, link: string, mapx: string, mapy: string}]
-    7. 밑의 응답 예시는 단순히 예시일 뿐이야. 위 "요청 데이터"를 기반으로 답변해줘.
-    8. 응답 예시: [
+    4. 꼭 요청 데이터의 모든 데이터가 안들어가도 괜찮아.
+    5. 여행기간: ${startDate} ~ ${endDate}
+    6. 응답 데이터는 리스트야. 추가적인 답변은 하지말아줘.
+    7. 응답 형식: [{date: string, schedule:string, time:string, description: string, address: string, link: string, mapx: string, mapy: string}]
+    8. 밑의 응답 예시는 단순히 예시일 뿐이야. 위 "요청 데이터"를 기반으로 답변해줘.
+    9. 응답 예시: [
   {
     date: "1월 13일",
     schedule: "동화가든에서 아침 식사",
