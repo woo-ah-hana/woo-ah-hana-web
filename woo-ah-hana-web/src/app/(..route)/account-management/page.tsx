@@ -4,8 +4,7 @@ import Bankbook from '@/app/ui/components/bankbook';
 import Image from 'next/image';
 import ProfileImage from '../../assets/img/profile.jpg';
 import FeeSettingModal from '@/app/ui/components/account/fee-setting.modal';
-import { Dialog } from '@/app/ui/molecule/dialog/dialog';
-import { DialogTrigger } from '@radix-ui/react-dialog';
+import MemberInviteModdal from '@/app/ui/components/account/member-invite.modal';
 
 //임시 멤버 데이터
 const members = [
@@ -82,7 +81,7 @@ export default function AccountManagement() {
             </div>
           ))}
         </div>
-        <AchromaticButton className='w-full'>멤버 초대하기</AchromaticButton>
+        <MemberInviteModdal />
       </div>
     </div>
   );
