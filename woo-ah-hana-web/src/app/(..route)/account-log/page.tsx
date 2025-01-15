@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Bankbook from '@/app/ui/components/bankbook';
-import { Skeleton, Divider, List, Avatar } from 'antd';
+import { Skeleton, Divider, List } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space, Typography } from 'antd';

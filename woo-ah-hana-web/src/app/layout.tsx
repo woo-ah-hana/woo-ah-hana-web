@@ -25,7 +25,7 @@ export default function RootLayout({
       <body
         className={cn(globalFont.variable, 'font-pretendard')}
       >
-        {children}
+        {children} 
       </body>
     </html>
   );
