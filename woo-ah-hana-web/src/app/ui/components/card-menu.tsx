@@ -22,9 +22,9 @@ const CardMenu: React.FC = () => {
 
   const onClick = (menuKey: string) => {
     switch (menuKey) {
-      case 'transfer':
+      case 'deposit':
         console.log('모임통장에 입금 클릭');
-        router.push('/transfer');
+        router.push('/deposit');
         break;
       case 'management':
         console.log('내/모임 계좌관리 클릭');
@@ -61,7 +61,7 @@ const CardMenu: React.FC = () => {
         </>
       ),
       icon: IconTransfer,
-      onClick: () => onClick('transfer'),
+      onClick: () => onClick('deposit'),
     },
     {
       label: (

@@ -77,6 +77,7 @@ export default function Home() {
           title={group.title}
           accountNumber={group.accountNumber}
           balance={group.balance}
+          footer={<div></div>}
         />
       </div>
     );
