@@ -3,6 +3,9 @@ import ToggleButton from '@/app/ui/atom/toggle/toggle-button';
 import Bankbook from '@/app/ui/components/bankbook';
 import Image from 'next/image';
 import ProfileImage from '../../assets/img/profile.jpg';
+import FeeSettingModal from '@/app/ui/components/account/fee-setting.modal';
+import { Dialog } from '@/app/ui/molecule/dialog/dialog';
+import { DialogTrigger } from '@radix-ui/react-dialog';
 
 //임시 멤버 데이터
 const members = [
@@ -53,7 +56,7 @@ export default function AccountManagement() {
           <div>회비 주기</div>
           <div>매월 30일</div>
         </div>
-        <AchromaticButton className='w-full'>회비 설정하기</AchromaticButton>
+        <FeeSettingModal/>
       </div>
       <hr className='bg-gray-800 my-3' />
       <div className='flex flex-col gap-5  text-[17px] mb-20'>
