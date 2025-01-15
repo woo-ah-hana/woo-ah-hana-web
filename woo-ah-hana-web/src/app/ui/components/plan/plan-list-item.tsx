@@ -1,9 +1,9 @@
 import Link from "next/link"
 import { Card } from "../../molecule/card/card"
-import Image from "next/image"
+import {categoryColors,categoryIcons} from '../../atom/category/category'
+import React from "react";
 
 export interface PlanListItemProps{
-  icons: string,
   title: string,
   category: string,
   startDate: string,
@@ -11,13 +11,17 @@ export interface PlanListItemProps{
   locations: string[],
   planId: string
 }
-export function PlanListItem({icons, title, category, startDate, endDate, locations, planId }: PlanListItemProps){
-  return (
+
+
+export function PlanListItem({ title, category, startDate, endDate, locations, planId }: PlanListItemProps){
+    const iconSrc = categoryIcons[category];
+    const bgColor = categoryColors[category];
+    return (
     <main>
       <Link href={`plan/detail?id=${planId}`}>
-        <Card className="grid grid-cols-[1fr_2fr_2fr] gap-2">
+          <Card className={`grid grid-cols-[1fr_2fr_2fr] gap-2 ${bgColor}`}>
             <div className="p-2 flex justify-center items-center">
-            <Image src={icons} alt="" width={50} height={50}/>
+                <img src={iconSrc} alt={category}/>
             </div>
             <div className="grid grid-cols-1">
             <p className="text-base mt-2"><strong>{title}</strong></p>
