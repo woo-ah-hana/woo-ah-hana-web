@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { ActivePlan, NaverSearchResult } from "../plan/active-plan";
+import { ActivePlan, SearchResult } from "../plan/active-plan";
 
 export class CustomAI {
   private readonly openai = new OpenAI({apiKey: `${process.env.AI_SECRETE}`})
@@ -7,7 +7,7 @@ export class CustomAI {
     return new CustomAI();
   }
 
-  async makeActivePlan(searchData: NaverSearchResult[], startDate: string, endDate: string):Promise<ActivePlan[]>{
+  async makeActivePlan(searchData: SearchResult[], startDate: string, endDate: string):Promise<ActivePlan[]>{
     const content: string = `
     요청 데이터: ${JSON.stringify(searchData)}
 
