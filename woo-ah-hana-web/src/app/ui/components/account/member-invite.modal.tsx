@@ -9,7 +9,7 @@ import {
 } from '../../molecule/dialog/dialog';
 import { useState } from 'react';
 
-export default function MemberInvireModal(){
+export default function MemberInviteModal(){
     const [isOpen, setIsOpen] = useState(false); 
 
     const handleCancelButton = () => {
