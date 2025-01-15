@@ -55,7 +55,9 @@ export async function getPlan(planId: string):Promise<APIResponseType<Plan>> {
 }
 
 export async function getPlans(communityId: string):Promise<APIResponseType<Plan[]>> {
-  const response = await instance.get(`${API_PATH}/plan/list/${communityId}`);
+
+    const response = await instance.get(`${API_PATH}/plan/list/${communityId}`);
+
 
   if(response.status==500){
     throw new InternetServerError(
