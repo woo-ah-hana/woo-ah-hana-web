@@ -23,7 +23,7 @@ export default function FeeStatus() {
   return (
     <div className='p-5 flex flex-col gap-8'>
       <div className='flex flex-col justify-center items-start'>
-        <div className='text-[18px] mb-2'>안 낸 멤버</div>
+        <div className='text-[18px] mb-4'>안 낸 멤버</div>
         {unpaidMembers.map((member, index) => (
           <div
             key={index}
@@ -43,7 +43,7 @@ export default function FeeStatus() {
       </div>
       <hr></hr>
       <div className='flex flex-col justify-center items-start'>
-        <div className='text-[18px] mb-2'>모임 멤버</div>
+        <div className='text-[18px] mb-4'>모임 멤버</div>
         {members.map((member, index) => (
           <div
             key={index}

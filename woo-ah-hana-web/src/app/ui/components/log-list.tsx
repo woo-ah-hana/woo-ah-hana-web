@@ -20,7 +20,7 @@ interface DataType {
   nat: string;
 }
 
-const LogList: React.FC = () => {
+export default function LogList(){
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState<DataType[]>([]);
   
@@ -79,5 +79,3 @@ const LogList: React.FC = () => {
       </div>
     );
   };
-
-export default LogList;

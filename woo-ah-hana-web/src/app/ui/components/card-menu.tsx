@@ -17,7 +17,7 @@ type MenuItem = {
   onClick?: () => void;
 };
 
-const CardMenu: React.FC = () => {
+export default function CardMenu(){
   const router = useRouter();
 
   const onClick = (menuKey: string) => {
@@ -133,5 +133,3 @@ const CardMenu: React.FC = () => {
     </div>
   );
 };
-
-export default CardMenu;

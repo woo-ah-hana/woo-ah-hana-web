@@ -10,7 +10,7 @@ import Dropdown from '../../atom/drop-down/drop-down';
 import TextInput from '../../atom/text-input/text-input';
 import { useState } from 'react';
 
-const FeeSettingModal: React.FC = () => {
+export default function FeeSettingModal(){
   const [isOpen, setIsOpen] = useState(false); 
   const dates = Array.from({ length: 30 }, (_, i) => (i + 1).toString());
 
@@ -43,6 +43,4 @@ const FeeSettingModal: React.FC = () => {
       </DialogContent>
     </Dialog>
   );
-};
-
-export default FeeSettingModal;
+}

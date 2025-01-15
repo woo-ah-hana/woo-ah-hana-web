@@ -7,7 +7,7 @@ type DropdownProps = {
   onSelect: (option: string) => void;
 };
 
-const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
+export default function Dropdown({ options, onSelect }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>('1');
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -22,7 +22,10 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -33,45 +36,53 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className='relative' ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
-        className="flex items-center justify-between px-4 py-2 bg-white text-black rounded-md shadow-md hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 w-auto"
+        className='flex items-center justify-between px-4 py-2 bg-white text-black rounded-md shadow-md hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 w-auto'
       >
         <span>{selectedOption + ' 일' || 'Select an option'}</span>
-        <span className="ml-2">
+        <span className='ml-2'>
           {isOpen ? (
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-4 w-4'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M5 15l7-7 7 7'
+              />
             </svg>
           ) : (
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-4 w-4'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M19 9l-7 7-7-7'
+              />
             </svg>
           )}
         </span>
       </button>
       {isOpen && (
-        <ul
-        className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg max-h-28 overflow-y-auto z-50"
-      >
+        <ul className='absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg max-h-28 overflow-y-auto z-50'>
           {options.map((option, index) => (
             <li
               key={index}
               onClick={() => handleOptionClick(option)}
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              className='px-4 py-2 hover:bg-gray-100 cursor-pointer'
             >
               {option}
             </li>
@@ -80,6 +91,4 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
       )}
     </div>
   );
-};
-
-export default Dropdown;
+}
