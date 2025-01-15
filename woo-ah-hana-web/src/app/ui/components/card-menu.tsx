@@ -42,9 +42,9 @@ const CardMenu: React.FC = () => {
         console.log('모임 결산 클릭');
         router.push('/closing');
         break;
-      case 'feeCheck':
+      case 'fee-status':
         console.log('회비 입금 현황 클릭');
-        router.push('/fee-check');
+        router.push('/fee-status');
         break;
       default:
         console.error('잘못된 메뉴 선택');
@@ -110,7 +110,7 @@ const CardMenu: React.FC = () => {
         </>
       ),
       icon: IconFeeCheck,
-      onClick: () => onClick('fee-check'),
+      onClick: () => onClick('fee-status'),
     },
   ];
 
