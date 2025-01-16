@@ -1,5 +1,9 @@
+"use client";
+
 import { FaUserCircle } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import Form from "../../molecule/form/form-index";
+import { deletePost } from "@/app/business/memory/memory.service";
+
 export interface MemoryDetailProps {
   id: string;
   memberId: string;
@@ -7,7 +11,6 @@ export interface MemoryDetailProps {
   description: string;
   createdAt: string;
 }
-
 export function MemoryDetail({
   id,
   memberId,
@@ -16,7 +19,6 @@ export function MemoryDetail({
   createdAt,
 }: MemoryDetailProps) {
   const date = createdAt.split(" ")[0];
-
   return (
     <main>
       <div className="mt-5">
@@ -32,7 +34,19 @@ export function MemoryDetail({
         <div className=" h-52 bg-red-100">이미지{`# ${imageUrl}`}</div>
         <div className="flex flex-row justify-between">
           <div className="text-lg">{description}</div>
-          <RiDeleteBin6Line />
+          <Form
+            id={"delete-post"}
+            action={deletePost}
+            failMessageControl={"alert"}
+            onSuccess={() => {
+              window.location.reload();
+            }}
+          >
+            <div>
+              <input id="id" name="id" value={id} className="hidden" />
+              <Form.SubmitButton label="삭제" />
+            </div>
+          </Form>
         </div>
       </div>
     </main>

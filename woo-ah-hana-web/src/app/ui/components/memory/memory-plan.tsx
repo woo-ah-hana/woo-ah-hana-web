@@ -27,7 +27,7 @@ export function MemoryPlan({
   const date = endDate.split(" ")[0];
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-5">
         <h2 className="text-lg font-bold">{title}</h2>
         <p className="text-sm text-gray-500">{date}</p>
       </div>

@@ -2,6 +2,7 @@ import { MemoryDetail } from "@/app/ui/components/memory/memory-detail";
 import { getPostsByPlanId } from "@/app/business/memory/memory.service";
 import { getPlan } from "@/app/business/plan/plan.service";
 import { MemoryPlan } from "@/app/ui/components/memory/memory-plan";
+
 export default async function Home({
   searchParams,
 }: {
@@ -9,16 +10,15 @@ export default async function Home({
 }) {
   const planId =
     (searchParams.id as string) || "dcd10a10-3fba-4c8b-9a83-bc6a09472f09";
-  console.log(planId);
   const detailResponse = await getPostsByPlanId(planId);
   const getPlansResponse = await getPlan(planId);
-  console.log("plan가져온것", getPlansResponse);
 
   const memories =
     detailResponse.isSuccess && Array.isArray(detailResponse.data)
       ? detailResponse.data
       : [];
   const plan = getPlansResponse.data;
+
   return (
     <main>
       <div className="p-5">

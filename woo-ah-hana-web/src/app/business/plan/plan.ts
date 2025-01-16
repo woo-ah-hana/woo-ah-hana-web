@@ -6,6 +6,7 @@ export class Plan {
   private endDate: string;
   private category: string;
   private locations: string[];
+  private memberIds: string[];
   private memberNames: string[];
 
   constructor(
@@ -16,6 +17,7 @@ export class Plan {
     endDate: string,
     category: string,
     locations: string[],
+    memberIds: string[],
     memberNames: string[]
   ) {
     this.id = id;
@@ -25,6 +27,7 @@ export class Plan {
     this.endDate = endDate;
     this.category = category;
     this.locations = locations;
+    this.memberIds = memberIds;
     this.memberNames = memberNames;
   }
 
@@ -36,6 +39,7 @@ export class Plan {
     endDate: string,
     category: string,
     locations: string[],
+    memberIds: string[],
     memberNames: string[]
   ) {
     return new Plan(
@@ -46,6 +50,7 @@ export class Plan {
       endDate,
       category,
       locations,
+      memberIds,
       memberNames
     );
   }
@@ -70,6 +75,9 @@ export class Plan {
   }
   public getLocations() {
     return this.locations;
+  }
+  public getMemberIds() {
+    return this.memberIds;
   }
   public getMemberNames() {
     return this.memberNames;

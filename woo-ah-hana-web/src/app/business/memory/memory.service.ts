@@ -1,8 +1,11 @@
+"use server";
+
 import { APIResponseType, instance } from "@/app/utils/http";
 import { Plan } from "@/app/business/plan/plan";
 import { InternetServerError } from "@/app/utils/http/http-error";
 import { API_PATH } from "@/app/utils/http/api-query";
 import { Memory } from "@/app/business/memory/memory";
+import { FormState } from "@/app/ui/molecule/form/form-root";
 
 interface GetCompletedPlanListDto {
   id: string;
@@ -11,6 +14,7 @@ interface GetCompletedPlanListDto {
   endDate: string;
   category: string;
   locations: string[];
+  memberIds: string[];
   memberNames: string[];
 }
 
@@ -90,6 +94,7 @@ export async function getCompletedPlans(
           item.endDate,
           item.category,
           item.locations,
+          item.memberIds,
           item.memberNames
         )
       );
@@ -108,31 +113,24 @@ export async function getCompletedPlans(
     });
   }
 }
-/*
-export async function deletePost(
-  postId: string
-): Promise<APIResponseType<Memory[]>> {
-  const response = await instance.delete(`${API_PATH}/post/${postId}`);
 
-  if (response.status == 500) {
+export async function deletePost(
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  const id = formData.get("id");
+  const response = await instance.delete(`${API_PATH}/post/${id}`);
+  if (response.status === 500) {
     throw new InternetServerError({
-      message: "서버가 불안정합니다. 잠시후 시도해주세요.",
+      message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
       statusCode: response.status,
       response: response.data,
     });
   }
-
-  try {
-    return {
-      isSuccess: true,
-      isFailure: false,
-      data: [],
-    };
-  } catch (error) {
-    console.log("erre", error);
-    throw new InternetServerError({
-      message: "서버가 불안정합니다. 잠시후 시도해주세요.",
-      statusCode: response.status,
-    });
-  }
-}*/
+  return {
+    isSuccess: true,
+    isFailure: false,
+    validationError: {},
+    message: "삭제 성공",
+  };
+}

@@ -12,6 +12,8 @@ interface GetPlanListDto {
   endDate: string;
   category: string;
   locations: string[];
+  memberIds: string[];
+  memberNames: string[];
 }
 
 export async function getPlan(planId: string): Promise<APIResponseType<Plan>> {
@@ -33,7 +35,8 @@ export async function getPlan(planId: string): Promise<APIResponseType<Plan>> {
       response.data.endDate,
       response.data.category,
       response.data.locations,
-      response.data.memberIds
+      response.data.memberIds,
+      response.data.memberNames
     );
 
     return {
@@ -78,7 +81,8 @@ export async function getPlans(
           item.endDate,
           item.category,
           item.locations,
-          []
+          item.memberIds,
+          item.memberNames
         )
       );
     }
