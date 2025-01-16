@@ -1,32 +1,30 @@
-'use server'
+"use server";
 
-import { APIResponseType, instance } from "@/app/utils/http"
-import { API_PATH } from "@/app/utils/http/api-query"
-import { Plan } from "./plan"
-import { InternetServerError } from "@/app/utils/http/http-error"
+import { APIResponseType, instance } from "@/app/utils/http";
+import { API_PATH } from "@/app/utils/http/api-query";
+import { Plan } from "./plan";
+import { InternetServerError } from "@/app/utils/http/http-error";
 
-interface GetPlanListDto{
-    id: string;
-    title: string;
-    startDate: string;
-    endDate: string;
-    category: string;
-    locations: string[];
+interface GetPlanListDto {
+  id: string;
+  title: string;
+  startDate: string;
+  endDate: string;
+  category: string;
+  locations: string[];
 }
 
-export async function getPlan(planId: string):Promise<APIResponseType<Plan>> {
+export async function getPlan(planId: string): Promise<APIResponseType<Plan>> {
   const response = await instance.get(`${API_PATH}/plan/${planId}`);
 
-  if(response.status==500){
-    throw new InternetServerError(
-      {
-        message: '서버가 불안정합니다. 잠시후 시도해주세요.',
-        statusCode: response.status,
-        response: response.data
-      }
-    )
+  if (response.status == 500) {
+    throw new InternetServerError({
+      message: "서버가 불안정합니다. 잠시후 시도해주세요.",
+      statusCode: response.status,
+      response: response.data,
+    });
   }
-  try{
+  try {
     const data: Plan = Plan.create(
       response.data.id,
       response.data.communityId,
@@ -37,67 +35,64 @@ export async function getPlan(planId: string):Promise<APIResponseType<Plan>> {
       response.data.locations,
       response.data.memberIds
     );
-    
+
     return {
       isSuccess: true,
       isFailure: false,
-      data: data
-    }
-  }catch(error){
-    console.log(error)
+      data: data,
+    };
+  } catch (error) {
+    console.log(error);
     return {
       isSuccess: false,
       isFailure: true,
-      data: undefined
-    }
+      data: undefined,
+    };
   }
-  
 }
 
-export async function getPlans(communityId: string):Promise<APIResponseType<Plan[]>> {
+export async function getPlans(
+  communityId: string
+): Promise<APIResponseType<Plan[]>> {
+  const response = await instance.get(`${API_PATH}/plan/list/${communityId}`);
 
-    const response = await instance.get(`${API_PATH}/plan/list/${communityId}`);
-
-
-  if(response.status==500){
-    throw new InternetServerError(
-      {
-        message: '서버가 불안정합니다. 잠시후 시도해주세요.',
-        statusCode: response.status,
-        response: response.data
-      }
-    )
+  if (response.status == 500) {
+    throw new InternetServerError({
+      message: "서버가 불안정합니다. 잠시후 시도해주세요.",
+      statusCode: response.status,
+      response: response.data,
+    });
   }
 
-  try{
+  try {
     const data: GetPlanListDto[] = response.data;
     const result: Plan[] = [];
-    
-    for(const item of data){
-      result.push(Plan.create(
-        item.id,
-        communityId,
-        item.title,
-        item.startDate,
-        item.endDate,
-        item.category,
-        item.locations,
-        [])
-      )
+
+    for (const item of data) {
+      result.push(
+        Plan.create(
+          item.id,
+          communityId,
+          item.title,
+          item.startDate,
+          item.endDate,
+          item.category,
+          item.locations,
+          []
+        )
+      );
     }
-    
-    return{
+
+    return {
       isSuccess: true,
       isFailure: false,
-      data: result
-    }
-  }catch(error){
+      data: result,
+    };
+  } catch (error) {
     console.log(error);
-    throw new InternetServerError(
-      {
-        message: '서버가 불안정합니다. 잠시후 시도해주세요.',
-        statusCode: response.status,
-      }
-    )
+    throw new InternetServerError({
+      message: "서버가 불안정합니다. 잠시후 시도해주세요.",
+      statusCode: response.status,
+    });
   }
 }
