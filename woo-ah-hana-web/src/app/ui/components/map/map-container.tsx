@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Coordinates } from "./map";
 import Map from "./map";
+import { Card } from "../../molecule/card/card";
  
 export default function MapContainer() {
   const [loc, setLoc] = useState<Coordinates>();
@@ -17,5 +18,9 @@ export default function MapContainer() {
     initLocation();
   }, []);
  
-  return loc && <Map loc={loc} />;
+  return loc && 
+  <Card>
+    <Map loc={loc} />
+  </Card>
+  
 }

@@ -35,7 +35,7 @@ export default function Map({ loc }: { loc: Coordinates }) {
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_MAP_CLIENT_ID}`}
         onReady={initializeMap}
       ></Script>
-      <div id={mapId} className="h-96 w-96"/>
+      <div id={mapId} className="aspect-video rounded-lg"/>
     </>
   );
 }
