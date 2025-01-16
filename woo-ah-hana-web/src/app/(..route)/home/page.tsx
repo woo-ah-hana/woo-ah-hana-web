@@ -6,6 +6,7 @@ import Bankbook from '@/app/ui/components/bankbook';
 import CardMenu from '@/app/ui/components/card-menu';
 import { useRouter } from 'next/navigation';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
+import Link from 'next/link';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -30,12 +31,12 @@ const groupData: GroupData[] = [
     accountNumber: '023-7896543-123',
     balance: 3450000,
   },
-  {
-    key: 'group3',
-    title: '모임 3',
-    accountNumber: '034-896543-465',
-    balance: 20000000,
-  },
+  // {
+  //   key: 'group3',
+  //   title: '모임 3',
+  //   accountNumber: '034-896543-465',
+  //   balance: 20000000,
+  // },
 ];
 
 const items: MenuItem[] = groupData.map((group) => ({
@@ -93,9 +94,11 @@ export default function Home() {
       <div className='p-5'>
         <div>{renderContent()}</div>
         {groupData.length < 3 && (
-          <AchromaticButton variant={'outline'} className='mt-5 w-full'>
-            + 모임통장 추가하기
-          </AchromaticButton>
+          <Link href={'/group-register'}>
+            <AchromaticButton variant={'outline'} className='mt-5 w-full'>
+              + 모임통장 추가하기
+            </AchromaticButton>
+          </Link>
         )}
         <h2 className='mt-8 mb-5 text-[20px] font-bold text-wooahMain'>
           {selectedGroupTitle} 홈
