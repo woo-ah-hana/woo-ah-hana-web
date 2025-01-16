@@ -5,6 +5,7 @@ import { Menu, MenuProps } from 'antd';
 import Bankbook from '@/app/ui/components/bankbook';
 import CardMenu from '@/app/ui/components/card-menu';
 import { useRouter } from 'next/navigation';
+import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -72,7 +73,7 @@ export default function Home() {
     if (!group) return null;
 
     return (
-      <div onClick={()=> router.push(`/account-log`)}>
+      <div onClick={() => router.push(`/account-log`)}>
         <Bankbook
           title={group.title}
           accountNumber={group.accountNumber}
@@ -83,15 +84,22 @@ export default function Home() {
     );
   };
 
-  const selectedGroupTitle = groupData.find((g) => g.key === selectedGroup)?.title || '';
+  const selectedGroupTitle =
+    groupData.find((g) => g.key === selectedGroup)?.title || '';
 
   return (
     <div>
-      {/* 모임 선택 */}
       <GroupMenu onMenuSelect={setSelectedGroup} />
       <div className='p-5'>
         <div>{renderContent()}</div>
-        <h2 className='mt-8 mb-5 text-[20px] font-bold text-wooahMain'>{selectedGroupTitle} 홈</h2>
+        {groupData.length < 3 && (
+          <AchromaticButton variant={'outline'} className='mt-5 w-full'>
+            + 모임통장 추가하기
+          </AchromaticButton>
+        )}
+        <h2 className='mt-8 mb-5 text-[20px] font-bold text-wooahMain'>
+          {selectedGroupTitle} 홈
+        </h2>
         <CardMenu />
       </div>
     </div>
