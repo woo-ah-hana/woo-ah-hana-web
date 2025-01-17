@@ -53,7 +53,9 @@ export default async function Home({
           <div>데이터가 존재하지 않습니다.</div>
         )}
       </div>
-      <MemoryPostModal planId={planId} />
+      <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
+        <MemoryPostModal planId={planId} />
+      </div>
     </main>
   );
 }
