@@ -22,7 +22,8 @@ export default function Home(){
   return(
     <main>
       <div className="p-5 grid grid-cols-1 gap-3">
-        <Map loc={mock[0].address}/>
+        {/* TODO: 지도 로딩 중일 경우, 렌딩 페이지 작업 */}
+        <Map loc={mock.map((item)=>{return item.address})}/>
         {ActivePlans}
       </div>
     </main>
