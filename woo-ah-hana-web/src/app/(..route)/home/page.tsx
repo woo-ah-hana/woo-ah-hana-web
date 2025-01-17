@@ -2,7 +2,7 @@
 import Bankbook from '@/app/ui/components/bankbook';
 import CardMenu from '@/app/ui/components/card-menu';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
-import GroupMenu from '@/app/ui/components/group-menu';
+import CommunityMenu from '@/app/ui/components/community-menu';
 import { CommunityInfoResponseDTO, CommunityResponseDTO, getCommunityInfo, getCommunityList } from '@/app/business/community/community.service';
 import { redirect } from 'next/navigation';
 
@@ -10,7 +10,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
   const response = await getCommunityList();
   const communityIds:CommunityResponseDTO[] = response.data || [];
   if (!response.data || response.data.length === 0) {
-    redirect('/group-register');
+    redirect('/community-register');
   }
 
   const selectedCommunity = searchParams.id? searchParams.id : communityIds[0].communityId;
@@ -34,7 +34,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
 
   return (
     <div>
-      <GroupMenu selectedCommunity={selectedCommunity} communityIds={communityIds} />
+      <CommunityMenu selectedCommunity={selectedCommunity} communityIds={communityIds} />
       <div className='p-5'>
         <Link href={`/account-log`}>
           <Bankbook
@@ -45,7 +45,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
           />
         </Link>
         {communityIds.length < 3 && (
-          <Link href={'/group-register'}>
+          <Link href={'/community-register'}>
             <AchromaticButton variant={'outline'} className='mt-5 w-full'>
               + 모임통장 추가하기
             </AchromaticButton>

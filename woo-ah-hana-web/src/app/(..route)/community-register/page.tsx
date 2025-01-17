@@ -1,10 +1,10 @@
-import { Card, CardContent } from "@/app/ui/molecule/card/card";
+import { Card } from "@/app/ui/molecule/card/card";
 import Image from "next/image";
 import IconPlus from '../../assets/img/icon-plus-circle.svg';
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import Link from "next/link";
 
-export default function GroupRegister(){
+export default function CommunityRegister(){
     return(
         <div className="p-5 flex flex-col gap-8">
             <Card className="h-40 flex justify-center items-center">
