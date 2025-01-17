@@ -1,4 +1,19 @@
-import { PaymentLogType } from "./memory";
+export interface PaymentLogType {
+    tran_date: string;
+    tran_time: string;
+    inout_type: string;
+    tran_type: string;
+    print_content: string;
+    tran_amt: string;
+    after_balance_amt: string;
+    branch_name: string;
+}
+
+export interface GetPlanReceiptDto {
+    records: PaymentLogType[];
+    totalAmt: number;       
+    perAmt: number;  
+}
 
 export class PaymentLog {
     constructor(
@@ -53,7 +68,7 @@ export class PlanReceipt {
     public getPerAmt(): number {return this.perAmt;}
 }
 
-export const MockLogData: PaymentLogType[] = [
+export const MockLogData: PaymentLog[] = [
     {
         tran_date: "2025-01-10",
         tran_time: "09:10",

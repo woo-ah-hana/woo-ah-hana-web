@@ -6,8 +6,7 @@ import { InternetServerError } from "@/app/utils/http/http-error";
 import { API_PATH } from "@/app/utils/http/api-query";
 import { Memory } from "@/app/business/memory/memory";
 import { FormState } from "@/app/ui/molecule/form/form-root";
-import { GetPlanReceiptDto } from "./memory";
-import { PaymentLog, PlanReceipt } from "@/app/business/memory/receipt";
+import { GetPlanReceiptDto, PaymentLog, PlanReceipt } from "@/app/business/memory/receipt";
 
 interface GetCompletedPlanListDto {
   id: string;
@@ -101,7 +100,6 @@ export async function getCompletedPlans(
         )
       );
     }
-}
     return {
       isSuccess: true,
       isFailure: false,
