@@ -1,7 +1,7 @@
 import { Card, CardContent } from "../../molecule/card/card";
 import Image from "next/image"
 import { DateDetailDilog } from "./date-detail.modal";
-import IconSchedule from '@/app/assets/img/icon-schedule.png';
+import IconSchedule from '@/app/assets/img/icon-plan.png';
 import IconMemory from '@/app/assets/img/icon-memory.png'
 import IconLocation from '@/app/assets/img/icon-location.png'
 import { MemberDetailDilog } from "./member-detail.modal";
