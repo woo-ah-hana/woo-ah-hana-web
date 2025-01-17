@@ -1,4 +1,4 @@
-export interface NaverSearchResult{
+export interface SearchResult{
   title: string;
   link: string;
   category: string;

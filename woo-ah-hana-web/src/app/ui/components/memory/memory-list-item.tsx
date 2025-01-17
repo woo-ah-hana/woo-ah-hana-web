@@ -10,21 +10,23 @@ export interface PlanListItemProps {
   endDate: string;
   locations: string[];
   planId: string;
+  memberNames: string[];
 }
 
-export function PlanListItem({
+export function MemoryListItem({
   title,
   category,
   startDate,
   endDate,
   locations,
   planId,
+  memberNames,
 }: PlanListItemProps) {
   const iconSrc = categoryIcons[category];
   const bgColor = categoryColors[category];
   return (
     <main>
-      <Link href={`plan/detail?id=${planId}`}>
+      <Link href={`memory/detail?id=${planId}`}>
         <Card className={`grid grid-cols-[1fr_2fr_2fr] gap-2 ${bgColor}`}>
           <div className="p-2 flex justify-center items-center">
             <img src={iconSrc} alt={category} />
@@ -35,11 +37,10 @@ export function PlanListItem({
             </p>
             <p className="text-sm text-slate-500">{`# ${category}`}</p>
           </div>
-          <div className="grid grid-cols-1">
+          <div className="grid grid-cols-1 ">
             <p className="text-sm mt-2">
               <strong>{locations[0]}</strong>
             </p>
-            {/* TODO: 날짜 표기 방식 논의 필요 */}
             <p className="text-sm text-slate-500">
               {startDate.substring(5, 10)}~{endDate.substring(5, 10)}
             </p>
