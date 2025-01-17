@@ -3,13 +3,14 @@
 import React from 'react';
 import { Card } from '@/app/ui/molecule/card/card';
 import IconTransfer from '../../assets/img/icon-transfer.png';
-import IconSchedule from '../../assets/img/icon-schedule.png';
+import IconPlan from '../../assets/img/icon-plan.png';
 import IconMemory from '../../assets/img/icon-memory.png';
 import IconManagement from '../../assets/img/icon-management.png';
 import IconClosing from '../../assets/img/icon-closing.png';
 import IconFeeCheck from '../../assets/img/icon-fee-check.png';
 import Image, { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
+import useCommunityStore from '@/app/store/community-store';
 
 type MenuItem = {
   label: React.ReactNode;
@@ -19,6 +20,7 @@ type MenuItem = {
 
 export default function CardMenu(){
   const router = useRouter();
+  const community = useCommunityStore((state) => state.community);
 
   const onClick = (menuKey: string) => {
     switch (menuKey) {
@@ -30,9 +32,9 @@ export default function CardMenu(){
         console.log('내/모임 계좌관리 클릭');
         router.push('/account-management');
         break;
-      case 'schedule':
+      case 'plan':
         console.log('모임 일정 둘러보기 클릭');
-        router.push('/schedule');
+        router.push(`/plan?id=${community}`);
         break;
       case 'memory':
         console.log('지난 모임 추억 클릭');
@@ -82,8 +84,8 @@ export default function CardMenu(){
           둘러보기
         </>
       ),
-      icon: IconSchedule,
-      onClick: () => onClick('schedule'),
+      icon: IconPlan,
+      onClick: () => onClick('plan'),
     },
     {
       label: (

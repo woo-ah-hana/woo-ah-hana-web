@@ -4,26 +4,31 @@ import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import { IoAdd } from "react-icons/io5";
 import Link from "next/link";
 
-export default async function Home({searchParams}:{searchParams: { [key: string]: string | string[] | undefined }}){
-  const getPlansResponse = await getPlans(searchParams.id as string)
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const getPlansResponse = await getPlans(searchParams.id as string);
   const plans = getPlansResponse.data;
 
   // TODO: Icon은 랜덤 ?
-  const PlansView: React.ReactNode[] | undefined = plans?.map((item, index)=>{
+  const PlansView: React.ReactNode[] | undefined = plans?.map((item, index) => {
     return (
       <main key={index}>
-        <PlanListItem 
+        <PlanListItem
           planId={item.getId()}
           title={item.getTitle()}
           category={item.getCategory()}
           startDate={item.getStartDate()}
           endDate={item.getEndDate()}
-          locations={item.getLocations()}/>
+          locations={item.getLocations()}
+        />
       </main>
-    )
-  })
+    );
+  });
 
-  return(
+  return (
     <main>
       <div className="h-full flex flex-col">
         <div className="flex-1 overflow-y-auto p-5">
@@ -40,5 +45,5 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         </div>
       </div>
     </main>
-  )
+  );
 }
