@@ -10,6 +10,7 @@ import IconClosing from '../../assets/img/icon-closing.png';
 import IconFeeCheck from '../../assets/img/icon-fee-check.png';
 import Image, { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
+import useCommunityStore from '@/app/store/community-store';
 
 type MenuItem = {
   label: React.ReactNode;
@@ -19,6 +20,7 @@ type MenuItem = {
 
 export default function CardMenu(){
   const router = useRouter();
+  const community = useCommunityStore((state) => state.community);
 
   const onClick = (menuKey: string) => {
     switch (menuKey) {
@@ -32,7 +34,7 @@ export default function CardMenu(){
         break;
       case 'schedule':
         console.log('모임 일정 둘러보기 클릭');
-        router.push('/schedule');
+        router.push(`/plan?id=${community}`);
         break;
       case 'memory':
         console.log('지난 모임 추억 클릭');

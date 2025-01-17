@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Menu, MenuProps } from 'antd';
 import Link from 'next/link';
 import useCommunityStore from '@/app/store/community-store';
@@ -25,6 +25,12 @@ export default function CommunityMenu({ selectedCommunity, communityIds }: Commu
   const handleSelect = ({ key }: { key: string }) => {
     setCommunity(key);
   };
+
+  useEffect(() => {
+    if(!community){
+      setCommunity(selectedCommunity);
+    }
+  }, [community, selectedCommunity, setCommunity]);
 
   return (
     <Menu
