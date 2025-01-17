@@ -11,7 +11,7 @@ export default async function Home({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const communityId =
-    (searchParams.id as string) || "6f5d21e2-25c4-4fda-a0d9-b07dfc281f68";
+    (searchParams.id as string) || "a61f6270-974b-44f3-b9f3-7a8ab9b145ff";
   console.log(communityId);
   const getPlansResponse = await getCompletedPlans(communityId);
   const plans = getPlansResponse.data;
@@ -32,12 +32,11 @@ export default async function Home({
       </main>
     );
   });
-  
+
   return (
     <main>
       <div className="h-full flex flex-col">
         <div className="flex-1 overflow-y-auto p-5">
-          <MemoryReceiptModal planId='b34d0cc1-46fd-4bb7-a192-cf5fda1fc92f' />
           <div className="grid grid-rows-1 gap-3">
             {plans ? PlansView : <div>데이터가 존재하지 않습니다.</div>}
           </div>
