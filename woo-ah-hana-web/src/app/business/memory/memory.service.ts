@@ -133,7 +133,6 @@ export async function getPlanReceipt(
 
   try {
     const data: GetPlanReceiptDto = response.data;
-
     const logs = data.records.map(
       (log: any) =>
         new PaymentLog(
@@ -149,7 +148,6 @@ export async function getPlanReceipt(
     );
 
     const result = new PlanReceipt(logs, data.totalAmt, data.perAmt);
-
     return {
       isSuccess: true,
       isFailure: false,

@@ -3,7 +3,6 @@ import { getCompletedPlans } from "@/app/business/memory/memory.service";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import { IoAdd } from "react-icons/io5";
 import Link from "next/link";
-import MemoryReceiptModal from "@/app/ui/components/memory/memory-receipt.modal";
 
 export default async function Home({
   searchParams,
@@ -12,6 +11,7 @@ export default async function Home({
 }) {
   const communityId =
     (searchParams.id as string) || "a61f6270-974b-44f3-b9f3-7a8ab9b145ff";
+
   console.log(communityId);
   const getPlansResponse = await getCompletedPlans(communityId);
   const plans = getPlansResponse.data;
