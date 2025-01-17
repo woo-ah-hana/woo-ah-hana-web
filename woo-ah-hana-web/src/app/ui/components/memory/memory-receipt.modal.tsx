@@ -24,7 +24,7 @@ export default async function MemoryReceiptModal({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <AchromaticButton className="w-full mt-5 bg-gray-100 shadow-none text-black text-base">
+        <AchromaticButton className="w-full mt-5 bg-gray-100 shadow-none text-black text-base hover:bg-gray-100">
           영수증 보기
         </AchromaticButton>
       </DialogTrigger>

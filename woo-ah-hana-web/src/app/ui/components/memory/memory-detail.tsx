@@ -1,9 +1,9 @@
 "use client";
 
-import { FaUserCircle } from "react-icons/fa";
 import Form from "../../molecule/form/form-index";
 import { deletePost } from "@/app/business/memory/memory.service";
-
+import ProfileImage from "@/app/assets/img/profile.jpg";
+import Image from "next/image";
 export interface MemoryDetailProps {
   id: string;
   memberId: string;
@@ -11,6 +11,7 @@ export interface MemoryDetailProps {
   description: string;
   createdAt: string;
 }
+
 export function MemoryDetail({
   id,
   memberId,
@@ -24,7 +25,11 @@ export function MemoryDetail({
       <div className="mt-5">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row">
-            <FaUserCircle className="size-10" />
+            <Image
+              src={ProfileImage}
+              alt={"프로필 이미지"}
+              className="w-12 h-12 rounded-full object-cover mb-3"
+            />
             <div className="text-lg mt-2 ml-3">{memberId}</div>
           </div>
           <div className="flex flex-row">
@@ -42,9 +47,12 @@ export function MemoryDetail({
               window.location.reload();
             }}
           >
-            <div>
+            <div className="flex flex-row">
               <input id="id" name="id" value={id} className="hidden" />
-              <Form.SubmitButton label="삭제" />
+              <Form.SubmitButton
+                label="삭제하기"
+                className="bg-white text-black shadow-none hover:bg-white"
+              />
             </div>
           </Form>
         </div>
