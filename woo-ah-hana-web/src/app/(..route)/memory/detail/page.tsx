@@ -9,7 +9,7 @@ export default async function Home({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const planId =
-    (searchParams.id as string) || "dcd10a10-3fba-4c8b-9a83-bc6a09472f09";
+    (searchParams.id as string) || "8dc0d13e-8269-44a5-88f8-c35e6abbb50f";
   const detailResponse = await getPostsByPlanId(planId);
   const getPlansResponse = await getPlan(planId);
 
