@@ -10,7 +10,8 @@ export default async function Home({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const communityId =
-    (searchParams.id as string) || "79426aaf-23ea-4aaa-a9eb-3955fd67013d";
+    (searchParams.id as string) || "a61f6270-974b-44f3-b9f3-7a8ab9b145ff";
+
   console.log(communityId);
   const getPlansResponse = await getCompletedPlans(communityId);
   const plans = getPlansResponse.data;

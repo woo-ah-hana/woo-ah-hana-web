@@ -2,6 +2,7 @@ import { MemoryDetail } from "@/app/ui/components/memory/memory-detail";
 import { getPostsByPlanId } from "@/app/business/memory/memory.service";
 import { getPlan } from "@/app/business/plan/plan.service";
 import { MemoryPlan } from "@/app/ui/components/memory/memory-plan";
+import MemoryPostModal from "@/app/ui/components/memory/memory-post.modal";
 
 export default async function Home({
   searchParams,
@@ -9,7 +10,7 @@ export default async function Home({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const planId =
-    (searchParams.id as string) || "8dc0d13e-8269-44a5-88f8-c35e6abbb50f";
+    (searchParams.id as string) || "a61f6270-974b-44f3-b9f3-7a8ab9b145ff";
   const detailResponse = await getPostsByPlanId(planId);
   const getPlansResponse = await getPlan(planId);
 
@@ -51,6 +52,9 @@ export default async function Home({
         ) : (
           <div>데이터가 존재하지 않습니다.</div>
         )}
+      </div>
+      <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
+        <MemoryPostModal planId={planId} />
       </div>
     </main>
   );
