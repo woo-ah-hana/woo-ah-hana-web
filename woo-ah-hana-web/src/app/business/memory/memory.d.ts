@@ -1,4 +1,4 @@
-export interface LogDataType {
+export interface PaymentLogType {
     tran_date: string;
     tran_time: string;
     inout_type: string;

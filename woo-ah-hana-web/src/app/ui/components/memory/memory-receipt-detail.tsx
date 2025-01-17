@@ -1,7 +1,7 @@
-import { LogDataType } from '@/app/business/memory/memory';
+import { PaymentLogType } from '@/app/business/memory/memory';
 import React from 'react';
 
-export function MemoryReceiptDetail({ logs }: { logs: LogDataType[] }) {
+export function MemoryReceiptDetail({ logs }: { logs: PaymentLogType[] }) {
     const logsView: React.ReactNode[] = logs.map((log, index) => (
         <div
             key={index}

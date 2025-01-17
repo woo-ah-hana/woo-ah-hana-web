@@ -6,7 +6,6 @@ import {
 } from '../../molecule/dialog/dialog';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { MemoryReceiptDetail } from './memory-receipt-detail';
-import { GetPlanReceiptDto, LogDataType } from '@/app/business/memory/memory';
 import { getPlanReceipt } from '@/app/business/memory/memory.service';
 import { PlanReceipt } from '@/app/business/memory/receipt';
 

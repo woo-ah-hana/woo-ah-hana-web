@@ -1,4 +1,6 @@
-export class LogData {
+import { PaymentLogType } from "./memory";
+
+export class PaymentLog {
     constructor(
         public tran_date: string,
         public tran_time: string,
@@ -22,7 +24,7 @@ export class LogData {
 
 export class PlanReceipt {
     constructor(
-        public records: LogData[],
+        public records: PaymentLog[],
         public totalAmt: number,
         public perAmt: number
     ) {
@@ -32,7 +34,7 @@ export class PlanReceipt {
     }
 
     static create(data: any): PlanReceipt {
-        const logs = data.records.map((log: any) => new LogData(
+        const logs = data.records.map((log: any) => new PaymentLog(
             log.tran_date,
             log.tran_time,
             log.inout_type,
@@ -46,23 +48,12 @@ export class PlanReceipt {
         return new PlanReceipt(logs, data.totalAmt, data.perAmt);
     }
 
-    public getRecords(): LogData[] {return this.records;}
+    public getRecords(): PaymentLog[] {return this.records;}
     public getTotalAmt(): number {return this.totalAmt;}
     public getPerAmt(): number {return this.perAmt;}
 }
 
-export interface LogDataType {
-    tran_date: string;
-    tran_time: string;
-    inout_type: string;
-    tran_type: string;
-    print_content: string;
-    tran_amt: string;
-    after_balance_amt: string;
-    branch_name: string;
-}
-
-export const MockLogData: LogDataType[] = [
+export const MockLogData: PaymentLogType[] = [
     {
         tran_date: "2025-01-10",
         tran_time: "09:10",

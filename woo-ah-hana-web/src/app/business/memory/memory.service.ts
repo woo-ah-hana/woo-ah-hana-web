@@ -3,7 +3,7 @@ import {Plan} from "@/app/business/plan/plan";
 import {InternetServerError} from "@/app/utils/http/http-error";
 import {API_PATH} from "@/app/utils/http/api-query";
 import { GetPlanReceiptDto } from "./memory";
-import { LogData, PlanReceipt } from "@/app/business/memory/receipt";
+import { PaymentLog, PlanReceipt } from "@/app/business/memory/receipt";
 
 interface GetCompletedPlanListDto{
     id: string;
@@ -79,7 +79,7 @@ export async function getPlanReceipt(planId: string):Promise<APIResponseType<Pla
     try{
         const data: GetPlanReceiptDto = response.data;
 
-        const logs = data.records.map((log: any) => new LogData(
+        const logs = data.records.map((log: any) => new PaymentLog(
             log.tran_date,
             log.tran_time,
             log.inout_type,
