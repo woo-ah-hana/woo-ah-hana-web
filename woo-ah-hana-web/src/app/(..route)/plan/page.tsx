@@ -1,5 +1,4 @@
 import { PlanListItem } from "@/app/ui/components/plan/plan-list-item";
-import IconMemory from '@/app/assets/img/icon-closing.png'
 import { getPlans } from "@/app/business/plan/plan.service";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import { IoAdd } from "react-icons/io5";
@@ -15,7 +14,6 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
       <main key={index}>
         <PlanListItem 
           planId={item.getId()}
-          icons={IconMemory.src}
           title={item.getTitle()}
           category={item.getCategory()}
           startDate={item.getStartDate()}

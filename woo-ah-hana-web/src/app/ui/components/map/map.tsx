@@ -15,7 +15,6 @@ export default function Map({ loc }: { loc: string[] }) {
   const mapRef = useRef<NaverMap | null>(null);
 
   const initializeMap = useCallback(() => {
- 
     naver.maps.onJSContentLoaded = function(){
       const points:naver.maps.Point[] = [];
 
