@@ -25,7 +25,7 @@ export default function GroupRegisterForm() {
           하나은행 모임 <br />
           <span className='font-semibold'>계좌번호</span>를 입력해주세요
         </div>
-        <TextInput placeholder='ex) OO고 동창회' />
+        <TextInput placeholder='ex) 01-9876-1234-5678' />
       </div>
       <div className='flex flex-col'>
         <p className='text-lg font-semibold'>얼마씩 모을까요?</p>
