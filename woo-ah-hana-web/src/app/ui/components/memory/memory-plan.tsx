@@ -1,7 +1,5 @@
-import Link from "next/link";
-import { Card } from "../../molecule/card/card";
-import { categoryColors, categoryIcons } from "../../atom/category/category";
 import React from "react";
+import MemoryReceiptModal from "@/app/ui/components/memory/memory-receipt.modal";
 
 export interface PlanListItemProps {
   planId: string;
@@ -28,7 +26,7 @@ export function MemoryPlan({
   return (
     <div>
       <div className="flex justify-between items-center mb-5">
-        <h2 className="text-lg font-bold">{title}</h2>
+        <h2 className="text-2xl font-bold">{title}</h2>
         <p className="text-sm text-gray-500">{date}</p>
       </div>
 
@@ -36,7 +34,7 @@ export function MemoryPlan({
         {memberNames.map((name, index) => (
           <span
             key={index}
-            className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+            className="px-3 py-1 bg-wooahBlue text-wooahDeepBlue rounded-full text-lg mb-1"
           >
             {name}
           </span>
@@ -47,12 +45,13 @@ export function MemoryPlan({
         {locations.map((location, index) => (
           <span
             key={index}
-            className={`px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-lg mr-1`}
+            className={`px-3 py-1 bg-wooahPurple text-wooahDeepPurple rounded-full text-lg mr-1`}
           >
             {location}
           </span>
         ))}
       </div>
+      <MemoryReceiptModal planId={planId} />
     </div>
   );
 }
