@@ -58,7 +58,7 @@ export default function MemoryPostModal({ planId }: MemoryPostModalProps) {
               </div>
               <div className="flex flex-col gap-1">
                 <FormTextArea
-                  label="Message"
+                  label="내용"
                   id="content"
                   placeholder="남기고 싶은 말을 적어주세요."
                   required
