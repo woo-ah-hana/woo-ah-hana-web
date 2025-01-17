@@ -1,4 +1,4 @@
-;import Link from 'next/link';
+import Link from 'next/link';
 import Bankbook from '@/app/ui/components/bankbook';
 import CardMenu from '@/app/ui/components/card-menu';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
