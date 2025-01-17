@@ -1,6 +1,6 @@
 import { ActivePlan } from "@/app/business/plan/active-plan"
 import { ActivePlanDetail } from "@/app/ui/components/active-plan/active-plan-detail"
-import MapContainer from "@/app/ui/components/map/map-container"
+import Map from "@/app/ui/components/map/map"
 
 export default function Home(){
   const ActivePlans = mock.map((item, index)=>{
@@ -22,7 +22,7 @@ export default function Home(){
   return(
     <main>
       <div className="p-5 grid grid-cols-1 gap-3">
-        <MapContainer/>
+        <Map loc={mock[0].address}/>
         {ActivePlans}
       </div>
     </main>
