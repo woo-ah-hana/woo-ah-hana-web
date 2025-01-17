@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card } from '@/app/ui/molecule/card/card';
 import IconTransfer from '../../assets/img/icon-transfer.png';
-import IconSchedule from '../../assets/img/icon-schedule.png';
+import IconPlan from '../../assets/img/icon-plan.png';
 import IconMemory from '../../assets/img/icon-memory.png';
 import IconManagement from '../../assets/img/icon-management.png';
 import IconClosing from '../../assets/img/icon-closing.png';
@@ -32,7 +32,7 @@ export default function CardMenu(){
         console.log('내/모임 계좌관리 클릭');
         router.push('/account-management');
         break;
-      case 'schedule':
+      case 'plan':
         console.log('모임 일정 둘러보기 클릭');
         router.push(`/plan?id=${community}`);
         break;
@@ -84,8 +84,8 @@ export default function CardMenu(){
           둘러보기
         </>
       ),
-      icon: IconSchedule,
-      onClick: () => onClick('schedule'),
+      icon: IconPlan,
+      onClick: () => onClick('plan'),
     },
     {
       label: (
