@@ -1,0 +1,74 @@
+import { APIResponseType, instance } from "@/app/utils/http";
+import { API_PATH } from "@/app/utils/http/api-query";
+import { InternetServerError } from "@/app/utils/http/http-error";
+
+export interface CommunityResponseDTO {
+  communityId: string;
+  name: string;
+}
+
+export interface CommunityInfoResponseDTO{
+  name: string;
+  accountNumber: string;
+  balance: number;
+}
+
+export async function getCommunityList(): Promise<APIResponseType<CommunityResponseDTO[]>> {
+  try {
+    const response = await instance.get(`${API_PATH}/community/list`);
+
+    if (response.status === 500) {
+      throw new InternetServerError({
+        message: '서버가 불안정합니다. 잠시후 시도해주세요.',
+        statusCode: response.status,
+        response: response.data
+      });
+    }
+
+    const data: CommunityResponseDTO[] = response.data;
+
+    return {
+      isSuccess: true,
+      isFailure: false,
+      data: data
+    };
+
+  } catch (error) {
+    console.error(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    };
+  }
+}
+
+export async function getCommunityInfo(communityId: string): Promise<APIResponseType<CommunityInfoResponseDTO>> {
+  try {
+    const response = await instance.get(`${API_PATH}/community/info?communityId=${communityId}`);
+
+    if (response.status === 500) {
+      throw new InternetServerError({
+        message: '서버가 불안정합니다. 잠시후 시도해주세요.',
+        statusCode: response.status,
+        response: response.data
+      });
+    }
+
+    const data: CommunityInfoResponseDTO = response.data;
+
+    return {
+      isSuccess: true,
+      isFailure: false,
+      data: data
+    };
+
+  } catch (error) {
+    console.error(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    };
+  }
+}
