@@ -8,14 +8,16 @@ import { useState } from "react";
 import { search } from "@/app/business/search/search.service";
 import { loadActivePlan } from "@/app/business/ai/ai.service";
 import { convertDate } from "@/app/utils/convert";
+import { saveActivePlan } from "@/app/business/plan/active-plan.service";
 
 interface RequestActivePlanForm{
+  planId?:string;
   startDate: string;
   endDate: string;
   locations: string[];
 }
 
-export function RequestActivePlanForm({startDate, endDate, locations}:RequestActivePlanForm){
+export function RequestActivePlanForm({startDate, endDate, locations, planId}:RequestActivePlanForm){
   const [aiData, setAiDate] = useState<ActivePlan[]>([]);
   
   async function getActivePlan(prevState: FormState, formData: FormData):Promise<FormState>{
@@ -28,13 +30,24 @@ export function RequestActivePlanForm({startDate, endDate, locations}:RequestAct
       convertDate(endDate)
     )
 
-    setAiDate(activePlan);
+    setAiDate(activePlan.map(
+      (item)=>{
+        item.planId = planId; 
+        return item
+      }
+    ));
+
     return{
       isSuccess: true,
       isFailure: false,
       validationError: {},
       message: "AI 요청에 실패했습니다. 잠시후 시도해주세요."
     }
+  }
+
+  async function save(){
+    // TODO: 지금은 데이터 1만 저장하지만, 백엔드 API 바뀔 시 수정
+    await saveActivePlan(aiData[0]);
   }
 
   const ActivePlans = aiData.map((item, index)=>{
@@ -63,7 +76,7 @@ export function RequestActivePlanForm({startDate, endDate, locations}:RequestAct
             {ActivePlans}
           </div>
           <div className="flex flex-row gap-2">
-            <AchromaticButton className='w-full' variant={`outline`}>저장하기</AchromaticButton>
+            <AchromaticButton className='w-full' variant={`outline`} onClick={async ()=>{await save();}}>저장하기</AchromaticButton>
           </div>
         </div> 
       }

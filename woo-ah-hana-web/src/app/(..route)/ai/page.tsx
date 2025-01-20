@@ -18,6 +18,7 @@ export default async function Home({
         <div> AI 요청은 하루에 세번까지만 가능합니다. </div>
       </Card>
       <RequestActivePlanForm 
+        planId={searchParams.plan as string}
         startDate={plan?.getStartDate() as string} 
         endDate={plan?.getEndDate() as string}
         locations={plan?.getLocations() as string[]}

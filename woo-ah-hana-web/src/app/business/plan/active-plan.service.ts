@@ -1,3 +1,4 @@
+'use server'
 import { APIResponseType, instance } from "@/app/utils/http";
 import { ActivePlan } from "./active-plan";
 import { API_PATH } from "@/app/utils/http/api-query";
