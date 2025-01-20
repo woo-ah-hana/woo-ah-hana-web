@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false });
 
-export default function GroupRegisterComplete() {
+export default function CommunityRegisterComplete() {
   useEffect(() => {
     const timer = setTimeout(() => {
       window.location.href = '/home';
@@ -17,7 +17,7 @@ export default function GroupRegisterComplete() {
   }, []);
 
   return (
-    <div className='h-screen p-10 flex flex-col justify-between'>
+    <div className='h-full p-10 flex flex-col justify-between'>
       <div className='mt-10 text-2xl align-center justify-center text-center flex flex-col gap-4'>
         <h1>모임 계좌 연동이</h1>
         <h1>완료되었습니다</h1>
