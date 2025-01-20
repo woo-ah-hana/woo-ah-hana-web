@@ -9,7 +9,6 @@ export default async function Home({
   }){
   const response = await getPlan(searchParams.plan as string);
   const plan = response.data;
-  console.log(plan);
   return (
   <main>
     <div className="flex flex-col gap-3 p-5">

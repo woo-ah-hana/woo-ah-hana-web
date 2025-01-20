@@ -7,6 +7,7 @@ import AchromaticButton from "../../atom/button/achromatic-button";
 import { useState } from "react";
 import { search } from "@/app/business/search/search.service";
 import { loadActivePlan } from "@/app/business/ai/ai.service";
+import { convertDate } from "@/app/utils/convert";
 
 interface RequestActivePlanForm{
   startDate: string;
@@ -17,15 +18,14 @@ interface RequestActivePlanForm{
 export function RequestActivePlanForm({startDate, endDate, locations}:RequestActivePlanForm){
   const [aiData, setAiDate] = useState<ActivePlan[]>([]);
   
-  
   async function getActivePlan(prevState: FormState, formData: FormData):Promise<FormState>{
     const input = formData.get('request') as string
     const activePlanSource = await search([input, ...locations]);
 
     const activePlan = await loadActivePlan(
       activePlanSource.data as SearchResult[], 
-      startDate, 
-      endDate
+      convertDate(startDate), 
+      convertDate(endDate)
     )
 
     setAiDate(activePlan);
