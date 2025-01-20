@@ -8,19 +8,25 @@ import { useState } from "react";
 import { search } from "@/app/business/search/search.service";
 import { loadActivePlan } from "@/app/business/ai/ai.service";
 
-export function RequestActivePlanForm(){
-  const [aiData, setAiDate] = useState<ActivePlan[]>([]);
+interface RequestActivePlanForm{
+  startDate: string;
+  endDate: string;
+  locations: string[];
+}
 
-  async function mock(prevState: FormState, formData: FormData):Promise<FormState>{
+export function RequestActivePlanForm({startDate, endDate, locations}:RequestActivePlanForm){
+  const [aiData, setAiDate] = useState<ActivePlan[]>([]);
+  
+  
+  async function getActivePlan(prevState: FormState, formData: FormData):Promise<FormState>{
     const input = formData.get('request') as string
-    const activePlanSource = await search([input]);
+    const activePlanSource = await search([input, ...locations]);
 
     const activePlan = await loadActivePlan(
       activePlanSource.data as SearchResult[], 
-      '2025년5월1일', 
-      '2025년5월2일'
+      startDate, 
+      endDate
     )
-
 
     setAiDate(activePlan);
     return{
@@ -63,7 +69,7 @@ export function RequestActivePlanForm(){
       }
       
       <div>
-        <Form id={"request-for-ai"} action={mock} onSuccess={()=>{}} failMessageControl={"alert"}>
+        <Form id={"request-for-ai"} action={getActivePlan} failMessageControl={"alert"}>
             <div className="grid grid-cols-[7fr_3fr]">
             <Form.TextInput 
             id={`request`} 
