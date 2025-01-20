@@ -11,6 +11,8 @@ export interface SearchResult{
 }
 
 export interface ActivePlan{
+  id?:string;
+  planId?:string;
   date: string;
   schedule: string;
   time: string;

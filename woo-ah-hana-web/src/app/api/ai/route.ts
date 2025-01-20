@@ -3,8 +3,7 @@ import OpenAI from "openai";
 const openai = new OpenAI({apiKey: `${process.env.AI_SECRETE}`})
 
 export async function POST(req: Request) {
-  const { data } = await req.json();
-  console.log(`${JSON.stringify(data)}`)
+  const { data, startDate, endDate } = await req.json();
   const response = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo-0125',
     messages: [
@@ -16,7 +15,7 @@ export async function POST(req: Request) {
             1. 요청 데이터 리스트의 아이템 중 link에 들어가서 정보를 확인하고
             2. 위치정보를 고려해서(mapx, mapy)
             3. 여행일정을 아래의 JSON 객체 리스트 형식으로 출력해줘.
-            4. 여행기간: 2019-01-13 ~ 2019-01-15
+            4. 여행기간: ${JSON.stringify(startDate)} ~ ${JSON.stringify(endDate)}
             5. 응답 데이터는 리스트야. 추가적인 답변은 하지말아줘.
             6. 응답 형식: [{date: string, schedule:string, time:string, description: string, address: string, link: string, mapx: string, mapy: string}]
             7. 밑의 응답 예시는 단순히 예시일 뿐이야. 위 "요청 데이터"를 기반으로 답변해줘.
