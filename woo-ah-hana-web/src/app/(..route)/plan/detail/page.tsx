@@ -8,7 +8,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
 
   const plan = response.isSuccess?
     (response.data as Plan):
-    (Plan.create("","","","","","",[],[]) as Plan)
+    (Plan.create("","","","","","",[],[],[]) as Plan)
   
   return (
     <main>
