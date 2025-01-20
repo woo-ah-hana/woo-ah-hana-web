@@ -11,8 +11,7 @@ export default async function Home({
   const plan = response.data;
   return (
   <main>
-    <div className="flex flex-col gap-3 p-5">
-      
+    <div className="flex flex-col gap-3 p-5"> 
       <Card className="flex flex-col gap-2 p-5 text-center">
         <div> 여행 계획 짜주는 AI입니다. </div>
         <div> 음성 또는 키보드로 요청사항을 입력하세요. </div>

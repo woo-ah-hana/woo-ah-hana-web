@@ -70,13 +70,13 @@ export function RequestActivePlanForm({startDate, endDate, locations}:RequestAct
       
       <div>
         <Form id={"request-for-ai"} action={getActivePlan} failMessageControl={"alert"}>
-            <div className="grid grid-cols-[7fr_3fr]">
+            <div className="grid grid-cols-[9fr_1fr] gap-1">
             <Form.TextInput 
             id={`request`} 
             label=""
             placeholder="예시) 강남역 맛집 추천해줘."
             />
-            <Form.SubmitButton className="h-11" label="요청하기"/>
+            <Form.SubmitButton className="h-11" label="요청"/>
             </div>
         </Form>
       </div>  
