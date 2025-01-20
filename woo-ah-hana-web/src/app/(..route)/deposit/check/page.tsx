@@ -6,6 +6,7 @@ import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 
 export default function DepositCheck({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const router = useRouter();
+  const communityName = searchParams.communityName || '';
   const accountNumber = searchParams.accountNumber || '';
   const bankTranId = searchParams.bankTranId || '';
   const tranAmt = searchParams.amount || '';
@@ -36,7 +37,7 @@ export default function DepositCheck({ searchParams }: { searchParams: { [key: s
   return (
     <div className='h-screen p-10 flex flex-col justify-between'>
       <div className='mt-10 text-2xl align-center justify-center text-center flex flex-col gap-4'>
-        <h1>모임 통장으로</h1>
+        <h1>{communityName} 통장으로</h1>
         <h1>
           <span className='text-3xl'>{tranAmt}</span> 원을
         </h1>

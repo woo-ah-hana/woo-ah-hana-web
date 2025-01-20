@@ -5,27 +5,27 @@ import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import TextInput from '@/app/ui/atom/text-input/text-input';
 import { Card } from '@/app/ui/molecule/card/card';
 import { useState } from 'react';
-import { TransferRequestDTO } from '@/app/business/account/account.service';
-import { FormNumberInput } from '@/app/ui/molecule/form/form-number-input';
+import useCommunityStore from '@/app/store/community-store';
 
 export default function Deposit() {
   const router = useRouter();
   const [amount, setAmount] = useState('');
   const myBalance = 1000; //임시 - 유저 계좌 잔액
+  const communityName = '강릉여행'; //임시 - 모임 이름
   const accountNumber = '3561057204496'; //임시 - 모임통장 계좌번호
   const bankTranId = '002'; //임시 - 은행 이체 id
+  // Todo: 모임 id 이용해서 모임 정보 받아오는 api 연결 
+  // const community = useCommunityStore((state) => state.community);
 
   const handleNavigation = () => {
     if (amount) {
       const queryParams = new URLSearchParams({
-        myBalance: myBalance.toString(),
         accountNumber,
         bankTranId,
         amount,
       }).toString();
   
       router.push(`/deposit/check?${queryParams}`);
-      console.log('전송하는 값:', { myBalance, accountNumber, bankTranId, amount });
     } else {
       alert('금액을 입력해주세요.');
     }
@@ -41,13 +41,13 @@ export default function Deposit() {
       <div className='flex flex-col gap-10'>
         <div className='border-none shadow-none mt-10'>
           <h1 className='text-2xl'>
-            하나은행 통장<span className='text-lg'>에서</span>
+            내 통장<span className='text-lg'>에서</span>
           </h1>
           <p className='text-base'>잔액 {myBalance}원</p>
         </div>
         <div className='border-none shadow-none'>
           <h1 className='text-2xl'>
-            토스뱅크 통장<span className='text-lg'>으로</span>
+            {communityName} 통장<span className='text-lg'>으로</span>
           </h1>
           <p className='text-base'>계좌번호 {accountNumber}</p>
         </div>
