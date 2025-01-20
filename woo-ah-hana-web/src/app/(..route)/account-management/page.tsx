@@ -5,6 +5,7 @@ import Image from "next/image";
 import ProfileImage from "../../assets/img/profile.jpg";
 import FeeSettingModal from "@/app/ui/components/account/fee-setting.modal";
 import MemberInviteModdal from "@/app/ui/components/account/member-invite.modal";
+import Header from "@/app/ui/components/header";
 
 //임시 멤버 데이터
 const members = [
@@ -17,6 +18,8 @@ const members = [
 
 export default function AccountManagement() {
   return (
+    <div className='h-full flex flex-col'>
+          <Header title='계좌 관리하기' link='/home' />
     <div className="p-5 flex flex-col gap-7">
       <div className="flex flex-col gap-5">
         <div className="text-[20px]">내 출금 계좌</div>
@@ -87,6 +90,7 @@ export default function AccountManagement() {
         </div>
         <MemberInviteModdal />
       </div>
+    </div>
     </div>
   );
 }
