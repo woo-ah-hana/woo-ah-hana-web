@@ -22,18 +22,17 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
   const checkDuplicate:string[] = [];
 
   const filtered = activePlans.map((item)=>{
-    if(!checkDuplicate.includes(item.schedule)){
-      checkDuplicate.push(item.schedule)
+    if(!checkDuplicate.includes(item.date)){
+      checkDuplicate.push(item.date)
       return item
     }
-  })
+  }).filter((item)=>{return item})
 
   const ActivePlanScheduleCard: JSX.Element[] = filtered.map((item, index)=>{
     return (
       <main key={index}>
-        <Card className="p-10">
-          <div>{item?.schedule}</div>
-          <div>{item?.date}</div>
+        <Card className="p-10 text-center">
+          <div>{item?.date.substring(5)}</div>
         </Card>
       </main>
     )
@@ -52,7 +51,8 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         memberIds={plan.getMemberIds()} 
         locations={plan.getLocations()}
         />
-        {ActivePlanScheduleCard}
+        <div className="flex flex-row gap-2">{ActivePlanScheduleCard}</div>
+        
         <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
           <Link href={`/ai?plan=${planId}`}>
             <AchromaticButton className="rounded-full">
