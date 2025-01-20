@@ -7,7 +7,7 @@ import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 export default async function Home({searchParams}:{searchParams: { [key: string]: string | string[] | undefined }}){
   const planId = searchParams.id as string;
   const response = await getPlan(planId)
-
+  
   const plan = response.isSuccess?
     (response.data as Plan):
     (Plan.create("","","","","","",[],[],[]) as Plan)
