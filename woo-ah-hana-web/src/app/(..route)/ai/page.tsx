@@ -11,14 +11,14 @@ export default async function Home({
   const plan = response.data;
   return (
   <main>
-    <div className="flex flex-col gap-3 p-5">
-      
+    <div className="flex flex-col gap-3 p-5"> 
       <Card className="flex flex-col gap-2 p-5 text-center">
         <div> 여행 계획 짜주는 AI입니다. </div>
         <div> 음성 또는 키보드로 요청사항을 입력하세요. </div>
         <div> AI 요청은 하루에 세번까지만 가능합니다. </div>
       </Card>
       <RequestActivePlanForm 
+        planId={searchParams.plan as string}
         startDate={plan?.getStartDate() as string} 
         endDate={plan?.getEndDate() as string}
         locations={plan?.getLocations() as string[]}

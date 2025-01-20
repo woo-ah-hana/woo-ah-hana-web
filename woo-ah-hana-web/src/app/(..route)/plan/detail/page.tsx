@@ -54,7 +54,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         />
         {ActivePlanScheduleCard}
         <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
-          <Link href={"ai"}>
+          <Link href={`/ai?plan=${planId}`}>
             <AchromaticButton className="rounded-full">
               AI 여행 계획짜기
             </AchromaticButton>
