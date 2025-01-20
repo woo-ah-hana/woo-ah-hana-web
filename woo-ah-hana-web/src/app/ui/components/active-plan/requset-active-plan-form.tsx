@@ -19,6 +19,7 @@ interface RequestActivePlanForm{
 
 export function RequestActivePlanForm({startDate, endDate, locations, planId}:RequestActivePlanForm){
   const [aiData, setAiDate] = useState<ActivePlan[]>([]);
+  const [selectedDay, setSelectedDay] = useState<string>("");
   
   async function getActivePlan(prevState: FormState, formData: FormData):Promise<FormState>{
     const input = formData.get('request') as string
@@ -37,6 +38,8 @@ export function RequestActivePlanForm({startDate, endDate, locations, planId}:Re
       }
     ));
 
+    setSelectedDay(activePlan[0].date);
+
     return{
       isSuccess: true,
       isFailure: false,
@@ -51,20 +54,30 @@ export function RequestActivePlanForm({startDate, endDate, locations, planId}:Re
   }
 
   const ActivePlans = aiData.map((item, index)=>{
-    return(
-      <main key={index}>
-        <ActivePlanDetail 
-          date={item.date} 
-          schedule={item.schedule} 
-          time={item.time} 
-          description={item.description} 
-          address={item.address} 
-          link={item.link} 
-          mapx={item.mapx} 
-          mapy={item.mapy}/>
-      </main>
-    )
+    if(item.date==selectedDay){
+      return(
+        <main key={index}>
+          <ActivePlanDetail 
+            date={item.date} 
+            schedule={item.schedule} 
+            time={item.time} 
+            description={item.description} 
+            address={item.address} 
+            link={item.link} 
+            mapx={item.mapx} 
+            mapy={item.mapy}/>
+        </main>
+      )
+    }
   })
+
+  const duplicated: string[] = [];
+  const days = aiData.map((item)=>{
+    if(!duplicated.includes(item.date)){
+      duplicated.push(item.date);
+      return item.date;
+    }
+  }).filter((item)=>item);
 
   return (
     <main className="flex flex-col gap-3">
@@ -73,6 +86,21 @@ export function RequestActivePlanForm({startDate, endDate, locations, planId}:Re
         :
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-3 p-3 bg-slate-100 rounded-xl overflow-y-auto h-96">
+            <div className="flex flex-row gap-3 justify-center justify-items-center">
+              {
+                days.map((item, index)=>{
+                  return (
+                  <AchromaticButton 
+                    className={item===selectedDay?`bg-slate-100 border-none shadow-none`:`text-gray-700`}
+                    key={index}
+                    variant={item===selectedDay?`outline`:`ghost`} 
+                    onClick={()=>{setSelectedDay(item as string)}}>
+                    {item?.substring(5)}
+                  </AchromaticButton>
+                )
+              })
+              }
+            </div>
             {ActivePlans}
           </div>
           <div className="flex flex-row gap-2">
