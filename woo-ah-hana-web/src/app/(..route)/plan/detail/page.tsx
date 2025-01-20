@@ -1,18 +1,48 @@
 import { PlanDetail } from "@/app/ui/components/plan/plan-detail";
 import { getPlan } from "@/app/business/plan/plan.service";
 import { Plan } from "@/app/business/plan/plan";
+import Link from "next/link";
+import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
+import { getActivePlans } from "@/app/business/plan/active-plan.service";
+import { ActivePlan } from "@/app/business/plan/active-plan";
+import { Card } from "@/app/ui/molecule/card/card";
 
 export default async function Home({searchParams}:{searchParams: { [key: string]: string | string[] | undefined }}){
   const planId = searchParams.id as string;
-  const response = await getPlan(planId)
+  const getPlanResponse = await getPlan(planId)
+  const getActivePlansResponse = await getActivePlans(planId);
 
-  const plan = response.isSuccess?
-    (response.data as Plan):
-    (Plan.create("","","","","","",[],[]) as Plan)
+  const plan = getPlanResponse.isSuccess?
+    (getPlanResponse.data as Plan):
+    (Plan.create("","","","","","",[],[],[]) as Plan)
+
+  const activePlans: ActivePlan[] = getActivePlansResponse.isSuccess?
+    (getActivePlansResponse.data as ActivePlan[]):([]);
+  
+  const checkDuplicate:string[] = [];
+
+  const filtered = activePlans.map((item)=>{
+    if(!checkDuplicate.includes(item.schedule)){
+      checkDuplicate.push(item.schedule)
+      return item
+    }
+  })
+
+  const ActivePlanScheduleCard: JSX.Element[] = filtered.map((item, index)=>{
+    return (
+      <main key={index}>
+        <Card className="p-10">
+          <div>{item?.schedule}</div>
+          <div>{item?.date}</div>
+        </Card>
+      </main>
+    )
+  })
+  
   
   return (
     <main>
-      <div className="p-5">
+      <div className="flex flex-col gap-3 p-5">
         <PlanDetail 
         id={planId} 
         title={plan.getTitle()} 
@@ -22,6 +52,14 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         memberIds={plan.getMemberIds()} 
         locations={plan.getLocations()}
         />
+        {ActivePlanScheduleCard}
+        <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
+          <Link href={"ai"}>
+            <AchromaticButton className="rounded-full">
+              AI 여행 계획짜기
+            </AchromaticButton>
+          </Link>
+        </div>
       </div>
     </main>
   )
