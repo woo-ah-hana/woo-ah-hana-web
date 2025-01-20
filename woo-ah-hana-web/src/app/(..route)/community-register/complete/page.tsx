@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false });
 
-export default function GroupRegisterComplete() {
+export default function CommunityRegisterComplete() {
   useEffect(() => {
     const timer = setTimeout(() => {
       window.location.href = '/home';
