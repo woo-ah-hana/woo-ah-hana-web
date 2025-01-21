@@ -17,6 +17,7 @@ interface GetPlanListDto {
 }
 
 export async function getPlan(planId: string): Promise<APIResponseType<Plan>> {
+  console.log(`${API_PATH}/plan/${planId}`);
   const response = await instance.get(`${API_PATH}/plan/${planId}`);
 
   if (response.status == 500) {
