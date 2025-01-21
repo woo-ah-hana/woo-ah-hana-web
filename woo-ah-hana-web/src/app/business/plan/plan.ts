@@ -1,12 +1,12 @@
 export class Plan {
   private id: string;
   private communityId: string;
-  private title: string;
-  private startDate: string;
-  private endDate: string;
-  private category: string;
-  private locations: string[];
-  private memberIds: string[];
+  public title: string;
+  public startDate: string;
+  public endDate: string;
+  public category: string;
+  public locations: string[];
+  public memberIds: string[];
   private memberNames: string[];
 
   constructor(
@@ -55,6 +55,23 @@ export class Plan {
     );
   }
 
+  public update(
+    updatedFields: Partial<
+      Pick<
+        Plan,
+        | "title"
+        | "startDate"
+        | "endDate"
+        | "category"
+        | "locations"
+        | "memberIds"
+      >
+    >
+  ) {
+    Object.assign(this, updatedFields);
+  }
+
+  // Getters for all properties
   public getId() {
     return this.id;
   }
