@@ -8,7 +8,7 @@ import { useState } from "react";
 import { search } from "@/app/business/search/search.service";
 import { loadActivePlan } from "@/app/business/ai/ai.service";
 import { convertDate } from "@/app/utils/convert";
-import { saveActivePlan } from "@/app/business/plan/active-plan.service";
+import { saveActivePlans } from "@/app/business/plan/active-plan.service";
 
 interface RequestActivePlanForm{
   planId?:string;
@@ -49,8 +49,7 @@ export function RequestActivePlanForm({startDate, endDate, locations, planId}:Re
   }
 
   async function save(){
-    // TODO: 지금은 데이터 1만 저장하지만, 백엔드 API 바뀔 시 수정
-    await saveActivePlan(aiData[0]);
+    await saveActivePlans(aiData);
   }
 
   const ActivePlans = aiData.map((item, index)=>{
