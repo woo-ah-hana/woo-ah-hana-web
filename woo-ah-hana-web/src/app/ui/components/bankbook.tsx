@@ -11,6 +11,8 @@ type Props = {
 };
 
 export default function Bankbook({ title, accountNumber, balance, footer }: Props) {
+  const formattedBalance = balance.toLocaleString();
+
   return (
     <Card
       style={{
@@ -24,7 +26,7 @@ export default function Bankbook({ title, accountNumber, balance, footer }: Prop
       </div>
       <div className='flex flex-col justify-center items-center text-2xl mb-5 mt-2'>
         <div className='flex justify-center items-center gap-1 text-[26px]'>
-          {balance} <span className='text-[20px]'> 원</span>
+          {formattedBalance} <span className='text-[20px]'> 원</span>
         </div>
       </div>
       {footer && (
