@@ -9,6 +9,7 @@ import { search } from "@/app/business/search/search.service";
 import { loadActivePlan } from "@/app/business/ai/ai.service";
 import { convertDate } from "@/app/utils/convert";
 import { saveActivePlans } from "@/app/business/plan/active-plan.service";
+import { useRouter } from "next/navigation";
 
 interface RequestActivePlanForm{
   planId?:string;
@@ -20,6 +21,7 @@ interface RequestActivePlanForm{
 export function RequestActivePlanForm({startDate, endDate, locations, planId}:RequestActivePlanForm){
   const [aiData, setAiDate] = useState<ActivePlan[]>([]);
   const [selectedDay, setSelectedDay] = useState<string>("");
+  const router = useRouter();
   
   async function getActivePlan(prevState: FormState, formData: FormData):Promise<FormState>{
     const input = formData.get('request') as string
@@ -49,7 +51,12 @@ export function RequestActivePlanForm({startDate, endDate, locations, planId}:Re
   }
 
   async function save(){
-    await saveActivePlans(aiData);
+    const response = await saveActivePlans(aiData);
+    if(response.isSuccess){
+      router.push(`/plan/detail?id=${planId}`)
+    }else{
+      alert('다시 시도해주세요.')
+    }
   }
 
   const ActivePlans = aiData.map((item, index)=>{
