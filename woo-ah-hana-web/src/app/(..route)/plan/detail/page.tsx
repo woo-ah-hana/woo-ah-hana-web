@@ -31,7 +31,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
   const ActivePlanScheduleCard: JSX.Element[] = filtered.map((item, index)=>{
     return (
       <main key={index}>
-        <Link href={`/plan/active?id=${planId}&date=${item}`}>
+        <Link href={`/plan/active?id=${planId}&date=${item?.date}`}>
           <Card className="p-5 text-center">
             <div>{item?.date.substring(5)}</div>
           </Card>
