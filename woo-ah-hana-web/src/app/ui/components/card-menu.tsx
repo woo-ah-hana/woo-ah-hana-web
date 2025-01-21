@@ -18,6 +18,7 @@ type MenuItem = {
   onClick?: () => void;
 };
 
+// TODO: ssr refactoring
 export default function CardMenu(){
   const router = useRouter();
   const community = useCommunityStore((state) => state.community);

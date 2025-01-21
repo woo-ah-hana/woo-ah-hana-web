@@ -31,9 +31,11 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
   const ActivePlanScheduleCard: JSX.Element[] = filtered.map((item, index)=>{
     return (
       <main key={index}>
-        <Card className="p-10 text-center">
-          <div>{item?.date.substring(5)}</div>
-        </Card>
+        <Link href={`/plan/active?id=${planId}&date=${item?.date}`}>
+          <Card className="p-5 text-center">
+            <div>{item?.date.substring(5)}</div>
+          </Card>
+        </Link>
       </main>
     )
   })
@@ -51,7 +53,9 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         memberIds={plan.getMemberIds()} 
         locations={plan.getLocations()}
         />
-        <div className="flex flex-row gap-2">{ActivePlanScheduleCard}</div>
+        <div className="grid grid-cols-3 gap-2">
+          {ActivePlanScheduleCard}
+        </div>
         
         <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
           <Link href={`/ai?plan=${planId}`}>
