@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { Card } from '@/app/ui/molecule/card/card';
 import IconTransfer from '../../assets/img/icon-transfer.png';
@@ -9,50 +7,19 @@ import IconManagement from '../../assets/img/icon-management.png';
 import IconClosing from '../../assets/img/icon-closing.png';
 import IconFeeCheck from '../../assets/img/icon-fee-check.png';
 import Image, { StaticImageData } from 'next/image';
-import { useRouter } from 'next/navigation';
-import useCommunityStore from '@/app/store/community-store';
+import Link from 'next/link';
+
+export interface Props {
+  community: string;
+}
 
 type MenuItem = {
   label: React.ReactNode;
   icon: StaticImageData;
-  onClick?: () => void;
+  link: string;
 };
 
-export default function CardMenu(){
-  const router = useRouter();
-  const community = useCommunityStore((state) => state.community);
-
-  const onClick = (menuKey: string) => {
-    switch (menuKey) {
-      case 'deposit':
-        console.log('모임통장에 입금 클릭');
-        router.push('/deposit');
-        break;
-      case 'management':
-        console.log('내/모임 계좌관리 클릭');
-        router.push('/account-management');
-        break;
-      case 'plan':
-        console.log('모임 일정 둘러보기 클릭');
-        router.push(`/plan?id=${community}`);
-        break;
-      case 'memory':
-        console.log('지난 모임 추억 클릭');
-        router.push('/memory');
-        break;
-      case 'closing':
-        console.log('모임 결산 클릭');
-        router.push('/closing');
-        break;
-      case 'fee-status':
-        console.log('회비 입금 현황 클릭');
-        router.push('/fee-status');
-        break;
-      default:
-        console.error('잘못된 메뉴 선택');
-    }
-  };
-
+export default function CardMenu({ community }: Props) {
   const menuItems: MenuItem[] = [
     {
       label: (
@@ -63,7 +30,7 @@ export default function CardMenu(){
         </>
       ),
       icon: IconTransfer,
-      onClick: () => onClick('deposit'),
+      link: '/deposit',
     },
     {
       label: (
@@ -74,7 +41,7 @@ export default function CardMenu(){
         </>
       ),
       icon: IconManagement,
-      onClick: () => onClick('management'),
+      link: '/account-management',
     },
     {
       label: (
@@ -85,7 +52,7 @@ export default function CardMenu(){
         </>
       ),
       icon: IconPlan,
-      onClick: () => onClick('plan'),
+      link: `/plan?id=${community}`,
     },
     {
       label: (
@@ -96,12 +63,12 @@ export default function CardMenu(){
         </>
       ),
       icon: IconMemory,
-      onClick: () => onClick('memory')
+      link: '/memory',
     },
     {
       label: <>모임 결산</>,
       icon: IconClosing,
-      onClick: () => onClick('closing'),
+      link: '/closing',
     },
     {
       label: (
@@ -112,26 +79,29 @@ export default function CardMenu(){
         </>
       ),
       icon: IconFeeCheck,
-      onClick: () => onClick('fee-status'),
+      link: '/fee-status',
     },
   ];
 
   return (
     <div className='grid grid-cols-2 gap-5'>
       {menuItems.map((item, index) => (
-        <Card
-          key={index}
-          onClick={item.onClick}
-          className='aspect-square flex justify-between p-4 cursor-pointer shadow hover:shadow-lg transition'
-        >
-          <div className='flex flex-col w-full text-[20px]'>
-            <div className='h-1/2'>{item.label}</div>
-            <div className='h-1/2 flex justify-end items-end'>
-              <Image src={item.icon} alt='입금아이콘' width={70} height={70} />
+        <Link href={item.link} key={index}>
+          <Card className='aspect-square flex justify-between p-4 cursor-pointer shadow hover:shadow-lg transition'>
+            <div className='flex flex-col w-full text-[20px]'>
+              <div className='h-1/2'>{item.label}</div>
+              <div className='h-1/2 flex justify-end items-end'>
+                <Image
+                  src={item.icon}
+                  alt='입금아이콘'
+                  style={{ width: 70, height: 70 }}
+                  priority={true}
+                />
+              </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </Link>
       ))}
     </div>
   );
-};
+}
