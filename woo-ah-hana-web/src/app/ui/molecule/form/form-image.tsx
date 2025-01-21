@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 interface FormImageProps {
