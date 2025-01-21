@@ -46,7 +46,13 @@ export default function MemoryPostModal({ planId }: MemoryPostModalProps) {
               window.location.reload();
             }}
           >
-            <input id="id" name="id" value={planId} className="hidden" />
+            <input
+              id="id"
+              name="id"
+              value={planId}
+              onChange={() => {}}
+              className="hidden"
+            />
             <div className="flex flex-col gap-4">
               <div className="border border-dashed border-gray-300 rounded-lg p-4 flex flex-col items-center gap-2">
                 <FormImage
@@ -72,12 +78,9 @@ export default function MemoryPostModal({ planId }: MemoryPostModalProps) {
               </div>
               <div className="w-full flex justify-between items-center">
                 <DialogClose>
-                  <AchromaticButton
-                    className="w-32 h-12 px-2 text-wooahmain rounded-lg"
-                    variant="secondary"
-                  >
+                  <div className="inline-flex items-center justify-center bg-slate-100 text-slate-900 shadow-md hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80 w-32 h-12 px-2 text-wooahmain rounded-lg tiem">
                     취소
-                  </AchromaticButton>
+                  </div>
                 </DialogClose>
                 <Form.SubmitButton
                   label="게시하기"
