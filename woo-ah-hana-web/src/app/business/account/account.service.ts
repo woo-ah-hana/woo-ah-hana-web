@@ -18,6 +18,55 @@ export interface TransferRequestDTO{
   tranAmt : string;
 }
 
+export interface TransferRecordRequestDTO {
+  communityId : string;
+  recentMonth : number;
+}
+
+export interface TransferRecordResponseDTO {
+  tranDate : string;
+  tranTime : string;
+  inoutType : string;
+  tranType : string;
+  printContent : string;
+  tranAmt : string;
+  afterBalanceAmt : string;
+  branchName : string;
+}
+
+export async function getTransferRecords(requestBody : TransferRecordRequestDTO): Promise<APIResponseType<TransferRecordResponseDTO[]>> {
+  try {
+    const response = await instance.post(`${API_PATH}/community/trsfRecords`, requestBody, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status === 500) {
+      throw new InternetServerError({
+        message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
+        statusCode: response.status,
+        response: response.data,
+      });
+    }
+
+    const data: TransferRecordResponseDTO[] = response.data;
+
+    return {
+      isSuccess: true,
+      isFailure: false,
+      data: data,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined,
+    };
+  }
+}
+
 export async function transfer(requestBody: TransferRequestDTO): Promise<APIResponseType<TransferResponseDTO>> {
   try {
     const response = await instance.post(`${API_PATH}/account/transfer`, requestBody, {
