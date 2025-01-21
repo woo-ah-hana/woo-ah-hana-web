@@ -2,12 +2,11 @@
 
 import { Plan } from "@/app/business/plan/plan";
 import { usePlanContext } from "@/app/context/plan-context";
-
-import { Calendar } from "@/app/ui/molecule/plan-set/calendar";
-import TextInput from "@/app/ui/atom/text-input/text-input"; // 경로는 실제 위치에 맞게 조정
+import { HiLightBulb } from "react-icons/hi";
+import TextInput from "@/app/ui/atom/text-input/text-input";
 import { useState } from "react";
 import dayjs from "dayjs";
-import AchromaticButton from "@/app/ui/atom/button/achromatic-button"; // 경로는 실제 위치에 맞게 조정
+import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import TitleDisplay from "@/app/ui/molecule/plan-set/title-display";
 
 const PlanPage = () => {
@@ -49,26 +48,35 @@ const PlanPage = () => {
   return (
     <div className="flex flex-col p-6">
       <div className="flex flex-col gap-20 min-h-[calc(100vh-10rem)]">
-        <div className="mb-6">
-          <TitleDisplay mainTitle="일정 제목을" subTitle="입력해주세요." />
+        <div className="mb-6 gap-4">
+          <TitleDisplay
+            mainTitle="만나고 싶은 지역, 장소를"
+            subTitle="입력해주세요."
+          />{" "}
+          <p className="text-gray-400 flex">
+            <HiLightBulb />
+            최소 1개이상 입력 해야합니다
+          </p>
           <TextInput
             value={title}
             onValueChange={handleTitleChange}
-            placeholder="모임 제목을 입력해주세요."
-            className="mb-4"
+            placeholder="ex) 서울 명동 카페"
+            className="mb-10"
           />
-        </div>
-
-        <div>
-          <TitleDisplay mainTitle="일정 기간을" subTitle="a설정 해주세요" />
-          <Calendar
-            value={dates}
-            onChange={handleDateChange}
-            className="mb-4"
+          <TextInput
+            value={title}
+            onValueChange={handleTitleChange}
+            placeholder="ex) 대구 관광지"
+            className="mb-10"
+          />
+          <TextInput
+            value={title}
+            onValueChange={handleTitleChange}
+            placeholder="ex) 강원도 등산코스"
+            className="mb-10"
           />
         </div>
       </div>
-
       <AchromaticButton
         onClick={handleUpdate}
         className="w-full h-12 flex justify-center items-center"

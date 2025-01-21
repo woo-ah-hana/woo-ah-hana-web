@@ -8,7 +8,7 @@ interface TitleDisplayProps {
 
 const TitleDisplay = ({ mainTitle, subTitle }: TitleDisplayProps) => {
   return (
-    <div className="mb-4 text-xl text-gray-800">
+    <div className="my-10 text-xl text-gray-800">
       <h1 className="font-bold mb-1">{mainTitle}</h1>
       <p>{subTitle}</p>
     </div>
