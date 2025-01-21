@@ -54,7 +54,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         <h2 className='mt-8 mb-5 text-[20px] font-bold text-wooahMain'>
           {communityAccount.name} 홈
         </h2>
-        <CardMenu />
+        <CardMenu community={selectedCommunity} />
       </div>
     </div>
   );
