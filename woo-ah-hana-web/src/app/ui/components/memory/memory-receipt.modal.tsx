@@ -45,11 +45,13 @@ export default async function MemoryReceiptModal({
           <div className="w-full flex flex-col items-start gap-2">
             <div className="flex justify-between w-full">
               <div>전체 소비 금액</div>
-              <div className="font-semibold">{receiptData.getTotalAmt()}</div>
+              <div className="font-semibold">
+                {receiptData.getTotalAmt()} 원
+              </div>
             </div>
             <div className="flex justify-between w-full">
               <div>인당 소비 금액</div>
-              <div className="font-semibold">{receiptData.getPerAmt()}</div>
+              <div className="font-semibold">{receiptData.getPerAmt()} 원</div>
             </div>
           </div>
         </div>
