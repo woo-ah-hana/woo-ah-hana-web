@@ -46,7 +46,7 @@ export function PlanDetail({id, title, category, startDate, endDate, memberIds, 
         <CardContent className="grid grid-cols-[1fr_4fr_2fr] gap-2">
           <Image src={IconLocation.src} alt="" width={50} height={50}/>
           <div className="text-base mt-2">{`${locations[0]} 외 ${locations.length-1}`}</div>
-          <LocationsDetailDilog id={id}/>
+          <LocationsDetailDilog id={id} locations={locations}/>
         </CardContent>
       </Card>
     </main>
