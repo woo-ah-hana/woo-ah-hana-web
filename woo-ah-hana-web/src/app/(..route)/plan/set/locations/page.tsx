@@ -7,7 +7,8 @@ import TextInput from "@/app/ui/atom/text-input/text-input";
 import { useState } from "react";
 import dayjs from "dayjs";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
-import TitleDisplay from "@/app/ui/molecule/plan-set/title-display";
+import TitleDisplay from "@/app/ui/components/plan/set-title-display";
+import Link from "next/link";
 
 const PlanPage = () => {
   const { plan, updatePlan } = usePlanContext();
@@ -77,12 +78,14 @@ const PlanPage = () => {
           />
         </div>
       </div>
-      <AchromaticButton
-        onClick={handleUpdate}
-        className="w-full h-12 flex justify-center items-center"
-      >
-        다음
-      </AchromaticButton>
+      <Link href="/plan/set/members">
+        <AchromaticButton
+          onClick={handleUpdate}
+          className="w-full h-12 flex justify-center items-center"
+        >
+          다음
+        </AchromaticButton>
+      </Link>
     </div>
   );
 };

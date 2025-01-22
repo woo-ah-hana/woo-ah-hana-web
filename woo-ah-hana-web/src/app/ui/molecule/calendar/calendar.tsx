@@ -57,7 +57,7 @@ export function Calendar({
         format="YYYY-MM-DD"
         allowClear={true}
         disabledDate={(current) => current.isBefore(today, "day")}
-        dropdownClassName="custom-range-picker" // 커스텀 클래스 추가
+        popupClassName="custom-range-picker" // 커스텀 클래스 추가
       />
     </div>
   );

@@ -5,7 +5,7 @@ import { usePlanContext } from "@/app/context/plan-context";
 import { useState } from "react";
 import dayjs from "dayjs";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
-import TitleDisplay from "@/app/ui/molecule/plan-set/title-display";
+import TitleDisplay from "@/app/ui/components/plan/set-title-display";
 import { Card, CardHeader, CardTitle } from "@/app/ui/molecule/card/card";
 import {
   categoryColors,
