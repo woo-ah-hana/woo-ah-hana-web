@@ -20,8 +20,17 @@ export interface Member{
 }
 
 export interface ValidationCodeRequestDTO{
-  bankTranId: string,
-  accountNumber: string
+  bankTranId: string;
+  accountNumber: string;
+}
+
+export interface CreateCommunityRequestDTO{
+  name: string;
+  accountNumber: string;
+  validationCode: string;
+  credits: number;
+  fee: number;
+  feePeriod: number;
 }
 
 export async function getCommunityList(): Promise<APIResponseType<CommunityResponseDTO[]>> {
@@ -114,6 +123,35 @@ export async function getCommunityMembers(communityId: string): Promise<APIRespo
 export async function validateAccount(requestBody: ValidationCodeRequestDTO): Promise<APIResponseType<string>> {
   try {
     const response = await instance.post(`${API_PATH}/community/send-code`, requestBody, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status === 500) {
+      throw new InternetServerError({
+        message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
+        statusCode: response.status,
+        response: response.data,
+      });
+    }
+
+    return {
+      isSuccess: true,
+      isFailure: false,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+    };
+  }
+}
+
+export async function createCommunity(requestBody: CreateCommunityRequestDTO): Promise<APIResponseType<string>> {
+  try {
+    const response = await instance.post(`${API_PATH}/community/new`, requestBody, {
       headers: {
         "Content-Type": "application/json",
       },

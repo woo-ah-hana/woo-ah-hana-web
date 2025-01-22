@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
+import { createCommunity } from '@/app/business/community/community.service';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import TextInput from '@/app/ui/atom/text-input/text-input';
 import Header from '@/app/ui/components/header';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function AccountAuthCheck() {
-    //Todo: 모임계좌 생성 API
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     communityName: '',
@@ -36,11 +36,31 @@ export default function AccountAuthCheck() {
   }, [formData.validationCode]);
 
   const handleInputChange = (value: string) => {
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      validationCode: value
+      validationCode: value,
     }));
-  }
+  };
+
+  const handleSubmit = async () => {
+    const requestBody = {
+      name: formData.communityName,
+      accountNumber: formData.accountNumber,
+      validationCode: '우아하나' + formData.validationCode,
+      credits: 3,
+      fee: Number(formData.fee),
+      feePeriod: Number(formData.feePeriod),
+    };
+
+    //모임 계좌 추가 API 
+    const response = await createCommunity(requestBody);
+
+    if (response.isSuccess) {
+      router.push('/community-register/complete');
+    } else {
+      alert('모임 계좌 생성에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
 
   return (
     <div className='h-full flex flex-col'>
@@ -62,11 +82,13 @@ export default function AccountAuthCheck() {
             onValueChange={handleInputChange}
           />
         </div>
-        <Link href={'/community-register/complete'}>
-          <AchromaticButton className='h-12 text-xl w-full' disabled={!isFormValid}>
-            인증 확인
-          </AchromaticButton>
-        </Link>
+        <AchromaticButton
+          className='h-12 text-xl w-full'
+          disabled={!isFormValid}
+          onClick={handleSubmit}
+        >
+          인증 확인
+        </AchromaticButton>
       </div>
     </div>
   );
