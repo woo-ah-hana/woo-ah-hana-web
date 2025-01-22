@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 export default function AccountRegisterForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   //Todo: 계좌로 1원 보내기 API
 
   const [formData, setFormData] = useState({
@@ -18,6 +18,7 @@ export default function AccountRegisterForm() {
     fee: '',
     accountNumber: '',
   });
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     const params = {
@@ -28,6 +29,10 @@ export default function AccountRegisterForm() {
     };
     setFormData(params);
   }, [searchParams]);
+
+  useEffect(() => {
+    setIsFormValid(!!formData.accountNumber); 
+  }, [formData.accountNumber]);
 
   const handleInputChange = (value: string) => {
     setFormData((prevState) => ({
@@ -69,6 +74,7 @@ export default function AccountRegisterForm() {
           variant={'outline'}
           className='h-12 text-xl w-full'
           onClick={handleSubmit}
+          disabled={!isFormValid}
         >
           계좌 인증하기
         </AchromaticButton>

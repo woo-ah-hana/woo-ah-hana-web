@@ -17,6 +17,7 @@ export default function AccountAuthCheck() {
     accountNumber: '',
     validationCode: '',
   });
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     const params = {
@@ -28,6 +29,11 @@ export default function AccountAuthCheck() {
     };
     setFormData(params);
   }, [searchParams]);
+
+  useEffect(() => {
+    const isValidCode = /^\d{3}$/.test(formData.validationCode);
+    setIsFormValid(isValidCode);
+  }, [formData.validationCode]);
 
   const handleInputChange = (value: string) => {
     setFormData(prevState => ({
@@ -57,7 +63,7 @@ export default function AccountAuthCheck() {
           />
         </div>
         <Link href={'/community-register/complete'}>
-          <AchromaticButton className='h-12 text-xl w-full'>
+          <AchromaticButton className='h-12 text-xl w-full' disabled={!isFormValid}>
             인증 확인
           </AchromaticButton>
         </Link>
