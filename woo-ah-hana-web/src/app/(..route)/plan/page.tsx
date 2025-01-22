@@ -16,6 +16,7 @@ export default async function Home({
     return (
       <main key={index}>
         <PlanListItem
+          communityId={searchParams.id as string}
           planId={item.getId()}
           title={item.getTitle()}
           category={item.getCategory()}
