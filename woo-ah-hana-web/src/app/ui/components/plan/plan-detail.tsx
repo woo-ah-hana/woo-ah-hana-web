@@ -18,10 +18,12 @@ export interface PlanDetailProps{
   endDate: string;
   memberIds: string[];
   memberNames: string[]
+  communityMemberIds: string[];
+  communityMemberNames: string[]
   locations: string[];
 }
 
-export function PlanDetail({id, communityId, title, category, startDate, endDate, memberIds, memberNames, locations}:PlanDetailProps){
+export function PlanDetail({id, communityId, title, category, startDate, endDate, memberIds, memberNames, communityMemberIds, communityMemberNames, locations}:PlanDetailProps){
   return(
     <main>
       <Card className="grid gird-cols-1 text-center">
@@ -40,7 +42,7 @@ export function PlanDetail({id, communityId, title, category, startDate, endDate
         <CardContent className="grid grid-cols-[1fr_4fr_2fr] gap-2">
           <Image src={IconClosing.src} alt="" width={50} height={50}/>
           <div className="text-base mt-2">{`${memberIds.length} 명 참여`}</div>
-          <MemberDetailDilog id={id} communityId={communityId} memberIds={memberIds} memberNames={memberNames} />
+          <MemberDetailDilog id={id} communityId={communityId} memberIds={memberIds} memberNames={memberNames} communityMemberIds={communityMemberIds} communityMemberNames={communityMemberNames} />
         </CardContent>
         <CardContent className="grid grid-cols-[1fr_4fr_2fr] gap-2">
           <Image src={IconLocation.src} alt="" width={50} height={50}/>

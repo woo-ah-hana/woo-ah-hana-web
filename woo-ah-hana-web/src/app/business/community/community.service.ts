@@ -2,7 +2,6 @@
 import { APIResponseType, instance } from "@/app/utils/http";
 import { API_PATH } from "@/app/utils/http/api-query";
 import { InternetServerError } from "@/app/utils/http/http-error";
-import { date } from "zod";
 
 export interface CommunityResponseDTO {
   communityId: string;
@@ -13,6 +12,11 @@ export interface CommunityInfoResponseDTO{
   name: string;
   accountNumber: string;
   balance: number;
+}
+
+export interface Member{
+  id: string,
+  name: string
 }
 
 export async function getCommunityList(): Promise<APIResponseType<CommunityResponseDTO[]>> {
@@ -75,7 +79,8 @@ export async function getCommunityInfo(communityId: string): Promise<APIResponse
   }
 }
 
-export async function getCommunityMembers(communityId: string) {
+export async function getCommunityMembers(communityId: string): Promise<APIResponseType<Member[]>> {
+  console.log(`${API_PATH}/community/member-list/${communityId}`)
   const response = await instance.get(`${API_PATH}/community/member-list/${communityId}`);
   if (response.status === 500) {
     throw new InternetServerError({
@@ -84,19 +89,19 @@ export async function getCommunityMembers(communityId: string) {
       response: response.data
     });
   }
-  
+
   try{
     return {
       isSuccess: true,
       isFailure: false,
-      date: response.data
+      data: response.data as Member[]
     }
   }catch(error){
     console.log(error)
     return {
       isSuccess: false,
       isFailure: true,
-      date: undefined
+      data: undefined
     }
   }
 }
