@@ -15,10 +15,6 @@ export default function AccountRegisterForm() {
             <br />
             <span className='font-semibold'>모임 계좌번호</span>를 입력해주세요
           </div>
-          <TextInput
-            placeholder='&#39; - &#39; 없이 입력하세요'
-            className='border-x-0 border-b-2 border-t-0 shadow-none rounded-none text-xl focus:outline-none focus:ring-transparent focus:border-transparent'
-          />
           <TextInput variant={'default'} placeholder='&#39; - &#39; 없이 입력하세요' />
           <TextInput variant={'secondary'} placeholder='&#39; - &#39; 없이 입력하세요' />
         </div>

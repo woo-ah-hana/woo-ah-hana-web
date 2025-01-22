@@ -9,11 +9,11 @@ const textInputVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-gray-300 focus:ring-blue-400 focus:border-transparent shadow-md',
-        secondary: 'rounded-none border-x-0 border-t-0 border-b-2 border-gray-400 bg-gray-50 focus:ring-gray-300 focus:border-gray-300',
+        default: 'border-gray-300 shadow-md has-[:focus]:ring-2 has-[:focus]:border-blue-400 has-[:focus]:ring-blue-200',
+        secondary: 'rounded-none border-x-0 border-t-0 border-b-2 border-gray-400 has-[:focus]:border-blue-400',
       },
       sizeVariants: {
-        default: 'py-0 text-lg',
+        default: 'py-1 text-lg',
         sm: 'py-0 text-sm',
         lg: 'py-2 text-xl',
       },
@@ -60,8 +60,8 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
         className={cn(
           textInputVariants({ variant, sizeVariants, className }),
           getInputColors(disabled, error),
-          'has-[:focus]:ring-2',
-          'has-[:focus]:border-blue-400 has-[:focus]:ring-blue-200',
+          // 'has-[:focus]:ring-2',
+          // 'has-[:focus]:border-blue-400 has-[:focus]:ring-blue-200',
         )}
       >
         {Icon ? <Icon className="text-gray-6 ml-2.5 h-5 w-5 shrink-0" /> : null}
