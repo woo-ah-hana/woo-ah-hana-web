@@ -4,26 +4,47 @@ import { useRouter } from 'next/navigation';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import TextInput from '@/app/ui/atom/text-input/text-input';
 import { Card } from '@/app/ui/molecule/card/card';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useCommunityStore from '@/app/store/community-store';
 import Header from '@/app/ui/components/header';
+import {
+  depositInfo,
+  DepositInfoResponseDTO,
+} from '@/app/business/account/account.service';
 
 export default function Deposit() {
   const router = useRouter();
   const [amount, setAmount] = useState('');
-  const myBalance = 1000; //임시 - 유저 계좌 잔액
-  const communityName = '강릉여행'; //임시 - 모임 이름
-  const accountNumber = '3561057204496'; //임시 - 모임통장 계좌번호
-  const bankTranId = '002'; //임시 - 은행 이체 id
-  // Todo: 모임 id 이용해서 모임 정보 받아오는 api 연결
-  // const community = useCommunityStore((state) => state.community);
+  const community = useCommunityStore((state) => state.community);
+  const [depositInfoData, setDepositInfoData] =
+    useState<DepositInfoResponseDTO | null>(null);
+
+  useEffect(() => {
+    const fetchDepositInfo = async () => {
+      try {
+        const response = await depositInfo({ communityId: community });
+        if (response.isSuccess && response.data) {
+          setDepositInfoData(response.data);
+        } else {
+          console.error('모임 정보를 가져오는 데 실패했습니다.');
+        }
+      } catch (error) {
+        console.error('API 호출 오류:', error);
+      }
+    };
+
+    fetchDepositInfo();
+  }, []);
 
   const handleNavigation = () => {
     if (amount) {
+      const communityAccountNumber = depositInfoData?.communityAccountNumber || ''; 
+      const communityAccountBank = depositInfoData?.communityAccountBank || '';
+
       const queryParams = new URLSearchParams({
-        communityName,
-        accountNumber,
-        bankTranId,
+        communityId: community,
+        communityAccountNumber,
+        communityAccountBank,
         amount,
       }).toString();
 
@@ -46,13 +67,18 @@ export default function Deposit() {
             <h1 className='text-2xl'>
               내 통장<span className='text-lg'>에서</span>
             </h1>
-            <p className='text-base'>잔액 {myBalance}원</p>
+            <p className='text-base'>
+              잔액 {depositInfoData?.memberAccountBalance}원
+            </p>
           </div>
           <div className='border-none shadow-none'>
             <h1 className='text-2xl'>
-              {communityName} 통장<span className='text-lg'>으로</span>
+              {depositInfoData?.communityAccountBank} 통장
+              <span className='text-lg'>으로</span>
             </h1>
-            <p className='text-base'>계좌번호 {accountNumber}</p>
+            <p className='text-base'>
+              계좌번호 {depositInfoData?.communityAccountNumber}
+            </p>
           </div>
           <Card className='border-none shadow-none'>
             <TextInput
