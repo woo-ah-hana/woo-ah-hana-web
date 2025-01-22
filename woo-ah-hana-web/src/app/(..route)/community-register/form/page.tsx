@@ -39,7 +39,7 @@ export default function CommunityRegisterForm() {
           </div>
         </div>
         <div className='w-full'>
-          <Link href={'/community-register/form/account'}>
+          <Link href={'/community-register/account-auth'}>
             <AchromaticButton className='h-12 text-xl w-full'>
               다음
             </AchromaticButton>

@@ -13,12 +13,10 @@ export default function AccountAuthCheck() {
             하나은행 모임계좌에
             <span className='font-semibold'> 1원</span>을 보냈어요
           </div>
-          {/* <div className='flex flex-col gap-3 mt-10'> */}
           <div className='font-semibold'>
             입금내역을 확인하고 <br /> &apos;우아하나&apos; 뒤 3자리를
             입력하세요
           </div>
-          {/* </div> */}
           <TextInput
             variant={'secondary'}
             sizeVariants={'default'}
@@ -26,8 +24,8 @@ export default function AccountAuthCheck() {
           />
         </div>
         <Link href={'/community-register/complete'}>
-          <AchromaticButton variant={'outline'} className='h-12 text-xl w-full'>
-            계좌 인증하기
+          <AchromaticButton className='h-12 text-xl w-full'>
+            인증 확인
           </AchromaticButton>
         </Link>
       </div>
