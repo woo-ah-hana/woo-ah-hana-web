@@ -1,19 +1,19 @@
 'use client'
 import { Member } from "@/app/business/community/community.service";
+import { updateMembers } from "@/app/business/plan/plan-update.service";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import { Dialog, DialogContent, DialogTrigger } from "@/app/ui/molecule/dialog/dialog";
 import { useEffect, useState } from "react";
 
 interface MemberDetailDilogProps{
   id: string,
-  communityId: string,
   memberIds: string[],
   memberNames: string[],
   communityMemberIds: string[],
   communityMemberNames: string[]
 }
 
-export function MemberDetailDilog({id, communityId, memberIds, memberNames, communityMemberIds, communityMemberNames}: MemberDetailDilogProps){
+export function MemberDetailDilog({id, memberIds, memberNames, communityMemberIds, communityMemberNames}: MemberDetailDilogProps){
   const [planMembers, setPlanMembers] = useState<Member[]>([]);
   const [communityMembers, setCommunityMembers] = useState<Member[]>([]);
 
@@ -29,6 +29,11 @@ export function MemberDetailDilog({id, communityId, memberIds, memberNames, comm
       }
     }).filter((member)=>{return member})
     setPlanMembers(members as Member[]);
+  };
+
+  async function handleUpdateMember(){
+    const memberIds = planMembers.map((member)=>{return member.id});
+    await updateMembers(id, memberIds).then(()=>{alert("참여 멤버가 변경되었어요!")})
   };
 
   useEffect(()=>{
@@ -87,6 +92,7 @@ export function MemberDetailDilog({id, communityId, memberIds, memberNames, comm
               })}
             </div>
           </div>
+          <AchromaticButton onClick={async ()=>{await handleUpdateMember()}}>변경하기</AchromaticButton>
         </div>
       </DialogContent>
     </Dialog>
