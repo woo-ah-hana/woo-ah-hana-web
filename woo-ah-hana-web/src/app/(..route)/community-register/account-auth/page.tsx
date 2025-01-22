@@ -1,9 +1,52 @@
+'use client';
+
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import TextInput from '@/app/ui/atom/text-input/text-input';
 import Header from '@/app/ui/components/header';
-import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function AccountRegisterForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  //Todo: 계좌로 1원 보내기 API
+
+  const [formData, setFormData] = useState({
+    communityName: '',
+    feePeriod: '',
+    fee: '',
+    accountNumber: '',
+  });
+
+  useEffect(() => {
+    const params = {
+      communityName: searchParams.get('communityName') || '',
+      feePeriod: searchParams.get('feePeriod') || '',
+      fee: searchParams.get('fee') || '',
+      accountNumber: '',
+    };
+    setFormData(params);
+  }, [searchParams]);
+
+  const handleInputChange = (value: string) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      accountNumber: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    const queryParams = new URLSearchParams({
+      communityName: formData.communityName,
+      feePeriod: formData.feePeriod,
+      fee: formData.fee,
+      accountNumber: formData.accountNumber,
+    }).toString();
+
+    router.push(`/community-register/account-auth/check?${queryParams}`);
+  };
+
   return (
     <div className='h-full flex flex-col'>
       <Header title='모임통장 추가하기' link='/community-register/form' />
@@ -19,13 +62,16 @@ export default function AccountRegisterForm() {
             sizeVariants={'lg'}
             type={'number'}
             placeholder='&#39; - &#39; 없이 입력하세요'
+            onValueChange={handleInputChange}
           />
         </div>
-        <Link href={'/community-register/account-auth/check'}>
-          <AchromaticButton variant={'outline'} className='h-12 text-xl w-full'>
-            계좌 인증하기
-          </AchromaticButton>
-        </Link>
+        <AchromaticButton
+          variant={'outline'}
+          className='h-12 text-xl w-full'
+          onClick={handleSubmit}
+        >
+          계좌 인증하기
+        </AchromaticButton>
       </div>
     </div>
   );
