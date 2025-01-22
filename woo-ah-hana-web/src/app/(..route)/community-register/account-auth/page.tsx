@@ -1,5 +1,6 @@
 'use client';
 
+import { validateAccount } from '@/app/business/community/community.service';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import TextInput from '@/app/ui/atom/text-input/text-input';
 import Header from '@/app/ui/components/header';
@@ -9,8 +10,6 @@ import { useEffect, useState } from 'react';
 export default function AccountRegisterForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  //Todo: 계좌로 1원 보내기 API
 
   const [formData, setFormData] = useState({
     communityName: '',
@@ -41,17 +40,34 @@ export default function AccountRegisterForm() {
     }));
   };
 
-  const handleSubmit = () => {
-    const queryParams = new URLSearchParams({
-      communityName: formData.communityName,
-      feePeriod: formData.feePeriod,
-      fee: formData.fee,
-      accountNumber: formData.accountNumber,
-    }).toString();
+  const handleSubmit = async () => {
+    try {
+      const requestBody = {
+        bankTranId: '001',
+        accountNumber: formData.accountNumber,
+      };
 
-    router.push(`/community-register/account-auth/check?${queryParams}`);
+      // 계좌로 1원 보내기 API
+      const response = await validateAccount(requestBody);
+
+      if (response.isSuccess) {
+        const queryParams = new URLSearchParams({
+          communityName: formData.communityName,
+          feePeriod: formData.feePeriod,
+          fee: formData.fee,
+          accountNumber: formData.accountNumber,
+        }).toString();
+
+        router.push(`/community-register/account-auth/check?${queryParams}`);
+      } else {
+        alert('계좌 인증에 실패했습니다. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      console.error('API 호출 중 오류:', error);
+      alert('계좌 인증 중 문제가 발생했습니다. 다시 시도해주세요.');
+    } 
   };
-
+  
   return (
     <div className='h-full flex flex-col'>
       <Header title='모임통장 추가하기' link='/community-register/form' />
