@@ -15,7 +15,7 @@ const textInputVariants = cva(
       sizeVariants: {
         default: 'py-1 text-lg',
         sm: 'py-0 text-sm',
-        lg: 'py-2 text-xl',
+        lg: 'py-1 text-3xl',
       },
     },
     defaultVariants: {
@@ -40,7 +40,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
   {
     variant,
     sizeVariants,
-    type = 'text',
+    type,
     icon,
     error = false,
     errorMessages,
@@ -60,8 +60,6 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
         className={cn(
           textInputVariants({ variant, sizeVariants, className }),
           getInputColors(disabled, error),
-          // 'has-[:focus]:ring-2',
-          // 'has-[:focus]:border-blue-400 has-[:focus]:ring-blue-200',
         )}
       >
         {Icon ? <Icon className="text-gray-6 ml-2.5 h-5 w-5 shrink-0" /> : null}
@@ -71,7 +69,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
           type={type}
           className={cn(
             'w-full rounded-lg border-none bg-transparent transition duration-100 focus:outline-none focus:ring-0',
-            'py-2 text-lg',
+            'py-2' ,
             'text-black-1',
             '[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none',
             Icon ? 'pl-2' : 'pl-3',

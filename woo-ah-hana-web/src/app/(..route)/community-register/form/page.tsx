@@ -18,34 +18,25 @@ export default function CommunityRegisterForm() {
     <div className='h-full flex flex-col'>
       <Header title='모임통장 추가하기' link='/community-register' />
       <div className='h-full flex flex-col justify-between p-10'>
-        <div className=' flex flex-col text-lg gap-14'>
-          <div className='flex flex-col gap-3'>
-            <div>
-              <span className='font-semibold'>모임 이름</span>을 입력해주세요
+        <div className=' flex flex-col text-[19px] gap-20'>
+          <div className='flex flex-col gap-5'>
+            <div className='font-semibold'>모임 이름을 입력해주세요
             </div>
-            <TextInput placeholder='ex) OO고 동창회' />
+            <TextInput variant={'secondary'} placeholder='ex) OO고 동창회' />
           </div>
-          <div className='flex flex-col'>
-            <p className='text-lg font-semibold'>얼마씩 모을까요?</p>
+          <div className='flex flex-col gap-5'>
+            <p className='font-semibold'>얼마씩 모을까요?</p>
             <div className='flex flex-col gap-4'>
               <div className='flex justify-start items-center gap-2'>
                 <div>매월</div>
                 <Dropdown options={dates} onSelect={handleSelect} />
               </div>
               <div className='flex justify-start items-center gap-2'>
-                <TextInput className='max-w-40' />
+                <TextInput variant={'secondary'} className='max-w-40' />
                 <div>원씩 모으기</div>
               </div>
             </div>
           </div>
-          {/* <div className='flex flex-col gap-3'>
-          <div>
-            하나은행 모임 <br />
-            <span className='font-semibold'>계좌번호</span>를 입력해주세요
-          </div>
-          <TextInput placeholder='ex) 01-9876-1234-5678' />
-          <AccountAuthModal />
-        </div> */}
         </div>
         <div className='w-full'>
           <Link href={'/community-register/form/account'}>
