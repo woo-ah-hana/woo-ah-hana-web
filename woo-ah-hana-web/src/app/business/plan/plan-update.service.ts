@@ -14,18 +14,10 @@ export async function updatePlanDate(
   const id = formData.get('id');
 
   try {
-    const getPlanResponse = await instance.get(`${API_PATH}/plan/${id}`)
-    const plan = getPlanResponse.data;
-    console.log(plan);
+
     const response = await instance.patch(`${API_PATH}/plan/update/${id}`, {
-      id: plan.id, 
-      communityId: plan.communityId, 
-      title: plan.title, 
       startDate: `${startDate} 11:11:11`, 
       endDate: `${endDate} 11:11:11`, 
-      category: plan.category, 
-      locations: plan.locations, 
-      memberIds: plan.memberIds
     });
   
     console.log(response);
