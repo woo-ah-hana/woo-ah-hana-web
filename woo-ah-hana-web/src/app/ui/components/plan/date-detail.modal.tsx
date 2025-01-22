@@ -17,8 +17,6 @@ export function DateDetailDilog({
   id,
 }: DateDetailDilogProps) {
   // TODO: FormData 활용해서 날짜 업데이트 api 요청
-
-  console.log(id);
   return (
     <Dialog>
       <DialogTrigger asChild>

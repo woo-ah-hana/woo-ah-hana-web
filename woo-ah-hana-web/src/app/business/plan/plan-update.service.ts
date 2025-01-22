@@ -1,10 +1,64 @@
 'use server'
 
 import { FormState } from "@/app/ui/molecule/form/form-root";
-import { instance } from "@/app/utils/http";
+import { APIResponseType, instance } from "@/app/utils/http";
 import { API_PATH } from "@/app/utils/http/api-query";
+import { InternetServerError } from "@/app/utils/http/http-error";
 
-// TODO: 업데이트 API 수정 요청해야함.
+export async function updateLocations(id: string, locations: string[]):Promise<APIResponseType<string>>{
+  const response = await instance.patch(`${API_PATH}/plan/update/${id}`, {locations})
+  
+  if (response.status === 500) {
+    throw new InternetServerError({
+      message: '서버가 불안정합니다. 잠시후 시도해주세요.',
+      statusCode: response.status,
+      response: response.data
+    });
+  }
+
+  try{
+    return{
+      isSuccess: true,
+      isFailure: false,
+      data: response.data as string
+    }
+  }catch(error){
+    console.log(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+}
+
+export async function updateMembers(id: string, memberIds: string[]):Promise<APIResponseType<string>>{
+  const response = await instance.patch(`${API_PATH}/plan/update/${id}`, {memberIds})
+  
+  if (response.status === 500) {
+    throw new InternetServerError({
+      message: '서버가 불안정합니다. 잠시후 시도해주세요.',
+      statusCode: response.status,
+      response: response.data
+    });
+  }
+
+  try{
+    return{
+      isSuccess: true,
+      isFailure: false,
+      data: response.data as string
+    }
+  }catch(error){
+    console.log(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+}
+
 export async function updatePlanDate(
   prevState: FormState,
   formData: FormData
@@ -14,18 +68,10 @@ export async function updatePlanDate(
   const id = formData.get('id');
 
   try {
-    const getPlanResponse = await instance.get(`${API_PATH}/plan/${id}`)
-    const plan = getPlanResponse.data;
-    console.log(plan);
+
     const response = await instance.patch(`${API_PATH}/plan/update/${id}`, {
-      id: plan.id, 
-      communityId: plan.communityId, 
-      title: plan.title, 
       startDate: `${startDate} 11:11:11`, 
       endDate: `${endDate} 11:11:11`, 
-      category: plan.category, 
-      locations: plan.locations, 
-      memberIds: plan.memberIds
     });
   
     console.log(response);

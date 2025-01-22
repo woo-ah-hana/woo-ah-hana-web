@@ -6,21 +6,26 @@ import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import { getActivePlans } from "@/app/business/plan/active-plan.service";
 import { ActivePlan } from "@/app/business/plan/active-plan";
 import { Card } from "@/app/ui/molecule/card/card";
+import { getCommunityMembers, Member } from "@/app/business/community/community.service";
 
 export default async function Home({searchParams}:{searchParams: { [key: string]: string | string[] | undefined }}){
   const planId = searchParams.id as string;
+  const communityId = searchParams.community as string;
+
   const getPlanResponse = await getPlan(planId)
   const getActivePlansResponse = await getActivePlans(planId);
 
   const plan = getPlanResponse.isSuccess?
     (getPlanResponse.data as Plan):
     (Plan.create("","","","","","",[],[],[]) as Plan)
+  
+  const getCommunityMembersResponse = await getCommunityMembers(communityId)
+  const communityMembers = getCommunityMembersResponse.data as Member[];
 
   const activePlans: ActivePlan[] = getActivePlansResponse.isSuccess?
     (getActivePlansResponse.data as ActivePlan[]):([]);
   
   const checkDuplicate:string[] = [];
-
   const filtered = activePlans.map((item)=>{
     if(!checkDuplicate.includes(item.date)){
       checkDuplicate.push(item.date)
@@ -47,10 +52,13 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         <PlanDetail 
         id={planId} 
         title={plan.getTitle()} 
-        category={plan.getTitle()} 
+        category={plan.getCategory()} 
         startDate={plan.getStartDate()} 
         endDate={plan.getEndDate()} 
         memberIds={plan.getMemberIds()} 
+        memberNames={plan.getMemberNames()}
+        communityMemberIds={communityMembers.map((member)=>{return member.id})}
+        communityMemberNames={communityMembers.map((member)=>{return member.name})}
         locations={plan.getLocations()}
         />
         <div className="grid grid-cols-3 gap-2">
