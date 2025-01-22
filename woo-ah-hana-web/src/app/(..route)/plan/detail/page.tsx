@@ -46,11 +46,13 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
       <div className="flex flex-col gap-3 p-5">
         <PlanDetail 
         id={planId} 
+        communityId={plan.getCategory()}
         title={plan.getTitle()} 
         category={plan.getTitle()} 
         startDate={plan.getStartDate()} 
         endDate={plan.getEndDate()} 
         memberIds={plan.getMemberIds()} 
+        memberNames={plan.getMemberNames()}
         locations={plan.getLocations()}
         />
         <div className="grid grid-cols-3 gap-2">

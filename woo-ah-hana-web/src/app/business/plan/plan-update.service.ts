@@ -4,7 +4,6 @@ import { FormState } from "@/app/ui/molecule/form/form-root";
 import { instance } from "@/app/utils/http";
 import { API_PATH } from "@/app/utils/http/api-query";
 
-// TODO: 업데이트 API 수정 요청해야함.
 export async function updatePlanDate(
   prevState: FormState,
   formData: FormData

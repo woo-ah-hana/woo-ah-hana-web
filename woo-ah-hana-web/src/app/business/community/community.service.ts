@@ -1,6 +1,8 @@
+'use server'
 import { APIResponseType, instance } from "@/app/utils/http";
 import { API_PATH } from "@/app/utils/http/api-query";
 import { InternetServerError } from "@/app/utils/http/http-error";
+import { date } from "zod";
 
 export interface CommunityResponseDTO {
   communityId: string;
@@ -70,5 +72,31 @@ export async function getCommunityInfo(communityId: string): Promise<APIResponse
       isFailure: true,
       data: undefined
     };
+  }
+}
+
+export async function getCommunityMembers(communityId: string) {
+  const response = await instance.get(`${API_PATH}/community/member-list/${communityId}`);
+  if (response.status === 500) {
+    throw new InternetServerError({
+      message: '서버가 불안정합니다. 잠시후 시도해주세요.',
+      statusCode: response.status,
+      response: response.data
+    });
+  }
+  
+  try{
+    return {
+      isSuccess: true,
+      isFailure: false,
+      date: response.data
+    }
+  }catch(error){
+    console.log(error)
+    return {
+      isSuccess: false,
+      isFailure: true,
+      date: undefined
+    }
   }
 }
