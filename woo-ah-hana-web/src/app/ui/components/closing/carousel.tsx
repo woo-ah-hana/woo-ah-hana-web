@@ -1,14 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import ClosingContent from './content';
 
-type SelectProps = {
-    children?: React.ReactNode;
-  };
-
-export default function Carousel({ children }: SelectProps) {
-  const [currentPeriod, setCurrentPeriod] = useState({ year: 2025, quarter: 1 });
-  const [content, setContent] = useState('');
+export default function ClosingCarousel() {
+  const [currentPeriod, setCurrentPeriod] = useState({
+    year: 2025,
+    quarter: 1,
+  });
 
   const handleLeftClick = () => {
     setCurrentPeriod((prev) => {
@@ -26,30 +25,27 @@ export default function Carousel({ children }: SelectProps) {
     });
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // Todo: 분기 변경 기간 설정(생성날짜기준)
-      const data = `This is content for ${currentPeriod.year} Q${currentPeriod.quarter}.`;
-      setContent(data);
-    };
-
-    fetchData();
-  }, [currentPeriod]);
-
   return (
-    <div className="h-full flex flex-col p-5">
+    <div>
+      <div className='h-full flex flex-col p-5 bg-[#bed0fc]'>
+        <div className='flex justify-between items-center mb-3'>
+          <button onClick={handleLeftClick} className='px-4 py-2 rounded'>
+            ◀
+          </button>
+          <div className='text-xl'>
+            {currentPeriod.year}년 {currentPeriod.quarter}분기
+          </div>
+          <button onClick={handleRightClick} className='px-4 py-2 rounded'>
+            ▶
+          </button>
+        </div>
 
-      <div className="flex justify-between items-center mb-5">
-        <button onClick={handleLeftClick} className="px-4 py-2 bg-gray-200 rounded">←</button>
-        <h1 className="text-xl font-bold">
-          {currentPeriod.year}년 {currentPeriod.quarter}분기
-        </h1>
-        <button onClick={handleRightClick} className="px-4 py-2 bg-gray-200 rounded">→</button>
-      </div>
-
-      <div className="flex flex-col items-center justify-center border-t pt-5">
-        <p className="text-lg">{content}</p>
-        {children}
+        <div className='flex flex-col items-center justify-center border-t pt-5'>
+          <ClosingContent
+            year={currentPeriod.year}
+            quarter={currentPeriod.quarter}
+          />
+        </div>
       </div>
     </div>
   );
