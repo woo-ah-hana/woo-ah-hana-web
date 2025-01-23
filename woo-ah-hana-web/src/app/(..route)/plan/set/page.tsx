@@ -4,12 +4,11 @@ import { Plan } from "@/app/business/plan/plan";
 import { usePlanContext } from "@/app/context/plan-context";
 import TextInput from "@/app/ui/atom/text-input/text-input";
 import { useState } from "react";
-import dayjs from "dayjs";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
-import TitleDisplay from "@/app/ui/components/plan/set-title-display";
 import Link from "next/link";
+import TitleDisplay from "@/app/ui/components/plan/set-title-display";
 
-const PlanPage = () => {
+export default function SetTitle() {
   const { plan, updatePlan } = usePlanContext();
 
   const [title, setTitle] = useState(plan.title);
@@ -30,8 +29,8 @@ const PlanPage = () => {
       plan.memberIds,
       plan.getMemberNames()
     );
-
     updatePlan(updatedPlan);
+    console.log(plan);
   };
 
   return (
@@ -57,6 +56,4 @@ const PlanPage = () => {
       </Link>
     </div>
   );
-};
-
-export default PlanPage;
+}

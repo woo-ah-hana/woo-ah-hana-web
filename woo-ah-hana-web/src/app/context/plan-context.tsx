@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode, useMemo } from "react";
 import { Plan } from "../business/plan/plan";
+import useCommunityStore from "@/app/store/community-store";
 
 interface PlanContextType {
   plan: Plan;
@@ -19,9 +20,11 @@ export const usePlanContext = () => {
 };
 
 export const PlanProvider = ({ children }: { children: ReactNode }) => {
+  const community = useCommunityStore((state) => state.community);
+
   const initialPlan = Plan.create(
     "default-id",
-    "default-community-id",
+    "b08eda13-03ef-4119-94a1-e25efbd4520c",
     "",
     new Date().toISOString(),
     new Date().toISOString(),

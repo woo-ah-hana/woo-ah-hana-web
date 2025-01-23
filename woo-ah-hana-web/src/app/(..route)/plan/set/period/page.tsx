@@ -6,10 +6,10 @@ import { Calendar } from "@/app/ui/molecule/calendar/calendar";
 import { useState } from "react";
 import dayjs from "dayjs";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
-import TitleDisplay from "@/app/ui/components/plan/set-title-display";
 import Link from "next/link";
+import TitleDisplay from "@/app/ui/components/plan/set-title-display";
 
-const PlanPage = () => {
+export default function SetPeriod() {
   const { plan, updatePlan } = usePlanContext();
   const [dates, setDates] = useState<[Date | null, Date | null]>([
     plan.startDate ? dayjs(plan.startDate).toDate() : null,
@@ -51,7 +51,7 @@ const PlanPage = () => {
           />
         </div>
       </div>
-      <Link href="/plan/set/locations">
+      <Link href="/plan/set/category">
         <AchromaticButton
           onClick={handleUpdate}
           className="w-full h-12 flex justify-center items-center"
@@ -61,6 +61,4 @@ const PlanPage = () => {
       </Link>
     </div>
   );
-};
-
-export default PlanPage;
+}

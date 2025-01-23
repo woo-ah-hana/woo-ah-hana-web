@@ -31,6 +31,20 @@ export class Plan {
     this.memberNames = memberNames;
   }
 
+  toJSON() {
+    const formattedStartDate = formatDateForBackend(this.startDate);
+    const formattedEndDate = formatDateForBackend(this.endDate);
+    return {
+      communityId: this.communityId,
+      title: this.title,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
+      category: this.category,
+      locations: this.locations,
+      memberIds: this.memberIds,
+    };
+  }
+
   public static create(
     id: string,
     communityId: string,
@@ -55,7 +69,7 @@ export class Plan {
     );
   }
 
-  public update(
+  public static update(
     updatedFields: Partial<
       Pick<
         Plan,
@@ -71,7 +85,6 @@ export class Plan {
     Object.assign(this, updatedFields);
   }
 
-  // Getters for all properties
   public getId() {
     return this.id;
   }
@@ -100,3 +113,21 @@ export class Plan {
     return this.memberNames;
   }
 }
+
+const formatDateForBackend = (date: string) => {
+  if (!date) return "";
+
+  const d = new Date(date);
+  if (isNaN(d.getTime())) return "";
+
+  const padZero = (num: number) => String(num).padStart(2, "0");
+
+  const year = d.getFullYear();
+  const month = padZero(d.getMonth() + 1);
+  const day = padZero(d.getDate());
+  const hours = padZero(d.getHours());
+  const minutes = padZero(d.getMinutes());
+  const seconds = padZero(d.getSeconds());
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+};
