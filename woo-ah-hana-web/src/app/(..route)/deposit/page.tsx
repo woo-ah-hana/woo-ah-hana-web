@@ -53,7 +53,6 @@ export default function Deposit() {
       alert('금액을 입력해주세요.');
     }
   };
-
   const handleAmountChange = (value: string) => {
     setAmount(value);
   };
@@ -68,12 +67,13 @@ export default function Deposit() {
               내 통장<span className='text-lg'>에서</span>
             </h1>
             <p className='text-base'>
-              잔액 {depositInfoData?.memberAccountBalance}원
+              잔액 {depositInfoData?.memberAccountBalance.toLocaleString('ko-KR')}원
             </p>
           </div>
           <div className='border-none shadow-none'>
+            <span className='text-lg'>{depositInfoData?.communityAccountName} </span>
             <h1 className='text-2xl'>
-              {depositInfoData?.communityAccountBank} 통장
+              {depositInfoData?.communityAccountBank} 모임통장
               <span className='text-lg'>으로</span>
             </h1>
             <p className='text-base'>
