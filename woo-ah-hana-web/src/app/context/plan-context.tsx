@@ -49,7 +49,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
         updatedPlan.memberIds,
         prevPlan.getMemberNames()
       );
-
+      
       return updated;
     });
   };
