@@ -2,11 +2,33 @@
 import React from 'react';
 import { cn } from '@/app/utils/style/helper';
 import { getInputColors } from '@/app/utils/style/helper';
+import { cva, type VariantProps } from 'class-variance-authority';
 
-export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+const textInputVariants = cva(
+  'relative flex w-full min-w-[10rem] items-center rounded-lg border outline-none transition duration-100',
+  {
+    variants: {
+      variant: {
+        default: 'border-gray-300 shadow-md has-[:focus]:ring-2 has-[:focus]:border-blue-400 has-[:focus]:ring-blue-200',
+        secondary: 'rounded-none border-x-0 border-t-0 border-b-2 border-gray-400 has-[:focus]:border-blue-400',
+      },
+      sizeVariants: {
+        default: 'py-1 text-lg',
+        sm: 'py-0 text-sm',
+        lg: 'py-1 text-3xl',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      sizeVariants: 'default',
+    },
+  }
+);
+
+export interface TextInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement>,
+    VariantProps<typeof textInputVariants> {
   type?: 'text' | 'password' | 'number';
-  defaultValue?: string | number;
-  value?: string | number;
   icon?: React.ElementType;
   error?: boolean;
   errorMessages?: string[];
@@ -16,9 +38,9 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
 
 const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
   {
+    variant,
+    sizeVariants,
     type,
-    defaultValue,
-    value,
     icon,
     error = false,
     errorMessages,
@@ -36,23 +58,18 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
     <>
       <div
         className={cn(
-          'relative flex w-full min-w-[10rem] items-center rounded-lg border outline-none transition duration-100',
-          'shadow-md',
+          textInputVariants({ variant, sizeVariants, className }),
           getInputColors(disabled, error),
-          'has-[:focus]:ring-2',
-          'has-[:focus]:border-blue-400 has-[:focus]:ring-blue-200',
-          className,
         )}
       >
         {Icon ? <Icon className="text-gray-6 ml-2.5 h-5 w-5 shrink-0" /> : null}
         <input
           {...props}
           ref={ref}
-          defaultValue={defaultValue}
-          value={value}
           type={type}
           className={cn(
-            'w-full rounded-lg border-none bg-transparent py-2 text-lg transition duration-100 focus:outline-none focus:ring-0',
+            'w-full rounded-lg border-none bg-transparent transition duration-100 focus:outline-none focus:ring-0',
+            'py-2' ,
             'text-black-1',
             '[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none',
             Icon ? 'pl-2' : 'pl-3',
@@ -71,7 +88,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
       </div>
       {error && errorMessages
         ? errorMessages.map((message, index) => (
-            <p key={index} className={cn('text-etc-red mt-1 text-sm')}>
+            <p key={index} className={cn('text-red-500 mt-1 text-sm')}>
               {message}
             </p>
           ))

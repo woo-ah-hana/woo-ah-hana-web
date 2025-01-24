@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Card } from "../../molecule/card/card";
 import { categoryColors, categoryIcons } from "../../atom/category/category";
 import React from "react";
+import Image from "next/image";
 
 export interface PlanListItemProps {
   title: string;
@@ -10,6 +11,7 @@ export interface PlanListItemProps {
   endDate: string;
   locations: string[];
   planId: string;
+  communityId: string;
 }
 
 export function PlanListItem({
@@ -19,15 +21,16 @@ export function PlanListItem({
   endDate,
   locations,
   planId,
+  communityId
 }: PlanListItemProps) {
   const iconSrc = categoryIcons[category];
   const bgColor = categoryColors[category];
   return (
     <main>
-      <Link href={`plan/detail?id=${planId}`}>
+      <Link href={`plan/detail?community=${communityId}&id=${planId}`}>
         <Card className={`grid grid-cols-[1fr_2fr_2fr] gap-2 ${bgColor}`}>
           <div className="p-2 flex justify-center items-center">
-            <img src={iconSrc} alt={category} />
+            <Image src={iconSrc} alt={category} height={50} width={50} priority={true}/>
           </div>
           <div className="grid grid-cols-1">
             <p className="text-base mt-2">
