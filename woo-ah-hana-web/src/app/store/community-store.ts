@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+// TODO: 커뮤니티 객체 전체 관리
 interface CommunityState {
-  community: string; // 현재 선택된 커뮤니티 ID
-  setCommunity: (communityId: string) => void; // 커뮤니티 변경 함수
+  community: string;
+  setCommunity: (communityId: string) => void;
 }
 
 const useCommunityStore = create<CommunityState>()(
@@ -13,7 +14,7 @@ const useCommunityStore = create<CommunityState>()(
       setCommunity: (communityId) => set({ community: communityId }),
     }),
     {
-      name: 'community-storage', // 로컬 스토리지 키 이름
+      name: 'community-storage',
     }
   )
 );

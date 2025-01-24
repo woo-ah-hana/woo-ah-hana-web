@@ -14,7 +14,10 @@ export interface CommunityInfoResponseDTO {
   balance: number;
 }
 
-
+export interface GetMembersDto {
+  id: string;
+  name: string;
+}
 export interface Member{
   id: string,
   name: string
@@ -42,6 +45,17 @@ export interface CreateCommunityRequestDTO{
   credits: number;
   fee: number;
   feePeriod: number;
+}
+
+export interface Transfer{
+  tranDate: string;
+  tranTime: string;
+  inoutType: string;
+  tranType: string;
+  printContent: string;
+  tranAmt: string;
+  afterBalanceAmt: string;
+  branchName: string;
 }
 
 export async function getCommunityList(): Promise<APIResponseType<CommunityResponseDTO[]>> {
@@ -104,12 +118,6 @@ export async function getCommunityInfo(
       data: undefined,
     };
   }
-}
-
-
-export interface GetMembersDto {
-  id: string;
-  name: string;
 }
 
 export async function getMembers(
@@ -232,6 +240,35 @@ export async function getCommunityFeeStatus(communityId: string):Promise<APIResp
       data: response.data as CommunityFeeStatus
     }
   }catch(error){
+    console.log(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+}
+
+
+export async function getCommunityTransferRecords(communityId: string, recentMonth: number):Promise<APIResponseType<Transfer[]>> {
+  const requestBody = {communityId, recentMonth};
+  const response = await instance.post(`${API_PATH}/community/trsfRecords`, requestBody);
+
+  if (response.status === 500) {
+    throw new InternetServerError({
+      message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
+      statusCode: response.status,
+      response: response.data,
+    });
+  }
+
+  try{
+    return {
+      isSuccess: true,
+      isFailure: false,
+      data: response.data as Transfer[]
+    }
+  } catch(error){
     console.log(error);
     return {
       isSuccess: false,

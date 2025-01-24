@@ -105,6 +105,7 @@ export interface DepositInfoResponseDTO{
   memberAccountNumber : string;
   memberAccountBalance : number;
   communityAccountBank : string;
+  communityAccountName : string;
   communityAccountNumber : string;
 }
 
