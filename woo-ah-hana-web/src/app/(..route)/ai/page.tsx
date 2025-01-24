@@ -1,7 +1,7 @@
 import { getPlan } from "@/app/business/plan/plan.service";
 import { RequestActivePlanForm } from "@/app/ui/components/active-plan/requset-active-plan-form";
 import { Card } from "@/app/ui/molecule/card/card";
-
+import Stt from '@/app/ui/components/stt/stt';
 export default async function Home({
     searchParams,
   }: {
@@ -25,6 +25,7 @@ export default async function Home({
         locations={plan?.getLocations() as string[]}
       />
     </div>
+    <Stt/>
   </main>
   )
 }

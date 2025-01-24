@@ -3,42 +3,52 @@
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
 
-const ReactMediaRecorder = dynamic(() => import("react-media-recorder").then((mod) => mod.ReactMediaRecorder), {
-  ssr: false, // 서버사이드 렌더링 비활성화
-});
+const ReactMediaRecorder = dynamic(
+  () =>
+    import("react-media-recorder").then((mod) => mod.ReactMediaRecorder),
+  { ssr: false }
+);
 
 const Stt: React.FC = () => {
   const [resp, setResp] = useState<string>(""); // STT 결과 저장
   const [mediaBlobUrl, setMediaBlobUrl] = useState<string | null>(null); // 녹음된 Blob URL
+  const [isUploading, setIsUploading] = useState<boolean>(false); // 업로드 상태 관리
 
-  const uploadRecording = async () => {
+  const handleUpload = async () => {
     if (!mediaBlobUrl) {
       alert("녹음된 파일이 없습니다.");
       return;
     }
 
+    setIsUploading(true);
     try {
       const blob = await fetch(mediaBlobUrl).then((res) => res.blob());
       const formData = new FormData();
       formData.append("uploadFile", blob, "recording.wav");
 
-      const res = await fetch("http://localhost:8080/fileUpload", {
+      const response = await fetch("/api/stt", {
         method: "POST",
         body: formData,
       });
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.error("서버 응답 오류:", errorText);
-        throw new Error("녹음 파일 업로드 중 오류 발생");
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error:", errorText);
+        alert("파일 업로드 중 오류가 발생했습니다.");
+        return;
       }
 
-      const result = await res.json();
-      setResp(result.text); // 서버에서 반환된 텍스트 결과 저장
+      const result = await response.json();
+      setResp(result.text || "결과가 없습니다.");
       alert("녹음 파일 업로드 성공");
-    } catch (error) {
-      console.error("Error:", error);
+
+      console.log("API 응답(JSON):", JSON.stringify(result, null, 2)); 
+
+    } catch (error: any) {
+      console.error("Error:", error.message);
       alert("녹음 파일 업로드 중 오류가 발생했습니다.");
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -48,9 +58,7 @@ const Stt: React.FC = () => {
 
       <ReactMediaRecorder
         audio
-        onStop={(blobUrl: string) => {
-          setMediaBlobUrl(blobUrl); // 녹음이 완료되면 URL 저장
-        }}
+        onStop={(blobUrl: string) => setMediaBlobUrl(blobUrl)}
         render={({ status, startRecording, stopRecording }) => (
           <div>
             <p>녹음 상태: {status}</p>
@@ -68,7 +76,9 @@ const Stt: React.FC = () => {
                   style={{ marginBottom: "10px" }}
                 />
                 <br />
-                <button onClick={uploadRecording}>🔼 업로드</button>
+                <button onClick={handleUpload} disabled={isUploading}>
+                  {isUploading ? "업로드 중..." : "🔼 업로드"}
+                </button>
               </>
             )}
           </div>
