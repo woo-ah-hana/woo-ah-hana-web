@@ -12,8 +12,7 @@ interface CommunityMenuProps {
 
 export default function CommunityMenu({ selectedCommunity, communityIds }: CommunityMenuProps) {
   const { community, setCommunity } = useCommunityStore();
-  const communityId = localStorage.getItem('community-storage');
-
+  const communityId = useCommunityStore((state)=>{return state.community})
 
   const items: MenuProps['items'] = communityIds.map((community) => ({
     label: (

@@ -41,7 +41,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
             title={communityAccount.name}
             accountNumber={communityAccount.accountNumber}
             balance={communityAccount.balance as unknown as number}
-            footer={<div></div>}
+            footer={<div className='w-full text-sm text-right'>거래내역 조회 {`>`} </div>}
           />
         </Link>
         {communityIds.length < 3 && (
