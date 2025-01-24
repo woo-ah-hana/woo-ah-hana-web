@@ -81,3 +81,9 @@ body {
   .ant-picker-header-next-btn {
   visibility: hidden !important;
 }
+
+.ant-message {
+  position: absolute;
+  bottom: 120px !important;
+  top: unset !important;
+}
