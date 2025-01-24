@@ -141,8 +141,9 @@ export async function getMembers(
       message: "서버가 불안정합니다. 잠시후 시도해주세요.",
       statusCode: response.status,
     });
-    
-    
+  }
+}
+
 export async function getCommunityMembers(communityId: string): Promise<APIResponseType<Member[]>> {
   console.log(`${API_PATH}/community/member-list/${communityId}`)
   const response = await instance.get(`${API_PATH}/community/member-list/${communityId}`);
@@ -206,12 +207,18 @@ export async function createCommunity(requestBody: CreateCommunityRequestDTO): P
         response: response.data,
       });
     }
-    };
-  } catch (error) {
+    return {
+      isSuccess: true,
+      isFailure: false,
+      data: response.data as string
+    }
+    }
+catch (error) {
     console.error(error);
     return {
       isSuccess: false,
       isFailure: true,
+      data: undefined
     };
   }
 }
