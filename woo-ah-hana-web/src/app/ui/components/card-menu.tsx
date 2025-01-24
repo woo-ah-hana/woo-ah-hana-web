@@ -79,7 +79,7 @@ export default function CardMenu({ community }: Props) {
         </>
       ),
       icon: IconFeeCheck,
-      link: '/fee-status',
+      link: `/fee-status?community=${community}`,
     },
   ];
 

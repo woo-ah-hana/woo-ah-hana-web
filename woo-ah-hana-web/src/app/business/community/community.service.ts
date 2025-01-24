@@ -19,6 +19,30 @@ export interface Member{
   name: string
 }
 
+export interface ValidationCodeRequestDTO{
+  bankTranId: string;
+  accountNumber: string;
+}
+
+export interface MemberFeeStatus{
+  memberName: string;
+  amount: number
+}
+
+export interface CommunityFeeStatus{
+  paidMembers: MemberFeeStatus[];
+  unpaidMembers: MemberFeeStatus[];
+}
+
+export interface CreateCommunityRequestDTO{
+  name: string;
+  accountNumber: string;
+  validationCode: string;
+  credits: number;
+  fee: number;
+  feePeriod: number;
+}
+
 export async function getCommunityList(): Promise<APIResponseType<CommunityResponseDTO[]>> {
   try {
     const response = await instance.get(`${API_PATH}/community/list`);
@@ -98,6 +122,74 @@ export async function getCommunityMembers(communityId: string): Promise<APIRespo
     }
   }catch(error){
     console.log(error)
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+}
+
+export async function validateAccount(requestBody: ValidationCodeRequestDTO): Promise<APIResponseType<string>> {
+  try {
+    const response = await instance.post(`${API_PATH}/community/send-code`, requestBody);
+
+    if (response.status === 500) {
+      throw new InternetServerError({
+        message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
+        statusCode: response.status,
+        response: response.data,
+      });
+    }
+
+    return {
+      isSuccess: true,
+      isFailure: false,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+    };
+  }
+}
+
+export async function createCommunity(requestBody: CreateCommunityRequestDTO): Promise<APIResponseType<string>> {
+  try {
+    const response = await instance.post(`${API_PATH}/community/new`, requestBody);
+
+    if (response.status === 500) {
+      throw new InternetServerError({
+        message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
+        statusCode: response.status,
+        response: response.data,
+      });
+    }
+
+    return {
+      isSuccess: true,
+      isFailure: false,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+    };
+  }
+}
+
+export async function getCommunityFeeStatus(communityId: string):Promise<APIResponseType<CommunityFeeStatus>> {
+  const response = await instance.post(`${API_PATH}/community/feeStatus`, {communityId});
+  try{
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: response.data as CommunityFeeStatus
+    }
+  }catch(error){
+    console.log(error);
     return {
       isSuccess: false,
       isFailure: true,
