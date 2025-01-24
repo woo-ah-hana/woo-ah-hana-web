@@ -16,6 +16,7 @@ export default function DepositCheck({
   const router = useRouter();
   const communityAccountNumber = searchParams.communityAccountNumber || '';
   const communityAccountBank = searchParams.communityAccountBank || '';
+  const communityAccountName = searchParams.communityAccountName || '';
   const communityId = searchParams.communityId || '';
   const tranAmt = searchParams.amount || '';
 
@@ -31,7 +32,7 @@ export default function DepositCheck({
       console.log('Deposit success:', response.data);
 
       if (response.isSuccess) {
-        router.push(`/deposit/complete?amount=${tranAmt}`);
+        router.push(`/deposit/complete?amount=${tranAmt}&accountName=${communityAccountName}`);
       }
     } catch (error) {
       console.error('Deposit failed:', error);
@@ -44,9 +45,10 @@ export default function DepositCheck({
       <Header title='입금' link='/deposit' />
       <div className='h-full px-10 py-5 flex flex-col justify-between'>
         <div className='text-2xl align-center justify-center text-center flex flex-col gap-4'>
-          <h1>{communityAccountBank} 통장으로</h1>
+          <span className='text-lg font-bold'>{communityAccountName}</span>
+          <h1>{communityAccountBank} 모임통장으로</h1>
           <h1>
-            <span className='text-3xl'>{tranAmt}</span> 원을
+            <span className='text-3xl'>{Number(tranAmt).toLocaleString('ko-KR')}</span> 원을
           </h1>
           <h1>옮길까요?</h1>
         </div>
@@ -60,13 +62,17 @@ export default function DepositCheck({
               <p>입금계좌</p>
               <p className='text-black'>{communityAccountNumber}</p>
             </div>
+            <div className='flex justify-between'>
+              <p></p>
+              <p className='text-black'>{communityAccountName}</p>
+            </div>
           </div>
           <div>
             <AchromaticButton
-              className='w-full px-5 h-14 text-xl'
-              onClick={handleTransfer}
+                className='w-full px-5 h-14 text-xl'
+                onClick={handleTransfer}
             >
-              옮기기
+            옮기기
             </AchromaticButton>
           </div>
         </div>
