@@ -4,11 +4,21 @@ import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import checkLottie from '../../../assets/lottie/check.json';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false });
 
 export default function DepositComplete() {
   const searchParams = useSearchParams();
   const amount = searchParams.get('amount');
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.location.href = '/home';
+    }, 2800);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   
   return (
     <div className='h-screen p-10 flex flex-col justify-between'>
