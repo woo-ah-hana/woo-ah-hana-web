@@ -35,7 +35,6 @@ export default function SetPeriod() {
       plan.memberIds,
       plan.getMemberNames()
     );
-
     updatePlan(updatedPlan);
   };
 

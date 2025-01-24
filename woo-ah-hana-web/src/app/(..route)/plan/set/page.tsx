@@ -2,26 +2,24 @@
 
 import { Plan } from "@/app/business/plan/plan";
 import { usePlanContext } from "@/app/context/plan-context";
-import TextInput from "@/app/ui/atom/text-input/text-input";
-import { useState } from "react";
-import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import Link from "next/link";
 import TitleDisplay from "@/app/ui/components/plan/set-title-display";
+import { FormState } from "@/app/ui/molecule/form/form-root";
+import Form from "@/app/ui/molecule/form/form-index";
 
 export default function SetTitle() {
   const { plan, updatePlan } = usePlanContext();
 
-  const [title, setTitle] = useState(plan.title);
+  async function getTitleValue(
+    prevState: FormState,
+    formData: FormData
+  ): Promise<FormState> {
+    const titleData = formData.get("title") as string;
 
-  const handleTitleChange = (value: string) => {
-    setTitle(value);
-  };
-
-  const handleUpdate = () => {
     const updatedPlan = new Plan(
       plan.getId(),
       plan.getCommunityId(),
-      title,
+      titleData,
       plan.startDate,
       plan.endDate,
       plan.category,
@@ -31,29 +29,35 @@ export default function SetTitle() {
     );
     updatePlan(updatedPlan);
     console.log(plan);
-  };
+
+    return {
+      ...prevState,
+      isSuccess: true,
+    };
+  }
 
   return (
     <div className="flex flex-col p-6">
-      <div className="flex flex-col gap-20 min-h-[calc(100vh-10rem)]">
-        <div className="mb-6">
-          <TitleDisplay mainTitle="일정 제목을" subTitle="입력해주세요." />
-          <TextInput
-            value={title}
-            onValueChange={handleTitleChange}
-            placeholder="모임 제목을 입력해주세요."
-            className="mb-4"
-          />
+      <Form id={"title"} action={getTitleValue} failMessageControl={"alert"}>
+        <div className="flex flex-col gap-20 min-h-[calc(100vh-10rem)]">
+          <div className="mb-6">
+            <TitleDisplay mainTitle="일정 제목을" subTitle="입력해주세요." />
+
+            <Form.TextInput
+              id="title"
+              label="일정 제목"
+              placeholder="모임 제목을 입력해주세요."
+              className="mb-4"
+            />
+          </div>
         </div>
-      </div>
-      <Link href="/plan/set/period">
-        <AchromaticButton
-          onClick={handleUpdate}
-          className="w-full h-12 flex justify-center items-center"
-        >
-          다음
-        </AchromaticButton>
-      </Link>
+        <Link href="/plan/set/period">
+          <Form.SubmitButton
+            label="다음"
+            className="w-full h-12 flex justify-center items-center bg-wooahMain text-slate-50 shadow-md hover:bg-wooahDeepBlue"
+          />
+        </Link>
+      </Form>
     </div>
   );
 }

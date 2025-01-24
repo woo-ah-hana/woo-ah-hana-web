@@ -50,7 +50,7 @@ export default function SetLocation() {
 
     updatePlan(updatedPlan);
 
-    console.log(updatedPlan.getCommunityId());
+    console.log(plan);
   };
 
   return (
@@ -99,7 +99,12 @@ export default function SetLocation() {
       </div>
 
       {/* 다음 버튼 */}
-      <Link href={`/plan/set/members?id=${plan.getCommunityId()}`}>
+      <Link
+        href={{
+          pathname: "/plan/set/members",
+          query: { id: plan.getCommunityId() }, // communityId는 해당 아이디 값
+        }}
+      >
         <AchromaticButton
           onClick={handleUpdate}
           className="w-full h-12 flex justify-center items-center"

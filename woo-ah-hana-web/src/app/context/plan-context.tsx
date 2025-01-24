@@ -24,7 +24,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
 
   const initialPlan = Plan.create(
     "default-id",
-    "b08eda13-03ef-4119-94a1-e25efbd4520c",
+    community || "5b423913-3990-4e67-972b-4fa77912012c",
     "",
     new Date().toISOString(),
     new Date().toISOString(),

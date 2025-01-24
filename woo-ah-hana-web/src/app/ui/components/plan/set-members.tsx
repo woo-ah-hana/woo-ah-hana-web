@@ -52,6 +52,7 @@ export default function SetMembers({ members }: { members: GetMembersDto[] }) {
 
     const updatedPlanObject = updatedPlan.toJSON();
     await CreatePlan(updatedPlanObject);
+    window.location.href = `/plan?id=${plan.getCommunityId()}`;
   };
 
   return (
