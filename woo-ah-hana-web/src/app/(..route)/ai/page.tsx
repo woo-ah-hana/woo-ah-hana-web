@@ -2,6 +2,7 @@ import { getPlan } from "@/app/business/plan/plan.service";
 import { RequestActivePlanForm } from "@/app/ui/components/active-plan/requset-active-plan-form";
 import { Card } from "@/app/ui/molecule/card/card";
 import Stt from '@/app/ui/components/stt/stt';
+import { SttModalWrapper } from "@/app/ui/components/stt/SttModalWrapper";
 export default async function Home({
     searchParams,
   }: {
@@ -25,7 +26,9 @@ export default async function Home({
         locations={plan?.getLocations() as string[]}
       />
     </div>
-    <Stt/>
+    <div className="fixed bottom-5 right-5 flex justify-end rounded">
+        <SttModalWrapper />
+      </div>
   </main>
   )
 }
