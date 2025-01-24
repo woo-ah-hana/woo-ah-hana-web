@@ -41,7 +41,7 @@ export default function CardMenu({ community }: Props) {
         </>
       ),
       icon: IconManagement,
-      link: '/account-management',
+      link: `/account-management?id=${community}`,
     },
     {
       label: (
@@ -63,12 +63,12 @@ export default function CardMenu({ community }: Props) {
         </>
       ),
       icon: IconMemory,
-      link: '/memory',
+      link: `/memory?id=${community}`,
     },
     {
       label: <>모임 결산</>,
       icon: IconClosing,
-      link: '/closing',
+      link: `/closing?id=${community}`,
     },
     {
       label: (
