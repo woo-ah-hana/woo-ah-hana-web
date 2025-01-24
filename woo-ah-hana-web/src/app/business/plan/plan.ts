@@ -1,12 +1,12 @@
 export class Plan {
   private id: string;
   private communityId: string;
-  private title: string;
-  private startDate: string;
-  private endDate: string;
-  private category: string;
-  private locations: string[];
-  private memberIds: string[];
+  public title: string;
+  public startDate: string;
+  public endDate: string;
+  public category: string;
+  public locations: string[];
+  public memberIds: string[];
   private memberNames: string[];
 
   constructor(
@@ -31,6 +31,20 @@ export class Plan {
     this.memberNames = memberNames;
   }
 
+  toJSON() {
+    const formattedStartDate = formatDateForBackend(this.startDate);
+    const formattedEndDate = formatDateForBackend(this.endDate);
+    return {
+      communityId: this.communityId,
+      title: this.title,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
+      category: this.category,
+      locations: this.locations,
+      memberIds: this.memberIds,
+    };
+  }
+
   public static create(
     id: string,
     communityId: string,
@@ -53,6 +67,22 @@ export class Plan {
       memberIds,
       memberNames
     );
+  }
+
+  public static update(
+    updatedFields: Partial<
+      Pick<
+        Plan,
+        | "title"
+        | "startDate"
+        | "endDate"
+        | "category"
+        | "locations"
+        | "memberIds"
+      >
+    >
+  ) {
+    Object.assign(this, updatedFields);
   }
 
   public getId() {
@@ -83,3 +113,21 @@ export class Plan {
     return this.memberNames;
   }
 }
+
+const formatDateForBackend = (date: string) => {
+  if (!date) return "";
+
+  const d = new Date(date);
+  if (isNaN(d.getTime())) return "";
+
+  const padZero = (num: number) => String(num).padStart(2, "0");
+
+  const year = d.getFullYear();
+  const month = padZero(d.getMonth() + 1);
+  const day = padZero(d.getDate());
+  const hours = padZero(d.getHours());
+  const minutes = padZero(d.getMinutes());
+  const seconds = padZero(d.getSeconds());
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+};
