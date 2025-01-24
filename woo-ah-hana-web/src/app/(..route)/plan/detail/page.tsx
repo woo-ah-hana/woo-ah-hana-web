@@ -66,7 +66,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         </div>
         
         <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
-          <Link href={`/ai?plan=${planId}`}>
+          <Link href={`/ai?plan=${planId}&community=${communityId}`}>
             <AchromaticButton className="rounded-full">
               AI 여행 계획짜기
             </AchromaticButton>

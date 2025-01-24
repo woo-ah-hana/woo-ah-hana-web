@@ -19,6 +19,7 @@ export default async function Home({
       </Card>
       <RequestActivePlanForm 
         planId={searchParams.plan as string}
+        communityId={searchParams.community as string}
         startDate={plan?.getStartDate() as string} 
         endDate={plan?.getEndDate() as string}
         locations={plan?.getLocations() as string[]}

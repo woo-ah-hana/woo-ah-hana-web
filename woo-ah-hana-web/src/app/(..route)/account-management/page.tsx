@@ -81,9 +81,9 @@ export default function AccountManagement() {
                   />
                   <div className='text-gray-800'>{member.name}</div>
                 </div>
-                <AchromaticButton variant={'outline'}>
+                {/* <AchromaticButton variant={'outline'}>
                   계주로 지정
-                </AchromaticButton>
+                </AchromaticButton> */}
               </div>
             ))}
           </div>

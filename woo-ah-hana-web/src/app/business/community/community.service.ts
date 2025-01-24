@@ -24,6 +24,16 @@ export interface ValidationCodeRequestDTO{
   accountNumber: string;
 }
 
+export interface MemberFeeStatus{
+  memberName: string;
+  amount: number
+}
+
+export interface CommunityFeeStatus{
+  paidMembers: MemberFeeStatus[];
+  unpaidMembers: MemberFeeStatus[];
+}
+
 export interface CreateCommunityRequestDTO{
   name: string;
   accountNumber: string;
@@ -122,11 +132,7 @@ export async function getCommunityMembers(communityId: string): Promise<APIRespo
 
 export async function validateAccount(requestBody: ValidationCodeRequestDTO): Promise<APIResponseType<string>> {
   try {
-    const response = await instance.post(`${API_PATH}/community/send-code`, requestBody, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await instance.post(`${API_PATH}/community/send-code`, requestBody);
 
     if (response.status === 500) {
       throw new InternetServerError({
@@ -151,11 +157,7 @@ export async function validateAccount(requestBody: ValidationCodeRequestDTO): Pr
 
 export async function createCommunity(requestBody: CreateCommunityRequestDTO): Promise<APIResponseType<string>> {
   try {
-    const response = await instance.post(`${API_PATH}/community/new`, requestBody, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await instance.post(`${API_PATH}/community/new`, requestBody);
 
     if (response.status === 500) {
       throw new InternetServerError({
@@ -175,5 +177,23 @@ export async function createCommunity(requestBody: CreateCommunityRequestDTO): P
       isSuccess: false,
       isFailure: true,
     };
+  }
+}
+
+export async function getCommunityFeeStatus(communityId: string):Promise<APIResponseType<CommunityFeeStatus>> {
+  const response = await instance.post(`${API_PATH}/community/feeStatus`, {communityId});
+  try{
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: response.data as CommunityFeeStatus
+    }
+  }catch(error){
+    console.log(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
   }
 }
