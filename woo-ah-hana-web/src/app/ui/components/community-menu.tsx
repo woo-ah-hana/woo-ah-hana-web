@@ -12,7 +12,6 @@ interface CommunityMenuProps {
 
 export default function CommunityMenu({ selectedCommunity, communityIds }: CommunityMenuProps) {
   const { community, setCommunity } = useCommunityStore();
-  const communityId = useCommunityStore((state)=>{return state.community})
 
   const items: MenuProps['items'] = communityIds.map((community) => ({
     label: (
@@ -25,11 +24,7 @@ export default function CommunityMenu({ selectedCommunity, communityIds }: Commu
 
   const handleSelect = ({ key }: { key: string }) => {
     setCommunity(key);
-    console.log(communityId);
-    if(communityId){
-      const parsed = JSON.parse(communityId);
-      console.log(parsed.state.community);
-    }
+    console.log(community);
   };
 
   useEffect(() => {

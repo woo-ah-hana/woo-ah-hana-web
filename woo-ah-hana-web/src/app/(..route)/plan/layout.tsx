@@ -1,3 +1,5 @@
+import Header from "@/app/ui/components/header";
+
 export default function Layout({
   children,
 }: Readonly<{
@@ -5,12 +7,13 @@ export default function Layout({
 }>) {
   return (
     <main>
-      <div className="h-1/6">
+      <div>{children}</div>
+      {/* <div className="h-1/6">
         <div className="px-5 p-5">
-          <Link href={"/home"}>{"<"}</Link> {` 모임`}
+          <Header title="모임" link="/home"/>
         </div>
       </div>
-      <div className="h-5/6">{children}</div>
+      <div className="h-5/6">{children}</div> */}
     </main>
   );
 }
