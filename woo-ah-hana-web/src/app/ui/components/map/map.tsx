@@ -1,64 +1,58 @@
-"use client"
- 
+"use client";
+
 import Script from "next/script";
 import { useCallback, useRef } from "react";
 
-type Lng = number;
-type Lat = number;
 export type NaverMap = naver.maps.Map;
-export type Coordinates = [Lng, Lat]
- 
+
 const mapId = "naver-map";
- 
-// TODO: 마커를 찍었지만 마커가 나오지 않는다 ...
+
 export default function Map({ loc }: { loc: string[] }) {
   const mapRef = useRef<NaverMap | null>(null);
 
   const initializeMap = useCallback(() => {
-    naver.maps.onJSContentLoaded = function(){
-      const points:naver.maps.Point[] = [];
-
-      for(let i=0; i<loc.length; i++){
-        naver.maps.Service.geocode({
-          query: loc[i]
-        }, function(status, response){
-          const item = response.v2.addresses[0];
-          const point = new naver.maps.Point(item.x as unknown as number, item.y as unknown as number);
-          points.push(point);
-        })
-      }
-
-      naver.maps.Service.geocode({
-        query: loc[0]
-      }, function(status, response){
-        const item = response.v2.addresses[0];
-        const point = new naver.maps.Point(item.x as unknown as number, item.y as unknown as number);
-
-        const mapOptions = {
-          center:  new window.naver.maps.LatLng([point.x, point.y]),
-          zoom: 15,
-          scaleControl: true,
-          mapDataControl: true,
-          logoControlOptions: {
-            position: naver.maps.Position.BOTTOM_LEFT,
-          },
-        };
-        const map = new window.naver.maps.Map(mapId, mapOptions);
-
-        const latlngs = points.map((value)=>{return new window.naver.maps.LatLng(value.x, value.y)})
-        
-        for(let i=0; i<latlngs.length; i++){
-          const marker = new window.naver.maps.Marker({
-            map: map,
-            position: latlngs[i],
-            zIndex: 100
+    naver.maps.onJSContentLoaded = function () {
+      const promises = loc.map(
+        (address) =>
+          new Promise<naver.maps.Point | null>((resolve) => {
+            naver.maps.Service.geocode({ query: address }, (status, response) => {
+              if (status === naver.maps.Service.Status.OK && response.v2.addresses.length > 0) {
+                const item = response.v2.addresses[0];
+                resolve(new naver.maps.Point(parseFloat(item.x), parseFloat(item.y)));
+              } else {
+                resolve(null);
+              }
+            });
           })
-          console.log(marker);
+      );
+
+      Promise.all(promises).then((points) => {
+        const validPoints = points.filter((point): point is naver.maps.Point => point !== null);
+
+        if (validPoints.length > 0) {
+          const centerPoint = validPoints[0];
+          const mapOptions = {
+            center: new naver.maps.LatLng(centerPoint.y, centerPoint.x),
+            zoom: 10,
+            scaleControl: true,
+            mapDataControl: true,
+            logoControlOptions: {
+              position: naver.maps.Position.BOTTOM_LEFT,
+            },
+          };
+          const map = new naver.maps.Map(mapId, mapOptions);
+          mapRef.current = map;
+
+          validPoints.forEach((point) => {
+            new naver.maps.Marker({
+              map: map,
+              position: new naver.maps.LatLng(point.y, point.x),
+              zIndex: 100,
+            });
+          });
         }
-        mapRef.current = map;
       });
-    }
-    
+    };
   }, [loc]);
 
   return (
@@ -70,8 +64,7 @@ export default function Map({ loc }: { loc: string[] }) {
         async={true}
         onReady={initializeMap}
       ></Script>
-
-      <div id={mapId} className="aspect-video rounded-lg"/>
+      <div id={mapId} className="aspect-video rounded-lg" />
     </>
   );
 }
