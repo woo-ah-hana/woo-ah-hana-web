@@ -63,6 +63,7 @@ export function MemberDetailDilog({id, memberIds, memberNames, communityMemberId
         <AchromaticButton variant={'ghost'} className="text-slate-600">수정</AchromaticButton>
       </DialogTrigger>
       <DialogContent title="참여 인원 변경">
+        <div className="px-3"><hr></hr></div>
         <div className="grid grid-cols1 gap-7 p-3">
           <div>
             <div className="text-center">현재 참여하는 사람들</div>
@@ -77,6 +78,7 @@ export function MemberDetailDilog({id, memberIds, memberNames, communityMemberId
               })}
             </div>
           </div>
+          <hr></hr>
           <div>
             <div className="text-center">모임 통장의 사람들</div>
             <div className="grid grid-cols-1 gap-3 mx-3">

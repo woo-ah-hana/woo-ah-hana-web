@@ -25,6 +25,7 @@ export function DateDetailDilog({
         </AchromaticButton>
       </DialogTrigger>
       <DialogContent title="모임일정 변경">
+        <hr></hr>
         <div className="p-5 text-center">
           <Form id="updatedate" action={updatePlanDate} failMessageControl={"alert"}>
             <Form.TextInput value={id} id='id' className="hidden" placeholder=""/>
