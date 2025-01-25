@@ -37,14 +37,18 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
     return (
       <main key={index}>
         <Link href={`/plan/active?id=${planId}&date=${item?.date}`}>
-          <Card className="p-5 text-center text-xl text-slate-700 font-medium">
-            <div className="p-5">{item?.date.substring(5)}</div>
+          <Card className="p-5">
+            <div className="p-5 text-center text-xl text-slate-600 font-medium">
+              {item?.date.substring(5)}
+            </div>
+            <div className="text-right text-slate-600 text-xs">
+              {`상세보기>`}
+            </div>
           </Card>
         </Link>
       </main>
     )
   })
-  
   
   return (
     <main>
@@ -61,6 +65,8 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         communityMemberNames={communityMembers.map((member)=>{return member.name})}
         locations={plan.getLocations()}
         />
+        <div className="mt-5 text-center">AI가 세운 일정</div>
+        <hr></hr>
         <div className="grid grid-cols-2 gap-2">
           {ActivePlanScheduleCard}
         </div>
