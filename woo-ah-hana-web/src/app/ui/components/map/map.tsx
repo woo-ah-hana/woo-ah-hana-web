@@ -33,7 +33,7 @@ export default function Map({ loc }: { loc: string[] }) {
           const centerPoint = validPoints[0];
           const mapOptions = {
             center: new naver.maps.LatLng(centerPoint.y, centerPoint.x),
-            zoom: 10,
+            zoom: 13,
             scaleControl: true,
             mapDataControl: true,
             logoControlOptions: {
