@@ -16,12 +16,12 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
 
   const selectedCommunityId = searchParams.id? searchParams.id : communityIds[0].communityId;
 
+  const getCommunityResponse = await getCommunity(selectedCommunityId);
+  const community = getCommunityResponse.data;
+
   let communityAccount;
-  let community;
   if (selectedCommunityId) {
     const responseInfo = await getCommunityInfo(selectedCommunityId);
-    const getCommunityResponse = await getCommunity(selectedCommunityId);
-    community = getCommunityResponse.data;
     const communityInfo: CommunityInfoResponseDTO = responseInfo?.data || {name:'', accountNumber:'', balance:0};
     communityAccount = {
       name: communityInfo.name,

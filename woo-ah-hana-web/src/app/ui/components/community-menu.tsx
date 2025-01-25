@@ -5,13 +5,14 @@ import { Menu, MenuProps } from 'antd';
 import Link from 'next/link';
 import useCommunityStore from '@/app/store/community-store';
 import { Community } from '@/app/business/community/community';
+import { getCommunity } from '@/app/business/community/community.service';
 
 interface CommunityMenuProps {
   selectedCommunity: Community;
   communityIds: { communityId: string; name: string }[];
 }
 
-
+// TODO: 클라이언트 컴포넌트에서 굳이 API 요청을 보낼 필요가 있을까? 상태 관리를 위해서 - 리팩토링 필요
 export default function CommunityMenu({ selectedCommunity, communityIds }: CommunityMenuProps) {
   const { community, setCommunity } = useCommunityStore();
 
@@ -24,8 +25,10 @@ export default function CommunityMenu({ selectedCommunity, communityIds }: Commu
     key: communityInfo.communityId,
   }));
 
-  const handleSelect = ({ community }: { community: Community }) => {
-    setCommunity(community);
+  const handleSelect = async (key:string) => {
+    await getCommunity(key).then((res)=>{
+      setCommunity(res.data as Community);
+    })
   };
 
   useEffect(() => {
@@ -37,9 +40,9 @@ export default function CommunityMenu({ selectedCommunity, communityIds }: Commu
   return (
     <Menu
       mode="horizontal"
-      selectedKeys={[selectedCommunity.id || community.id]} // Zustand 상태를 우선 사용
+      selectedKeys={[selectedCommunity.id]}
       items={items}
-      onSelect={()=>{handleSelect({community: selectedCommunity})}}
+      onSelect={(selectInfo)=>{handleSelect(selectInfo.selectedKeys[0])}}
       className="custom-menu"
     />
   );

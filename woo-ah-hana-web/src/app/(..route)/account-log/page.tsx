@@ -17,7 +17,7 @@ export default function AccountLog() {
       const data = response.data?.reverse();
       setTransfers(data as Transfer[])
     })
-  }, [community]);
+  }, [community, period]);
 
   return (
       <div className="p-5 flex flex-col gap-5">
