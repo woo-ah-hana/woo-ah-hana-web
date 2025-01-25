@@ -25,7 +25,6 @@ export function Calendar({
 
   const handleDateChange = (
     dates: [Dayjs | null, Dayjs | null] | null,
-    dateStrings: [string, string]
   ) => {
     if (dates) {
       const startDate = dates[0]?.toDate() || null;

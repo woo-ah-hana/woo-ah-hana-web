@@ -4,27 +4,28 @@ import React, { useEffect } from 'react';
 import { Menu, MenuProps } from 'antd';
 import Link from 'next/link';
 import useCommunityStore from '@/app/store/community-store';
+import { Community } from '@/app/business/community/community';
 
 interface CommunityMenuProps {
-  selectedCommunity: string;
+  selectedCommunity: Community;
   communityIds: { communityId: string; name: string }[];
 }
+
 
 export default function CommunityMenu({ selectedCommunity, communityIds }: CommunityMenuProps) {
   const { community, setCommunity } = useCommunityStore();
 
-  const items: MenuProps['items'] = communityIds.map((community) => ({
+  const items: MenuProps['items'] = communityIds.map((communityInfo) => ({
     label: (
-      <Link href={`/home?id=${community.communityId}`}>
-        {community.name}
+      <Link href={`/home?id=${communityInfo.communityId}`}>
+        {communityInfo.name}
       </Link>
     ),
-    key: community.communityId,
+    key: communityInfo.communityId,
   }));
 
-  const handleSelect = ({ key }: { key: string }) => {
-    setCommunity(key);
-    console.log(community);
+  const handleSelect = ({ community }: { community: Community }) => {
+    setCommunity(community);
   };
 
   useEffect(() => {
@@ -36,9 +37,9 @@ export default function CommunityMenu({ selectedCommunity, communityIds }: Commu
   return (
     <Menu
       mode="horizontal"
-      selectedKeys={[community || selectedCommunity]} // Zustand 상태를 우선 사용
+      selectedKeys={[selectedCommunity.id || community.id]} // Zustand 상태를 우선 사용
       items={items}
-      onSelect={handleSelect}
+      onSelect={()=>{handleSelect({community: selectedCommunity})}}
       className="custom-menu"
     />
   );
