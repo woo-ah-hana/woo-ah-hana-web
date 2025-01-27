@@ -21,7 +21,6 @@ messaging.onBackgroundMessage((payload) => {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: 'woo-ah-hana-web/src/app/assets/img/Logo.png', // 알림 아이콘
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
