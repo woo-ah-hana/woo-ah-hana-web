@@ -15,7 +15,7 @@ export default function CommunityRegisterForm() {
     fee: ''
   })
   const [isFormValid, setIsFormValid] = useState(false);
-  const dates = Array.from({ length: 30 }, (_, i) => (i + 1).toString());
+  const dates = Array.from({ length: 30 }, (_, i) => (i + 1).toString()+' 일');
 
   const handleSelect = (date: string) => {
     setFormData(prevState => ({
@@ -41,7 +41,7 @@ export default function CommunityRegisterForm() {
   const handleSubmit = () => {
     const queryParams = new URLSearchParams({
       communityName: formData.communityName,
-      feePeriod: formData.feePeriod,
+      feePeriod: formData.feePeriod.trim()[0],
       fee: formData.fee
     }).toString();
 
@@ -68,7 +68,7 @@ export default function CommunityRegisterForm() {
             <div className='flex flex-col gap-4'>
               <div className='flex justify-start items-center gap-2'>
                 <div>매월</div>
-                <Dropdown options={dates} onSelect={handleSelect} />
+                <Dropdown options={dates} deafault='1 일' onSelect={handleSelect} />
               </div>
               <div className='flex justify-start items-center gap-2'>
                 <TextInput variant={'secondary'} type={'number'} className='max-w-40' onValueChange={handleFeeChange} />

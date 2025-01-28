@@ -35,7 +35,7 @@ export default async function Home({
       <Header title='모임 결산' link='/home' />
         <div className='flex-1 overflow-y-auto p-5'>
           <div className='grid grid-rows-1 gap-3'>
-            {/* Todo: 데이터가 존재하지 않을 경우 ui 수정 */}
+            {/* TODO: 데이터가 존재하지 않을 경우 ui 수정 */}
             {plans ? PlansView : <div>데이터가 존재하지 않습니다.</div>}
           </div>
         </div>

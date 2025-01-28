@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 export default function FeeSettingModal(){
   const [isOpen, setIsOpen] = useState(false); 
-  const dates = Array.from({ length: 30 }, (_, i) => (i + 1).toString());
+  const dates = Array.from({ length: 30 }, (_, i) => (i + 1).toString()+' 일');
 
   const handleSelect = (date: string) => {
     console.log('Selected option:', date);
@@ -32,7 +32,7 @@ export default function FeeSettingModal(){
         <div className='flex flex-col gap-4'>
           <div className='flex justify-start items-center gap-2'>
             <div>매월</div>
-            <Dropdown options={dates} onSelect={handleSelect} />
+            <Dropdown options={dates} deafault='1 일' onSelect={handleSelect} />
           </div>
           <div className='flex justify-start items-center gap-2'>
             <TextInput className='max-w-40' />

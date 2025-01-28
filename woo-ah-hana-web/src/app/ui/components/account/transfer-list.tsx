@@ -9,7 +9,7 @@ interface TransferListProps{
 }
 
 export default function TransferList({transfers}:TransferListProps){
-  const TransferListItems: JSX.Element[] = transfers.reverse().map((item, index)=>{
+  const TransferListItems: JSX.Element[] = transfers.map((item, index)=>{
     const transAmt= new Number(item.tranAmt).valueOf();
     const afterBalanceAmt = new Number(item.afterBalanceAmt).valueOf();
     return (

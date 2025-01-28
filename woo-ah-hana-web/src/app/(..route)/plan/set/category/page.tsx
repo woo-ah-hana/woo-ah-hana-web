@@ -22,8 +22,8 @@ const categories = [
 export default function SetCategory() {
   const { plan, updatePlan } = usePlanContext();
 
-  const [title, setTitle] = useState(plan.title);
-  const [dates, setDates] = useState<[Date | null, Date | null]>([
+  const [title] = useState(plan.title);
+  const [dates] = useState<[Date | null, Date | null]>([
     plan.startDate ? dayjs(plan.startDate).toDate() : null,
     plan.endDate ? dayjs(plan.endDate).toDate() : null,
   ]);

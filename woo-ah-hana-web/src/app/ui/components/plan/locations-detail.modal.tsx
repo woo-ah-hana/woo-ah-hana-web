@@ -48,6 +48,7 @@ export function LocationsDetailDilog({id, locations}: LocationsDetailDilogProps)
         <AchromaticButton variant={'ghost'} className="text-slate-600">수정</AchromaticButton>
       </DialogTrigger>
       <DialogContent title="모임 장소">
+        <div className="px-5"><hr></hr></div>
         <div className="p-5 grid grid-cols-1 gap-5">
           <div>
           {currentLocations.map((location, index)=>{
@@ -59,6 +60,7 @@ export function LocationsDetailDilog({id, locations}: LocationsDetailDilogProps)
             )
           })}
           </div>
+          <hr></hr>
           <div>
             <div className="mb-3">모임 장소 입력하기</div>
             <Form id={"add-location"} action={handleAddLocation} failMessageControl={"alert"}>

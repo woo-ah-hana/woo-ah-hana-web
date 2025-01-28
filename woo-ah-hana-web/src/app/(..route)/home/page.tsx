@@ -3,8 +3,9 @@ import Bankbook from '@/app/ui/components/bankbook';
 import CardMenu from '@/app/ui/components/card-menu';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import CommunityMenu from '@/app/ui/components/community-menu';
-import { CommunityInfoResponseDTO, CommunityResponseDTO, getCommunityInfo, getCommunityList } from '@/app/business/community/community.service';
+import { CommunityInfoResponseDTO, CommunityResponseDTO, getCommunity, getCommunityInfo, getCommunityList } from '@/app/business/community/community.service';
 import { redirect } from 'next/navigation';
+import { Community } from '@/app/business/community/community';
 
 export default async function Home({searchParams}:{searchParams: { [key: string]: string | undefined }}) {
   const response = await getCommunityList();
@@ -13,11 +14,14 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
     redirect('/community-register');
   }
 
-  const selectedCommunity = searchParams.id? searchParams.id : communityIds[0].communityId;
+  const selectedCommunityId = searchParams.id? searchParams.id : communityIds[0].communityId;
+
+  const getCommunityResponse = await getCommunity(selectedCommunityId);
+  const community = getCommunityResponse.data;
 
   let communityAccount;
-  if (selectedCommunity) {
-    const responseInfo = await getCommunityInfo(selectedCommunity);
+  if (selectedCommunityId) {
+    const responseInfo = await getCommunityInfo(selectedCommunityId);
     const communityInfo: CommunityInfoResponseDTO = responseInfo?.data || {name:'', accountNumber:'', balance:0};
     communityAccount = {
       name: communityInfo.name,
@@ -34,7 +38,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
 
   return (
     <div>
-      <CommunityMenu selectedCommunity={selectedCommunity} communityIds={communityIds} />
+      <CommunityMenu selectedCommunity={community as Community} communityIds={communityIds} />
       <div className='p-5'>
         <Link href={`/account-log`}>
           <Bankbook
@@ -54,7 +58,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
         <h2 className='mt-8 mb-5 text-[20px] font-bold text-wooahMain'>
           {communityAccount.name} 홈
         </h2>
-        <CardMenu community={selectedCommunity} />
+        <CardMenu community={selectedCommunityId} />
       </div>
     </div>
   );

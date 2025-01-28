@@ -23,6 +23,7 @@ export function MemoryPlan({
   memberNames,
 }: PlanListItemProps) {
   const date = endDate.split(" ")[0];
+  console.log(category, startDate, communityId)
   return (
     <div>
       <div className="flex justify-between items-center mb-5">
