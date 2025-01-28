@@ -42,7 +42,6 @@ export function CategoryMenu({
           }}
         >
           <div className="absolute inset-0 flex flex-col items-center justify-center p-1">
-            {/* 이미지와 텍스트를 동일한 비율로 배치 */}
             <div className="flex flex-col items-center justify-center gap-2 h-full">
               <div className="w-[90%] flex items-center justify-center aspect-square">
                 <Image
