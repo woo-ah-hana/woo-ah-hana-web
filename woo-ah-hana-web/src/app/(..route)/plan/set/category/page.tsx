@@ -12,7 +12,8 @@ import TitleDisplay from "@/app/ui/components/plan/set-title-display";
 const categories = [
   { key: "meeting", label: "정기 모임" },
   { key: "location", label: "여행" },
-  { key: "exercise", label: "운동" },
+  // { key: "exercise", label: "운동" },
+  { key: "meal", label: "식사" },
   { key: "hobby", label: "취미" },
   { key: "shopping", label: "쇼핑" },
   { key: "acc", label: "기타" },

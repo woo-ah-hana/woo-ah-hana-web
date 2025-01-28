@@ -6,6 +6,7 @@ import {
   categoryIcons,
   categoryTextColors,
 } from "@/app/ui/atom/category/category";
+import Image from "next/image";
 
 interface Category {
   key: string;
@@ -33,25 +34,35 @@ export function CategoryMenu({
             categoryColors[category.key]
           } ${
             selectedCategory === category.key
-              ? "border-4 border-blue-500 opacity-90"
+              ? "outline outline-2 outline-blue-500 opacity-90"
               : "hover:opacity-80"
           }`}
+          style={{
+            boxSizing: "border-box",
+          }}
         >
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-3">
-            <img
-              src={categoryIcons[category.key]}
-              alt={category.label}
-              className="mb-[10%] w-[70%] h-[70%]"
-            />
-            <CardTitle className="text-center">
-              <div
-                className={`${
-                  categoryTextColors[category.key]
-                } font-bold text-[calc(10px+2vw)]`}
-              >
-                {category.label}
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-1">
+            {/* 이미지와 텍스트를 동일한 비율로 배치 */}
+            <div className="flex flex-col items-center justify-center gap-2 h-full">
+              <div className="w-[90%] flex items-center justify-center aspect-square">
+                <Image
+                  src={categoryIcons[category.key]}
+                  alt={category.label}
+                  width={60}
+                  height={60}
+                  className="object-contain"
+                />
               </div>
-            </CardTitle>
+              <CardTitle className="text-center">
+                <div
+                  className={`${
+                    categoryTextColors[category.key]
+                  } font-bold md:text-base lg:text-lg`}
+                >
+                  {category.label}
+                </div>
+              </CardTitle>
+            </div>
           </div>
         </Card>
       ))}
