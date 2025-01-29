@@ -25,7 +25,7 @@ export default function Deposit() {
   useEffect(() => {
     const fetchDepositInfo = async () => {
       try {
-        const response = await depositInfo({ communityId: community });
+        const response = await depositInfo({ communityId: community.id });
         if (response.isSuccess && response.data) {
           setDepositInfoData(response.data);
         } else {
@@ -46,7 +46,7 @@ export default function Deposit() {
       const communityAccountName = depositInfoData?.communityAccountName || '';
 
       const queryParams = new URLSearchParams({
-        communityId: community,
+        communityId: community.id,
         communityAccountNumber,
         communityAccountBank,
         communityAccountName,
