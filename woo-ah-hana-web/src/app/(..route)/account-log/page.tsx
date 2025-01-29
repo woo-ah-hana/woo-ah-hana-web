@@ -5,6 +5,7 @@ import Dropdown from "@/app/ui/atom/drop-down/drop-down";
 import TransferList from "@/app/ui/components/account/transfer-list";
 import Bankbook from "@/app/ui/components/bankbook";
 import { useEffect, useState } from "react";
+import Header from "@/app/ui/components/header";
 
 export default function AccountLog() {
   const [transfers, setTransfers] = useState<Transfer[]>([]);
@@ -20,7 +21,10 @@ export default function AccountLog() {
   }, [community, period]);
 
   return (
+      <>
+      <Header title='모임통장 거래내역' link='/home' />
       <div className="p-5 flex flex-col gap-5">
+
         <Bankbook
             title={community.name}
             accountNumber={community.accountNumber}
@@ -32,5 +36,6 @@ export default function AccountLog() {
         </div>
         <TransferList transfers={transfers}/>
       </div>
+      </>
   );
 }

@@ -57,7 +57,11 @@ export default function AccountAuthCheck() {
 
     if (response.isSuccess) {
       router.push('/community-register/complete');
-    } else {
+    }
+    else if(response.data == '입금자명이 일치하지 않습니다.') {
+      alert('입금자명이 일치하지 않습니다.');
+    }
+    else {
       alert('모임 계좌 생성에 실패했습니다. 다시 시도해주세요.');
     }
   };

@@ -247,13 +247,13 @@ export async function createCommunity(requestBody: CreateCommunityRequestDTO): P
       data: response.data as string
     }
     }
-catch (error) {
-    console.error(error);
-    return {
-      isSuccess: false,
-      isFailure: true,
-      data: undefined
-    };
+  catch (error) {
+      console.error(error);
+      return {
+        isSuccess: false,
+        isFailure: true,
+        data: error.response.data
+      };
   }
 }
 
