@@ -32,7 +32,10 @@ export default function CommunityMenu({ selectedCommunity, communityIds }: Commu
   };
 
   useEffect(() => {
+    console.log(community);
     if(!community){
+      setCommunity(selectedCommunity);
+    }else{
       setCommunity(selectedCommunity);
     }
   }, [community, selectedCommunity, setCommunity]);
