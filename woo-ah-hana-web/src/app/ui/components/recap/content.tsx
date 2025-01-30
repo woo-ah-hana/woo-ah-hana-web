@@ -59,7 +59,7 @@ function FadeInCard({ children, className = '' }: FadeInCardProps) {
   );
 }
 
-export default function ClosingContent({ year, quarter }: Props) {
+export default function RecapContent({ year, quarter }: Props) {
   const data = {
     labels: ['1월', '2월', '3월'],
     datasets: [

@@ -68,7 +68,7 @@ export default function CardMenu({ community }: Props) {
     {
       label: <>모임 결산</>,
       icon: IconClosing,
-      link: `/closing?id=${community}`,
+      link: `/recap?id=${community}`,
     },
     {
       label: (

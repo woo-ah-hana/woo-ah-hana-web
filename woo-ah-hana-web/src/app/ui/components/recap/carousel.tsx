@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import ClosingContent from './content';
+import RecapContent from './content';
 
-export default function ClosingCarousel() {
+export default function RecapCarousel() {
   const [currentPeriod, setCurrentPeriod] = useState({
     year: 2025,
     quarter: 1,
@@ -41,7 +41,7 @@ export default function ClosingCarousel() {
         </div>
 
         <div className='flex flex-col items-center justify-center border-t pt-5'>
-          <ClosingContent
+          <RecapContent
             year={currentPeriod.year}
             quarter={currentPeriod.quarter}
           />
