@@ -6,6 +6,7 @@ import TextInput from '@/app/ui/atom/text-input/text-input';
 import Header from '@/app/ui/components/header';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import {message} from "antd";
 
 export default function AccountAuthCheck() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function AccountAuthCheck() {
     validationCode: '',
   });
   const [isFormValid, setIsFormValid] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
     const params = {
@@ -57,12 +59,26 @@ export default function AccountAuthCheck() {
 
     if (response.isSuccess) {
       router.push('/community-register/complete');
-    } else {
-      alert('모임 계좌 생성에 실패했습니다. 다시 시도해주세요.');
+    }
+    else if(response.data == '입금자명이 일치하지 않습니다.') {
+      messageApi.open({type: 'error',
+        content: '입력 코드가 일치하지 않습니다.',
+        duration: 3,
+        className: 'font-bold'
+      });
+    }
+    else {
+      messageApi.open({type: 'error',
+        content: '모임 계좌 생성에 실패했습니다. 다시 시도해주세요.',
+        duration: 3,
+        className: 'font-bold'
+      });
     }
   };
 
   return (
+    <>
+      {contextHolder}
     <div className='h-full flex flex-col'>
       <Header title='모임통장 추가하기' link='/community-register/form' />
       <div className='h-full p-10 flex flex-col justify-between'>
@@ -91,5 +107,6 @@ export default function AccountAuthCheck() {
         </AchromaticButton>
       </div>
     </div>
-  );
+    </>
+    );
 }

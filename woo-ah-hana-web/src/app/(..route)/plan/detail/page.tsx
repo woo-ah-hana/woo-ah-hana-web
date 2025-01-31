@@ -7,6 +7,7 @@ import { getActivePlans } from "@/app/business/plan/active-plan.service";
 import { ActivePlan } from "@/app/business/plan/active-plan";
 import { Card } from "@/app/ui/molecule/card/card";
 import { getCommunityMembers, Member } from "@/app/business/community/community.service";
+import Header from "@/app/ui/components/header";
 
 export default async function Home({searchParams}:{searchParams: { [key: string]: string | string[] | undefined }}){
   const planId = searchParams.id as string;
@@ -52,6 +53,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
   
   return (
     <main>
+      <Header title='모임 일정' link={`/plan?id=${communityId}`} />
       <div className="flex flex-col gap-3 p-5">
         <PlanDetail 
         id={planId} 

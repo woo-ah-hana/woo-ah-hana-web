@@ -32,7 +32,7 @@ export default async function Home({
   return (
     <main>
       <div className='h-full flex flex-col'>
-      <Header title='모임 결산' link='/home' />
+      <Header title='모임 일정' link='/home' />
         <div className='flex-1 overflow-y-auto p-5'>
           <div className='grid grid-rows-1 gap-3'>
             {/* TODO: 데이터가 존재하지 않을 경우 ui 수정 */}

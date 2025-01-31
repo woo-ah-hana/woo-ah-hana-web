@@ -36,7 +36,15 @@ export function MemoryDetail({
             <div className="text-base mt-2">{date}</div>
           </div>
         </div>
-        <div className=" h-52 bg-red-100">이미지{`# ${imageUrl}`}</div>
+        <div className="bg-red-100 rounded-lg">
+          <Image
+            src={imageUrl}
+            alt={"추억 이미지"}
+            width={500}
+            height={500}
+
+            className="mb-3 rounded-lg"/>
+        </div>
         <div className="flex flex-row justify-between">
           <div className="text-lg">{description}</div>
           <Form

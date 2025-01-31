@@ -13,6 +13,7 @@ import { useState } from "react";
 import { FormTextArea } from "../../molecule/form/form-textarea";
 import { FormImage } from "../../molecule/form/form-image";
 import { createPost } from "@/app/business/memory/memory.service";
+import {message} from "antd";
 
 interface MemoryPostModalProps {
   planId: string;
@@ -21,9 +22,11 @@ interface MemoryPostModalProps {
 export default function MemoryPostModal({ planId }: MemoryPostModalProps) {
   const [content, setContent] = useState<string>("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [messageApi, contextHolder] = message.useMessage();
 
   return (
     <Dialog>
+      {contextHolder}
       <DialogTrigger asChild>
         <AchromaticButton className="h-14 w-14 rounded-full">
           <MdOutlineAddPhotoAlternate color="white" size={40} />
@@ -42,8 +45,14 @@ export default function MemoryPostModal({ planId }: MemoryPostModalProps) {
             }}
             failMessageControl="alert"
             onSuccess={() => {
-              alert("게시되었습니다.");
-              window.location.reload();
+              //alert("게시되었습니다.");
+              messageApi.open({type: 'success',
+                content: '게시되었습니다!',
+                duration: 2,
+                className: 'font-bold'
+              });
+              setTimeout(() => window.location.reload(), 2000);
+
             }}
           >
             <input
