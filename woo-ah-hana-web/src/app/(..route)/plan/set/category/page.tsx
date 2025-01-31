@@ -12,7 +12,7 @@ import TitleDisplay from "@/app/ui/components/plan/set-title-display";
 const categories = [
   { key: "meeting", label: "정기 모임" },
   { key: "location", label: "여행" },
-  { key: "exercise", label: "운동" },
+  { key: "meal", label: "식사" },
   { key: "hobby", label: "취미" },
   { key: "shopping", label: "쇼핑" },
   { key: "acc", label: "기타" },
@@ -59,12 +59,11 @@ export default function SetCategory() {
           />
         </div>
       </div>
-      {/* 다음 버튼 */}
       <Link href="/plan/set/locations">
         <AchromaticButton
           onClick={handleUpdate}
           className="w-full h-12 flex justify-center items-center"
-          disabled={!selectedCategory} // 선택된 카테고리가 없으면 버튼 비활성화
+          disabled={!selectedCategory}
         >
           다음
         </AchromaticButton>
