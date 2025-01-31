@@ -59,6 +59,24 @@ export interface Transfer{
   branchName: string;
 }
 
+export interface getRecapRequestDTO{
+  communityId: string;
+  fromDate: string;
+  toDate: string;
+}
+
+export interface getRecapResponseDTO{
+  planTitleList: string[];
+  numberOfplans: number;
+  howMuchSpentThanLastQuarter: number;
+  thisQuarterExpense: number;
+  thisQuarterIncome: number;
+  highestMonth: number;
+  monthlyExpenses: number[];
+  highestPlanName: string;
+  highestPlanExpense: number;
+}
+
 export async function getCommunityList(): Promise<APIResponseType<CommunityResponseDTO[]>> {
   try {
     const response = await instance.get(`${API_PATH}/community/list`);
@@ -301,5 +319,36 @@ export async function getCommunityTransferRecords(communityId: string, recentMon
       isFailure: true,
       data: undefined
     }
+  }
+}
+
+export async function getRecap(requestBody: getRecapRequestDTO): Promise<APIResponseType<getRecapResponseDTO>> {
+  try {
+    const response = await instance.post(
+      `${API_PATH}/community/expense-info`, requestBody
+    );
+
+    if (response.status === 500) {
+      throw new InternetServerError({
+        message: "서버가 불안정합니다. 잠시후 시도해주세요.",
+        statusCode: response.status,
+        response: response.data,
+      });
+    }
+
+    const data: getRecapResponseDTO = response.data;
+
+    return {
+      isSuccess: true,
+      isFailure: false,
+      data: data,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined,
+    };
   }
 }
