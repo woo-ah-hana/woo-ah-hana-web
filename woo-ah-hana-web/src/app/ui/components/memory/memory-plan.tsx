@@ -31,7 +31,7 @@ export function MemoryPlan({
         <p className="text-sm text-gray-500">{date}</p>
       </div>
 
-      <div className="flex flex-wrap gap-2 flex-row">
+      <div className="flex flex-wrap gap-1 flex-row">
         {memberNames.map((name, index) => (
           <span
             key={index}
@@ -42,11 +42,11 @@ export function MemoryPlan({
         ))}
       </div>
 
-      <div className="mt-2">
+      <div className="flex flex-wrap gap-1 flex-row mt-2">
         {locations.map((location, index) => (
           <span
             key={index}
-            className={`px-3 py-1 bg-wooahPurple text-wooahDeepPurple rounded-full text-lg mr-1`}
+            className={`px-3 py-1 bg-wooahPurple text-wooahDeepPurple rounded-full text-lg mr-1 break-all`}
           >
             {location}
           </span>

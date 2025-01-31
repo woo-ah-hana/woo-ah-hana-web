@@ -13,7 +13,6 @@ export default async function Home({
   const communityId =
     (searchParams.id as string) || "a61f6270-974b-44f3-b9f3-7a8ab9b145ff";
 
-  console.log(communityId);
   const getPlansResponse = await getCompletedPlans(communityId);
   const plans = getPlansResponse.data;
   console.log(plans);
