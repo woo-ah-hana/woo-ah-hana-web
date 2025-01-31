@@ -29,6 +29,11 @@ export interface ValidationCodeRequestDTO{
   accountNumber: string;
 }
 
+export interface CodeCheckRequestDTO{
+  accountNumber: string;
+  validationCode: string;
+}
+
 export interface MemberFeeStatus{
   memberName: string;
   memberId: string;
@@ -227,6 +232,31 @@ export async function getCommunityMembers(communityId: string): Promise<APIRespo
 export async function validateAccount(requestBody: ValidationCodeRequestDTO): Promise<APIResponseType<string>> {
   try {
     const response = await instance.post(`${API_PATH}/community/send-code`, requestBody);
+
+    if (response.status === 500) {
+      throw new InternetServerError({
+        message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
+        statusCode: response.status,
+        response: response.data,
+      });
+    }
+
+    return {
+      isSuccess: true,
+      isFailure: false,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+    };
+  }
+}
+
+export async function validateCode(requestBody: CodeCheckRequestDTO): Promise<APIResponseType<string>> {
+  try {
+    const response = await instance.post(`${API_PATH}/account/validate`, requestBody);
 
     if (response.status === 500) {
       throw new InternetServerError({

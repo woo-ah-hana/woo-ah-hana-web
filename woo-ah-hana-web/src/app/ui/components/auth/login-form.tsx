@@ -19,6 +19,11 @@ export default function LoginForm(){
           </div>
         </div>
       </Form>
+
+      <div className="mt-4">
+        <Form.SubmitButton label="회원가입" position="center" onClick={() => router.push('/signup/account-auth')} className="w-full h-12"/>
+        
+      </div>
     </main>
   )
 }
