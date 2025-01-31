@@ -31,6 +31,7 @@ export interface ValidationCodeRequestDTO{
 
 export interface MemberFeeStatus{
   memberName: string;
+  memberId: string;
   amount: number
 }
 
