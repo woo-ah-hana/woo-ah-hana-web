@@ -270,7 +270,7 @@ export async function createCommunity(requestBody: CreateCommunityRequestDTO): P
       return {
         isSuccess: false,
         isFailure: true,
-        data: error.response.data
+        data: undefined
       };
   }
 }
