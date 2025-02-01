@@ -4,6 +4,7 @@ import ProfileImage from '@/app/assets/img/profile.jpg'
 import { MemberFeeStatus } from "@/app/business/community/community.service";
 import AchromaticButton from "../../atom/button/achromatic-button";
 import {yearMonthProps} from "@/app/(..route)/fee-status/page";
+import { notifyToUnpaidMember } from "@/app/business/notification/notification.service";
 
 interface UnpaidMemberListProps{
   unpaidMembers:MemberFeeStatus[];
@@ -29,7 +30,7 @@ export function UnpaidMemberList({unpaidMembers, yearMonth}:UnpaidMemberListProp
                       />
                       <div className='text-gray-800'>{member.memberName}</div>
                   </div>
-                  <AchromaticButton>회비 요청</AchromaticButton>
+                  <AchromaticButton onClick={async ()=>{await notifyToUnpaidMember(member.memberId)}}>회비 요청</AchromaticButton>
               </div>
           ))}
       </div>
