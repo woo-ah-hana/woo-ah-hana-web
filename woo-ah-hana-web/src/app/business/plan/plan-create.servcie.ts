@@ -2,7 +2,6 @@
 import { APIResponseType, instance } from "@/app/utils/http";
 import { API_PATH } from "@/app/utils/http/api-query";
 import { InternetServerError } from "@/app/utils/http/http-error";
-import { Plan } from "./plan";
 
 interface CreatePlanRequestDto {
   communityId: string;
@@ -43,21 +42,3 @@ export async function CreatePlan(
     };
   }
 }
-
-const formatDateForBackend = (date: string) => {
-  if (!date) return "";
-
-  const d = new Date(date);
-  if (isNaN(d.getTime())) return "";
-
-  const padZero = (num: number) => String(num).padStart(2, "0");
-
-  const year = d.getFullYear();
-  const month = padZero(d.getMonth() + 1);
-  const day = padZero(d.getDate());
-  const hours = padZero(d.getHours());
-  const minutes = padZero(d.getMinutes());
-  const seconds = padZero(d.getSeconds());
-
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-};

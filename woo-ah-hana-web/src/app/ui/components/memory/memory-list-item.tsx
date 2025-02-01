@@ -27,6 +27,7 @@ export function MemoryListItem({
   const bgColor = categoryColors[category];
   console.log(startDate);
   console.log(endDate);
+  console.log(memberNames)
   return (
     <main>
       <Link href={`memory/detail?id=${planId}`}>

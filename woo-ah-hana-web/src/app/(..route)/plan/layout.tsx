@@ -1,5 +1,3 @@
-import Header from "@/app/ui/components/header";
-
 export default function Layout({
   children,
 }: Readonly<{

@@ -9,6 +9,7 @@ import { FormState } from "@/app/ui/molecule/form/form-root";
 import {
   GetPlanReceiptDto,
   PaymentLog,
+  PaymentLogType,
   PlanReceipt,
 } from "@/app/business/memory/receipt";
 
@@ -133,9 +134,8 @@ export async function getPlanReceipt(
 
   try {
     const data: GetPlanReceiptDto = response.data;
-    console.log(response.data);
     const logs = data.records.map(
-      (log: any) =>
+      (log: PaymentLogType) =>
         new PaymentLog(
           log.tranDate,
           log.tranTime,
@@ -204,10 +204,7 @@ export async function createPost(
 
   const requestData = {
     planId: id,
-    //memberId: "408466ce-f244-4830-a86d-88d62a1601c8",
     description: content,
-    //createAt: new Date().toISOString(),
-    //createAt: "2025-01-30T12:42:37.969Z"
   };
 
   const multipartFormData = new FormData();
@@ -215,7 +212,6 @@ export async function createPost(
     "data",
     new Blob([JSON.stringify(requestData)], { type: "application/json" })
   );
-  //multipartFormData.append("data", JSON.stringify(requestData));
   multipartFormData.append("image", image);
 
   console.log(multipartFormData);
@@ -246,15 +242,8 @@ export async function createPost(
     } else {
       throw new Error("Unexpected server response");
     }
-  } catch (error: any) {
-    //console.error("Error creating post:", error);
-    if (error.response?.status === 500) {
-      throw new InternetServerError({
-        message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
-        statusCode: error.response.status,
-        response: error.response.data,
-      });
-    }
+  } catch (error) {
+    console.error(error);
     return {
       isSuccess: false,
       isFailure: true,

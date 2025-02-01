@@ -1,12 +1,12 @@
 export interface PaymentLogType {
-    tran_date: string;
-    tran_time: string;
-    inout_type: string;
-    tran_type: string;
-    print_content: string;
-    tran_amt: string;
-    after_balance_amt: string;
-    branch_name: string;
+    tranDate: string;
+    tranTime: string;
+    inoutType: string;
+    tranType: string;
+    printContent: string;
+    tranAmt: string;
+    afterBalanceAmt: string;
+    branchMame: string;
 }
 
 export interface GetPlanReceiptDto {
@@ -46,21 +46,6 @@ export class PlanReceipt {
         this.records = records;
         this.totalAmt = totalAmt;
         this.perAmt = perAmt;
-    }
-
-    static create(data: any): PlanReceipt {
-        const logs = data.records.map((log: any) => new PaymentLog(
-            log.tran_date,
-            log.tran_time,
-            log.inout_type,
-            log.tran_type,
-            log.print_content,
-            log.tran_amt,
-            log.after_balance_amt,
-            log.branch_name
-        ));
-
-        return new PlanReceipt(logs, data.totalAmt, data.perAmt);
     }
 
     public getRecords(): PaymentLog[] {return this.records;}
