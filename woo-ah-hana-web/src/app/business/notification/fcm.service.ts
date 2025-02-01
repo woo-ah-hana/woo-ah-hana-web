@@ -1,4 +1,3 @@
-'use server'
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, Messaging } from "firebase/messaging";
 
