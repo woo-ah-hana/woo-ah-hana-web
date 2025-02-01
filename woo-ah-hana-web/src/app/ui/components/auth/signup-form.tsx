@@ -25,7 +25,7 @@ export default function SignupForm(){
           <Form.TextInput id="bankName" label="은행" placeholder=""/>
           <input value={token} type="hidden" id="token" name="token"/>
           <div>
-            <Form.SubmitButton label="회원가입" position="center" className="w-full h-12"/>
+            <Form.SubmitButton label="회원가입" position="center" className="w-full h-12 bg-blue-800"/>
           </div>
         </div>
       </Form>
