@@ -45,7 +45,8 @@ export function PlanListItem({
 
               <div className='flex flex-col justify-center items-start gap-4 py-2'>
               <div className='flex flex-col gap-3 text-slate-700 text-[17px]'>
-                <div className=''>{startDate.substring(5, 10)} ~ {endDate.substring(5, 10)}</div>
+                <div className=''>{startDate.substring(5, 10) == endDate.substring(5, 10) ?
+                    startDate.substring(5, 10)  : `${startDate.substring(5, 10)}부터 ${endDate.substring(5, 10)}까지`}</div>
               </div>
                 <div className='text-xl'>
                   <strong>{title}</strong>
