@@ -53,8 +53,12 @@ export async function signup(prevState: FormState, formData: FormData):Promise<F
       body: JSON.stringify(body)
     });
 
-    if (!response.ok) {
-      throw new HttpError(response.status, "서버에러");
+    if (response.status === 409) {
+      throw new HttpError(response.status, "중복된 아이디");
+    }
+
+    else if(response.status === 403) {
+      throw new HttpError(response.status, "비밀번호 조건 불만족");
     }
 
     return {
@@ -65,7 +69,7 @@ export async function signup(prevState: FormState, formData: FormData):Promise<F
     };
 
   }catch(error){
-    console.log(error)
+    //console.log(error)
     if(error instanceof Error && error instanceof AxiosError){
       const exception = await httpErrorHandler(error);
       return {
@@ -75,6 +79,22 @@ export async function signup(prevState: FormState, formData: FormData):Promise<F
         message: exception.message,
       };
     }else{
+      if(error instanceof HttpError && error.statusCode === 403){
+        return {
+          isSuccess: false,
+          isFailure: true,
+          validationError: {},
+          message: '비밀번호는 영문자/숫자/특수문자를 조합하여 8자 이상이어야 합니다.'
+        }
+      }
+      if(error instanceof HttpError && error.statusCode === 409){
+        return {
+          isSuccess: false,
+          isFailure: true,
+          validationError: {},
+          message: '중복된 전화번호입니다.'
+        }
+      }
       return {
         isSuccess: false,
         isFailure: true,
