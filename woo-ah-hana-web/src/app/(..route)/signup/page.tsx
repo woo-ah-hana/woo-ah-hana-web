@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import Logo from '@/app/assets/img/logo.png';
+import Logo from '@/app/assets/img/Logo.png';
 import SignupForm from "@/app/ui/components/auth/signup-form";
 
 export default async function Home() {
