@@ -4,12 +4,12 @@ importScripts('https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging-comp
 
 // Your web app's Firebase configuration
 const config = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGE_APP_ID,
+  apiKey: 'AIzaSyC60aSq7JI6m3i6Atiad-OfVXi6HTDd5iw',
+  authDomain: 'wooahhana.firebaseapp.com',
+  projectId: 'wooahhana',
+  storageBucket: 'wooahhana.firebasestorage.app',
+  messagingSenderId: '852689356963',
+  appId: '1:852689356963:web:2e5700e183cca92b7f9716',
 };
 // Initialize Firebase
 firebase.initializeApp(config);
