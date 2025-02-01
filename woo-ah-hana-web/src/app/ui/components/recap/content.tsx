@@ -20,7 +20,6 @@ import {
   getRecapResponseDTO,
 } from '@/app/business/community/community.service';
 import { useSearchParams } from 'next/navigation';
-// import { getRecap, getRecapRequestDTO, getRecapResponseDTO } from '@/api/community';
 
 ChartJS.register(
   CategoryScale,
@@ -44,29 +43,6 @@ const QUARTER_DATE_RANGES: {
   3: (year) => ({ fromDate: `${year}-07-01`, toDate: `${year}-09-30` }),
   4: (year) => ({ fromDate: `${year}-10-01`, toDate: `${year}-12-31` }),
 };
-
-// async function callGetRecap(fromDate: string, toDate: string) {
-//   try {
-//     const requestBody: getRecapRequestDTO = {
-//       communityId: 'a1f3e12f-979c-4784-a28e-d1bd9da5e71b',
-//       fromDate,
-//       toDate,
-//     };
-
-//     const response = await getRecap(requestBody);
-
-//     if (response.isSuccess) {
-//       // const recap: getRecapResponseDTO = response.data;
-//       // console.log('Recap Data:', recap);
-//       return response.data;
-//     } else {
-//       console.error('Failed to fetch recap data.');
-//     }
-//   } catch (error) {
-//     console.error('Error fetching recap data:', error);
-//   }
-//   return null;
-// }
 
 type Props = {
   year: number;
@@ -141,11 +117,11 @@ export default function RecapContent({ year, quarter }: Props) {
           setRecapData(response.data);
         } else {
           console.warn('데이터가 비어 있습니다.');
-          setRecapData(null); // 빈 데이터 처리
+          setRecapData(null); 
         }
       } catch (error) {
         console.error('데이터 요청에 실패했습니다.', error);
-        setRecapData(null); // 오류 시 초기화 처리
+        setRecapData(null); 
       }
     }
   
@@ -197,7 +173,6 @@ export default function RecapContent({ year, quarter }: Props) {
 
   return (
     <div className='flex flex-col w-screen py-5 px-5 text-xl gap-24 mb-20 bg-[#bed0fc]'>
-      {/* 첫 번째 카드 */}
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
           {year}년 {quarter}분기에 함께한 일정
@@ -212,7 +187,6 @@ export default function RecapContent({ year, quarter }: Props) {
         </FadeInCard>
       </div>
 
-      {/* 두 번째 카드 */}
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
           지난 분기보다{' '}
@@ -232,7 +206,6 @@ export default function RecapContent({ year, quarter }: Props) {
         </FadeInCard>
       </div>
 
-      {/* 세 번째 카드 */}
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
           소비가 가장 많았던 달은
@@ -245,7 +218,6 @@ export default function RecapContent({ year, quarter }: Props) {
         </FadeInCard>
       </div>
 
-      {/* 네 번째 카드 */}
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
           가장 많이 지출한 모임은
