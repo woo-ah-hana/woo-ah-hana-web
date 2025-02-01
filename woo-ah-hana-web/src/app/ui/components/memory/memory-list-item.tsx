@@ -25,7 +25,8 @@ export function MemoryListItem({
 }: PlanListItemProps) {
   const iconSrc = categoryIcons[category];
   const bgColor = categoryColors[category];
-  console.log(memberNames);
+  console.log(startDate);
+  console.log(endDate);
   return (
     <main>
       <Link href={`memory/detail?id=${planId}`}>
@@ -35,7 +36,7 @@ export function MemoryListItem({
           </div>
           <div className="grid grid-cols-1">
             <p className="text-base mt-2">
-              <strong>{title}</strong>
+              <span className="[word-break:keep-all]">{title}</span>
             </p>
             <p className="text-sm text-slate-500">{`# ${category}`}</p>
           </div>
@@ -44,7 +45,8 @@ export function MemoryListItem({
               <strong>{locations[0]}</strong>
             </p>
             <p className="text-sm text-slate-500">
-              {startDate.substring(5, 10)}~{endDate.substring(5, 10)}
+              {startDate.substring(5, 10) == endDate.substring(5, 10) ?
+                  startDate.substring(5, 10)  : `${startDate.substring(5, 10)}부터 ${endDate.substring(5, 10)}까지`}
             </p>
           </div>
         </Card>

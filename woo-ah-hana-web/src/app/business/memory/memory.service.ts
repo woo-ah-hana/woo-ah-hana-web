@@ -133,17 +133,18 @@ export async function getPlanReceipt(
 
   try {
     const data: GetPlanReceiptDto = response.data;
+    console.log(response.data);
     const logs = data.records.map(
       (log: any) =>
         new PaymentLog(
-          log.tran_date,
-          log.tran_time,
-          log.inout_type,
-          log.tran_type,
-          log.print_content,
-          log.tran_amt,
-          log.after_balance_amt,
-          log.branch_name
+          log.tranDate,
+          log.tranTime,
+          log.inoutType,
+          log.tranType,
+          log.printContent,
+          log.tranAmt,
+          log.afterBalanceAmt,
+          log.branchMame
         )
     );
 
