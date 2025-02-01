@@ -71,7 +71,7 @@ export default function Deposit() {
     }
   };
   const handleAmountChange = (value: string) => {
-    if(Number(value) > depositInfoData?.memberAccountBalance) {
+    if(Number(value).valueOf() > (depositInfoData?.memberAccountBalance as unknown as number)) {
       setOverBalance(true);
     }
     else {
