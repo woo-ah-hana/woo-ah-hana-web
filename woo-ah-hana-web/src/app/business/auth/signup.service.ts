@@ -1,11 +1,11 @@
+'use server'
 import { z } from 'zod';
-import { generateFCMToken } from '../notification/fcm.service';
 import { FormState } from '@/app/ui/molecule/form/form-root';
 import { BankName, convertBankNameToCode } from '@/app/utils/convert';
-import { API_PATH } from '@/app/utils/http/api-query';
 import { HttpError } from '@/app/utils/http/http-error';
 import { httpErrorHandler } from '@/app/utils/http/http-error-handler';
 import { AxiosError } from 'axios';
+import { API_PATH } from '@/app/utils/http/api-query';
 
 const SignUpFormSchema = z.object({
   username: z.string(),
@@ -19,9 +19,9 @@ const SignUpFormSchema = z.object({
 
 type SignUpRequestBody = z.infer<typeof SignUpFormSchema>
 
-export async function signUp(prevState: FormState, formData: FormData):Promise<FormState> {
-  const fcmToken = await generateFCMToken();
-  console.log(fcmToken);
+export async function signup(prevState: FormState, formData: FormData):Promise<FormState> {
+  
+  console.log(formData.get("token") as string);
 
   const validatedFields = SignUpFormSchema.safeParse({
     username: formData.get("username") as string,
@@ -29,8 +29,8 @@ export async function signUp(prevState: FormState, formData: FormData):Promise<F
     name: formData.get("name") as string,
     phoneNumber: formData.get("username") as string,
     accountNumber: formData.get("accountNumber") as string,
-    bankTranId: convertBankNameToCode(formData.get("bankTranId") as BankName),
-    fcmToken: fcmToken
+    bankTranId: convertBankNameToCode(formData.get("bankName") as BankName),
+    fcmToken: formData.get("token") as string
   })
 
   if (!validatedFields.success) {
@@ -45,7 +45,7 @@ export async function signUp(prevState: FormState, formData: FormData):Promise<F
   const body: SignUpRequestBody = { ...validatedFields.data };
 
   try{
-    const response = await fetch(`${API_PATH}/member/login`, {
+    const response = await fetch(`${API_PATH}/member/signup`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -56,9 +56,6 @@ export async function signUp(prevState: FormState, formData: FormData):Promise<F
     if (!response.ok) {
       throw new HttpError(response.status, "서버에러");
     }
-
-    const result = await response.json();
-    console.log(result);
 
     return {
       isSuccess: true,
