@@ -1,6 +1,6 @@
 import LoginForm from "./ui/components/auth/login-form";
 import Image from "next/image";
-import Logo from '@/app/assets/img/logo.png';
+import Logo from '@/app/assets/img/Logo.png';
 
 export default async function Home() {
 
