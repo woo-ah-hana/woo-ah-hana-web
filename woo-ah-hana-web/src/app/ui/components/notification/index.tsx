@@ -18,7 +18,7 @@ const NotificationIndex = ():React.JSX.Element => {
         messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID,
         appId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGE_APP_ID,
       };
-
+      
       const firebaseApp = initializeApp(config)
 
       const messaging: Messaging = getMessaging(firebaseApp)
