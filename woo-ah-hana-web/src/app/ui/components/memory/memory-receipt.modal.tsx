@@ -19,7 +19,7 @@ export default async function MemoryReceiptModal({
   const response = await getPlanReceipt(planId);
   const receiptData = response.isSuccess
     ? (response.data as PlanReceipt)
-    : (PlanReceipt.create([]) as PlanReceipt);
+    : (new PlanReceipt([], 0, 0) as PlanReceipt);
 
   return (
     <Dialog>
