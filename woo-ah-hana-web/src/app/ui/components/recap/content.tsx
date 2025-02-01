@@ -208,7 +208,7 @@ export default function RecapContent({ year, quarter }: Props) {
               • {plan}
             </div>
           ))}
-          <div className='text-end text-[28px]'>{recapData?.numberOfPlans}회</div>
+          <div className='text-end text-[28px]'>{recapData?.numberOfplans}회</div>
         </FadeInCard>
       </div>
 
