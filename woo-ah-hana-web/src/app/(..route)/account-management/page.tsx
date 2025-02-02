@@ -1,11 +1,11 @@
-import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import ToggleButton from "@/app/ui/atom/toggle/toggle-button";
-import Bankbook from "@/app/ui/components/bankbook";
 import Image from "next/image";
 import ProfileImage from "../../assets/img/profile.jpg";
 import FeeSettingModal from "@/app/ui/components/account/fee-setting.modal";
 import MemberInviteModdal from "@/app/ui/components/account/member-invite.modal";
 import Header from "@/app/ui/components/header";
+import { getCommunityInfo } from "@/app/business/community/community.service";
+import { AccountManagementMain } from "@/app/ui/components/account-management/account-management-main";
 
 //임시 멤버 데이터
 const members = [
@@ -16,27 +16,25 @@ const members = [
   { name: "김현수" },
 ];
 
-export default function AccountManagement() {
+export default async function AccountManagement({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  
+  // const community = (await getCommunity(searchParams.id as string)).data;
+  const communityInfo   = (await getCommunityInfo(searchParams.id as string)).data;
+  
   return (
     <div className="h-full flex flex-col">
       <Header title="계좌 관리하기" link="/home" />
       <div className="p-5 flex flex-col gap-7">
         <div className="flex flex-col gap-5">
           <div className="text-[20px]">내 출금 계좌</div>
-          <Bankbook
-            title={"하나은행"}
-            accountNumber={"12-3456-78-1029"}
-            balance={23450000}
-            footer={
-              <div className="w-[100%] flex justify-between">
-                <AchromaticButton variant={"secondary"} className="w-[45%]">
-                  자동이체
-                </AchromaticButton>
-                <AchromaticButton variant={"secondary"} className="w-[45%]">
-                  계좌변경
-                </AchromaticButton>
-              </div>
-            }
+          <AccountManagementMain 
+            communityName={communityInfo?.name as string} 
+            accountNumber={communityInfo?.accountNumber as string} 
+            accountBalance={communityInfo?.balance as number}
           />
         </div>
 
@@ -81,10 +79,6 @@ export default function AccountManagement() {
                   />
                   <div className="text-gray-800">{member.name}</div>
                 </div>
-
-                {/* <AchromaticButton variant={'outline'}>
-                  계주로 지정
-                </AchromaticButton> */}
               </div>
             ))}
           </div>

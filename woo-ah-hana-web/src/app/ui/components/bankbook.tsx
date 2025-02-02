@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { Card, CardFooter, CardHeader } from '@/app/ui/molecule/card/card';
 
