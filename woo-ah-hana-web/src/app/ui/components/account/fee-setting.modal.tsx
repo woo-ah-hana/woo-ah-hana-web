@@ -8,19 +8,40 @@ import {
 import AchromaticButton from '../../atom/button/achromatic-button';
 import Dropdown from '../../atom/drop-down/drop-down';
 import TextInput from '../../atom/text-input/text-input';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { changeFeeInfo } from '@/app/business/community/community.service';
+import useCommunityStore from '@/app/store/community-store';
 
 export default function FeeSettingModal(){
   const [isOpen, setIsOpen] = useState(false); 
+  const [selectedDate, setSelectedDate] = useState<number>(1);
+  const newFeeRef = useRef<HTMLInputElement>(null);
+  const community = useCommunityStore((state)=>{return state.community});
   const dates = Array.from({ length: 30 }, (_, i) => (i + 1).toString()+' 일');
+  
 
   const handleSelect = (date: string) => {
-    console.log('Selected option:', date);
+    console.log('Selected option:', date.substring(0,1));
+    setSelectedDate(Number(date.substring(0,1)).valueOf());
   };
 
-  const handleButton = () =>{
+  const handleButton = async () =>{
     setIsOpen(false)
-  }
+    if(community.id !=='0' ){
+      const feeAmount = Number(newFeeRef.current?.value);
+      console.log(newFeeRef.current?.value)
+      if (isNaN(feeAmount) || feeAmount <= 0) {
+        alert('올바른 금액을 입력해주세요.');
+        return;
+      }
+      changeFeeInfo(community.id, feeAmount, selectedDate).then((res)=>{
+        console.log(res)
+        window.location.reload()
+      })
+    }else{
+      alert("일시적으로 에러가 발생했습니다. 잠시후 다시 시도해주세요!")
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -35,7 +56,7 @@ export default function FeeSettingModal(){
             <Dropdown options={dates} deafault='1 일' onSelect={handleSelect} />
           </div>
           <div className='flex justify-start items-center gap-2'>
-            <TextInput className='max-w-40' />
+          <TextInput className="max-w-40" ref={newFeeRef} placeholder="금액 입력" />
             <div>원씩 모으기</div>
           </div>
         </div>

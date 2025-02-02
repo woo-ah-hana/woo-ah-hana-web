@@ -354,7 +354,7 @@ export async function getRecap(requestBody: getRecapRequestDTO): Promise<APIResp
   }
 }
 
-export async function changeFeeIngo(communityId: string, fee: number, feePeriod: number) :Promise<APIResponseType<string>>{
+export async function changeFeeInfo(communityId: string, fee: number, feePeriod: number) :Promise<APIResponseType<string>>{
   try{
     const response = await instance.post(`${API_PATH}/community/account/changeFeeInfo`, {communityId, fee, feePeriod});
     const data:string = response.data
