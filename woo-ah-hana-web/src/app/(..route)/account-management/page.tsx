@@ -35,11 +35,6 @@ export default async function AccountManagement({
         </div>
 
         <div className="flex flex-col gap-5">
-          <div className="text-[20px]">모임 설정</div>
-          <div className="flex items-center justify-between">
-            <div>모임 알림</div>
-            <ToggleButton text={""} />
-          </div>
           <div className="flex items-center justify-between">
             <div>입출금 알림</div>
             <ToggleButton text={""} />

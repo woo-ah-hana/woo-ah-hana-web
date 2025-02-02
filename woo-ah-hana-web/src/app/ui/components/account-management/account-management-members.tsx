@@ -1,5 +1,5 @@
 import Image from "next/image";
-import MemberInviteModdal from "@/app/ui/components/account/member-invite.modal";
+import MemberInviteModdal from "@/app/ui/components/account-management/member-invite.modal";
 import ProfileImage from "@/app/assets/img/profile.jpg"
 import { Member } from "@/app/business/community/community.service";
 

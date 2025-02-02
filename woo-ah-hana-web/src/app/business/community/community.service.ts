@@ -78,6 +78,12 @@ export interface getRecapResponseDTO{
   highestPlanExpense: number;
 }
 
+export interface RegisterCommunityResponseDTO{
+  memberName: string;
+  communityName: string;
+  success: boolean
+}
+
 export async function getCommunityList(): Promise<APIResponseType<CommunityResponseDTO[]>> {
   try {
     const response = await instance.get(`${API_PATH}/community/list`);
@@ -372,4 +378,23 @@ export async function changeFeeInfo(communityId: string, fee: number, feePeriod:
     }
   }
   
+}
+
+export async function registerCommunity(memberId: string, communityId: string) :Promise<APIResponseType<RegisterCommunityResponseDTO>> {
+  try{
+    const response = await instance.post(`${API_PATH}/community/register`, {memberId, communityId});
+    const data: RegisterCommunityResponseDTO = response.data
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: data
+    }
+  }catch(error){
+    console.log(error);
+    return{
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
 }

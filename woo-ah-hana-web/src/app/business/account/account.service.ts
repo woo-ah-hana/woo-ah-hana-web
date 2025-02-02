@@ -243,7 +243,6 @@ export async function changeAccount(accountNumber: string, bankTranId: string, v
       data: undefined
     }
   }
-  
 }
 
 export async function getMyAccount():Promise<APIResponseType<GetMyAccountInfoResponseDto>> {
