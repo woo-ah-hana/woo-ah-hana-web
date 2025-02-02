@@ -1,29 +1,28 @@
 'use client'
 
-import AchromaticButton from "../../atom/button/achromatic-button"
 import Bankbook from "../bankbook"
+import { AutoTransferDialog } from "./auto-transfer.modal";
+import { ChangeAccountDialog } from "./change-account.modal";
 
 interface AccountManagementProps{
-  communityName: string;
+  bankName: string;
   accountNumber: string;
   accountBalance: number;
+  fee: number;
+  feePeriod: number;
 }
 
-export function AccountManagementMain({communityName, accountNumber, accountBalance}:AccountManagementProps){
+export function AccountManagementMain({bankName, accountNumber, accountBalance, fee, feePeriod}:AccountManagementProps){
   return (
     <main>
       <Bankbook
-        title={communityName}
+        title={bankName}
         accountNumber={accountNumber}
         balance={accountBalance}
         footer={
           <div className="w-[100%] flex justify-between">
-            <AchromaticButton variant={"secondary"} className="w-[45%]" onClick={()=>{}}>
-              자동이체
-            </AchromaticButton>
-            <AchromaticButton variant={"secondary"} className="w-[45%]" onClick={()=>{}}>
-              계좌변경
-            </AchromaticButton>
+            <AutoTransferDialog accountNumber={accountNumber} fee={fee} feePeriod={feePeriod}/>
+            <ChangeAccountDialog accountNumber={accountNumber}/>
           </div>
           }
       />

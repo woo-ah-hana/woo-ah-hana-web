@@ -4,8 +4,9 @@ import ProfileImage from "../../assets/img/profile.jpg";
 import FeeSettingModal from "@/app/ui/components/account/fee-setting.modal";
 import MemberInviteModdal from "@/app/ui/components/account/member-invite.modal";
 import Header from "@/app/ui/components/header";
-import { getCommunityInfo } from "@/app/business/community/community.service";
+import { getCommunity} from "@/app/business/community/community.service";
 import { AccountManagementMain } from "@/app/ui/components/account-management/account-management-main";
+import { getMyAccount } from "@/app/business/account/account.service";
 
 //임시 멤버 데이터
 const members = [
@@ -22,8 +23,10 @@ export default async function AccountManagement({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   
-  // const community = (await getCommunity(searchParams.id as string)).data;
-  const communityInfo   = (await getCommunityInfo(searchParams.id as string)).data;
+  const community = (await getCommunity(searchParams.id as string)).data;
+  const myAccount   = (await getMyAccount()).data;
+
+  console.log(myAccount);
   
   return (
     <div className="h-full flex flex-col">
@@ -32,9 +35,11 @@ export default async function AccountManagement({
         <div className="flex flex-col gap-5">
           <div className="text-[20px]">내 출금 계좌</div>
           <AccountManagementMain 
-            communityName={communityInfo?.name as string} 
-            accountNumber={communityInfo?.accountNumber as string} 
-            accountBalance={communityInfo?.balance as number}
+            bankName={myAccount?.name as string}
+            accountNumber={myAccount?.accountNumber as string}
+            accountBalance={myAccount?.amount as number} 
+            fee={community?.fee as number} 
+            feePeriod={community?.feePeriod as number}
           />
         </div>
 

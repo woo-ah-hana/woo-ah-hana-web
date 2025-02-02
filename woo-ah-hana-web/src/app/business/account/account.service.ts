@@ -34,6 +34,12 @@ export interface TransferRecordResponseDTO {
   branchName : string;
 }
 
+export interface GetMyAccountInfoResponseDto{
+  bankTranId: string
+  accountNumber: string
+  name: string
+  amount: number
+}
 export async function getTransferRecords(requestBody : TransferRecordRequestDTO): Promise<APIResponseType<TransferRecordResponseDTO[]>> {
   try {
     const response = await instance.post(`${API_PATH}/community/trsfRecords`, requestBody, {
@@ -166,20 +172,104 @@ export async function deposit(requestBody: DepositRequestDTO): Promise<APIRespon
         response: response.data,
       });
     }
-    
-    // const data: DepositCommunityInfoRespDTO = response.data;
 
     return {
       isSuccess: true,
       isFailure: false,
-      // data: data,
     };
   } catch (error) {
     console.error(error);
     return {
       isSuccess: false,
       isFailure: true,
-      // data: undefined,
     };
+  }
+}
+
+export async function setAutoDeposit(communityId: string, fee: string, depositDay: number) :Promise<APIResponseType<string>>{
+  try{
+    const response = await instance.post(`${API_PATH}/community/account/autoDeposit`, {communityId, fee, depositDay});
+    const data:string = response.data
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: data
+    }
+  }catch(error){
+    console.log(error);
+    return{
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+  
+}
+
+export async function sendCode(bankTranId: string, accountNumber: string) :Promise<APIResponseType<string>>{
+  try{
+    const response = await instance.post(`${API_PATH}/community/send-code`, {bankTranId, accountNumber});
+    const data:string = response.data
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: data
+    }
+  }catch(error){
+    console.log(error);
+    return{
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+  
+}
+
+export async function changeAccount(accountNumber: string, bankTranId: string, validationCode:string) :Promise<APIResponseType<string>>{
+  try{
+    const response = await instance.post(`${API_PATH}/community/account/changeAccount`, {accountNumber, bankTranId, validationCode});
+    const data:string = response.data
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: data
+    }
+  }catch(error){
+    console.log(error);
+    return{
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+  
+}
+
+export async function getMyAccount():Promise<APIResponseType<GetMyAccountInfoResponseDto>> {
+  try{
+    const response = await instance.get(`${API_PATH}/member/my-account/info`)
+    if (response.status === 500) {
+      throw new InternetServerError({
+        message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
+        statusCode: response.status,
+        response: response.data,
+      });
+    }
+
+    const data:GetMyAccountInfoResponseDto = response.data
+
+    return{
+      isSuccess: true,
+      isFailure: false,
+      data: data
+    }
+  }catch(error){
+    console.log(error);
+    return{
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
   }
 }
