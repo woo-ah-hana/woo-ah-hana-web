@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import React, { useState, useRef, useEffect } from "react";
 import voice from "@/app/assets/img/voice.gif"; // GIF 파일 import
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
+import { MdKeyboardVoice } from "react-icons/md";
 
 const ReactMediaRecorder = dynamic(
   () => import("react-media-recorder").then((mod) => mod.ReactMediaRecorder),
@@ -88,13 +89,18 @@ const Stt: React.FC<SttProps> = ({ onClose, onResult }) => {
           <div className="flex flex-col">
             <div>
               {isRecording && (
-                <div className="w-full flex justify-center">
-                  <img
-                    src={voice.src}
-                    alt="녹음 중"
-                    className="w-[200px] h-[200px]"
-                    style={{ clipPath: "inset(10% 10% 10% 10%)" }}
-                  />
+                <div>
+                  <div className="w-full flex justify-center pb-16">
+                    <img
+                      src={voice.src}
+                      alt="녹음 중"
+                      className="w-[200px] h-[200px]"
+                      style={{ clipPath: "inset(10% 10% 10% 10%)" }}
+                    />
+                  </div>
+                  <div className="w-full flex justify-center">
+                    <MdKeyboardVoice className="text-white bg-wooahMain text-7xl p-3 rounded-full" />
+                  </div>
                 </div>
               )}
               <div className="flex justify-between">

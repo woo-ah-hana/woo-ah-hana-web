@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Stt from "@/app/ui/components/stt/stt";
+import Stt from "@/app/ui/components/stt/stt1";
 
 interface SttModalWrapperProps {
   onResult: (text: string) => void;
@@ -24,10 +24,10 @@ export const SttModalWrapper: React.FC<SttModalWrapperProps> = ({
         stt 모달 열기인데 열지 마요
       </button>
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-end justify-center bg-white z-50">
+        <div className="fixed inset-0 flex items-end justify-center bg-black z-50 bg-opacity-80">
           <div className="h-full flex flex-col justify-between w-full">
-            <div className="text-gray-500 p-5 text-lg">
-              📢 예를 들어, '설악산 등산 가서 순두부찌개 먹고 내려오려고! 친구
+            <div className="text-white p-5 text-lg pt-52">
+              예를 들어, '설악산 등산 가서 순두부찌개 먹고 내려오려고! 친구
               셋이랑 1박 2일 일정으로 가볼까 해.' 이렇게 말하면 돼요.
             </div>
             <Stt onClose={() => setIsModalOpen(false)} onResult={onResult} />

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import React, { useState, useRef, useEffect } from "react";
 import voice from "@/app/assets/img/voice.gif"; // GIF 파일 import
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
+import { MdKeyboardVoice } from "react-icons/md";
 
 const ReactMediaRecorder = dynamic(
   () => import("react-media-recorder").then((mod) => mod.ReactMediaRecorder),
@@ -88,53 +89,23 @@ const Stt: React.FC<SttProps> = ({ onClose, onResult }) => {
           <div className="flex flex-col">
             <div>
               {isRecording && (
-                <div className="w-full flex justify-center">
-                  <img
-                    src={voice.src}
-                    alt="녹음 중"
-                    className="w-[200px] h-[200px]"
-                    style={{ clipPath: "inset(10% 10% 10% 10%)" }}
+                <div className="relative flex items-center justify-center pb-5">
+                  <div className="absolute w-40 h-40 rounded-full bg-blue-300 opacity-30 animate-ping pointer-events-none"></div>
+                  <div className="absolute w-60 h-60 rounded-full bg-blue-400 opacity-50 animate-ping pointer-events-none"></div>
+                  <MdKeyboardVoice
+                    className="text-white bg-wooahMain text-7xl p-3 rounded-full"
+                    onClick={() => {
+                      if (timerRef.current) {
+                        clearTimeout(timerRef.current);
+                        timerRef.current = null;
+                      }
+                      stopRecording();
+                      setIsRecording(false);
+                      onClose();
+                    }}
                   />
                 </div>
               )}
-              <div className="flex justify-between">
-                <AchromaticButton
-                  variant={"link"}
-                  onClick={() => {
-                    if (timerRef.current) {
-                      clearTimeout(timerRef.current);
-                      timerRef.current = null;
-                    }
-                    navigator.mediaDevices
-                      .getUserMedia({ audio: true })
-                      .then((stream) => {
-                        stream.getTracks().forEach((track) => track.stop());
-                      })
-                      .catch((err) => console.error("마이크 종료 실패:", err));
-
-                    setMediaBlobUrl(null);
-                    setResp("");
-                    window.location.href = window.location.href;
-                  }}
-                >
-                  닫기
-                </AchromaticButton>
-
-                <AchromaticButton
-                  variant={"link"}
-                  onClick={() => {
-                    if (timerRef.current) {
-                      clearTimeout(timerRef.current);
-                      timerRef.current = null;
-                    }
-                    stopRecording();
-                    setIsRecording(false);
-                    onClose();
-                  }}
-                >
-                  녹음 완료
-                </AchromaticButton>
-              </div>
             </div>
           </div>
         );
