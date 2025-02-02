@@ -1,12 +1,12 @@
 import ToggleButton from "@/app/ui/atom/toggle/toggle-button";
 import Image from "next/image";
 import ProfileImage from "../../assets/img/profile.jpg";
-import FeeSettingModal from "@/app/ui/components/account/fee-setting.modal";
 import MemberInviteModdal from "@/app/ui/components/account/member-invite.modal";
 import Header from "@/app/ui/components/header";
 import { getCommunity} from "@/app/business/community/community.service";
 import { AccountManagementMain } from "@/app/ui/components/account-management/account-management-main";
 import { getMyAccount } from "@/app/business/account/account.service";
+import { AccountManagementManager } from "@/app/ui/components/account-management/account-management-manager";
 
 //임시 멤버 데이터
 const members = [
@@ -25,8 +25,6 @@ export default async function AccountManagement({
   
   const community = (await getCommunity(searchParams.id as string)).data;
   const myAccount   = (await getMyAccount()).data;
-
-  console.log(myAccount);
   
   return (
     <div className="h-full flex flex-col">
@@ -55,18 +53,10 @@ export default async function AccountManagement({
           </div>
         </div>
         <hr className="bg-gray-800 my-3" />
-        <div className="flex flex-col gap-5  text-[17px]">
-          <div className="text-[20px]">계주 관리</div>
-          <div className="flex items-center justify-between align-baseline">
-            <div>회비 금액</div>
-            <div>100,000원</div>
-          </div>
-          <div className="flex items-center justify-between align-baseline">
-            <div>회비 주기</div>
-            <div>매월 30일</div>
-          </div>
-          <FeeSettingModal />
-        </div>
+        <AccountManagementManager 
+          fee={community?.fee as number} 
+          feePeriod={community?.feePeriod as number}
+        />
         <hr className="bg-gray-800 my-3" />
         <div className="flex flex-col gap-5  text-[17px] mb-20">
           <div className="text-[20px]">모임 멤버</div>

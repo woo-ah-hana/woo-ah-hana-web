@@ -353,3 +353,23 @@ export async function getRecap(requestBody: getRecapRequestDTO): Promise<APIResp
     };
   }
 }
+
+export async function changeFeeIngo(communityId: string, fee: number, feePeriod: number) :Promise<APIResponseType<string>>{
+  try{
+    const response = await instance.post(`${API_PATH}/community/account/changeFeeInfo`, {communityId, fee, feePeriod});
+    const data:string = response.data
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: data
+    }
+  }catch(error){
+    console.log(error);
+    return{
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+  
+}
