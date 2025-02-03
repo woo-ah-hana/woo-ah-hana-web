@@ -31,7 +31,6 @@ export interface ValidationCodeRequestDTO{
 
 export interface MemberFeeStatus{
   memberName: string;
-  memberId: string;
   amount: number
 }
 
@@ -68,7 +67,7 @@ export interface getRecapRequestDTO{
 
 export interface getRecapResponseDTO{
   planTitleList: string[];
-  numberOfplans: number;
+  numberOfPlans: number;
   howMuchSpentThanLastQuarter: number;
   thisQuarterExpense: number;
   thisQuarterIncome: number;
@@ -76,12 +75,6 @@ export interface getRecapResponseDTO{
   monthlyExpenses: number[];
   highestPlanName: string;
   highestPlanExpense: number;
-}
-
-export interface RegisterCommunityResponseDTO{
-  memberName: string;
-  communityName: string;
-  success: boolean
 }
 
 export async function getCommunityList(): Promise<APIResponseType<CommunityResponseDTO[]>> {
@@ -272,13 +265,13 @@ export async function createCommunity(requestBody: CreateCommunityRequestDTO): P
       data: response.data as string
     }
     }
-  catch (error) {
-      console.error(error);
-      return {
-        isSuccess: false,
-        isFailure: true,
-        data: undefined
-      };
+catch (error) {
+    console.error(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    };
   }
 }
 
@@ -357,44 +350,5 @@ export async function getRecap(requestBody: getRecapRequestDTO): Promise<APIResp
       isFailure: true,
       data: undefined,
     };
-  }
-}
-
-export async function changeFeeInfo(communityId: string, fee: number, feePeriod: number) :Promise<APIResponseType<string>>{
-  try{
-    const response = await instance.post(`${API_PATH}/community/account/changeFeeInfo`, {communityId, fee, feePeriod});
-    const data:string = response.data
-    return {
-      isSuccess: false,
-      isFailure: true,
-      data: data
-    }
-  }catch(error){
-    console.log(error);
-    return{
-      isSuccess: false,
-      isFailure: true,
-      data: undefined
-    }
-  }
-  
-}
-
-export async function registerCommunity(memberId: string, communityId: string) :Promise<APIResponseType<RegisterCommunityResponseDTO>> {
-  try{
-    const response = await instance.post(`${API_PATH}/community/register`, {memberId, communityId});
-    const data: RegisterCommunityResponseDTO = response.data
-    return {
-      isSuccess: false,
-      isFailure: true,
-      data: data
-    }
-  }catch(error){
-    console.log(error);
-    return{
-      isSuccess: false,
-      isFailure: true,
-      data: undefined
-    }
   }
 }
