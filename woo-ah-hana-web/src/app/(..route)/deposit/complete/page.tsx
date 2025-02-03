@@ -11,10 +11,11 @@ export default function DepositComplete() {
   const searchParams = useSearchParams();
   const amount = searchParams.get('amount');
   const accountName = searchParams.get('accountName');
+  const communityId = searchParams.get('communityId');
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      window.location.href = '/home';
+      window.location.href = `/home?id=${communityId}`;
     }, 2800);
 
     return () => clearTimeout(timer);
@@ -24,8 +25,7 @@ export default function DepositComplete() {
   return (
     <div className='h-screen p-10 flex flex-col justify-between'>
       <div className='mt-10 text-2xl align-center justify-center text-center flex flex-col gap-4'>
-        <h1>{accountName}</h1>
-        <h1>하나은행 모임통장으로</h1>
+        <h1>{accountName} 모임통장으로</h1>
         <h1>
           <span className='text-3xl'>{Number(amount).toLocaleString('ko-KR')}</span> 원을
         </h1>

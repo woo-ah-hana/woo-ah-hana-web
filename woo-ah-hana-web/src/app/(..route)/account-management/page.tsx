@@ -17,7 +17,7 @@ export default async function AccountManagement({
   
   return (
     <div className="h-full flex flex-col">
-      <Header title="계좌 관리하기" link="/home" />
+      <Header title="계좌 관리하기" link={`/home?id=${searchParams.id}`} />
       <div className="p-5 flex flex-col gap-7">
         <div className="flex flex-col gap-5">
           <div className="text-[20px]">내 출금 계좌</div>
