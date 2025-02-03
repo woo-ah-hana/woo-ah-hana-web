@@ -12,6 +12,7 @@ export interface PlanListItemProps {
   locations: string[];
   planId: string;
   memberNames: string[];
+  communityId: string;
 }
 
 export function MemoryListItem({
@@ -22,6 +23,7 @@ export function MemoryListItem({
   locations,
   planId,
   memberNames,
+  communityId,
 }: PlanListItemProps) {
   const iconSrc = categoryIcons[category];
   const bgColor = categoryColors[category];
@@ -30,7 +32,7 @@ export function MemoryListItem({
   console.log(memberNames)
   return (
     <main>
-      <Link href={`memory/detail?id=${planId}`}>
+      <Link href={`memory/detail?community=${communityId}&id=${planId}`}>
         <Card className={`${bgColor} p-4`}>
           <div className='flex justify-between'>
             <div className='flex gap-5'>

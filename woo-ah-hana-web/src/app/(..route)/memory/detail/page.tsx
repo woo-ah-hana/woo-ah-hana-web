@@ -3,12 +3,14 @@ import { getPostsByPlanId } from "@/app/business/memory/memory.service";
 import { getPlan } from "@/app/business/plan/plan.service";
 import { MemoryPlan } from "@/app/ui/components/memory/memory-plan";
 import MemoryPostModal from "@/app/ui/components/memory/memory-post.modal";
+import Header from "@/app/ui/components/header";
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const communityId =  (searchParams.community as string);
   const planId =
     (searchParams.id as string) || "a61f6270-974b-44f3-b9f3-7a8ab9b145ff";
   const detailResponse = await getPostsByPlanId(planId);
@@ -22,6 +24,7 @@ export default async function Home({
 
   return (
     <main>
+      <Header title='지난 모임 추억' link={`/memory?id=${communityId}`} />
       <div className="p-5">
         {plan ? (
           <MemoryPlan
