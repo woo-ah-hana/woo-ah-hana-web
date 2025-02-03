@@ -143,7 +143,7 @@ export default function RecapContent({ year, quarter }: Props) {
         datasets: [
           {
             label: '소비 금액 (원)',
-            data: recapData.monthlyExpenses || [], // 동적 데이터 값
+            data: recapData.monthlyExpenses || [],
             backgroundColor: 'rgba(50, 77, 221, 0.8)',
             borderWidth: 0,
             borderRadius: 8,
@@ -183,7 +183,7 @@ export default function RecapContent({ year, quarter }: Props) {
               • {plan}
             </div>
           ))}
-          <div className='text-end text-[28px]'>{recapData?.numberOfplans}회</div>
+          <div className='text-end text-[28px]'>{recapData?.numberOfPlans}회</div>
         </FadeInCard>
       </div>
 
