@@ -2,10 +2,8 @@
 
 import dynamic from "next/dynamic";
 import React, { useState, useRef, useEffect } from "react";
-import voice from "@/app/assets/img/voice.gif"; // GIF 파일 import
-import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import { MdKeyboardVoice } from "react-icons/md";
-import Robot from "@/app/assets/img/icon-robot.png";
+//import Robot from "@/app/assets/img/icon-robot.png";
 
 const ReactMediaRecorder = dynamic(
   () => import("react-media-recorder").then((mod) => mod.ReactMediaRecorder),
@@ -16,9 +14,6 @@ interface SttProps {
   onResult: (text: string) => void;
 }
 const Stt = ({ onClose, onResult }: SttProps) => {
-  const [resp, setResp] = useState<string>("");
-  const [mediaBlobUrl, setMediaBlobUrl] = useState<string | null>(null);
-  const [isUploading, setIsUploading] = useState<boolean>(false);
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -28,7 +23,6 @@ const Stt = ({ onClose, onResult }: SttProps) => {
       return;
     }
 
-    setIsUploading(true);
     try {
       const blob = await fetch(blobUrl).then((res) => res.blob());
       const formData = new FormData();
@@ -47,16 +41,13 @@ const Stt = ({ onClose, onResult }: SttProps) => {
       }
 
       const result = await response.json();
-      setResp(result.text || "결과가 없습니다.");
       onResult(result.text || "결과가 없습니다.");
-      alert("녹음 파일 업로드 성공");
 
       console.log("API 응답(JSON):", JSON.stringify(result, null, 2));
-    } catch (error: any) {
-      console.error("Error:", error.message);
-      alert("녹음 파일 업로드 중 오류가 발생했습니다.");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("음성인식 중 오류가 발생했습니다.");
     } finally {
-      setIsUploading(false);
     }
   };
 
@@ -65,11 +56,11 @@ const Stt = ({ onClose, onResult }: SttProps) => {
       audio
       onStop={(blobUrl: string) => {
         console.log("🎤 녹음 완료! Blob URL:", blobUrl);
-        setMediaBlobUrl(blobUrl);
         setIsRecording(false);
         handleUpload(blobUrl);
       }}
       render={({ startRecording, stopRecording }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         useEffect(() => {
           setIsRecording(true);
           startRecording();
@@ -85,7 +76,7 @@ const Stt = ({ onClose, onResult }: SttProps) => {
             }
           };
         }, []);
-        Robot;
+        // Robot;
         return (
           <div className="flex flex-col">
             <div>
@@ -116,8 +107,5 @@ const Stt = ({ onClose, onResult }: SttProps) => {
     />
   );
 };
-{
-  /*
-   */
-}
+
 export default Stt;
