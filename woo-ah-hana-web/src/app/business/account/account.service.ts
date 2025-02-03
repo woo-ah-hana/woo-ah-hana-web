@@ -211,8 +211,8 @@ export async function sendCode(bankTranId: string, accountNumber: string) :Promi
     const response = await instance.post(`${API_PATH}/community/send-code`, {bankTranId, accountNumber});
     const data:string = response.data
     return {
-      isSuccess: false,
-      isFailure: true,
+      isSuccess: true,
+      isFailure: false,
       data: data
     }
   }catch(error){
@@ -231,8 +231,8 @@ export async function changeAccount(accountNumber: string, bankTranId: string, v
     const response = await instance.post(`${API_PATH}/community/account/changeAccount`, {accountNumber, bankTranId, validationCode});
     const data:string = response.data
     return {
-      isSuccess: false,
-      isFailure: true,
+      isSuccess: true,
+      isFailure: false,
       data: data
     }
   }catch(error){
