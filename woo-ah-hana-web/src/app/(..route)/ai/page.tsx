@@ -4,10 +4,10 @@ import { Card } from "@/app/ui/molecule/card/card";
 import Header from "@/app/ui/components/header";
 
 export default async function Home({
-    searchParams,
-  }: {
-    searchParams: { [key: string]: string | string[] | undefined };
-  }){
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const response = await getPlan(searchParams.plan as string);
   const plan = response.data;
   const communityId = searchParams.community as string;

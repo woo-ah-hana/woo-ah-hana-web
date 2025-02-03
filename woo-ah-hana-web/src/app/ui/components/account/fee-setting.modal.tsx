@@ -53,7 +53,7 @@ export default function FeeSettingModal(){
         <div className='flex flex-col gap-4'>
           <div className='flex justify-start items-center gap-2'>
             <div>매월</div>
-            <Dropdown options={dates} deafault='1 일' onSelect={handleSelect} />
+            <Dropdown options={dates} defaultOption='1 일' onSelect={handleSelect} />
           </div>
           <div className='flex justify-start items-center gap-2'>
           <TextInput className="max-w-40" ref={newFeeRef} placeholder="금액 입력" />
