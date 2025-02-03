@@ -32,21 +32,17 @@ export default function CommunityMenu({ selectedCommunity, communityIds }: Commu
   };
 
   useEffect(() => {
-    console.log(community);
-    if(!community){
-      setCommunity(selectedCommunity);
-    }else{
-      setCommunity(selectedCommunity);
-    }
+    console.log(selectedCommunity);
+    setCommunity(selectedCommunity);
   }, [community, selectedCommunity, setCommunity]);
 
   return (
     <Menu
       mode="horizontal"
-      selectedKeys={[selectedCommunity.id]}
       items={items}
       onSelect={(selectInfo)=>{handleSelect(selectInfo.selectedKeys[0])}}
       className="custom-menu"
+      defaultSelectedKeys={[selectedCommunity.id]}
     />
   );
 }

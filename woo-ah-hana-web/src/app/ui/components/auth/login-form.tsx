@@ -12,7 +12,6 @@ export default function LoginForm(){
       <Form id='login' action={authenticate} onSuccess={()=>{router.push('/home')}} failMessageControl={"alert"}>
         <div className="grid grid-cols-1 gap-5">
           <Form.TextInput id="username" label="전화번호" placeholder=""/>
-          {/* <Form.TextInput id="name" label="이름" placeholder=""/> */}
           <Form.PasswordInput id="password" label="비밀번호" placeholder=""/>
           <div>
             <Form.SubmitButton label="로그인" position="center" className="w-full h-12"/>
