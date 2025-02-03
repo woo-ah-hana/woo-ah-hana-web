@@ -1,9 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { MdKeyboardVoice } from "react-icons/md";
-//import Robot from "@/app/assets/img/icon-robot.png";
 
 const ReactMediaRecorder = dynamic(
   () => import("react-media-recorder").then((mod) => mod.ReactMediaRecorder),
@@ -13,9 +12,32 @@ interface SttProps {
   onClose: () => void;
   onResult: (text: string) => void;
 }
+
 const Stt = ({ onClose, onResult }: SttProps) => {
   const [isRecording, setIsRecording] = useState<boolean>(false);
+  const [selectedMic, setSelectedMic] = useState<string | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const getAvailableMicrophone = useCallback(async () => {
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const audioDevices = devices.filter(
+        (device) => device.kind === "audioinput"
+      );
+
+      if (audioDevices.length > 0) {
+        setSelectedMic(audioDevices[0].deviceId);
+      } else {
+        console.warn("사용할 수 있는 마이크가 없습니다.");
+      }
+    } catch (error) {
+      console.error("마이크 검색 중 오류 발생:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getAvailableMicrophone();
+  }, [getAvailableMicrophone]);
 
   const handleUpload = async (blobUrl: string) => {
     if (!blobUrl) {
@@ -54,7 +76,7 @@ const Stt = ({ onClose, onResult }: SttProps) => {
   // TODO: 컴포넌트안에서 useEffect 호출하는거 바꿔야합니다...
   return (
     <ReactMediaRecorder
-      audio
+      audio={selectedMic ? { deviceId: { exact: selectedMic } } : true}
       onStop={(blobUrl: string) => {
         console.log("🎤 녹음 완료! Blob URL:", blobUrl);
         setIsRecording(false);
@@ -69,7 +91,7 @@ const Stt = ({ onClose, onResult }: SttProps) => {
             stopRecording();
             setIsRecording(false);
             alert("녹음이 종료되었습니다.");
-          }, 1500000000);
+          }, 15000);
           return () => {
             if (timerRef.current) {
               clearTimeout(timerRef.current);
@@ -77,7 +99,6 @@ const Stt = ({ onClose, onResult }: SttProps) => {
             }
           };
         }, []);
-        // Robot;
         return (
           <div className="flex flex-col">
             <div>
