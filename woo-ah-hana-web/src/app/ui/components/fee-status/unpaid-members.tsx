@@ -30,7 +30,11 @@ export function UnpaidMemberList({unpaidMembers, yearMonth}:UnpaidMemberListProp
                       />
                       <div className='text-gray-800'>{member.memberName}</div>
                   </div>
-                  <AchromaticButton onClick={async ()=>{await notifyToUnpaidMember(member.memberId)}}>회비 요청</AchromaticButton>
+                  <AchromaticButton onClick={async ()=>{
+                    await notifyToUnpaidMember(member.memberId)
+                  }}>
+                    회비 요청
+                  </AchromaticButton>
               </div>
           ))}
       </div>
