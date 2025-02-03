@@ -50,7 +50,10 @@ export default function SetCategory() {
 
   return (
     <div>
-      <Header title='모임 일정 생성' link='/plan/set/period' />
+      <Header
+              title='모임 일정 생성'
+              link={`/plan?id=${plan.getCommunityId()}`}
+            />
       <div className='flex flex-col p-6'>
         <div className='flex flex-col gap-20 min-h-[calc(100vh-10rem)]'>
           <div className='mb-6 gap-4'>
