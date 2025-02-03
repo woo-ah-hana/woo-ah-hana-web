@@ -68,7 +68,7 @@ export interface getRecapRequestDTO{
 
 export interface getRecapResponseDTO{
   planTitleList: string[];
-  numberOfplans: number;
+  numberOfPlans: number;
   howMuchSpentThanLastQuarter: number;
   thisQuarterExpense: number;
   thisQuarterIncome: number;
