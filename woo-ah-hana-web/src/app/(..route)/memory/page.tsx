@@ -43,13 +43,6 @@ export default async function Home({
             {plans ? PlansView : <div>데이터가 존재하지 않습니다.</div>}
           </div>
         </div>
-        <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
-          <Link href={"plan/set"}>
-            <AchromaticButton className="h-14 w-14 rounded-full">
-              <IoAdd color="white" size={40} />
-            </AchromaticButton>
-          </Link>
-        </div>
       </div>
     </main>
   );
