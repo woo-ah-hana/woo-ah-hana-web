@@ -14,22 +14,25 @@ export default async function Home({
   const planId = searchParams.plan as string;
 
   return (
-  <main>
-    <Header title='AI 계획 세우기' link={`/plan/detail?community=${communityId}&id=${planId}`}/>
-    <div className="flex flex-col gap-3 p-5"> 
-      <Card className="flex flex-col gap-2 p-5 text-center">
-        <div> 여행 계획을 세워주는 AI입니다. </div>
-        <div> 음성 또는 키보드로 요청사항을 입력하세요. </div>
-        <div> AI 요청은 하루에 3회까지만 가능합니다. </div>
-      </Card>
-      <RequestActivePlanForm 
-        planId={searchParams.plan as string}
-        communityId={searchParams.community as string}
-        startDate={plan?.getStartDate() as string} 
-        endDate={plan?.getEndDate() as string}
-        locations={plan?.getLocations() as string[]}
+    <main>
+      <Header
+        title="AI 계획 세우기"
+        link={`/plan/detail?community=${communityId}&id=${planId}`}
       />
-    </div>
-  </main>
-  )
+      <div className="flex flex-col gap-3 p-5">
+        <Card className="flex flex-col gap-2 p-5 text-center">
+          <div> 여행 계획을 세워주는 AI입니다. </div>
+          <div> 음성 또는 키보드로 요청사항을 입력하세요. </div>
+          <div> AI 요청은 하루에 3회까지만 가능합니다. </div>
+        </Card>
+        <RequestActivePlanForm
+          planId={searchParams.plan as string}
+          communityId={searchParams.community as string}
+          startDate={plan?.getStartDate() as string}
+          endDate={plan?.getEndDate() as string}
+          locations={plan?.getLocations() as string[]}
+        />
+      </div>
+    </main>
+  );
 }

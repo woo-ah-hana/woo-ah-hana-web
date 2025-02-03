@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Card } from "../../molecule/card/card";
-import { categoryColors, categoryIcons } from "../../atom/category/category";
+import { categoryColors, categoryIcons } from "@/app/ui/atom/category/category";
 import React from "react";
 import Image from "next/image";
 
@@ -29,14 +29,14 @@ export function MemoryListItem({
   const bgColor = categoryColors[category];
   console.log(startDate);
   console.log(endDate);
-  console.log(memberNames)
+  console.log(memberNames);
   return (
     <main>
       <Link href={`memory/detail?community=${communityId}&id=${planId}`}>
         <Card className={`${bgColor} p-4`}>
-          <div className='flex justify-between'>
-            <div className='flex gap-5'>
-              <div className='flex flex-row justify-center items-start'>
+          <div className="flex justify-between">
+            <div className="flex gap-5">
+              <div className="flex flex-row justify-center items-start">
                 <Image
                   src={iconSrc}
                   alt={category}
@@ -47,19 +47,25 @@ export function MemoryListItem({
                 />
               </div>
 
-              <div className='flex flex-col justify-center items-start gap-4 py-2'>
-              <div className='flex flex-col gap-3 text-slate-700 text-[17px]'>
-                <div className=''>{startDate.substring(5, 10) == endDate.substring(5, 10) ?
-                    startDate.substring(5, 10)  : `${startDate.substring(5, 10)}부터 ${endDate.substring(5, 10)}까지`}</div>
-              </div>
-                <div className='text-xl'>
+              <div className="flex flex-col justify-center items-start gap-4 py-2">
+                <div className="flex flex-col gap-3 text-slate-700 text-[17px]">
+                  <div className="">
+                    {startDate.substring(5, 10) == endDate.substring(5, 10)
+                      ? startDate.substring(5, 10)
+                      : `${startDate.substring(5, 10)}부터 ${endDate.substring(
+                          5,
+                          10
+                        )}까지`}
+                  </div>
+                </div>
+                <div className="text-xl">
                   <strong>{title}</strong>
                 </div>
-                <div className='text-slate-600 font-semibold text-[15px]'>
-                {locations.map((location, index) => (
+                <div className="text-slate-600 font-semibold text-[15px]">
+                  {locations.map((location, index) => (
                     <span key={index}>{`#${location}  `}</span>
                   ))}
-                  </div>
+                </div>
               </div>
             </div>
           </div>
