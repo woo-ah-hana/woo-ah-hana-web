@@ -11,13 +11,9 @@ export default async function AccountManagement({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  
   const community = (await getCommunity(searchParams.id as string)).data;
   const myAccount   = (await getMyAccount()).data;
   const communityMembers = (await getCommunityMembers(searchParams.id as string)).data;
-
-  console.log(communityMembers)
-  
   
   return (
     <div className="h-full flex flex-col">
@@ -41,11 +37,13 @@ export default async function AccountManagement({
           </div>
         </div>
         <hr className="bg-gray-800 my-3" />
+
         <AccountManagementManager 
           fee={community?.fee as number} 
           feePeriod={community?.feePeriod as number}
         />
         <hr className="bg-gray-800 my-3" />
+
         <AccountManagementMembers communityMembers={communityMembers as Member[]}/>
       </div>
     </div>
