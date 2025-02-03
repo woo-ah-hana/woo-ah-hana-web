@@ -32,7 +32,13 @@ export default function AccountLog() {
             footer={<div></div>}
         />
         <div className="flex justify-end">
-          <Dropdown deafault = '1개월' options={['1 개월', '3 개월', '6 개월']} onSelect={()=>{setPeriod(new Number('3 개월'.substring(0,1)).valueOf())}}/> 
+          <Dropdown 
+            defaultOption = '1개월' 
+            options={['1 개월', '3 개월', '6 개월']} 
+            onSelect={(option)=>{
+              setPeriod(new Number(option.substring(0,1)).valueOf())
+            }}
+          /> 
         </div>
         <TransferList transfers={transfers}/>
       </div>

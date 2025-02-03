@@ -4,13 +4,13 @@ import { useState, useEffect, useRef } from 'react';
 
 type DropdownProps = {
   options: string[];
-  deafault: string;
+  defaultOption: string;
   onSelect: (option: string) => void;
 };
 
-export default function Dropdown({ options, deafault, onSelect }: DropdownProps) {
+export default function Dropdown({ options, defaultOption, onSelect }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(deafault);
+  const [selectedOption, setSelectedOption] = useState<string | null>(defaultOption);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
