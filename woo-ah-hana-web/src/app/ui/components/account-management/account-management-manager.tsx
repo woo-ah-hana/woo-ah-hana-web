@@ -9,7 +9,7 @@ export function AccountManagementManager({fee, feePeriod}: AccountManagementMana
   return(
   <main>
     <div className="flex flex-col gap-5  text-[17px]">
-      <div className="text-[20px]">모임 통장 관리자 설정</div>
+      <div className="text-[20px]">모임 통장 회비 관리</div>
       <div className="flex items-center justify-between align-baseline">
         <div>회비 금액</div>
         <div>{fee.toLocaleString()}원</div>
