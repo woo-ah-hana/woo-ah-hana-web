@@ -10,7 +10,7 @@ import { loadActivePlan } from "@/app/business/ai/ai.service";
 import { convertDate } from "@/app/utils/convert";
 import { saveActivePlans } from "@/app/business/plan/active-plan.service";
 import { useRouter } from "next/navigation";
-import { SttModalWrapper } from "@/app/ui/components/stt/SttModalWrapper2";
+import { SttModalWrapper } from "@/app/ui/components/stt/SttModalWrapper";
 
 interface RequestActivePlanForm {
   planId?: string;
