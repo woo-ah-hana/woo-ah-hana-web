@@ -15,7 +15,7 @@ interface SttProps {
   onClose: () => void;
   onResult: (text: string) => void;
 }
-const Stt: React.FC<SttProps> = ({ onClose, onResult }) => {
+const Stt = ({ onClose, onResult }: SttProps) => {
   const [resp, setResp] = useState<string>("");
   const [mediaBlobUrl, setMediaBlobUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
