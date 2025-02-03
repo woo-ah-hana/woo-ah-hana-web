@@ -11,6 +11,7 @@ import {
   Member,
 } from "@/app/business/community/community.service";
 import Header from "@/app/ui/components/header";
+import Robot from "@/app/assets/img/icon-robot1.png";
 
 export default async function Home({
   searchParams,
@@ -51,7 +52,7 @@ export default async function Home({
       <main key={index}>
         <Link href={`/plan/active?id=${planId}&date=${item?.date}`}>
           <Card className="p-3">
-            <div className="text-center text-xl font-medium">
+            <div className="text-center text-lg font-medium">
               {item?.date.substring(5)}
             </div>
             <div className="text-right text-slate-500 text-xs mt-2">
@@ -90,7 +91,13 @@ export default async function Home({
           <div className="grid grid-cols-2 gap-2">{ActivePlanScheduleCard}</div>
           <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
             <Link href={`/ai?plan=${planId}&community=${communityId}`}>
-              <AchromaticButton className="rounded-full">
+              <AchromaticButton className="rounded-full bg-gradient-to-b from-blue-400 to-blue-200">
+                <img
+                  src={Robot.src}
+                  width={30}
+                  height={30}
+                  className="animate-pulse"
+                />
                 AI 여행 계획짜기
               </AchromaticButton>
             </Link>
