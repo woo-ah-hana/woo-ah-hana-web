@@ -5,7 +5,6 @@ import IconLocation from "@/app/assets/img/icon-location.png";
 import IconHobby from "@/app/assets/img/icon-hobby.png";
 import IconShopping from "@/app/assets/img/icon-shopping.png";
 import IconAcc from "@/app/assets/img/icon-acc.png";
-import IconHobbyBg from "@/app/assets/img/icon-hobbyBg.png";
 import IconHobbyBg1 from "@/app/assets/img/food.jpg";
 
 export const categoryIcons: { [key: string]: string } = {

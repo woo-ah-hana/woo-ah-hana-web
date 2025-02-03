@@ -50,12 +50,12 @@ export default async function Home({
     return (
       <main key={index}>
         <Link href={`/plan/active?id=${planId}&date=${item?.date}`}>
-          <Card className="p-5">
-            <div className="p-5 text-center text-xl text-slate-600 font-medium">
+          <Card className="p-3">
+            <div className="text-center text-xl font-medium">
               {item?.date.substring(5)}
             </div>
-            <div className="text-right text-slate-600 text-xs">
-              {`상세보기>`}
+            <div className="text-right text-slate-500 text-xs mt-2">
+              {`보러가기>`}
             </div>
           </Card>
         </Link>
@@ -64,9 +64,9 @@ export default async function Home({
   });
 
   return (
-    <main>
+    <main className="bg-gray-100">
       <Header title="모임 일정" link={`/plan?id=${communityId}`} />
-      <div className="flex flex-col gap-3">
+      <div className="bg-white">
         <PlanDetail
           id={planId}
           title={plan.getTitle()}
@@ -83,16 +83,18 @@ export default async function Home({
           })}
           locations={plan.getLocations()}
         />
-        <div className="mt-5 text-center">AI가 세운 일정</div>
-        <hr></hr>
-        <div className="grid grid-cols-2 gap-2">{ActivePlanScheduleCard}</div>
-
-        <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
-          <Link href={`/ai?plan=${planId}&community=${communityId}`}>
-            <AchromaticButton className="rounded-full">
-              AI 여행 계획짜기
-            </AchromaticButton>
-          </Link>
+      </div>
+      <div className="bg-white mt-2">
+        <div className="text-start p-3 text-lg font-bold">AI가 세운 일정</div>
+        <div className="ml-5 mr-5">
+          <div className="grid grid-cols-2 gap-2">{ActivePlanScheduleCard}</div>
+          <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
+            <Link href={`/ai?plan=${planId}&community=${communityId}`}>
+              <AchromaticButton className="rounded-full">
+                AI 여행 계획짜기
+              </AchromaticButton>
+            </Link>
+          </div>
         </div>
       </div>
     </main>
