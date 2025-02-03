@@ -28,8 +28,8 @@ export async function POST(req: Request) {
 
     const result = await springResponse.json();
     return NextResponse.json(result);
-  } catch (error: any) {
-    console.error("API 라우트 오류:", error.message);
+  } catch (error) {
+    console.error("API 라우트 오류:", error);
     return NextResponse.json(
       { error: "파일 업로드 처리 중 오류가 발생했습니다." },
       { status: 500 }
