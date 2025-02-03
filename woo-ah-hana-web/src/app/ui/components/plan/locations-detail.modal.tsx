@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FormState } from "../../molecule/form/form-root";
 import Form from "../../molecule/form/form-index";
 import { updateLocations } from "@/app/business/plan/plan-update.service";
+import {message} from "antd";
 
 interface LocationsDetailDilogProps{
   id: string,
@@ -13,6 +14,7 @@ interface LocationsDetailDilogProps{
 
 export function LocationsDetailDilog({id, locations}: LocationsDetailDilogProps){
   const [currentLocations, setCurrentLocations] = useState<string[]>(locations);
+  const [messageApi, contextHolder] = message.useMessage();
 
   function handleAddLocation(prevState: FormState, formData: FormData):FormState{
     try{
@@ -44,10 +46,12 @@ export function LocationsDetailDilog({id, locations}: LocationsDetailDilogProps)
   
   return (
     <Dialog>
+      {contextHolder}
       <DialogTrigger asChild>
         <AchromaticButton variant={'ghost'} className="text-slate-600">수정</AchromaticButton>
       </DialogTrigger>
       <DialogContent title="모임 장소">
+        <div className="px-5"><hr></hr></div>
         <div className="p-5 grid grid-cols-1 gap-5">
           <div>
           {currentLocations.map((location, index)=>{
@@ -59,6 +63,7 @@ export function LocationsDetailDilog({id, locations}: LocationsDetailDilogProps)
             )
           })}
           </div>
+          <hr></hr>
           <div>
             <div className="mb-3">모임 장소 입력하기</div>
             <Form id={"add-location"} action={handleAddLocation} failMessageControl={"alert"}>
@@ -70,7 +75,13 @@ export function LocationsDetailDilog({id, locations}: LocationsDetailDilogProps)
           </div>
           <AchromaticButton onClick={async()=>{
             await updateLocations(id, currentLocations)
-            alert('모임 장소가 변경되었습니다!')
+            messageApi.open({
+              type: 'success',
+              content: '모임 장소 변경에 성공했습니다!',
+              duration: 1,
+              className: 'font-bold'
+            });
+              setTimeout(() => window.location.reload(), 1000);
             }}>변경하기</AchromaticButton>
         </div>
       </DialogContent>

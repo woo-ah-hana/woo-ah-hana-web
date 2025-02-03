@@ -1,19 +1,28 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { Community } from '../business/community/community';
 
 interface CommunityState {
-  community: string; // 현재 선택된 커뮤니티 ID
-  setCommunity: (communityId: string) => void; // 커뮤니티 변경 함수
+  community: Community;
+  setCommunity: (community: Community) => void;
 }
 
 const useCommunityStore = create<CommunityState>()(
   persist(
     (set) => ({
-      community: '',
-      setCommunity: (communityId) => set({ community: communityId }),
+      community: {
+        id: '0', 
+        name: '0', 
+        accountNumber: '0', 
+        managerId:'0', 
+        fee: 0, 
+        feePeriod: 0, 
+        credit:0
+      },
+      setCommunity: (community) => set({ community: community }),
     }),
     {
-      name: 'community-storage', // 로컬 스토리지 키 이름
+      name: 'community-storage',
     }
   )
 );

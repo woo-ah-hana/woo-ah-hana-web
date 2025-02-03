@@ -30,6 +30,60 @@ body {
 
 /* 선택된 메뉴 항목 스타일 */
 .custom-menu .ant-menu-item-selected {
-  color: #527FF7;
+  color: #527ff7;
   font-weight: bold; /* 강조 */
+}
+
+/* 달력 스타일 */
+.custom-range-picker .ant-picker-panels {
+  @apply flex flex-col items-center justify-center gap-2;
+}
+
+.custom-range-picker .ant-picker-panel-container {
+  @apply w-auto px-2;
+}
+
+.custom-range-picker .ant-picker-date-panel {
+  @apply mx-auto;
+}
+
+.custom-range-picker .ant-picker {
+  @apply scale-110;
+}
+
+.custom-range-picker .ant-picker-panels {
+  @apply flex-wrap !important;
+  width: 300px !important;
+}
+.custom-range-picker .ant-picker-panels {
+  @apply flex-wrap !important;
+  width: 300px !important;
+}
+
+.custom-range-picker
+  .ant-picker-panel:first-child
+  .ant-picker-date-panel
+  .ant-picker-header-super-next-btn,
+.custom-range-picker
+  .ant-picker-panel:first-child
+  .ant-picker-date-panel
+  .ant-picker-header-next-btn {
+  visibility: visible !important;
+}
+
+.custom-range-picker
+  .ant-picker-panel:nth-child(2)
+  .ant-picker-date-panel
+  .ant-picker-header-super-next-btn,
+.custom-range-picker
+  .ant-picker-panel:nth-child(2)
+  .ant-picker-date-panel
+  .ant-picker-header-next-btn {
+  visibility: hidden !important;
+}
+
+.ant-message {
+  position: absolute;
+  bottom: 120px !important;
+  top: unset !important;
 }

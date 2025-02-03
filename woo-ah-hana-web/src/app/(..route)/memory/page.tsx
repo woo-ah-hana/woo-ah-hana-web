@@ -3,6 +3,7 @@ import { getCompletedPlans } from "@/app/business/memory/memory.service";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import { IoAdd } from "react-icons/io5";
 import Link from "next/link";
+import Header from "@/app/ui/components/header";
 
 export default async function Home({
   searchParams,
@@ -12,7 +13,6 @@ export default async function Home({
   const communityId =
     (searchParams.id as string) || "a61f6270-974b-44f3-b9f3-7a8ab9b145ff";
 
-  console.log(communityId);
   const getPlansResponse = await getCompletedPlans(communityId);
   const plans = getPlansResponse.data;
   console.log(plans);
@@ -36,6 +36,7 @@ export default async function Home({
   return (
     <main>
       <div className="h-full flex flex-col">
+        <Header title='지난 모임 추억' link='/home' />
         <div className="flex-1 overflow-y-auto p-5">
           <div className="grid grid-rows-1 gap-3">
             {plans ? PlansView : <div>데이터가 존재하지 않습니다.</div>}

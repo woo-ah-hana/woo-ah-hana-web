@@ -4,12 +4,13 @@ import { useState, useEffect, useRef } from 'react';
 
 type DropdownProps = {
   options: string[];
+  defaultOption: string;
   onSelect: (option: string) => void;
 };
 
-export default function Dropdown({ options, onSelect }: DropdownProps) {
+export default function Dropdown({ options, defaultOption, onSelect }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>('1');
+  const [selectedOption, setSelectedOption] = useState<string | null>(defaultOption);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
@@ -41,7 +42,7 @@ export default function Dropdown({ options, onSelect }: DropdownProps) {
         onClick={toggleDropdown}
         className='flex items-center justify-between px-4 py-2 bg-white text-black rounded-md shadow-md hover:bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 w-auto'
       >
-        <span>{selectedOption + ' 일' || 'Select an option'}</span>
+        <span>{selectedOption || 'Select an option'}</span>
         <span className='ml-2'>
           {isOpen ? (
             <svg

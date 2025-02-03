@@ -6,17 +6,11 @@ import {
   DialogTrigger,
 } from '../../molecule/dialog/dialog';
 import AchromaticButton from '../../atom/button/achromatic-button';
-import Dropdown from '../../atom/drop-down/drop-down';
 import TextInput from '../../atom/text-input/text-input';
 import { useState } from 'react';
 
 export default function AccountAuthModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const dates = Array.from({ length: 30 }, (_, i) => (i + 1).toString());
-
-  const handleSelect = (date: string) => {
-    console.log('Selected option:', date);
-  };
 
   const handleButton = () => {
     setIsOpen(false);

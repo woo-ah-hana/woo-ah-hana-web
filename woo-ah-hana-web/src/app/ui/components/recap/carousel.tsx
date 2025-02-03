@@ -1,13 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
-import ClosingContent from './content';
+import React, { Suspense, useState } from 'react';
+import RecapContent from './content';
 
-export default function ClosingCarousel() {
+export default function RecapCarousel() {
   const [currentPeriod, setCurrentPeriod] = useState({
     year: 2025,
     quarter: 1,
   });
+
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentQuarter = Math.floor(now.getMonth() / 3) + 1;
 
   const handleLeftClick = () => {
     setCurrentPeriod((prev) => {
@@ -21,6 +25,10 @@ export default function ClosingCarousel() {
     setCurrentPeriod((prev) => {
       const newQuarter = prev.quarter === 4 ? 1 : prev.quarter + 1;
       const newYear = prev.quarter === 4 ? prev.year + 1 : prev.year;
+
+      if (newYear > currentYear || (newYear === currentYear && newQuarter > currentQuarter)) {
+        return prev;
+      }
       return { year: newYear, quarter: newQuarter };
     });
   };
@@ -41,10 +49,12 @@ export default function ClosingCarousel() {
         </div>
 
         <div className='flex flex-col items-center justify-center border-t pt-5'>
-          <ClosingContent
-            year={currentPeriod.year}
-            quarter={currentPeriod.quarter}
-          />
+          <Suspense>
+            <RecapContent
+              year={currentPeriod.year}
+              quarter={currentPeriod.quarter}
+            />
+          </Suspense>
         </div>
       </div>
     </div>

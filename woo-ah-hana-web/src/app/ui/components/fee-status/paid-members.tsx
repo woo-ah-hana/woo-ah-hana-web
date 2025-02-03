@@ -9,7 +9,7 @@ interface MemberListProps{
 export function PaidMemberList({members}:MemberListProps){
   return(
     <div className='flex flex-col justify-center items-start'>
-    <div className='text-[18px] mb-4'>모임 멤버</div>
+    <div className='text-[18px] mb-4'>이번 달 납입 금액</div>
     {members.map((member, index) => (
       <div
         key={index}
@@ -23,7 +23,7 @@ export function PaidMemberList({members}:MemberListProps){
           />
           <div>{member.memberName}</div>
         </div>
-        <div><span className='text-[19px]'>{member.amount}</span> 원</div>
+        <div><span className='text-[19px]'>{member.amount.toLocaleString()}</span> 원</div>
       </div>
     ))}
   </div>

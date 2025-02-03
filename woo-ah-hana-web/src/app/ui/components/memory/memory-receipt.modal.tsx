@@ -19,7 +19,7 @@ export default async function MemoryReceiptModal({
   const response = await getPlanReceipt(planId);
   const receiptData = response.isSuccess
     ? (response.data as PlanReceipt)
-    : (PlanReceipt.create([]) as PlanReceipt);
+    : (new PlanReceipt([], 0, 0) as PlanReceipt);
 
   return (
     <Dialog>
@@ -29,7 +29,7 @@ export default async function MemoryReceiptModal({
         </AchromaticButton>
       </DialogTrigger>
       <DialogContent className="p-6">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           <div className="flex justify-between">
             <div className="text-lg font-semibold">영수증</div>
             <DialogClose>
@@ -38,7 +38,7 @@ export default async function MemoryReceiptModal({
           </div>
           <div
             id="scrollableDiv"
-            className="overflow-y-auto max-h-[55vh] border-t border-b border-gray-300 pr-2"
+            className="overflow-y-auto max-h-[54vh] border-t border-b border-gray-300 pr-2"
           >
             <MemoryReceiptDetail logs={receiptData.getRecords()} />
           </div>
@@ -46,12 +46,12 @@ export default async function MemoryReceiptModal({
             <div className="flex justify-between w-full">
               <div>전체 소비 금액</div>
               <div className="font-semibold">
-                {receiptData.getTotalAmt()} 원
+                {receiptData.getTotalAmt().toLocaleString('ko-KR')} 원
               </div>
             </div>
             <div className="flex justify-between w-full">
               <div>인당 소비 금액</div>
-              <div className="font-semibold">{receiptData.getPerAmt()} 원</div>
+              <div className="font-semibold">{receiptData.getPerAmt().toLocaleString('ko-KR')} 원</div>
             </div>
           </div>
         </div>

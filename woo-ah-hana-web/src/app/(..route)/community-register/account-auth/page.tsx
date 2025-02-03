@@ -49,7 +49,6 @@ export default function AccountRegisterForm() {
 
       // 계좌로 1원 보내기 API
       const response = await validateAccount(requestBody);
-
       if (response.isSuccess) {
         const queryParams = new URLSearchParams({
           communityName: formData.communityName,

@@ -4,6 +4,7 @@ import { updateMembers } from "@/app/business/plan/plan-update.service";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import { Dialog, DialogContent, DialogTrigger } from "@/app/ui/molecule/dialog/dialog";
 import { useEffect, useState } from "react";
+import {message} from "antd";
 
 interface MemberDetailDilogProps{
   id: string,
@@ -16,6 +17,7 @@ interface MemberDetailDilogProps{
 export function MemberDetailDilog({id, memberIds, memberNames, communityMemberIds, communityMemberNames}: MemberDetailDilogProps){
   const [planMembers, setPlanMembers] = useState<Member[]>([]);
   const [communityMembers, setCommunityMembers] = useState<Member[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
 
   function handleAddMember(addedMember: Member){
     const members = [addedMember, ...planMembers]
@@ -33,7 +35,15 @@ export function MemberDetailDilog({id, memberIds, memberNames, communityMemberId
 
   async function handleUpdateMember(){
     const memberIds = planMembers.map((member)=>{return member.id});
-    await updateMembers(id, memberIds).then(()=>{alert("참여 멤버가 변경되었어요!")})
+    await updateMembers(id, memberIds).then(()=> {
+      messageApi.open({
+        type: 'success',
+        content: '참여 멤버 변경에 성공했습니다!',
+        duration: 1,
+        className: 'font-bold'
+      });
+      setTimeout(() => window.location.reload(), 1000);
+    });
   };
 
   useEffect(()=>{
@@ -59,10 +69,12 @@ export function MemberDetailDilog({id, memberIds, memberNames, communityMemberId
 
   return (
     <Dialog>
+      {contextHolder}
       <DialogTrigger asChild>
         <AchromaticButton variant={'ghost'} className="text-slate-600">수정</AchromaticButton>
       </DialogTrigger>
       <DialogContent title="참여 인원 변경">
+        <div className="px-3"><hr></hr></div>
         <div className="grid grid-cols1 gap-7 p-3">
           <div>
             <div className="text-center">현재 참여하는 사람들</div>
@@ -77,6 +89,7 @@ export function MemberDetailDilog({id, memberIds, memberNames, communityMemberId
               })}
             </div>
           </div>
+          <hr></hr>
           <div>
             <div className="text-center">모임 통장의 사람들</div>
             <div className="grid grid-cols-1 gap-3 mx-3">
