@@ -28,6 +28,7 @@ export default async function Home({
           endDate={item.getEndDate()}
           locations={item.getLocations()}
           memberNames={item.getMemberNames()}
+          communityId={item.getCommunityId()}
         />
       </main>
     );
