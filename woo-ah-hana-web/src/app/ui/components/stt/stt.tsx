@@ -51,6 +51,7 @@ const Stt = ({ onClose, onResult }: SttProps) => {
     }
   };
 
+  // TODO: 컴포넌트안에서 useEffect 호출하는거 바꿔야합니다...
   return (
     <ReactMediaRecorder
       audio
