@@ -4,7 +4,7 @@ import { API_PATH } from "@/app/utils/http/api-query";
 import { InternetServerError } from "@/app/utils/http/http-error";
 
 export async function notifyToUnpaidMember(memberId: string):Promise<APIResponseType<string>>{
-  const response = await instance.post(`${API_PATH}/community-notification/unpaid`, memberId);
+  const response = await instance.post(`${API_PATH}/community-notification/unpaid`, {memberId});
 
   if (response.status == 500) {
     throw new InternetServerError({
