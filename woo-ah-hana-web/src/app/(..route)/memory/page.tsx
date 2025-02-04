@@ -1,8 +1,5 @@
 import { MemoryListItem } from "@/app/ui/components/memory/memory-list-item";
 import { getCompletedPlans } from "@/app/business/memory/memory.service";
-import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
-import { IoAdd } from "react-icons/io5";
-import Link from "next/link";
 import Header from "@/app/ui/components/header";
 
 export default async function Home({
@@ -42,13 +39,6 @@ export default async function Home({
           <div className="grid grid-rows-1 gap-3">
             {plans ? PlansView : <div>데이터가 존재하지 않습니다.</div>}
           </div>
-        </div>
-        <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
-          <Link href={"plan/set"}>
-            <AchromaticButton className="h-14 w-14 rounded-full">
-              <IoAdd color="white" size={40} />
-            </AchromaticButton>
-          </Link>
         </div>
       </div>
     </main>
