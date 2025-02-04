@@ -12,7 +12,7 @@ import { saveActivePlans } from "@/app/business/plan/active-plan.service";
 import { useRouter } from "next/navigation";
 import { SttModalWrapper } from "@/app/ui/components/stt/SttModalWrapper";
 import { Loading } from "@/app/ui/components/ai/loading";
-import Robot from "@/app/assets/img/icon-robot.png";
+
 interface RequestActivePlanForm {
   planId?: string;
   communityId: string;
@@ -32,34 +32,45 @@ export function RequestActivePlanForm({
   const [selectedDay, setSelectedDay] = useState<string>("");
   const router = useRouter();
   const [sttResult, setSttResult] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function getActivePlan(
     prevState: FormState,
     formData: FormData
   ): Promise<FormState> {
-    const input = formData.get("request") as string;
-    const activePlanSource = await search([input, ...locations]);
+    try {
+      const input = formData.get("request") as string;
+      const activePlanSource = await search([input, ...locations]);
 
-    const activePlan = await loadActivePlan(
-      activePlanSource.data as SearchResult[],
-      convertDate(startDate),
-      convertDate(endDate)
-    );
+      const activePlan = await loadActivePlan(
+        activePlanSource.data as SearchResult[],
+        convertDate(startDate),
+        convertDate(endDate)
+      );
 
-    setAiDate(
-      activePlan.map((item) => {
-        item.planId = planId;
-        return item;
-      })
-    );
+      setAiDate(
+        activePlan.map((item) => {
+          item.planId = planId;
+          return item;
+        })
+      );
 
-    setSelectedDay(activePlan[0].date);
+      setSelectedDay(activePlan[0].date);
+    } catch (error) {
+      console.error("AI 요청 실패:", error);
+      return {
+        isSuccess: false,
+        isFailure: true,
+        validationError: {},
+        message: "AI 요청에 실패했습니다. 잠시 후 다시 시도해주세요.",
+      };
+    }
 
     return {
       isSuccess: true,
       isFailure: false,
       validationError: {},
-      message: "AI 요청에 실패했습니다. 잠시후 시도해주세요.",
+      message: "",
     };
   }
 
@@ -103,6 +114,7 @@ export function RequestActivePlanForm({
 
   return (
     <main className="flex flex-col gap-3">
+      {isLoading && <Loading />}
       {aiData.length == 0 ? (
         <></>
       ) : (
@@ -143,28 +155,30 @@ export function RequestActivePlanForm({
           </div>
         </div>
       )}
-
       <div>
         <Form
-          id={"request-for-ai"}
+          id="request-for-ai"
           action={getActivePlan}
-          failMessageControl={"alert"}
+          failMessageControl="alert"
         >
           <div className="grid grid-cols-[9fr_1fr] gap-1">
             <Form.TextInput
-              id={`request`}
+              id="request"
               label=""
               placeholder="예시) 강남역 맛집 추천해줘."
               value={sttResult}
-              onValueChange={(value: string) => setSttResult(value)}
+              onValueChange={setSttResult}
             />
-            <Form.SubmitButton className="h-11" label="요청" />
+            <Form.SubmitButton
+              className="h-11"
+              label="요청"
+              setLoading={setIsLoading}
+            />
           </div>
         </Form>
       </div>
-      <Loading />
       <div className="fixed bottom-5 right-5 flex justify-end rounded">
-        <SttModalWrapper onResult={(text) => setSttResult(text)} />
+        <SttModalWrapper onResult={setSttResult} />
       </div>
     </main>
   );
