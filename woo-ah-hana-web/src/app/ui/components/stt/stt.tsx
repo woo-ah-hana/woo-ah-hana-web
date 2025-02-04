@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { MdKeyboardVoice } from "react-icons/md";
+import Robot from "@/app/assets/img/icon-robot.png";
+import Image from "next/image";
 
 const ReactMediaRecorder = dynamic(
   () => import("react-media-recorder").then((mod) => mod.ReactMediaRecorder),
@@ -104,11 +106,20 @@ const Stt = ({ onClose, onResult }: SttProps) => {
             <div>
               {isRecording && (
                 <div>
-                  <div className="relative flex items-center justify-center pb-5">
+                  <div className="relative flex items-center justify-end pb-5">
                     <div className="absolute w-20 h-20 rounded-full bg-blue-300 opacity-30 animate-ping pointer-events-none"></div>
                     <div className="absolute w-40 h-40 rounded-full bg-blue-400 opacity-50 animate-ping pointer-events-none"></div>
-                    <MdKeyboardVoice
-                      className="text-white bg-wooahMain text-7xl p-3 rounded-full"
+                    <Image
+                      src={Robot}
+                      alt=""
+                      className="relative z-10"
+                      width={150}
+                      height={150}
+                    />
+                  </div>
+                  <div className="text-center mb-4">
+                    <button
+                      className="text-white bg-wooahMain w-11/12 p-3 rounded-lg"
                       onClick={() => {
                         if (timerRef.current) {
                           clearTimeout(timerRef.current);
@@ -118,7 +129,9 @@ const Stt = ({ onClose, onResult }: SttProps) => {
                         setIsRecording(false);
                         onClose();
                       }}
-                    />
+                    >
+                      녹음 완료
+                    </button>
                   </div>
                 </div>
               )}
