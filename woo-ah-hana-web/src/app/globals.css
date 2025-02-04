@@ -23,7 +23,7 @@ body {
 /* 기본 메뉴 항목 스타일 */
 .custom-menu .ant-menu-item {
   color: gray; /* 선택되지 않은 메뉴는 회색 */
-  transition: color 0.3s ease; /* 부드러운 전환 효과 */
+  transition: color 0.3s none; /* 부드러운 전환 효과*/
   font-size: large;
   font-weight: bold;
 }

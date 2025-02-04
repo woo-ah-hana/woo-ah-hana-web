@@ -11,17 +11,13 @@ export default async function AccountManagement({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  
   const community = (await getCommunity(searchParams.id as string)).data;
   const myAccount   = (await getMyAccount()).data;
   const communityMembers = (await getCommunityMembers(searchParams.id as string)).data;
-
-  console.log(communityMembers)
-  
   
   return (
     <div className="h-full flex flex-col">
-      <Header title="계좌 관리하기" link="/home" />
+      <Header title="계좌 관리하기" link={`/home?id=${searchParams.id}`} />
       <div className="p-5 flex flex-col gap-7">
         <div className="flex flex-col gap-5">
           <div className="text-[20px]">내 출금 계좌</div>
@@ -41,11 +37,13 @@ export default async function AccountManagement({
           </div>
         </div>
         <hr className="bg-gray-800 my-3" />
+
         <AccountManagementManager 
           fee={community?.fee as number} 
           feePeriod={community?.feePeriod as number}
         />
         <hr className="bg-gray-800 my-3" />
+
         <AccountManagementMembers communityMembers={communityMembers as Member[]}/>
       </div>
     </div>

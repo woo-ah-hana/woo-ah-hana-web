@@ -49,7 +49,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
           />
         </Link>
         {communityIds.length < 3 && (
-          <Link href={'/community-register'}>
+          <Link href={'/community-register/form'}>
             <AchromaticButton variant={'outline'} className='mt-5 w-full'>
               + 모임통장 추가하기
             </AchromaticButton>

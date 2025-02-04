@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import { Plan } from "@/app/business/plan/plan";
-import { usePlanContext } from "@/app/context/plan-context";
-import { Calendar } from "@/app/ui/molecule/calendar/calendar";
-import { useState } from "react";
-import dayjs from "dayjs";
-import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
-import Link from "next/link";
-import TitleDisplay from "@/app/ui/components/plan/set-title-display";
+import { Plan } from '@/app/business/plan/plan';
+import { usePlanContext } from '@/app/context/plan-context';
+import { Calendar } from '@/app/ui/molecule/calendar/calendar';
+import { useState } from 'react';
+import dayjs from 'dayjs';
+import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
+import Link from 'next/link';
+import TitleDisplay from '@/app/ui/components/plan/set-title-display';
+import Header from '@/app/ui/components/header';
 
 export default function SetPeriod() {
   const { plan, updatePlan } = usePlanContext();
@@ -39,25 +40,31 @@ export default function SetPeriod() {
   };
 
   return (
-    <div className="flex flex-col p-6">
-      <div className="flex flex-col gap-20 min-h-[calc(100vh-10rem)]">
-        <div>
-          <TitleDisplay mainTitle="일정 기간을" subTitle="설정 해주세요" />
-          <Calendar
-            value={dates}
-            onChange={handleDateChange}
-            className="mb-4"
-          />
+    <div>
+      <Header
+        title='모임 일정 생성'
+        link={`/plan?id=${plan.getCommunityId()}`}
+      />
+      <div className='flex flex-col p-6'>
+        <div className='flex flex-col gap-20 min-h-[calc(100vh-10rem)]'>
+          <div>
+            <TitleDisplay mainTitle='일정 기간을' subTitle='설정 해주세요' />
+            <Calendar
+              value={dates}
+              onChange={handleDateChange}
+              className='mb-4'
+            />
+          </div>
         </div>
+        <Link href='/plan/set/category'>
+          <AchromaticButton
+            onClick={handleUpdate}
+            className='w-full h-12 flex justify-center items-center'
+          >
+            다음
+          </AchromaticButton>
+        </Link>
       </div>
-      <Link href="/plan/set/category">
-        <AchromaticButton
-          onClick={handleUpdate}
-          className="w-full h-12 flex justify-center items-center"
-        >
-          다음
-        </AchromaticButton>
-      </Link>
     </div>
   );
 }

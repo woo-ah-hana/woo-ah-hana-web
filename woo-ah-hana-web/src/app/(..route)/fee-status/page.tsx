@@ -28,7 +28,7 @@ export default async function Home({
 
   return (
       <>
-      <Header title='회비 입금 현황' link='/home' />
+      <Header title='회비 입금 현황' link={`/home?id=${searchParams.community}`} />
     <div className='p-5 flex flex-col gap-8'>
       <UnpaidMemberList unpaidMembers={unpaidMembers} yearMonth={yearMonth} />
       <hr></hr>

@@ -84,7 +84,7 @@ export default function Deposit() {
     <>
     {contextHolder}
     <div className='h-full flex flex-col'>
-      <Header title='입금' link='/home' />
+      <Header title='입금' link={`/home?id=${community.id}`} />
       <div className='px-10 py-5 h-full flex flex-col justify-between'>
         <div className='flex flex-col gap-10'>
           <div className='border-none shadow-none'>

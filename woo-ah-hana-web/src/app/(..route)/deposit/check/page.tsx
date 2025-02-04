@@ -32,7 +32,7 @@ export default function DepositCheck({
       console.log('Deposit success:', response.data);
 
       if (response.isSuccess) {
-        router.push(`/deposit/complete?amount=${tranAmt}&accountName=${communityAccountName}`);
+        router.push(`/deposit/complete?communityId=${communityId}&amount=${tranAmt}&accountName=${communityAccountName}`);
       }
     } catch (error) {
       console.error('Deposit failed:', error);
@@ -45,7 +45,7 @@ export default function DepositCheck({
       <Header title='입금' link='/deposit' />
       <div className='h-full px-10 py-5 flex flex-col justify-between'>
         <div className='text-2xl align-center justify-center text-center flex flex-col gap-4'>
-          <span className='text-lg font-bold'>{communityAccountName}</span>
+          <span className='text-xl font-semibold'>{communityAccountName}</span>
           <h1>{communityAccountBank} 모임통장으로</h1>
           <h1>
             <span className='text-3xl'>{Number(tranAmt).toLocaleString('ko-KR')}</span> 원을
@@ -63,7 +63,7 @@ export default function DepositCheck({
               <p className='text-black'>{communityAccountNumber}</p>
             </div>
             <div className='flex justify-between'>
-              <p></p>
+              <p>모임정보</p>
               <p className='text-black'>{communityAccountName}</p>
             </div>
           </div>
