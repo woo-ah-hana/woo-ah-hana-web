@@ -39,6 +39,7 @@ export interface GetMyAccountInfoResponseDto{
   accountNumber: string
   name: string
   amount: number
+  setAutoDeposit: boolean
 }
 export async function getTransferRecords(requestBody : TransferRecordRequestDTO): Promise<APIResponseType<TransferRecordResponseDTO[]>> {
   try {
@@ -206,6 +207,26 @@ export async function setAutoDeposit(communityId: string, fee: string, depositDa
   
 }
 
+export async function deleteAutoDeposit(communityId: string) :Promise<APIResponseType<string>>{
+  try{
+    const response = await instance.delete(`${API_PATH}/community/account/autoDeposit?communityId=${communityId}`);
+    const data:string = response.data
+    return {
+      isSuccess: false,
+      isFailure: true,
+      data: data
+    }
+  }catch(error){
+    console.log(error);
+    return{
+      isSuccess: false,
+      isFailure: true,
+      data: undefined
+    }
+  }
+  
+}
+
 export async function sendCode(bankTranId: string, accountNumber: string) :Promise<APIResponseType<string>>{
   try{
     const response = await instance.post(`${API_PATH}/community/send-code`, {bankTranId, accountNumber});
@@ -245,9 +266,11 @@ export async function changeAccount(accountNumber: string, bankTranId: string, v
   }
 }
 
-export async function getMyAccount():Promise<APIResponseType<GetMyAccountInfoResponseDto>> {
+export async function getMyAccount(communityAccNum: string):Promise<APIResponseType<GetMyAccountInfoResponseDto>> {
   try{
-    const response = await instance.get(`${API_PATH}/member/my-account/info`)
+    console.log(`API URL: ${API_PATH}/member/my-account/info?communityAccNum=${communityAccNum}`);
+
+    const response = await instance.get(`${API_PATH}/member/my-account/info?communityAccNum=${communityAccNum}`)
     if (response.status === 500) {
       throw new InternetServerError({
         message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
