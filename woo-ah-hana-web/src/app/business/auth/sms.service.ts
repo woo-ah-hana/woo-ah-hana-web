@@ -22,7 +22,7 @@ export async function sendSMSCode(phoneNumber: string):Promise<APIResponseType<b
   }
 }
 
-export async function validSMSCode(phoneNumber: string, validationCode:string):Promise<APIResponseType<boolean>> {
+export async function validateSMSCode(phoneNumber: string, validationCode:string):Promise<APIResponseType<boolean>> {
   try{
     const response = await instance.post(`${API_PATH}/sms/valid-code`, {phoneNumber, validationCode})
     const result: boolean = response.data;

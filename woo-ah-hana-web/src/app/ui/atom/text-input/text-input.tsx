@@ -33,6 +33,7 @@ export interface TextInputProps
   error?: boolean;
   errorMessages?: string[];
   disabled?: boolean;
+  label?:string;
   onValueChange?: (value: string) => void;
 }
 
@@ -47,6 +48,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
     disabled = false,
     placeholder,
     className,
+    label,
     onValueChange,
     ...props
   },
@@ -55,7 +57,17 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
   const Icon = icon;
 
   return (
-    <>
+    <main>
+      {
+        label!==''?
+        <label
+          htmlFor=''
+          className="mb-2 block text-sm font-medium group-has-[:required]:after:pl-1 group-has-[:required]:after:text-red-400 group-has-[:required]:after:content-['*']"
+        >
+          {label}
+        </label>:
+        <></>
+      }
       <div
         className={cn(
           textInputVariants({ variant, sizeVariants, className }),
@@ -93,7 +105,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
             </p>
           ))
         : null}
-    </>
+    </main>
   );
 });
 
