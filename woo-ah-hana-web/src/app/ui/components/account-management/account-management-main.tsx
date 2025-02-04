@@ -19,6 +19,8 @@ export function AccountManagementMain({bankName, accountNumber, accountBalance, 
         title={bankName}
         accountNumber={accountNumber}
         balance={accountBalance}
+        bgcolor={'wooahBrightPurple'}
+        bdcolor={'wooahBrightPurple'}
         footer={
           <div className="w-[100%] flex justify-between">
             <AutoTransferDialog accountNumber={accountNumber} fee={fee} feePeriod={feePeriod}/>
