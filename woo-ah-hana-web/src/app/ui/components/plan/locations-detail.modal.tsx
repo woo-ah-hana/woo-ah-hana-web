@@ -67,7 +67,7 @@ export function LocationsDetailDilog({
       </DialogTrigger>
       <PlanDialog className="rounded-t-2xl">
         <div className="text-start text-xl font-semibold mb-2 pl-3 pr-3">
-          모임 장소
+          모임 장소 변경
         </div>
         <div className="p-5 grid grid-cols-1 gap-5">
           <div className="flex flex-wrap gap-2">

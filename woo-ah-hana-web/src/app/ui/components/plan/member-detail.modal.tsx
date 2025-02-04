@@ -2,16 +2,11 @@
 import { Member } from "@/app/business/community/community.service";
 import { updateMembers } from "@/app/business/plan/plan-update.service";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/app/ui/molecule/dialog/dialog";
+import { Dialog, DialogTrigger } from "@/app/ui/molecule/dialog/dialog";
 import { useEffect, useState } from "react";
 import { message } from "antd";
 import { PlanDialog } from "@/app/ui/molecule/planDialog/planDialog";
 import IconClosing from "@/app/assets/img/icon-closing.png";
-import IconManagement from "@/app/assets/img/icon-management.png";
 import { BsPlusLg } from "react-icons/bs";
 
 interface MemberDetailDilogProps {
