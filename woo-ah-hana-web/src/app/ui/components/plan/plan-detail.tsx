@@ -4,7 +4,6 @@ import { MemberDetailDilog } from "./member-detail.modal";
 import { LocationsDetailDilog } from "./locations-detail.modal";
 import { convertDateWithoutYear } from "@/app/utils/convert";
 import {
-  categoryColors,
   categoryIconBg,
 } from "@/app/ui/atom/category/category";
 import IconPlan from "@/app/assets/img/icon-plan.png";
@@ -36,7 +35,6 @@ export function PlanDetail({
   communityMemberNames,
   locations,
 }: PlanDetailProps) {
-  const bgColor = categoryColors[category];
   const iconBg = categoryIconBg[category];
   return (
     <main>

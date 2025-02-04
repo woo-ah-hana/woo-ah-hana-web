@@ -162,6 +162,7 @@ export function RequestActivePlanForm({
           failMessageControl="alert"
         >
           <div className="grid grid-cols-[9fr_1fr] gap-1">
+            {/* TODO: onValueChange 지양 useRef로 변경 */}
             <Form.TextInput
               id="request"
               label=""
@@ -170,7 +171,7 @@ export function RequestActivePlanForm({
               onValueChange={setSttResult}
             />
             <Form.SubmitButton
-              className="h-11"
+              className=" mt-2 h-12"
               label="요청"
               setLoading={setIsLoading}
             />

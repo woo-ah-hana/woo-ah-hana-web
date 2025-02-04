@@ -1,5 +1,4 @@
 import IconMeeting from "@/app/assets/img/icon-meeting.png";
-import IconExercise from "@/app/assets/img/icon-exercise.png";
 import IconMeal from "@/app/assets/img/icon-meal.png";
 import IconLocation from "@/app/assets/img/icon-location.png";
 import IconHobby from "@/app/assets/img/icon-hobby.png";

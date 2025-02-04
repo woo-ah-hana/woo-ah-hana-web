@@ -17,9 +17,7 @@ export default function LogoutModal() {
 
     const handleLogout = async () => {
         try {
-            // 로그아웃 처리
             await logout();
-            // 로그인 페이지로 리디렉션
             router.push('/');
         } catch (error) {
             console.error("로그아웃 처리 실패", error);
