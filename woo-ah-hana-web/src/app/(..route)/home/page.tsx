@@ -6,6 +6,8 @@ import CommunityMenu from '@/app/ui/components/community-menu';
 import { CommunityInfoResponseDTO, CommunityResponseDTO, getCommunity, getCommunityInfo, getCommunityList } from '@/app/business/community/community.service';
 import { redirect } from 'next/navigation';
 import { Community } from '@/app/business/community/community';
+import {logout} from "@/app/business/auth/login.service";
+import LogoutModal from "@/app/ui/components/LogoutModal";
 
 export default async function Home({searchParams}:{searchParams: { [key: string]: string | undefined }}) {
   const response = await getCommunityList();
@@ -59,6 +61,7 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
           {communityAccount.name} 홈
         </h2>
         <CardMenu community={selectedCommunityId} />
+        <LogoutModal></LogoutModal>
       </div>
     </div>
   );
