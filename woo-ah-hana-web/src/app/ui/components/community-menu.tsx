@@ -32,7 +32,6 @@ export default function CommunityMenu({ selectedCommunity, communityIds }: Commu
   };
 
   useEffect(() => {
-    console.log(selectedCommunity);
     setCommunity(selectedCommunity);
   }, [community, selectedCommunity, setCommunity]);
 
