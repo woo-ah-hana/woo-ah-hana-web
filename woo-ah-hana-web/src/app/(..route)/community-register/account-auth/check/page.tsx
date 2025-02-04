@@ -111,7 +111,7 @@ export default function AccountAuthCheck() {
             onValueChange={handleInputChange}
           />
           <div className='self-end'>
-                {countdown !== null && countdown > 0 && (
+                {countdown !== null && countdown >= 0 && (
                   <div className='flex flex-row justify-center items-center gap-0 text-[17px] text-start text-[#ec4646] mt-1 mr-1'>
                     {`${Math.floor(countdown / 60)}:${String(
                       countdown % 60
