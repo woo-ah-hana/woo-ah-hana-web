@@ -93,7 +93,7 @@ const Stt = ({ onClose, onResult }: SttProps) => {
             stopRecording();
             setIsRecording(false);
             alert("녹음이 종료되었습니다.");
-          }, 1500000);
+          }, 15000);
           return () => {
             if (timerRef.current) {
               clearTimeout(timerRef.current);
