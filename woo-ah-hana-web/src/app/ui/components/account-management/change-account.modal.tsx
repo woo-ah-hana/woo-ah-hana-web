@@ -76,7 +76,7 @@ export function ChangeAccountDialog({
           계좌변경
         </AchromaticButton>
       </DialogTrigger>
-      <DialogContent title='출금 계좌 변경'>
+      <DialogContent title='출금 계좌 변경' className='overflow-y-scroll max-h-[80vh]'>
         <div className='px-5'>
           <hr></hr>
         </div>
