@@ -190,13 +190,7 @@ export default function RecapContent({ year, quarter }: Props) {
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
           지난 분기보다{' '}
-          <span className='text-2xl'>
-             {recapData?.howMuchSpentThanLastQuarter !== undefined
-                 ? (recapData?.howMuchSpentThanLastQuarter >= 0
-                     ? <><span className="text-red-500"> {recapData?.howMuchSpentThanLastQuarter.toLocaleString()}원 더</span> 썼어요!</>
-                     : <><span className="text-blue-600"> {((-1)*(recapData?.howMuchSpentThanLastQuarter)).toLocaleString()}원 덜</span> 썼어요!</>)
-                 : '데이터가 없습니다.'}
-          </span>
+          <span className='text-2xl text-wooahMain'>{recapData?.howMuchSpentThanLastQuarter.toLocaleString()}원</span> 더 썼어요!
         </div>
         <FadeInCard className='p-8 flex flex-col gap-5'>
           <div className='flex justify-between'>
@@ -209,24 +203,13 @@ export default function RecapContent({ year, quarter }: Props) {
             <div className='text-2xl text-wooahMain'>{recapData?.thisQuarterIncome.toLocaleString()}원</div>
 
           </div>
-          <div className='flex justify-between border-t pt-5'>
-            <div>합계</div>
-            <div className='text-2xl'>
-              {recapData?.thisQuarterExpense != undefined && recapData?.thisQuarterIncome != undefined
-              ? (recapData?.thisQuarterExpense > recapData?.thisQuarterIncome ?
-                  <><span className="text-wooahDeepRed">- {(recapData?.thisQuarterExpense - recapData?.thisQuarterIncome).toLocaleString()}원</span></>
-                  : <><span className="text-wooahDeepBlue">+ {(recapData?.thisQuarterIncome - recapData?.thisQuarterExpense).toLocaleString()}원</span></>)
-              : '데이터가 없습니다.'}
-            </div>
-
-          </div>
         </FadeInCard>
       </div>
 
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
           소비가 가장 많았던 달은
-          <br/>
+          <br />
           <span className='text-2xl text-wooahMain'>{recapData?.highestMonth}월</span> 입니다!
         </div>
         <FadeInCard className='py-10 px-1 flex justify-center items-center'>
@@ -237,24 +220,18 @@ export default function RecapContent({ year, quarter }: Props) {
 
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
-          {recapData?.highestPlanName !== undefined
-              ? (recapData?.highestPlanName == '이번 분기, 여행한 기록이 없습니다.' ?
-                  '해당 분기에 여행한 기록이 없어요.' : <>가장 많이 지출한 모임은 <br /><span
-                      className="text-2xl text-wooahMain">{recapData?.highestPlanName}</span>입니다.</>)
-              : '데이터가 없습니다.'}
+          가장 많이 지출한 모임은
+          <br />
+          <span className='text-2xl text-wooahMain'>{recapData?.highestPlanName}</span>이에요.
         </div>
         <FadeInCard className='p-8 flex flex-col gap-8'>
           <div className='flex justify-center'>
-            {/* <Image src={ImgParty} width={280} alt='모임사진' /> */}
             <Image src={recapData?.imageUrl || ImgParty} width={280} height={280} style={{width:280}} alt='모임사진' />
-
           </div>
           <div>
-            {recapData?.highestPlanName !== undefined
-                ? (recapData?.highestPlanName == '이번 분기, 여행한 기록이 없습니다.' ?
-                    '' : <>이 모임에서 지출한 금액은 <br /><span className="text-2xl text-wooahMain">
-                      {recapData?.highestPlanExpense.toLocaleString()}원</span>이에요.</>)
-                : '데이터가 없습니다.'}
+            이 모임에서 지출한 금액은
+            <br />
+            <span className='text-2xl text-wooahMain'>{recapData?.highestPlanExpense.toLocaleString()}원</span>이에요.
           </div>
         </FadeInCard>
       </div>
