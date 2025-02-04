@@ -34,11 +34,10 @@ export default async function Home({
   return (
     <main>
       <div className="h-full flex flex-col">
-        <Header title="지난 모임 추억" link="/home" />
+        <Header title="지난 모임 추억" link={`/home?id=${communityId}`} />
         <div className="flex-1 overflow-y-auto p-5">
           <div className="grid grid-rows-1 gap-3">
-            {/* {plans && plans === undefined ? PlansView : <div>데이터가 존재하지 않습니다.</div>} */}
-            {plans && plans === undefined ? PlansView : <MemoryNone />}
+            {plans && plans.length>0? PlansView : <MemoryNone />}
           </div>
         </div>
       </div>
