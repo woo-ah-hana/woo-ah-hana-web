@@ -9,6 +9,8 @@ import {
 } from "@/app/ui/atom/category/category";
 import IconPlan from "@/app/assets/img/icon-plan.png";
 import IconManagetment from "@/app/assets/img/icon-management.png";
+import Image from "next/image";
+import IconPlace from "@/app/assets/img/icon-place.png";
 export interface PlanDetailProps {
   id: string;
   title: string;
@@ -47,8 +49,8 @@ export function PlanDetail({
           </div>
         </CardContent>
         <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
-          <img
-            src={IconPlan.src}
+          <Image
+            src={IconPlan}
             alt=""
             className="bg-wooahPurple rounded-full"
             width={40}
@@ -64,8 +66,8 @@ export function PlanDetail({
           <DateDetailDilog id={id} />
         </CardContent>
         <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
-          <img
-            src={IconManagetment.src}
+          <Image
+            src={IconManagetment}
             alt=""
             className="bg-wooahBlue rounded-full"
             width={40}
@@ -84,10 +86,10 @@ export function PlanDetail({
           />
         </CardContent>
         <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
-          <img
-            src={IconManagetment.src}
+          <Image
+            src={IconPlace}
             alt=""
-            className="bg-wooahBlue rounded-full"
+            className="bg-wooahRed rounded-full"
             width={40}
             height={40}
           />

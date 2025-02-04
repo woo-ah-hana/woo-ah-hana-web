@@ -8,6 +8,7 @@ import { message } from "antd";
 import { PlanDialog } from "@/app/ui/molecule/planDialog/planDialog";
 import IconClosing from "@/app/assets/img/icon-closing.png";
 import { BsPlusLg } from "react-icons/bs";
+import Image from "next/image";
 
 interface MemberDetailDilogProps {
   id: string;
@@ -100,7 +101,12 @@ export function MemberDetailDilog({
         <div className="grid grid-cols1 gap-7 p-3">
           <div>
             <div className="flex flex-row">
-              <img src={IconClosing.src} className="w-8 h-8" />
+              <Image
+                src={IconClosing}
+                width={30}
+                height={30}
+                alt="Robot Icon"
+              />
               <div className="text-start font-semibold mb-2 mt-2 ml-1">
                 현재 참여하는 사람들
               </div>
