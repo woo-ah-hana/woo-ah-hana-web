@@ -21,8 +21,11 @@ type SignUpRequestBody = z.infer<typeof SignUpFormSchema>
 
 export async function signup(prevState: FormState, formData: FormData):Promise<FormState> {
   
-  console.log(formData.get("token") as string);
-
+  console.log('fcm token', formData.get("token") as string);
+  console.log('username', formData.get("username") as string);
+  console.log('accnum', formData.get("accontNumber") as string);
+  console.log('bank code',formData.get("bankName") as string);
+  
   const validatedFields = SignUpFormSchema.safeParse({
     username: formData.get("username") as string,
     password: formData.get("password") as string,
