@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { generateFCMToken } from "@/app/business/notification/fcm.service";
 import TextInput from "../../atom/text-input/text-input";
 import Dropdown from "../../atom/drop-down/drop-down";
-import { BankName, banks, convertBankNameToCode } from "@/app/utils/convert";
+import { BankCode, BankName, banks, convertBankNameToCode } from "@/app/utils/convert";
 import AchromaticButton from "../../atom/button/achromatic-button";
 import { sendSMSCode, validateSMSCode } from "@/app/business/auth/sms.service";
 import { sendCode } from "@/app/business/account/account.service";
@@ -16,7 +16,7 @@ import { validateAccountCode } from "@/app/business/auth/account-auth.service";
 export default function SignupForm(){
   const router = useRouter();
   const [token, setToken] = useState<string>("");
-  const [bank, setBank] = useState<BankName>("하나은행");
+  const [bank, setBank] = useState<string>("하나은행");
   const accountNumberRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
   const smsCodeRef = useRef<HTMLInputElement>(null);
@@ -96,7 +96,7 @@ export default function SignupForm(){
           options={banks} 
           defaultOption={"은행 선택"} 
           onSelect={(selectedBank) => {
-            setBank(selectedBank as BankName);
+            setBank(selectedBank);
           }}
         />
         <div className="flex flex-row gap-3">
@@ -106,7 +106,7 @@ export default function SignupForm(){
           variant={'outline'} 
           onClick={async()=>{
             await handleAccountNumberValidation(
-              convertBankNameToCode(bank) as string, 
+              convertBankNameToCode(bank as BankName) as BankCode as string, 
               accountNumberRef.current?.value as string
             )
           }}>
@@ -147,7 +147,7 @@ export default function SignupForm(){
           <input value={username} type="hidden" id="username" name="username"/>
           <Form.TextInput id="name" label="이름" placeholder=""/>
           <Form.PasswordInput id="password" label="비밀번호" placeholder=""/>
-          <input value={convertBankNameToCode(bank) as string} type="hidden" id="bankName" name="bankName"/>
+          <input value={bank} type="hidden" id="bankName" name="bankName"/>
           <input value={accountNumber} type="hidden" id="accountNumber" name="accountNumber"/>
           <input value={token} type="hidden" id="token" name="token"/>
           <div>
