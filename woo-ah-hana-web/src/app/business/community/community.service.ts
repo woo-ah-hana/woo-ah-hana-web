@@ -66,6 +66,7 @@ export interface getRecapResponseDTO{
   monthlyExpenses: number[];
   highestPlanName: string;
   highestPlanExpense: number;
+  imageUrl: string;
 }
 export interface RegisterCommunityResponseDTO{
   memberName: string;

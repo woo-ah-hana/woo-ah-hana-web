@@ -226,7 +226,9 @@ export default function RecapContent({ year, quarter }: Props) {
         </div>
         <FadeInCard className='p-8 flex flex-col gap-8'>
           <div className='flex justify-center'>
-            <Image src={ImgParty} width={280} alt='모임사진' />
+            {/* <Image src={ImgParty} width={280} alt='모임사진' /> */}
+            <Image src={recapData?.imageUrl || ImgParty} width={280} height={280} style={{width:280}} alt='모임사진' />
+
           </div>
           <div>
             이 모임에서 지출한 금액은
