@@ -55,7 +55,7 @@ export default function CommunityRegisterForm() {
 
   return (
     <div className='h-full flex flex-col'>
-      <Header title='모임통장 추가하기' link='/community-register' />
+      <Header title='모임통장 추가하기' link='/home' />
       <div className='h-full flex flex-col justify-between p-10'>
         <div className=' flex flex-col text-[19px] gap-20'>
           <div className='flex flex-col gap-5'>

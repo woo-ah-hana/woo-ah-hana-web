@@ -22,7 +22,7 @@ export default function AccountLog() {
 
   return (
       <>
-      <Header title='모임통장 거래내역' link='/home' />
+      <Header title='모임통장 거래내역' link={`/home?id=${community.id}`} />
       <div className="p-5 flex flex-col gap-5">
 
         <Bankbook

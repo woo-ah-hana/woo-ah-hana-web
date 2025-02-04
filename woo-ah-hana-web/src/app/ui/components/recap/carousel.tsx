@@ -4,14 +4,14 @@ import React, { Suspense, useState } from 'react';
 import RecapContent from './content';
 
 export default function RecapCarousel() {
-  const [currentPeriod, setCurrentPeriod] = useState({
-    year: 2025,
-    quarter: 1,
-  });
-
   const now = new Date();
   const currentYear = now.getFullYear();
   const currentQuarter = Math.floor(now.getMonth() / 3) + 1;
+
+  const [currentPeriod, setCurrentPeriod] = useState({
+    year: currentYear,
+    quarter: currentQuarter,
+  });
 
   const handleLeftClick = () => {
     setCurrentPeriod((prev) => {
