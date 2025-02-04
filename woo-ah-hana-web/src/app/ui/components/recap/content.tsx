@@ -237,22 +237,18 @@ export default function RecapContent({ year, quarter }: Props) {
 
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
-          {recapData?.highestPlanName !== undefined
-              ? (recapData?.highestPlanName == '이번 분기, 여행한 기록이 없습니다.' ?
-                  '해당 분기에 여행한 기록이 없어요.' : <>가장 많이 지출한 모임은 <br /><span
-                      className="text-2xl text-wooahMain">{recapData?.highestPlanName}</span>입니다.</>)
-              : '데이터가 없습니다.'}
+          {recapData?.highestPlanName == undefined
+          ? '해당 분기에 여행한 기록이 없어요.' : <>가장 많이 지출한 모임은 <br /><span
+                  className="text-2xl text-wooahMain">{recapData?.highestPlanName}</span>입니다.</>}
         </div>
         <FadeInCard className='p-8 flex flex-col gap-8'>
           <div className='flex justify-center'>
             <Image src={ImgParty} width={280} alt='모임사진' />
           </div>
           <div>
-            {recapData?.highestPlanName !== undefined
-                ? (recapData?.highestPlanName == '이번 분기, 여행한 기록이 없습니다.' ?
-                    '' : <>이 모임에서 지출한 금액은 <br /><span className="text-2xl text-wooahMain">
-                      {recapData?.highestPlanExpense.toLocaleString()}원</span>이에요.</>)
-                : '데이터가 없습니다.'}
+            {recapData?.highestPlanName == undefined
+                ? '' : <>이 모임에서 지출한 금액은 <br /><span className="text-2xl text-wooahMain">
+                      {recapData?.highestPlanExpense.toLocaleString()}원</span>이에요.</>}
           </div>
         </FadeInCard>
       </div>
