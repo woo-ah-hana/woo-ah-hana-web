@@ -116,7 +116,7 @@ export function LocationsDetailDilog({
                   className="h-10"
                 />
                 <Form.SubmitButton
-                  className=" bg-white text-wooahMain border border-wooahMain shadow-none h-10 rounded-3xl"
+                  className=" focus:bg-white bg-white text-wooahMain border border-wooahMain shadow-none h-10 rounded-3xl"
                   label="추가"
                 />
               </div>
