@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { MdKeyboardVoice } from "react-icons/md";
 import Robot from "@/app/assets/img/icon-robot.png";
 import Image from "next/image";
 
