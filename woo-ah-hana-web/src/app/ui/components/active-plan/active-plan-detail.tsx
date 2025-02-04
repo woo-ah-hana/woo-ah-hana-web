@@ -4,8 +4,7 @@ import { IoTimeOutline, IoLocationOutline } from "react-icons/io5";
 import { MdOutlineDescription } from "react-icons/md";
 import { AiOutlineGlobal } from "react-icons/ai";
 
-export function ActivePlanDetail({date, schedule, time, description, address, link, mapx, mapy}:ActivePlan){
-  console.log(date, mapx, mapy);
+export function ActivePlanDetail({schedule, time, description, address, link}:ActivePlan){
   return(
     <main>
       <Card>

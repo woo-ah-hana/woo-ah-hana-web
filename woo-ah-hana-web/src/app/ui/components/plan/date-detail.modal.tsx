@@ -2,7 +2,6 @@
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import {
   Dialog,
-  DialogContent,
   DialogTrigger,
 } from "@/app/ui/molecule/dialog/dialog";
 import Form from "../../molecule/form/form-index";

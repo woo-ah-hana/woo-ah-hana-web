@@ -9,7 +9,6 @@ import { useState } from 'react';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import Link from 'next/link';
 import TitleDisplay from '@/app/ui/components/plan/set-title-display';
-import Header from '@/app/ui/components/header';
 
 export default function SetLocation() {
   const { plan, updatePlan } = usePlanContext();
@@ -125,6 +124,5 @@ export default function SetLocation() {
           </AchromaticButton>
         </Link>
       </div>
-    </div>
   );
 }

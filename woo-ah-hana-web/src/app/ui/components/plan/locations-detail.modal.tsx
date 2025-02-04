@@ -2,7 +2,6 @@
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import {
   Dialog,
-  DialogContent,
   DialogTrigger,
 } from "@/app/ui/molecule/dialog/dialog";
 import { useState } from "react";
@@ -73,9 +72,8 @@ export function LocationsDetailDilog({
           <div className="flex flex-wrap gap-2">
             {currentLocations.map((location, index) => {
               return (
-                <div>
+                <div key={index}>
                   <div
-                    key={index}
                     className="bg-blue-50 text-gray-800 px-4 rounded-full flex items-center"
                   >
                     <span>{location}</span>
