@@ -10,9 +10,10 @@ interface AccountManagementProps{
   accountBalance: number;
   fee: number;
   feePeriod: number;
+  setAutoDeposit: boolean;
 }
 
-export function AccountManagementMain({bankName, accountNumber, accountBalance, fee, feePeriod}:AccountManagementProps){
+export function AccountManagementMain({bankName, accountNumber, accountBalance, fee, feePeriod, setAutoDeposit}:AccountManagementProps){
   return (
     <main>
       <Bankbook
@@ -23,7 +24,7 @@ export function AccountManagementMain({bankName, accountNumber, accountBalance, 
         bdcolor={'wooahBrightPurple'}
         footer={
           <div className="w-[100%] flex justify-between">
-            <AutoTransferDialog accountNumber={accountNumber} fee={fee} feePeriod={feePeriod}/>
+            <AutoTransferDialog accountNumber={accountNumber} fee={fee} feePeriod={feePeriod} hasAutoDeposit={setAutoDeposit}/>
             <ChangeAccountDialog accountNumber={accountNumber}/>
           </div>
           }

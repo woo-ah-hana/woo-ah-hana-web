@@ -19,6 +19,14 @@ export function convertBankNameToCode(name: BankName): BankCode | undefined{
   }
 }
 
+export function convertCodeToBankName(code: BankCode): BankName | undefined{
+  const codeMap = new Map<BankCode, BankName>();
+  bankMap.forEach((code, name) => {
+    codeMap.set(code, name);
+  });
+  return codeMap.get(code);
+}
+
 export type BankCode =  "000" | "001" | "002" | "003" | "004" | "005" | "006" | "007" | "008" | "009" | "010" | "011" | "012" | "013"
 export type BankName = 
   | "하나은행"

@@ -2,16 +2,17 @@
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import { Dialog, DialogContent, DialogTrigger } from "@/app/ui/molecule/dialog/dialog";
 import {message} from "antd";
-import { setAutoDeposit } from "@/app/business/account/account.service";
+import { setAutoDeposit,deleteAutoDeposit } from "@/app/business/account/account.service";
 import useCommunityStore from "@/app/store/community-store";
 
 interface AutoTransferDialogProps{
   accountNumber: string,
   fee: number,
-  feePeriod: number
+  feePeriod: number,
+  hasAutoDeposit: boolean,
 }
 
-export function AutoTransferDialog({accountNumber, fee, feePeriod}: AutoTransferDialogProps){
+export function AutoTransferDialog({accountNumber, fee, feePeriod, hasAutoDeposit}: AutoTransferDialogProps){
   const [messageApi, contextHolder] = message.useMessage();
   const community = useCommunityStore((state)=>{return state.community});
   
@@ -31,22 +32,51 @@ export function AutoTransferDialog({accountNumber, fee, feePeriod}: AutoTransfer
             <div>{`${fee}원씩 내요!`}</div>
           </div>
 
-          <AchromaticButton onClick={async()=>{
-            if(community.id !=='0'){
-              await setAutoDeposit(community.id, fee as unknown as string, feePeriod)
-              messageApi.open({
-                type: 'success',
-                content: '자동 이체 설정에 성공했습니다!',
-                duration: 1,
-                className: 'font-bold'
-              });
-              setTimeout(() => window.location.reload(), 1000);
-            }
-          }}>
-            설정하기
-          </AchromaticButton>
+          {hasAutoDeposit ? (
+            <div className="flex flex-col items-center gap-3 p-3 rounded-lg">
+              <div className="text-red-600 font-bold text-center">
+                이미 자동이체가 설정되어 있습니다. <br />
+                삭제하시겠습니까?
+              </div>
+              <AchromaticButton
+                variant="destructive"
+                className="w-full"
+                onClick={async () => {
+                  if (community.id !== "0") {
+                    await deleteAutoDeposit(community.id);
+                    messageApi.open({
+                      type: "success",
+                      content: "자동 이체가 삭제되었습니다!",
+                      duration: 1,
+                      className: "font-bold"
+                    });
+                    setTimeout(() => window.location.reload(), 1000);
+                  }
+                }}
+              >
+                자동이체 삭제하기
+              </AchromaticButton>
+            </div>
+          ) : (
+            <AchromaticButton
+              onClick={async () => {
+                if (community.id !== "0") {
+                  await setAutoDeposit(community.id, fee as unknown as string, feePeriod);
+                  messageApi.open({
+                    type: "success",
+                    content: "자동 이체 설정에 성공했습니다!",
+                    duration: 1,
+                    className: "font-bold"
+                  });
+                  setTimeout(() => window.location.reload(), 1000);
+                }
+              }}
+            >
+              설정하기
+            </AchromaticButton>
+          )}
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
