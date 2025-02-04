@@ -25,7 +25,7 @@ export function CategoryMenu({
   onCategorySelect,
 }: CategoryMenuProps) {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-2">
       {categories.map((category) => (
         <Card
           key={category.key}
@@ -41,7 +41,7 @@ export function CategoryMenu({
             boxSizing: "border-box",
           }}
         >
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-1">
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="flex flex-col items-center justify-center gap-2 h-full">
               <div className="w-[90%] flex items-center justify-center aspect-square">
                 <Image
@@ -56,7 +56,7 @@ export function CategoryMenu({
                 <div
                   className={`${
                     categoryTextColors[category.key]
-                  } font-bold md:text-base lg:text-lg`}
+                  } font-normal md:text-base lg:text-lg`}
                 >
                   {category.label}
                 </div>
