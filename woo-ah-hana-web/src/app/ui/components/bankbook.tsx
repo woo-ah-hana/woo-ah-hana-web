@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function Bankbook({ title, accountNumber, balance, footer }: Props) {
-  const formattedBalance = balance.toLocaleString();
+  const formattedBalance =(typeof balance === 'number')? balance.toLocaleString():balance;
 
   return (
     <Card

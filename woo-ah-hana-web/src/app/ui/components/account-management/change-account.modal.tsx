@@ -15,6 +15,8 @@ import {
 import { useEffect, useState } from 'react';
 import IconTimer from '../../../assets/img/icon-timer-red.svg';
 import Image from 'next/image';
+import Dropdown from "@/app/ui/atom/drop-down/drop-down";
+import { BankName, banks, convertBankNameToCode } from "@/app/utils/convert"
 
 interface ChangeAccountDialogProps {
   accountNumber: string;
@@ -25,9 +27,10 @@ export function ChangeAccountDialog({
 }: ChangeAccountDialogProps) {
   const [messageApi, contextHolder] = message.useMessage();
   const [newAccountNumber, setNewAccountNumber] = useState<string>('');
-  const [newBank, setNewBank] = useState<string>('');
+  // const [newBank, setNewBank] = useState<string>('');
   //   const community = useCommunityStore((state)=>{return state.community});
   const [countdown, setCountdown] = useState<number | null>(null);
+  const [newBank, setNewBank] = useState<BankName>();
 
   useEffect(() => {
     if (countdown === null || countdown <= 0) return;
@@ -42,35 +45,27 @@ export function ChangeAccountDialog({
     formData: FormData
   ): Promise<FormState> {
     setNewAccountNumber(formData.get('account-number') as string);
-    setNewBank(formData.get('bank') as string);
-    await sendCode(
-      formData.get('bank') as string,
-      formData.get('account-number') as string
-    );
+
+    const bankTranId = convertBankNameToCode(newBank as BankName);
+    setNewBank(bankTranId as BankName);
+    const result = await sendCode(bankTranId as string, formData.get('account-number') as string);
     setCountdown(300); // 5분(300초) 타이머 시작
     return {
-      isSuccess: true,
-      isFailure: false,
+      isSuccess: result.isSuccess,
+      isFailure: result.isFailure,
       validationError: {},
-      message: '자동이체 성공',
-    };
+      message: result.data ? '1원을 입금하였습니다. 인증 코드를 입력하세요' : '잘못된 계좌입니다. 다시 입력해주세요.'
+    }
   }
 
-  async function changeAccountAction(
-    prevState: FormState,
-    formData: FormData
-  ): Promise<FormState> {
-    await changeAccount(
-      newAccountNumber,
-      newBank,
-      formData.get('code') as string
-    );
+  async function changeAccountAction(prevState: FormState, formData: FormData): Promise<FormState>{
+    const result = await changeAccount(newAccountNumber, newBank as string, '우아하나' + formData.get('code') as string)
     return {
-      isSuccess: true,
-      isFailure: false,
+      isSuccess: result.isSuccess,
+      isFailure: result.isFailure,
       validationError: {},
-      message: '자동이체 성공',
-    };
+      message: result.data ? '계좌 변경이 완료되었습니다.' : '잘못된 코드입니다. 다시 입력해주세요.'
+    }
   }
 
   return (
@@ -97,36 +92,32 @@ export function ChangeAccountDialog({
               변경할 계좌 정보
             </div>
           </div>
-          <Form
-            id={'send-code'}
-            action={authenticateNewAccount}
-            onSuccess={() => {
-              messageApi.open({
-                type: 'success',
-                content: '계좌에 1원을 보냈어요!',
-                duration: 1,
-                className: 'font-bold',
-              });
+          <label className="block text-sm font-medium text-gray-700">은행 선택</label>
+          <Dropdown
+            options={banks} 
+            defaultOption={"은행 선택"} 
+            onSelect={(selectedBank) => {
+              setNewBank(selectedBank as BankName);
             }}
-            failMessageControl={'alert'}
-          >
-            <div className='flex flex-col gap-3'>
-              <Form.TextInput
-                label='계좌번호'
-                placeholder=''
-                id='account-number'
-              />
-              <div className='flex flex-row gap-3'>
-                <Form.TextInput label='은행' placeholder='' id='bank' />
-                <div className='mt-7'>
-                  <Form.SubmitButton
-                    className='h-12'
-                    label='등록'
-                    position='center'
-                  />
+          />
+          <Form 
+          id={"send-code"} 
+          action={authenticateNewAccount} 
+          onSuccess={()=>{
+            messageApi.open({
+              type: 'success',
+              content: '계좌에 1원을 보냈어요!',
+              duration: 1,
+              className: 'font-bold'
+            });
+          }}
+          failMessageControl={"alert"}>
+              <div className="flex flex-row gap-3">
+              <Form.TextInput label="계좌번호" placeholder="" id="account-number"/>
+                <div className="mt-7">
+                    <Form.SubmitButton className='h-12' label="인증하기" position="center"/>
                 </div>
               </div>
-            </div>
           </Form>
           <div>
             <hr></hr>
