@@ -46,6 +46,8 @@ export default async function Home({searchParams}:{searchParams: { [key: string]
             title={communityAccount.name}
             accountNumber={communityAccount.accountNumber}
             balance={communityAccount.balance as unknown as number}
+            bdcolor={'wooahMain'}
+            bgcolor={'wooahMain'}
             footer={<div className='w-full text-sm text-right'>거래내역 조회 {`>`} </div>}
           />
         </Link>
