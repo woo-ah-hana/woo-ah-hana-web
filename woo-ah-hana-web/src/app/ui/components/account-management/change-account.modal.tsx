@@ -29,6 +29,14 @@ export function ChangeAccountDialog({
   const [newAccountNumber, setNewAccountNumber] = useState<string>('');
   const [countdown, setCountdown] = useState<number | null>(null);
   const [newBank, setNewBank] = useState<BankName>();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  // 타이머 설정 및 초기화
+  useEffect(() => {
+    if (!isOpen) {
+      setCountdown(null); // 모달 닫힐 때 타이머 초기화
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (countdown === null || countdown <= 0) return;
@@ -81,7 +89,7 @@ export function ChangeAccountDialog({
   }
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={(open) => setIsOpen(open)}>
       {contextHolder}
       <DialogTrigger asChild>
         <AchromaticButton variant={'secondary'} className='w-[45%]'>
