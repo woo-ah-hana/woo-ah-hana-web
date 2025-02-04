@@ -27,8 +27,6 @@ export function ChangeAccountDialog({
 }: ChangeAccountDialogProps) {
   const [messageApi, contextHolder] = message.useMessage();
   const [newAccountNumber, setNewAccountNumber] = useState<string>('');
-  // const [newBank, setNewBank] = useState<string>('');
-  //   const community = useCommunityStore((state)=>{return state.community});
   const [countdown, setCountdown] = useState<number | null>(null);
   const [newBank, setNewBank] = useState<BankName>();
 

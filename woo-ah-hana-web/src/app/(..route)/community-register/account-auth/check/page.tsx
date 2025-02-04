@@ -7,6 +7,8 @@ import Header from '@/app/ui/components/header';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {message} from "antd";
+import Image from 'next/image';
+import IconTimer from '../../../../assets/img/icon-timer-red.svg';
 
 export default function AccountAuthCheck() {
   const router = useRouter();
@@ -19,6 +21,7 @@ export default function AccountAuthCheck() {
     validationCode: '',
   });
   const [isFormValid, setIsFormValid] = useState(false);
+  const [countdown, setCountdown] = useState<number | null>(null);
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
@@ -30,6 +33,7 @@ export default function AccountAuthCheck() {
       validationCode: '',
     };
     setFormData(params);
+    setCountdown(300); // 5분(300초) 타이머 시작
   }, [searchParams]);
 
   useEffect(() => {
@@ -43,6 +47,14 @@ export default function AccountAuthCheck() {
       validationCode: value,
     }));
   };
+
+  useEffect(() => {
+    if (countdown === null || countdown <= 0) return;
+    const timer = setInterval(() => {
+      setCountdown((prev) => (prev !== null && prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [countdown]);
 
   const handleSubmit = async () => {
     const requestBody = {
@@ -91,12 +103,29 @@ export default function AccountAuthCheck() {
             입금내역을 확인하고 <br /> &apos;우아하나&apos; 뒤 3자리를
             입력하세요
           </div>
+          <div className='flex flex-col gap-1'>
           <TextInput
             variant={'secondary'}
             sizeVariants={'default'}
             placeholder='3자리 숫자'
             onValueChange={handleInputChange}
           />
+          <div className='self-end'>
+                {countdown !== null && countdown > 0 && (
+                  <div className='flex flex-row justify-center items-center gap-0 text-[17px] text-start text-[#ec4646] mt-1 mr-1'>
+                    {`${Math.floor(countdown / 60)}:${String(
+                      countdown % 60
+                    ).padStart(2, '0')}`}
+                    <Image
+                      src={IconTimer}
+                      alt='timer'
+                      style={{ width: '19px' }}
+                    />
+                  </div>
+                )}
+              </div>
+          </div>
+          
         </div>
         <AchromaticButton
           className='h-12 text-xl w-full'
