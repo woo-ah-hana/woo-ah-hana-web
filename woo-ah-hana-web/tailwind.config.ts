@@ -55,6 +55,7 @@ export default {
         wooahDeepYellow: "#7D8B2F",
         wooahDeepPurple: "#AC38DD",
         wooahDeepMint: "#1892B0",
+        wooahBrightPurple: "#6976ec",
       },
       borderRadius: {
         "tremor-small": "0.375rem",

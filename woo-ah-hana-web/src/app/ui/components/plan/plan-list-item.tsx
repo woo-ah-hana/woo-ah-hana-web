@@ -29,10 +29,10 @@ export function PlanListItem({
   return (
     <main>
       <Link href={`plan/detail?community=${communityId}&id=${planId}`}>
-        <Card className={`${bgColor} rounded-full border-none`}>
+        <Card className={`${bgColor} rounded-full border-none p-1`}>
           <div className="flex justify-between">
             <div className="flex">
-              <div className="flex flex-row justify-center items-center">
+              <div className="flex flex-row justify-center items-center ml-2 mr-1">
                 <Image
                   src={iconSrc}
                   alt={category}
@@ -44,12 +44,12 @@ export function PlanListItem({
                 />
               </div>
 
-              <div className="flex flex-col justify-center items-start py-2">
-                <div className="text-lg font-normal">
-                  <strong>{title}</strong>
+              <div className="flex flex-col justify-center items-start py-2 gap-1">
+                <div className="text-[20px] font-semibold">
+                  {title}
                 </div>
 
-                <div className="flex flex-col text-xs">
+                <div className="flex flex-col text-base">
                   <div className="">
                     {startDate.substring(5, 10) == endDate.substring(5, 10)
                       ? startDate.substring(5, 10)
@@ -66,14 +66,14 @@ export function PlanListItem({
                       `}
                   </div>
                 </div>
-                <div className="text-slate-600 text-xs font-light">
+                <div className="text-slate-600 text-base font-light">
                   {locations.map((location, index) => (
                     <span key={index}>{`#${location}  `}</span>
                   ))}
                 </div>
               </div>
             </div>
-            <div className="flex justify-center items-start py-7 px-2">
+            <div className="flex justify-center items-center py-7 px-2">
               <Image src={IconDelete} style={{ width: 20 }} alt={"delete"} />
             </div>
           </div>

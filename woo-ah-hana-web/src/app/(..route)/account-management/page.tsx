@@ -1,5 +1,5 @@
-import ToggleButton from '@/app/ui/atom/toggle/toggle-button';
-import Header from '@/app/ui/components/header';
+import ToggleButton from "@/app/ui/atom/toggle/toggle-button";
+import Header from "@/app/ui/components/header";
 import {
   getCommunity,
   getCommunityMembers,
@@ -38,13 +38,13 @@ export default async function AccountManagement({
           />
         </div>
 
-        <div className='flex flex-col gap-5'>
-          <div className='flex items-center justify-between'>
+        <div className="flex flex-col gap-5">
+          <div className="flex items-center justify-between mt-2">
             <div>입출금 알림</div>
-            <ToggleButton text={''} />
+            <ToggleButton text={""} />
           </div>
         </div>
-        <hr className='bg-gray-800 my-3' />
+        <hr className="bg-gray-800" />
 
         {myInfo?.id === community?.managerId && (
           <>
@@ -52,7 +52,7 @@ export default async function AccountManagement({
               fee={community?.fee as number}
               feePeriod={community?.feePeriod as number}
             />
-            <hr className='bg-gray-800 my-3' />
+            <hr className="bg-gray-800 my-3" />
           </>
         )}
 

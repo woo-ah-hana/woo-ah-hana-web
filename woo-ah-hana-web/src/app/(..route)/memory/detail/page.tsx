@@ -10,7 +10,7 @@ export default async function Home({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const communityId =  (searchParams.community as string);
+  const communityId = searchParams.community as string;
   const planId =
     (searchParams.id as string) || "a61f6270-974b-44f3-b9f3-7a8ab9b145ff";
   const detailResponse = await getPostsByPlanId(planId);
@@ -24,7 +24,7 @@ export default async function Home({
 
   return (
     <main>
-      <Header title='지난 모임 추억' link={`/memory?id=${communityId}`} />
+      <Header title="지난 모임 추억" link={`/memory?id=${communityId}`} />
       <div className="p-5">
         {plan ? (
           <MemoryPlan
@@ -53,14 +53,14 @@ export default async function Home({
             />
           ))
         ) : (
-            <div className="flex flex-col h-40 justify-center items-center">
-                <span className="my-3">아직 남긴 추억이 없어요.</span>
-                <span className="my-3">첫 추억을 남겨보세요!</span>
-            </div>
+          <div className="flex flex-col h-40 justify-center items-center">
+            <span className="my-3">아직 남긴 추억이 없어요.</span>
+            <span className="my-3">첫 추억을 남겨보세요!</span>
+          </div>
         )}
       </div>
-        <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
-        <MemoryPostModal planId={planId}/>
+      <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
+        <MemoryPostModal planId={planId} />
       </div>
     </main>
   );

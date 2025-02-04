@@ -36,7 +36,7 @@ export default async function Home({
         <Header title="모임 일정" link={`/home?id=${searchParams.id}`} />
         <div className="flex-1 overflow-y-auto p-5">
           <div className="grid grid-rows-1 gap-3">
-            {plans && plans === undefined ? PlansView : <PlanNone />}
+            {plans && plans.length>0? PlansView : <PlanNone />}
           </div>
         </div>
         <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
