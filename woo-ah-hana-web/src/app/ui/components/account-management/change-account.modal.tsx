@@ -4,8 +4,10 @@ import { Dialog, DialogContent, DialogTrigger } from "@/app/ui/molecule/dialog/d
 import {message} from "antd";
 import { FormState } from "../../molecule/form/form-root";
 import Form from "../../molecule/form/form-index";
+import Dropdown from "@/app/ui/atom/drop-down/drop-down";
 import { changeAccount, sendCode } from "@/app/business/account/account.service";
 import { useState } from "react";
+import { BankName, banks, convertBankNameToCode } from "@/app/utils/convert"
 
 interface ChangeAccountDialogProps{
   accountNumber: string,
@@ -14,28 +16,30 @@ interface ChangeAccountDialogProps{
 export function ChangeAccountDialog({accountNumber}: ChangeAccountDialogProps){
   const [messageApi, contextHolder] = message.useMessage();
   const [newAccountNumber, setNewAccountNumber] = useState<string>("");
-  const [newBank, setNewBank] = useState<string>("");
+  const [newBank, setNewBank] = useState<BankName>();
+  
 //   const community = useCommunityStore((state)=>{return state.community});
 
   async function authenticateNewAccount(prevState: FormState, formData: FormData):Promise<FormState>{
     setNewAccountNumber(formData.get('account-number') as string);
-    setNewBank(formData.get('bank') as string)
-    await sendCode(formData.get('bank') as string, formData.get('account-number') as string);
+    const bankTranId = convertBankNameToCode(newBank as BankName);
+    setNewBank(bankTranId as BankName);
+    const result = await sendCode(bankTranId as string, formData.get('account-number') as string);
     return {
-      isSuccess: true,
-      isFailure: false,
+      isSuccess: result.isSuccess,
+      isFailure: result.isFailure,
       validationError: {},
-      message: '자동이체 성공'
+      message: result.data ? '1원을 입금하였습니다. 인증 코드를 입력하세요' : '잘못된 계좌입니다. 다시 입력해주세요.'
     }
   }
 
   async function changeAccountAction(prevState: FormState, formData: FormData): Promise<FormState>{
-    await changeAccount(newAccountNumber, newBank, formData.get('code') as string)
+    const result = await changeAccount(newAccountNumber, newBank as string, '우아하나' + formData.get('code') as string)
     return {
-      isSuccess: true,
-      isFailure: false,
+      isSuccess: result.isSuccess,
+      isFailure: result.isFailure,
       validationError: {},
-      message: '자동이체 성공'
+      message: result.data ? '계좌 변경이 완료되었습니다.' : '잘못된 코드입니다. 다시 입력해주세요.'
     }
   }
   
@@ -57,6 +61,14 @@ export function ChangeAccountDialog({accountNumber}: ChangeAccountDialogProps){
             <hr></hr>
             <div className="mb-1 mt-3 text-center text-base font-medium">변경할 계좌 정보 입력</div>
           </div>
+          <label className="block text-sm font-medium text-gray-700">은행 선택</label>
+          <Dropdown
+            options={banks} 
+            defaultOption={"은행 선택"} 
+            onSelect={(selectedBank) => {
+              setNewBank(selectedBank as BankName);
+            }}
+          />
           <Form 
           id={"send-code"} 
           action={authenticateNewAccount} 
@@ -69,15 +81,12 @@ export function ChangeAccountDialog({accountNumber}: ChangeAccountDialogProps){
             });
           }}
           failMessageControl={"alert"}>
-            <div className="flex flex-col gap-3">
-              <Form.TextInput label="계좌번호" placeholder="" id="account-number"/>
               <div className="flex flex-row gap-3">
-                <Form.TextInput label="은행" placeholder="" id="bank"/>
+              <Form.TextInput label="계좌번호" placeholder="" id="account-number"/>
                 <div className="mt-7">
-                    <Form.SubmitButton className='h-12' label="등록" position="center"/>
+                    <Form.SubmitButton className='h-12' label="인증하기" position="center"/>
                 </div>
               </div>
-            </div>
           </Form>
           <div>
             <hr></hr>
@@ -97,7 +106,7 @@ export function ChangeAccountDialog({accountNumber}: ChangeAccountDialogProps){
           }} 
           failMessageControl={"alert"}>
             <div className="flex flex-row gap-3">
-              <Form.TextInput label="인증코드 입력" placeholder="" id="code"/>
+              <Form.TextInput label="인증코드 입력" placeholder="3자리 숫자" id="code"/>
               <div className="mt-7">
                 <Form.SubmitButton className='h-12' label="변경하기" position="center"/>
               </div>
