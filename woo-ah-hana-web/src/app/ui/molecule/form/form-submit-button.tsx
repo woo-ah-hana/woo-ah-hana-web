@@ -2,7 +2,7 @@ import { VariantProps } from "class-variance-authority";
 import AchromaticButton, {
   buttonVariants,
 } from "@/app/ui/atom/button/achromatic-button";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { FormContext } from "./form.context";
 import { useFormStatus } from "react-dom";
 import clsx from "clsx";
@@ -13,6 +13,7 @@ interface FormSubmitButtonProps
   position?: "left" | "right" | "center";
   variant?: VariantProps<typeof buttonVariants>["variant"];
   size?: VariantProps<typeof buttonVariants>["size"];
+  setLoading?: (loading: boolean) => void;
 }
 
 export function FormSubmitButton({
@@ -20,10 +21,15 @@ export function FormSubmitButton({
   position = "right",
   variant = "default",
   size = "default",
+  setLoading,
   ...props
 }: FormSubmitButtonProps) {
   const { formId } = useContext(FormContext);
   const { pending } = useFormStatus();
+
+  useEffect(() => {
+    if (setLoading) setLoading(pending);
+  }, [pending, setLoading]);
 
   return (
     <div

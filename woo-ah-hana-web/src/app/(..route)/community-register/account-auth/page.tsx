@@ -4,6 +4,7 @@ import { validateAccount } from '@/app/business/community/community.service';
 import AchromaticButton from '@/app/ui/atom/button/achromatic-button';
 import TextInput from '@/app/ui/atom/text-input/text-input';
 import Header from '@/app/ui/components/header';
+import { message } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -59,11 +60,11 @@ export default function AccountRegisterForm() {
 
         router.push(`/community-register/account-auth/check?${queryParams}`);
       } else {
-        alert('계좌 인증에 실패했습니다. 다시 시도해주세요.');
+        message.error('계좌 인증에 실패했습니다. 다시 시도해주세요.');
       }
     } catch (error) {
       console.error('API 호출 중 오류:', error);
-      alert('계좌 인증 중 문제가 발생했습니다. 다시 시도해주세요.');
+      message.error('계좌 인증 중 문제가 발생했습니다. 다시 시도해주세요.');
     } 
   };
   

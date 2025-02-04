@@ -84,6 +84,5 @@ body {
 
 .ant-message {
   position: absolute;
-  bottom: 120px !important;
-  top: unset !important;
+  top: 35px !important;
 }

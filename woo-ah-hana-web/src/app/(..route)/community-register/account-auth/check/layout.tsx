@@ -7,12 +7,10 @@ export default function Layout({
     children: React.ReactNode;
   }>){
   return(
-    <main>
-      <div>
-        <Suspense>
-          {children}
-        </Suspense>
-      </div>
+    <main className="h-full">
+      <Suspense>
+        {children}
+      </Suspense>
     </main>
   )
 }

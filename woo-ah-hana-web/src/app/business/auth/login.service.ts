@@ -85,3 +85,41 @@ export async function authenticate(prevState: FormState, formData: FormData):Pro
     }
   }
 }
+
+export async function logout(): Promise<FormState> {
+  try {
+    cookies().delete("token");
+    cookies().delete("refresh-token");
+
+    const response = await fetch(`${API_PATH}/member/logout`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if(response.ok) {
+      return {
+        isSuccess: true,
+        isFailure: false,
+        validationError: {},
+        message: "로그아웃에 성공했습니다.",
+      };
+    }
+    else {
+      return {
+        isSuccess: false,
+        isFailure: true,
+        validationError: {},
+        message: '로그아웃 중 오류가 발생했습니다.',
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      isSuccess: false,
+      isFailure: true,
+      validationError: {},
+      message: '로그아웃 중 오류가 발생했습니다.',
+    };
+  }
+}
