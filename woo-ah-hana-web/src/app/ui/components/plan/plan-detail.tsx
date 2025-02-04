@@ -7,7 +7,6 @@ import {
   categoryColors,
   categoryIconBg,
 } from "@/app/ui/atom/category/category";
-import { FaRegCalendarCheck } from "react-icons/fa6";
 import IconPlan from "@/app/assets/img/icon-plan.png";
 import IconManagetment from "@/app/assets/img/icon-management.png";
 export interface PlanDetailProps {
@@ -39,68 +38,68 @@ export function PlanDetail({
   const iconBg = categoryIconBg[category];
   return (
     <main>
-      <div className={`${bgColor} `}>
-        <img src={iconBg} alt="" />
-      </div>
-      <CardContent className="gap-2 mt-2 p-3">
-        <div>
-          <div className="text-lg text-start font-bold">{title}</div>
-          <div className="text-xs text-slate-600 text-start">{`# ${category}`}</div>
-        </div>
-      </CardContent>
-      <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
-        <img
-          src={IconPlan.src}
-          alt=""
-          className="bg-wooahPurple rounded-full"
-          width={40}
-          height={40}
-        />
-        <div>
-          <div className="text-xs text-gray-500">일정</div>
-          <div className="text-sm">
-            {convertDateWithoutYear(startDate)} ~{" "}
-            {convertDateWithoutYear(endDate)}
+      <img src={iconBg} alt="" />
+      <div className="pl-2 pr-2">
+        <CardContent className="gap-2 mt-2 p-3">
+          <div>
+            <div className="text-lg text-start font-bold">{title}</div>
+            <div className="text-xs text-slate-600 text-start">{`# ${category}`}</div>
           </div>
-        </div>
-        <DateDetailDilog id={id} />
-      </CardContent>
-      <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
-        <img
-          src={IconManagetment.src}
-          alt=""
-          className="bg-wooahBlue rounded-full"
-          width={40}
-          height={40}
-        />
-        <div>
-          <div className="text-xs text-gray-500">참여 인원</div>
-          <div className="text-base">{`${memberIds.length} 명 참여`}</div>
-        </div>
-        <MemberDetailDilog
-          id={id}
-          memberIds={memberIds}
-          memberNames={memberNames}
-          communityMemberIds={communityMemberIds}
-          communityMemberNames={communityMemberNames}
-        />
-      </CardContent>
-      <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
-        <img
-          src={IconManagetment.src}
-          alt=""
-          className="bg-wooahBlue rounded-full"
-          width={40}
-          height={40}
-        />
-        <div>
-          <div className="text-xs text-gray-500">장소</div>
-          <div className="text-base">{`${locations[0]} 외 ${
-            locations.length - 1
-          }`}</div>
-        </div>
-        <LocationsDetailDilog id={id} locations={locations} />
-      </CardContent>
+        </CardContent>
+        <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
+          <img
+            src={IconPlan.src}
+            alt=""
+            className="bg-wooahPurple rounded-full"
+            width={40}
+            height={40}
+          />
+          <div>
+            <div className="text-xs text-gray-500">일정</div>
+            <div className="text-sm">
+              {convertDateWithoutYear(startDate)} ~{" "}
+              {convertDateWithoutYear(endDate)}
+            </div>
+          </div>
+          <DateDetailDilog id={id} />
+        </CardContent>
+        <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
+          <img
+            src={IconManagetment.src}
+            alt=""
+            className="bg-wooahBlue rounded-full"
+            width={40}
+            height={40}
+          />
+          <div>
+            <div className="text-xs text-gray-500">참여 인원</div>
+            <div className="text-base">{`${memberIds.length} 명 참여`}</div>
+          </div>
+          <MemberDetailDilog
+            id={id}
+            memberIds={memberIds}
+            memberNames={memberNames}
+            communityMemberIds={communityMemberIds}
+            communityMemberNames={communityMemberNames}
+          />
+        </CardContent>
+        <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
+          <img
+            src={IconManagetment.src}
+            alt=""
+            className="bg-wooahBlue rounded-full"
+            width={40}
+            height={40}
+          />
+          <div>
+            <div className="text-xs text-gray-500">장소</div>
+            <div className="text-base">{`${locations[0]} 외 ${
+              locations.length - 1
+            }`}</div>
+          </div>
+          <LocationsDetailDilog id={id} locations={locations} />
+        </CardContent>
+      </div>
     </main>
   );
 }

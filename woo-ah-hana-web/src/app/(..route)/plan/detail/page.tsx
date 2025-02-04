@@ -87,7 +87,7 @@ export default async function Home({
       </div>
       <div className="bg-white mt-2">
         <div className="text-start p-3 text-lg font-bold">AI가 세운 일정</div>
-        <div className="ml-5 mr-5">
+        <div className="ml-5 mr-5 pb-5">
           <div className="grid grid-cols-2 gap-2">{ActivePlanScheduleCard}</div>
           <div className="fixed bottom-5 right-5 mb-5 flex justify-end items-end">
             <Link href={`/ai?plan=${planId}&community=${communityId}`}>
