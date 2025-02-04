@@ -8,15 +8,13 @@ import {
 import Form from "../../molecule/form/form-index";
 import { updatePlanDate } from "@/app/business/plan/plan-update.service";
 import { FormSubmitButton } from "../../molecule/form/form-submit-button";
-import {message} from "antd";
-
+import { message } from "antd";
+import { PlanDialog } from "@/app/ui/molecule/planDialog/planDialog";
 interface DateDetailDilogProps {
   id: string;
 }
 
-export function DateDetailDilog({
-  id,
-}: DateDetailDilogProps) {
+export function DateDetailDilog({ id }: DateDetailDilogProps) {
   // TODO: FormData 활용해서 날짜 업데이트 api 요청
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -28,35 +26,61 @@ export function DateDetailDilog({
           수정
         </AchromaticButton>
       </DialogTrigger>
-      <DialogContent title="모임일정 변경">
-        <hr></hr>
-        <div className="p-5 text-center">
-          <Form id="updatedate" action={updatePlanDate} failMessageControl={"alert"}
-                onSuccess={() => {
-                  messageApi.open({type: 'success',
-                    content: '일정 변경에 성공했습니다!',
-                    duration: 1,
-                    className: 'font-bold'
-                  });
-                  setTimeout(() => window.location.reload(), 1000);
-                }}>
-            <Form.TextInput value={id} id='id' className="hidden" placeholder=""/>
+      <PlanDialog className="rounded-t-2xl">
+        <div className="pl-3 pr-3 pb-3 text-center">
+          <div className="text-start text-xl font-semibold mb-2">
+            모임 일정 변경
+          </div>
+          <Form
+            id="updatedate"
+            action={updatePlanDate}
+            failMessageControl={"alert"}
+            onSuccess={() => {
+              messageApi.open({
+                type: "success",
+                content: "일정 변경에 성공했습니다!",
+                duration: 1,
+                className: "font-bold",
+              });
+              setTimeout(() => window.location.reload(), 1000);
+            }}
+          >
+            <Form.TextInput
+              value={id}
+              id="id"
+              className="hidden"
+              placeholder=""
+            />
             <div className="grid grid-cols-1 gap-2 text-lg text-slate-500">
               <div className="grid grid-cols-[2fr_4fr]">
-                <div className="text-left p-3">시작 일:</div>
-                <input type="date" name="start-date" id="start-date" className="border-none"/>
+                <div className="text-left p-3 text-sm">시작 일:</div>
+                <input
+                  type="date"
+                  name="start-date"
+                  id="start-date"
+                  className="border-none text-sm"
+                />
               </div>
               <div className="grid grid-cols-[2fr_4fr]">
-                <div className="text-left p-3">종료 일:</div>
-                <input type="date" name="end-date" id="end-date" className="border-none"/>
+                <div className="text-left p-3 text-sm">종료 일:</div>
+                <input
+                  type="date"
+                  name="end-date"
+                  id="end-date"
+                  className="border-none text-sm"
+                />
               </div>
             </div>
             <div className="mt-7">
-              <FormSubmitButton label="수정하기" position="center"/>
+              <FormSubmitButton
+                label="저장"
+                position="center"
+                className="w-11/12 rounded-xl"
+              />
             </div>
           </Form>
         </div>
-      </DialogContent>
+      </PlanDialog>
     </Dialog>
   );
 }
