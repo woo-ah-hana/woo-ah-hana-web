@@ -11,7 +11,8 @@ import { convertDate } from "@/app/utils/convert";
 import { saveActivePlans } from "@/app/business/plan/active-plan.service";
 import { useRouter } from "next/navigation";
 import { SttModalWrapper } from "@/app/ui/components/stt/SttModalWrapper";
-
+import { Loading } from "@/app/ui/components/ai/loading";
+import Robot from "@/app/assets/img/icon-robot.png";
 interface RequestActivePlanForm {
   planId?: string;
   communityId: string;
@@ -161,6 +162,7 @@ export function RequestActivePlanForm({
           </div>
         </Form>
       </div>
+      <Loading />
       <div className="fixed bottom-5 right-5 flex justify-end rounded">
         <SttModalWrapper onResult={(text) => setSttResult(text)} />
       </div>
