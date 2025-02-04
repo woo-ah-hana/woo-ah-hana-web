@@ -1,13 +1,13 @@
-import React from 'react';
-import { Card } from '@/app/ui/molecule/card/card';
-import IconTransfer from '../../assets/img/icon-transfer.png';
-import IconPlan from '../../assets/img/icon-plan.png';
-import IconMemory from '../../assets/img/icon-memory.png';
-import IconManagement from '../../assets/img/icon-management.png';
-import IconClosing from '../../assets/img/icon-closing.png';
-import IconFeeCheck from '../../assets/img/icon-fee-check.png';
-import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
+import React from "react";
+import { Card } from "@/app/ui/molecule/card/card";
+import IconTransfer from "../../assets/img/icon-transfer.png";
+import IconPlan from "../../assets/img/icon-plan.png";
+import IconMemory from "../../assets/img/icon-memory.png";
+import IconManagement from "../../assets/img/icon-management.png";
+import IconClosing from "../../assets/img/icon-closing.png";
+import IconFeeCheck from "../../assets/img/icon-fee-check.png";
+import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 
 export interface Props {
   community: string;
@@ -30,7 +30,7 @@ export default function CardMenu({ community }: Props) {
         </>
       ),
       icon: IconTransfer,
-      link: '/deposit',
+      link: "/deposit",
     },
     {
       label: (
@@ -84,16 +84,16 @@ export default function CardMenu({ community }: Props) {
   ];
 
   return (
-    <div className='grid grid-cols-2 gap-5'>
+    <div className="grid grid-cols-2 gap-5">
       {menuItems.map((item, index) => (
         <Link href={item.link} key={index}>
-          <Card className='aspect-square flex justify-between p-4 cursor-pointer shadow hover:shadow-lg transition'>
-            <div className='flex flex-col w-full text-[20px]'>
-              <div className='h-1/2'>{item.label}</div>
-              <div className='h-1/2 flex justify-end items-end'>
+          <Card className="aspect-square flex justify-between p-4 cursor-pointer shadow-md hover:shadow-lg transition">
+            <div className="flex flex-col w-full text-[20px]">
+              <div className="h-1/2">{item.label}</div>
+              <div className="h-1/2 flex justify-end items-end">
                 <Image
                   src={item.icon}
-                  alt='입금아이콘'
+                  alt="입금아이콘"
                   style={{ width: 70, height: 70 }}
                   priority={true}
                 />
