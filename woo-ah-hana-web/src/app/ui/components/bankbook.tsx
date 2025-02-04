@@ -5,12 +5,12 @@ type Props = {
   title: string;
   accountNumber: string;
   balance: number;
-  bgcolor: string;
-  bdcolor: string;
+  bgcolor?: string;
+  bdcolor?: string;
   footer?: React.ReactNode;
 };
 
-export default function Bankbook({ title, accountNumber, balance, bgcolor, bdcolor, footer }: Props) {
+export default function Bankbook({ title, accountNumber, balance, footer }: Props) {
   const formattedBalance =(typeof balance === 'number')? balance.toLocaleString():balance;
 
   return (
@@ -18,7 +18,7 @@ export default function Bankbook({ title, accountNumber, balance, bgcolor, bdcol
       style={{
         boxShadow: "2px 5px 8px rgba(0, 0, 0, 0.4)",
       }}
-      className={`text-white bg-${bgcolor || ''} border-${bdcolor || ''}`}
+      className={`text-white bg-wooahMain border-wooahMain`}
     >
       <div className="flex justify-between">
         <CardHeader>{title}</CardHeader>
