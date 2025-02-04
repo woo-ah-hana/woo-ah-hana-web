@@ -24,39 +24,40 @@ export function AutoTransferDialog({accountNumber, fee, feePeriod, hasAutoDeposi
       </DialogTrigger>
       <DialogContent title="자동 이체 설정">
         <div className="px-5"><hr></hr></div>
-        <div className="p-5 grid grid-cols-1 gap-5">
+        <div className="p-5 grid grid-cols-1 gap-3">
           
-          <div className="flex flex-col gap-2">
-            <div>{`현재 내 계좌: ${accountNumber}`}</div>
-            <div>{`우리 모임 통장은 매월 ${feePeriod}일`}</div>
-            <div>{`${fee}원씩 내요!`}</div>
+          <div className="flex flex-col gap-5">
+            <div className='flex justify-between items-center'>
+              <div>현재 내 계좌</div>
+              <div className='text-lg'>{accountNumber}</div>
+            </div>
+            <hr/>
+            <div className="flex flex-row gap-2">
+              <div>{`우리 모임 통장회비는`}</div>
+              <div className="font-bold">{`매월 ${feePeriod}일,`}</div>
+            </div>
+            <div><strong>{`${fee}원`}</strong>이에요!</div>
           </div>
 
           {hasAutoDeposit ? (
-            <div className="flex flex-col items-center gap-3 p-3 rounded-lg">
-              <div className="text-red-600 font-bold text-center">
-                이미 자동이체가 설정되어 있습니다. <br />
-                삭제하시겠습니까?
-              </div>
-              <AchromaticButton
-                variant="destructive"
-                className="w-full"
-                onClick={async () => {
-                  if (community.id !== "0") {
-                    await deleteAutoDeposit(community.id);
-                    messageApi.open({
-                      type: "success",
-                      content: "자동 이체가 삭제되었습니다!",
-                      duration: 1,
-                      className: "font-bold"
-                    });
-                    setTimeout(() => window.location.reload(), 1000);
-                  }
-                }}
-              >
-                자동이체 삭제하기
-              </AchromaticButton>
-            </div>
+            <AchromaticButton
+              variant="destructive"
+              className="w-full"
+              onClick={async () => {
+                if (community.id !== "0") {
+                  await deleteAutoDeposit(community.id);
+                  messageApi.open({
+                    type: "success",
+                    content: "자동 이체가 해제되었습니다!",
+                    duration: 1,
+                    className: "font-bold"
+                  });
+                  setTimeout(() => window.location.reload(), 300);
+                }
+              }}
+            >
+              자동이체 해제하기
+            </AchromaticButton>
           ) : (
             <AchromaticButton
               onClick={async () => {
@@ -68,11 +69,11 @@ export function AutoTransferDialog({accountNumber, fee, feePeriod, hasAutoDeposi
                     duration: 1,
                     className: "font-bold"
                   });
-                  setTimeout(() => window.location.reload(), 1000);
+                  setTimeout(() => window.location.reload(), 300);
                 }
               }}
             >
-              설정하기
+              자동이체 설정하기
             </AchromaticButton>
           )}
         </div>

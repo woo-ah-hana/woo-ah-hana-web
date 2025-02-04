@@ -31,10 +31,10 @@ export function ChangeAccountDialog({
   const [newBank, setNewBank] = useState<BankName>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  // 타이머 설정 및 초기화
+  // TODO: 타이머 컴포넌트 분리 리팩토링 필요
   useEffect(() => {
     if (!isOpen) {
-      setCountdown(null); // 모달 닫힐 때 타이머 초기화
+      setCountdown(null);
     }
   }, [isOpen]);
 

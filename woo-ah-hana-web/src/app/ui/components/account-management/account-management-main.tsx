@@ -21,9 +21,12 @@ export function AccountManagementMain({bankName, accountNumber, accountBalance, 
         accountNumber={accountNumber}
         balance={accountBalance}
         footer={
-          <div className="w-[100%] flex justify-between">
-            <AutoTransferDialog accountNumber={accountNumber} fee={fee} feePeriod={feePeriod} hasAutoDeposit={setAutoDeposit}/>
-            <ChangeAccountDialog accountNumber={accountNumber}/>
+          <div className="w-[100%] flex flex-col gap-5">
+            <div className="text-center font-semibold"> {setAutoDeposit?`현재 자동이체 상태입니다.`:`자동이체 상태가 아닙니다.`} </div>
+            <div className="w-[100%] flex justify-between">
+              <AutoTransferDialog accountNumber={accountNumber} fee={fee} feePeriod={feePeriod} hasAutoDeposit={setAutoDeposit}/>
+              <ChangeAccountDialog accountNumber={accountNumber}/>
+            </div>
           </div>
           }
       />
