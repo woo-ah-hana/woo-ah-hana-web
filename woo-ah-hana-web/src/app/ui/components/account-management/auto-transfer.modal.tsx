@@ -45,14 +45,20 @@ export function AutoTransferDialog({accountNumber, fee, feePeriod, hasAutoDeposi
               className="w-full"
               onClick={async () => {
                 if (community.id !== "0") {
-                  await deleteAutoDeposit(community.id);
-                  messageApi.open({
-                    type: "success",
-                    content: "자동 이체가 해제되었습니다!",
-                    duration: 1,
-                    className: "font-bold"
-                  });
-                  setTimeout(() => window.location.reload(), 300);
+                  deleteAutoDeposit(community.id).then((response)=>{
+                    console.log(response)
+                    if(response.isSuccess){
+                      messageApi.open({
+                        type: "success",
+                        content: "자동 이체가 해제되었습니다!",
+                        duration: 1,
+                        className: "font-bold"
+                      });
+                      setTimeout(() => window.location.reload(), 300);
+                    }else{
+                      alert('서버에 문제가 생겼습니다. 잠시후 시도해주세요.')
+                    }
+                  })
                 }
               }}
             >
@@ -62,14 +68,20 @@ export function AutoTransferDialog({accountNumber, fee, feePeriod, hasAutoDeposi
             <AchromaticButton
               onClick={async () => {
                 if (community.id !== "0") {
-                  await setAutoDeposit(community.id, fee as unknown as string, feePeriod);
-                  messageApi.open({
-                    type: "success",
-                    content: "자동 이체 설정에 성공했습니다!",
-                    duration: 1,
-                    className: "font-bold"
+                  setAutoDeposit(community.id, fee as unknown as string, feePeriod).then((response)=>{
+                    console.log(response)
+                    if(response.isSuccess){
+                      messageApi.open({
+                        type: "success",
+                        content: "자동 이체 설정에 성공했습니다!",
+                        duration: 1,
+                        className: "font-bold"
+                      });
+                      setTimeout(() => window.location.reload(), 300);
+                    }else{
+                      alert('서버에 문제가 생겼습니다. 잠시후 시도해주세요.')
+                    }
                   });
-                  setTimeout(() => window.location.reload(), 300);
                 }
               }}
             >

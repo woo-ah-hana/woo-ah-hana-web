@@ -192,8 +192,8 @@ export async function setAutoDeposit(communityId: string, fee: string, depositDa
     const response = await instance.post(`${API_PATH}/community/account/autoDeposit`, {communityId, fee, depositDay});
     const data:string = response.data
     return {
-      isSuccess: false,
-      isFailure: true,
+      isSuccess: true,
+      isFailure: false,
       data: data
     }
   }catch(error){
@@ -212,8 +212,8 @@ export async function deleteAutoDeposit(communityId: string) :Promise<APIRespons
     const response = await instance.delete(`${API_PATH}/community/account/autoDeposit?communityId=${communityId}`);
     const data:string = response.data
     return {
-      isSuccess: false,
-      isFailure: true,
+      isSuccess: true,
+      isFailure: false,
       data: data
     }
   }catch(error){
