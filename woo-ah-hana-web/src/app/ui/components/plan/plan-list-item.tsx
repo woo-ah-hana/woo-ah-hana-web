@@ -45,9 +45,6 @@ export function PlanListItem({
               </div>
 
               <div className="flex flex-col justify-center items-start py-2 gap-1">
-                {/* <div className="text-lg font-normal">
-                  <strong>{title}</strong>
-                </div> */}
                 <div className="text-[20px] font-semibold">
                   {title}
                 </div>
