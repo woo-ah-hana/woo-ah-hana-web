@@ -5,7 +5,6 @@ import { LocationsDetailDilog } from "./locations-detail.modal";
 import { convertDateWithoutYear } from "@/app/utils/convert";
 import {
   categoryColors,
-  categoryIcons,
   categoryIconBg,
 } from "@/app/ui/atom/category/category";
 import { FaRegCalendarCheck } from "react-icons/fa6";

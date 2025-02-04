@@ -73,7 +73,7 @@ export function DateDetailDilog({ id }: DateDetailDilogProps) {
             </div>
             <div className="mt-7">
               <FormSubmitButton
-                label="수정하기"
+                label="저장"
                 position="center"
                 className="w-11/12 rounded-xl"
               />

@@ -12,6 +12,7 @@ import { message } from "antd";
 import { PlanDialog } from "@/app/ui/molecule/planDialog/planDialog";
 import IconClosing from "@/app/assets/img/icon-closing.png";
 import IconManagement from "@/app/assets/img/icon-management.png";
+import { BsPlusLg } from "react-icons/bs";
 
 interface MemberDetailDilogProps {
   id: string;
@@ -130,13 +131,13 @@ export function MemberDetailDilog({
           </div>
 
           <div>
-            <div className="flex flex-row">
-              <img src={IconManagement.src} className="w-8 h-8" />
-              <div className="text-start font-semibold mb-2 mt-2 ml-1">
-                모임 통장의 사람들
+            <hr></hr>
+            <div className="flex flex-row mt-2">
+              <BsPlusLg className="text-gray-600 bg-gray-100 rounded-full text-2xl mt-1 p-1 mx-1" />
+              <div className="text-start font-semibold mb-2 ml-1 mx-2 mt-2">
+                초대하기
               </div>
             </div>
-            <hr></hr>
             <div className="grid grid-cols-1 gap-3 mx-3">
               {communityMembers.map((member, index) => {
                 if (
@@ -168,7 +169,7 @@ export function MemberDetailDilog({
               await handleUpdateMember();
             }}
           >
-            변경하기
+            저장
           </AchromaticButton>
         </div>
       </PlanDialog>

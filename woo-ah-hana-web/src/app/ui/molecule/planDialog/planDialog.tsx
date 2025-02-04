@@ -32,7 +32,10 @@ export const PlanDialog = React.forwardRef<
       <DialogPrimitive.Content
         {...props}
         ref={forwardedRef}
-        className={cn("fixed bottom-0 w-full bg-white ", className)}
+        className={cn(
+          "fixed bottom-0 w-full bg-white  animate-slideUp",
+          className
+        )}
       >
         {title ? (
           <DialogPrimitive.Title

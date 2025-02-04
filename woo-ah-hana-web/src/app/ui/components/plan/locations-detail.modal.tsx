@@ -65,39 +65,60 @@ export function LocationsDetailDilog({
           수정
         </AchromaticButton>
       </DialogTrigger>
-      <PlanDialog title="모임 장소">
-        <div className="px-5">
-          <hr></hr>
+      <PlanDialog className="rounded-t-2xl">
+        <div className="text-start text-xl font-semibold mb-2 pl-3 pr-3">
+          모임 장소
         </div>
         <div className="p-5 grid grid-cols-1 gap-5">
-          <div>
+          <div className="flex flex-wrap gap-2">
             {currentLocations.map((location, index) => {
               return (
-                <div key={index} className="grid grid-cols-[9fr_1fr]">
-                  <div className="mt-2">{location}</div>
-                  <AchromaticButton
-                    variant={"ghost"}
-                    onClick={() => {
-                      handleRemoveLocation(location);
-                    }}
+                <div>
+                  <div
+                    key={index}
+                    className="bg-blue-50 text-gray-800 px-4 rounded-full flex items-center"
                   >
-                    삭제
-                  </AchromaticButton>
+                    <span>{location}</span>
+                    <AchromaticButton
+                      variant={"ghost"}
+                      onClick={() => handleRemoveLocation(location)}
+                      className="text-gray-500 p-0 text-lg ml-2"
+                    >
+                      ×
+                    </AchromaticButton>
+                  </div>
                 </div>
               );
             })}
           </div>
-          <hr></hr>
+
           <div>
-            <div className="mb-3">모임 장소 입력하기</div>
+            <div className="mb-5">
+              <div className="mt-3 font-bold mb-1">모임 장소 추가</div>
+
+              <div className="text-xs text-gray-600">
+                여러분의 특별한 공간을 추가해 보세요.
+              </div>
+              <div className="text-xs text-gray-600">
+                모임 장소를 추가하면 참석자들과 더 쉽게 공유할 수 있어요.
+              </div>
+            </div>
             <Form
               id={"add-location"}
               action={handleAddLocation}
               failMessageControl={"alert"}
             >
-              <div className="grid grid-cols-[7fr_3fr]">
-                <Form.TextInput id="location" label="" placeholder="" />
-                <Form.SubmitButton className="h-12" label="입력" />
+              <div className="grid grid-cols-[3fr_1fr]">
+                <Form.TextInput
+                  id="location"
+                  label=""
+                  placeholder=""
+                  className="h-10"
+                />
+                <Form.SubmitButton
+                  className=" bg-white text-wooahMain border border-wooahMain shadow-none h-10 rounded-3xl"
+                  label="추가"
+                />
               </div>
             </Form>
           </div>
@@ -113,7 +134,7 @@ export function LocationsDetailDilog({
               setTimeout(() => window.location.reload(), 1000);
             }}
           >
-            변경하기
+            저장
           </AchromaticButton>
         </div>
       </PlanDialog>

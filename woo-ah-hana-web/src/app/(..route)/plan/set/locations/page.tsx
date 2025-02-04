@@ -61,6 +61,15 @@ export default function SetLocation() {
             mainTitle="만나고 싶은 지역, 장소를"
             subTitle="입력해주세요."
           />
+          <div>
+            원하는 장소를 입력해 주세요. 더 편리하게 모임을 관리할 수 있어요!
+          </div>
+          <div>어디서 모일 예정인가요? 장소를 등록해 주세요!</div>
+          <div>친구들과 자주 만나는 곳을 등록해 보세요.</div>
+          <div>모임 장소를 추가하면 일정 관리가 더 쉬워져요!</div>
+          <div>정확한 주소를 입력하면 참석자들이 쉽게 찾아올 수 있어요.</div>
+          <div>입력한 장소는 내 모임 일정에서 바로 확인할 수 있어요.</div>
+
           <p className="text-gray-400 flex items-center gap-2">
             <HiLightBulb />
             최소 1개 이상 입력해야 하며, 최대 3개까지 가능합니다.
