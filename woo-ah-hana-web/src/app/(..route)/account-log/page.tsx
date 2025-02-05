@@ -29,7 +29,7 @@ export default function AccountLog() {
             title={community.name}
             accountNumber={community.accountNumber}
             balance={transfers.length==0?0:transfers[0].afterBalanceAmt as unknown as number}
-            footer={<div></div>}
+            footer={<div className="h-3"></div>}
         />
         <div className="flex justify-end">
           <Dropdown 

@@ -112,22 +112,21 @@ export default function RecapContent({ year, quarter }: Props) {
           toDate,
         };
         const response = await getRecap(requestBody);
-  
+
         if (response?.data) {
           setRecapData(response.data);
         } else {
           console.warn('데이터가 비어 있습니다.');
-          setRecapData(null); 
+          setRecapData(null);
         }
       } catch (error) {
         console.error('데이터 요청에 실패했습니다.', error);
-        setRecapData(null); 
+        setRecapData(null);
       }
     }
-  
+
     fetchData();
   }, [fromDate, toDate]);
-  
 
   useEffect(() => {
     if (recapData) {
@@ -179,29 +178,34 @@ export default function RecapContent({ year, quarter }: Props) {
         </div>
         <FadeInCard className='py-5 px-8 flex flex-col gap-3'>
           {recapData?.planTitleList?.map((plan: string, index: number) => (
-            <div key={index}>
-              • {plan}
-            </div>
+            <div key={index}>• {plan}</div>
           ))}
-          <div className='text-end text-[28px]'>{recapData?.numberOfPlans}회</div>
+          <div className='text-end text-[28px]'>
+            {recapData?.numberOfPlans}회
+          </div>
         </FadeInCard>
       </div>
 
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
           지난 분기보다{' '}
-          <span className='text-2xl text-wooahMain'>{recapData?.howMuchSpentThanLastQuarter.toLocaleString()}원</span> 더 썼어요!
+          <span className='text-2xl text-wooahMain'>
+            {recapData?.howMuchSpentThanLastQuarter.toLocaleString()}원
+          </span>{' '}
+          더 썼어요!
         </div>
         <FadeInCard className='p-8 flex flex-col gap-5'>
           <div className='flex justify-between'>
             <div>지출</div>
-            <div className='text-2xl text-wooahDeepRed'>{recapData?.thisQuarterExpense.toLocaleString()}원</div>
-
+            <div className='text-2xl text-wooahDeepRed'>
+              {recapData?.thisQuarterExpense.toLocaleString()}원
+            </div>
           </div>
           <div className='flex justify-between'>
             <div>수입</div>
-            <div className='text-2xl text-wooahMain'>{recapData?.thisQuarterIncome.toLocaleString()}원</div>
-
+            <div className='text-2xl text-wooahMain'>
+              {recapData?.thisQuarterIncome.toLocaleString()}원
+            </div>
           </div>
         </FadeInCard>
       </div>
@@ -210,34 +214,52 @@ export default function RecapContent({ year, quarter }: Props) {
         <div className='text-center'>
           소비가 가장 많았던 달은
           <br />
-          <span className='text-2xl text-wooahMain'>{recapData?.highestMonth}월</span> 입니다!
+          <span className='text-2xl text-wooahMain'>
+            {recapData?.highestMonth}월
+          </span>{' '}
+          입니다!
         </div>
         <FadeInCard className='py-10 px-1 flex justify-center items-center'>
           <Bar data={chartData} options={options} />
-
         </FadeInCard>
       </div>
 
       <div className='flex flex-col gap-10'>
         <div className='text-center'>
-          {recapData?.highestPlanName == undefined
-          ? <div>해당 분기에 여행한 기록이 없어요.</div> : <div>가장 많이 지출한 모임은 <br /><span
-                  className="text-2xl text-wooahMain">{recapData?.highestPlanName}</span>입니다.</div>}
+          {recapData?.highestPlanName == undefined ? (
+            <div>해당 분기에 여행한 기록이 없어요.</div>
+          ) : (
+            <div>
+              가장 많이 지출한 모임은 <br />
+              <span className='text-2xl text-wooahMain'>
+                {recapData?.highestPlanName}
+              </span>
+              입니다.
+            </div>
+          )}
         </div>
-        {recapData?.highestPlanName == undefined
-                ? '' :
-        <FadeInCard className='p-8 flex flex-col gap-8'>
-          <div className='flex justify-center'>
-            <Image src={recapData?.imageUrl || ImgParty} width={280} height={280} style={{width:280}} alt='모임사진' />
-          </div>
-          <div>이 모임에서 지출한 금액은 <br /><span className="text-2xl text-wooahMain">
-                      {recapData?.highestPlanExpense.toLocaleString()}원</span>이에요.</div>
-          {/* <div>
-            {recapData?.highestPlanName == undefined
-                ? '' : <div>이 모임에서 지출한 금액은 <br /><span className="text-2xl text-wooahMain">
-                      {recapData?.highestPlanExpense.toLocaleString()}원</span>이에요.</div>}
-          </div> */}
-        </FadeInCard>}
+        {recapData?.highestPlanName == undefined ? (
+          ''
+        ) : (
+          <FadeInCard className='p-8 flex flex-col gap-8'>
+            <div className='flex justify-center'>
+              <Image
+                src={recapData?.imageUrl || ImgParty}
+                width={280}
+                height={280}
+                style={{ width: 280 }}
+                alt='모임사진'
+              />
+            </div>
+            <div>
+              이 모임에서 지출한 금액은 <br />
+              <span className='text-2xl text-wooahMain'>
+                {recapData?.highestPlanExpense.toLocaleString()}원
+              </span>
+              이에요.
+            </div>
+          </FadeInCard>
+        )}
       </div>
     </div>
   );
