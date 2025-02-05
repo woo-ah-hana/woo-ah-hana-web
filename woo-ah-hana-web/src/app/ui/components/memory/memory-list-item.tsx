@@ -33,7 +33,7 @@ export function MemoryListItem({
   return (
     <main>
       <Link href={`memory/detail?community=${communityId}&id=${planId}`}>
-        <Card className={`${bgColor} p-4`}>
+        <Card className={`${bgColor} p-3 cursor-pointer shadow-md hover:shadow-lg`}>
           <div className="flex justify-between">
             <div className="flex gap-5">
               <div className="flex flex-row justify-center items-start">
@@ -47,7 +47,7 @@ export function MemoryListItem({
                 />
               </div>
 
-              <div className="flex flex-col justify-center items-start gap-4 py-2">
+              <div className="flex flex-col justify-center items-start gap-3 py-2">
                 <div className="flex flex-col gap-3 text-slate-700 text-[17px]">
                   <div className="">
                     {startDate.substring(5, 10) == endDate.substring(5, 10)
@@ -61,7 +61,7 @@ export function MemoryListItem({
                 <div className="text-xl">
                   <strong>{title}</strong>
                 </div>
-                <div className="text-slate-600 font-semibold text-[15px]">
+                <div className="text-slate-600 font-medium text-[15px]">
                   {locations.map((location, index) => (
                     <span key={index}>{`#${location}  `}</span>
                   ))}

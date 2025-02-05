@@ -33,7 +33,7 @@ export default function DepositCheck({
 
       if (response.isSuccess) {
         router.push(
-          `/deposit/complete?communityId=${communityId}&amount=${tranAmt}&accountName=${communityAccountName}`
+          `/deposit/password?communityId=${communityId}&amount=${tranAmt}&accountName=${communityAccountName}`
         );
       }
     } catch (error) {

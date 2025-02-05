@@ -16,7 +16,7 @@ export default function DepositComplete() {
   useEffect(() => {
     const timer = setTimeout(() => {
       window.location.href = `/home?id=${communityId}`;
-    }, 2800);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);

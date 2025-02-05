@@ -42,11 +42,11 @@ export function PlanDetail({
       <div className="pl-2 pr-2">
         <CardContent className="gap-2 mt-2 p-3">
           <div>
-            <div className="text-lg text-start font-bold">{title}</div>
-            <div className="text-xs text-slate-600 text-start">{`# ${category}`}</div>
+            <div className="text-xl text-start font-bold">{title}</div>
+            <div className="text-base text-slate-600 text-start">{`# ${category}`}</div>
           </div>
         </CardContent>
-        <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
+        <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3 items-center">
           <Image
             src={IconPlan}
             alt=""
@@ -55,15 +55,15 @@ export function PlanDetail({
             height={40}
           />
           <div>
-            <div className="text-xs text-gray-500">일정</div>
-            <div className="text-sm">
+            <div className="text-sm text-gray-500">일정</div>
+            <div className="text-base">
               {convertDateWithoutYear(startDate)} ~{" "}
               {convertDateWithoutYear(endDate)}
             </div>
           </div>
           <DateDetailDilog id={id} />
         </CardContent>
-        <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
+        <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3 items-center">
           <Image
             src={IconManagetment}
             alt=""
@@ -72,7 +72,7 @@ export function PlanDetail({
             height={40}
           />
           <div>
-            <div className="text-xs text-gray-500">참여 인원</div>
+            <div className="text-base text-gray-500">참여 인원</div>
             <div className="text-base">{`${memberIds.length} 명 참여`}</div>
           </div>
           <MemberDetailDilog
@@ -83,7 +83,7 @@ export function PlanDetail({
             communityMemberNames={communityMemberNames}
           />
         </CardContent>
-        <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3">
+        <CardContent className="grid grid-cols-[2fr_6fr_2fr] gap-2 p-3 items-center">
           <Image
             src={IconPlace}
             alt=""
@@ -92,10 +92,15 @@ export function PlanDetail({
             height={40}
           />
           <div>
-            <div className="text-xs text-gray-500">장소</div>
-            <div className="text-base">{`${locations[0]} 외 ${
-              locations.length - 1
-            }`}</div>
+            <div className="text-sm text-gray-500">장소</div>
+            <div className="text-base">
+              {locations.length > 0 ? (
+                  locations.length > 1
+                      ? `${locations[0]} 외 ${locations.length - 1}`
+                      : `${locations[0]}`
+              ) : (
+                  '장소를 추가해 주세요.'
+              )}</div>
           </div>
           <LocationsDetailDilog id={id} locations={locations} />
         </CardContent>
