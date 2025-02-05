@@ -93,11 +93,13 @@ export function PlanListItem({
                       id="id"
                       name="id"
                       value={planId}
+                      onChange={() => {}}
                       className="hidden"
                     />
                     <Form.SubmitButton
                       label="X"
                       className="bg-[bgColor] text-gray-500 shadow-none hover:bg-[bgColor]"
+                      onClick={(event) => event.stopPropagation()}
                     />
                   </div>
                 </Form>
