@@ -58,7 +58,7 @@ export function ChangeAccountDialog({
       bankTranId as string,
       formData.get('account-number') as string
     );
-    setCountdown(3); // 5분(300초) 타이머 시작
+    setCountdown(300); // 5분(300초) 타이머 시작
     return {
       isSuccess: result.isSuccess,
       isFailure: result.isFailure,

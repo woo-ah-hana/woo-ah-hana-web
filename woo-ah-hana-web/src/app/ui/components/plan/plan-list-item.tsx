@@ -59,7 +59,7 @@ export function PlanListItem({
                         : `${startDate.substring(2, 4)}.${startDate.substring(
                             5,
                             7
-                          )}.${startDate.substring(2, 4)}
+                          )}.${startDate.substring(8, 10)}
                       
                       
                       ~ ${endDate.substring(2, 4)}.${endDate.substring(
