@@ -1,8 +1,10 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import ImgParty from '../../../assets/img/party.png';
-import { Bar } from 'react-chartjs-2';
+import Image from "next/image";
+import ImgParty from "../../../assets/img/party.png";
+import { Bar } from "react-chartjs-2";
+import { categoryColors, categoryIcons } from "../../atom/category/category";
+import TotalPlan from "@/app/assets/img/icon-totalPlan.jpg";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,15 +13,16 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { useEffect, useRef, useState } from 'react';
-import { Card } from '../../molecule/card/card';
+} from "chart.js";
+import { useEffect, useRef, useState } from "react";
+import { Card } from "../../molecule/card/card";
 import {
   getRecap,
+  getRecapPlanInfoDTO,
   getRecapRequestDTO,
   getRecapResponseDTO,
-} from '@/app/business/community/community.service';
-import { useSearchParams } from 'next/navigation';
+} from "@/app/business/community/community.service";
+import { useSearchParams } from "next/navigation";
 
 ChartJS.register(
   CategoryScale,
@@ -54,7 +57,7 @@ type FadeInCardProps = {
   className?: string;
 };
 
-function FadeInCard({ children, className = '' }: FadeInCardProps) {
+function FadeInCard({ children, className = "" }: FadeInCardProps) {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
@@ -77,7 +80,7 @@ function FadeInCard({ children, className = '' }: FadeInCardProps) {
     <Card
       ref={cardRef}
       className={`transition-all duration-1000 ease-in-out opacity-0 translate-y-5 ${
-        isVisible ? 'opacity-100 translate-y-0' : ''
+        isVisible ? "opacity-100 translate-y-0" : ""
       } ${className}`}
     >
       {children}
@@ -88,15 +91,15 @@ function FadeInCard({ children, className = '' }: FadeInCardProps) {
 export default function RecapContent({ year, quarter }: Props) {
   const { fromDate, toDate } = QUARTER_DATE_RANGES[quarter](year);
   const searchParams = useSearchParams();
-  const communityId = searchParams.get('id');
+  const communityId = searchParams.get("id");
   const [recapData, setRecapData] = useState<getRecapResponseDTO | null>(null);
   const [chartData, setChartData] = useState({
     labels: [] as string[],
     datasets: [
       {
-        label: '소비 금액 (원)',
+        label: "소비 금액 (원)",
         data: [] as number[],
-        backgroundColor: 'rgba(50, 77, 221, 0.8)',
+        backgroundColor: "rgba(50, 77, 221, 0.8)",
         borderWidth: 0,
         borderRadius: 8,
       },
@@ -107,7 +110,7 @@ export default function RecapContent({ year, quarter }: Props) {
     async function fetchData() {
       try {
         const requestBody: getRecapRequestDTO = {
-          communityId: communityId || '',
+          communityId: communityId || "",
           fromDate,
           toDate,
         };
@@ -116,11 +119,11 @@ export default function RecapContent({ year, quarter }: Props) {
         if (response?.data) {
           setRecapData(response.data);
         } else {
-          console.warn('데이터가 비어 있습니다.');
+          console.warn("데이터가 비어 있습니다.");
           setRecapData(null);
         }
       } catch (error) {
-        console.error('데이터 요청에 실패했습니다.', error);
+        console.error("데이터 요청에 실패했습니다.", error);
         setRecapData(null);
       }
     }
@@ -131,19 +134,19 @@ export default function RecapContent({ year, quarter }: Props) {
   useEffect(() => {
     if (recapData) {
       const monthLabelsByQuarter: { [key: number]: string[] } = {
-        1: ['1월', '2월', '3월'],
-        2: ['4월', '5월', '6월'],
-        3: ['7월', '8월', '9월'],
-        4: ['10월', '11월', '12월'],
+        1: ["1월", "2월", "3월"],
+        2: ["4월", "5월", "6월"],
+        3: ["7월", "8월", "9월"],
+        4: ["10월", "11월", "12월"],
       };
 
       setChartData({
         labels: monthLabelsByQuarter[quarter] || [],
         datasets: [
           {
-            label: '소비 금액 (원)',
+            label: "소비 금액 (원)",
             data: recapData.monthlyExpenses || [],
-            backgroundColor: 'rgba(50, 77, 221, 0.8)',
+            backgroundColor: "rgba(50, 77, 221, 0.8)",
             borderWidth: 0,
             borderRadius: 8,
           },
@@ -155,8 +158,8 @@ export default function RecapContent({ year, quarter }: Props) {
   const options = {
     responsive: true,
     plugins: {
-      legend: { position: 'top' as const, display: false },
-      title: { display: false, text: '3개월 소비 금액 비교' },
+      legend: { position: "top" as const, display: false },
+      title: { display: false, text: "3개월 소비 금액 비교" },
     },
     scales: {
       y: {
@@ -171,67 +174,87 @@ export default function RecapContent({ year, quarter }: Props) {
   };
 
   return (
-    <div className='flex flex-col w-screen py-5 px-5 text-xl gap-24 mb-20 bg-[#bed0fc]'>
-      <div className='flex flex-col gap-10'>
-        <div className='text-center'>
-          {year}년 {quarter}분기에 함께한 일정
+    <div className="flex flex-col w-screen text-xl gap-6">
+      <div className="flex flex-col gap-10 bg-white p-5 pb-20">
+        <div className="text-center font-medium text-2xl mt-10">
+          {year}년 {quarter}분기에 함께한 일정{" "}
+          <Image src={TotalPlan} width={500} alt="" className="rounded-full" />
         </div>
-        <FadeInCard className='py-5 px-8 flex flex-col gap-3'>
-          {recapData?.planTitleList?.map((plan: string, index: number) => (
-            <div key={index}>• {plan}</div>
-          ))}
-          <div className='text-end text-[28px]'>
-            {recapData?.numberOfPlans}회
-          </div>
+        <div className="text-center text-[28px] font-semibold">
+          총 {recapData?.numberOfPlans}회
+        </div>
+        <FadeInCard className="py-5 px-8 flex flex-col gap-3">
+          {recapData?.planInfoList?.map(
+            (plan: getRecapPlanInfoDTO, index: number) => (
+              <div key={index} className="flex flex-row items-center">
+                <div
+                  className={`${
+                    categoryColors[plan.category]
+                  } rounded-full mr-3`}
+                >
+                  <Image
+                    src={categoryIcons[plan.category]}
+                    alt={plan.category}
+                    style={{ width: 60 }}
+                    height={50}
+                    width={50}
+                    priority={true}
+                    className="p-1"
+                  />
+                </div>
+                {plan.title}
+              </div>
+            )
+          )}
         </FadeInCard>
       </div>
 
-      <div className='flex flex-col gap-10'>
-        <div className='text-center'>
-          지난 분기보다{' '}
-          <span className='text-2xl text-wooahMain'>
+      <div className="flex flex-col gap-10 bg-white w-full justify-center p-5 pb-20">
+        <div className="text-center mt-10 font-medium">
+          지난 분기보다{" "}
+          <span className="text-2xl text-wooahMain font-semibold">
             {recapData?.howMuchSpentThanLastQuarter.toLocaleString()}원
-          </span>{' '}
+          </span>{" "}
           더 썼어요!
         </div>
-        <FadeInCard className='p-8 flex flex-col gap-5'>
-          <div className='flex justify-between'>
-            <div>지출</div>
-            <div className='text-2xl text-wooahDeepRed'>
-              {recapData?.thisQuarterExpense.toLocaleString()}원
-            </div>
-          </div>
-          <div className='flex justify-between'>
+        <FadeInCard className="p-8 flex flex-col gap-5">
+          <div className="flex justify-between">
             <div>수입</div>
-            <div className='text-2xl text-wooahMain'>
+            <div className="text-2xl text-wooahMain font-semibold">
               {recapData?.thisQuarterIncome.toLocaleString()}원
             </div>
           </div>
+          <div className="flex justify-between">
+            <div>지출</div>
+            <div className="text-2xl text-wooahDeepRed font-semibold">
+              {recapData?.thisQuarterExpense.toLocaleString()}원
+            </div>
+          </div>
         </FadeInCard>
       </div>
 
-      <div className='flex flex-col gap-10'>
-        <div className='text-center'>
+      <div className="flex flex-col gap-10 p-5 bg-white pb-20">
+        <div className="text-center text-xl mt-10 font-medium">
           소비가 가장 많았던 달은
           <br />
-          <span className='text-2xl text-wooahMain'>
+          <span className="text-2xl text-wooahMain font-semibold">
             {recapData?.highestMonth}월
-          </span>{' '}
+          </span>{" "}
           입니다!
         </div>
-        <FadeInCard className='py-10 px-1 flex justify-center items-center'>
+        <FadeInCard className="py-10 px-1 flex justify-center items-center">
           <Bar data={chartData} options={options} />
         </FadeInCard>
       </div>
 
-      <div className='flex flex-col gap-10'>
-        <div className='text-center'>
+      <div className="flex flex-col gap-10 p-5 bg-white pb-20">
+        <div className="text-center mt-10 font-medium">
           {recapData?.highestPlanName == undefined ? (
             <div>해당 분기에 여행한 기록이 없어요.</div>
           ) : (
             <div>
               가장 많이 지출한 모임은 <br />
-              <span className='text-2xl text-wooahMain'>
+              <span className="text-2xl text-wooahMain font-semibold">
                 {recapData?.highestPlanName}
               </span>
               입니다.
@@ -239,21 +262,21 @@ export default function RecapContent({ year, quarter }: Props) {
           )}
         </div>
         {recapData?.highestPlanName == undefined ? (
-          ''
+          ""
         ) : (
-          <FadeInCard className='p-8 flex flex-col gap-8'>
-            <div className='flex justify-center'>
+          <FadeInCard className="p-8 flex flex-col gap-8 font-medium">
+            <div className="flex justify-center">
               <Image
                 src={recapData?.imageUrl || ImgParty}
                 width={280}
                 height={280}
                 style={{ width: 280 }}
-                alt='모임사진'
+                alt="모임사진"
               />
             </div>
             <div>
               이 모임에서 지출한 금액은 <br />
-              <span className='text-2xl text-wooahMain'>
+              <span className="text-2xl text-wooahMain font-semibold">
                 {recapData?.highestPlanExpense.toLocaleString()}원
               </span>
               이에요.

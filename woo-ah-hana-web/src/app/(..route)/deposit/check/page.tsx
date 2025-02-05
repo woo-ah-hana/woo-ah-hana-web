@@ -47,16 +47,16 @@ export default function DepositCheck({
       <Header title="입금" link="/deposit" />
       <div className="h-full px-10 py-5 flex flex-col justify-between">
         <div className="text-2xl align-center justify-center text-start flex flex-col">
-          <span className="text-base">{communityAccountName}</span>
-          <h1 className="text-2xl">
+          <span className="text-lg">{communityAccountName}</span>
+          <h1 className="text-3xl font-semibold">
             {communityAccountBank} 모임통장
-            <span className="text-lg">으로</span>
+            <span className="text-2xl font-medium">으로</span>
           </h1>
           <div className="flex items-end flex-row mt-6">
-            <div className="text-2xl font-semibold">
+            <div className="text-3xl font-semibold">
               <span>{Number(tranAmt).toLocaleString("ko-KR")}</span>원
             </div>
-            <div className="text-xl">을 옮길까요?</div>
+            <div className="text-2xl">을 옮길까요?</div>
           </div>
         </div>
         <div className="flex flex-col gap-12">
