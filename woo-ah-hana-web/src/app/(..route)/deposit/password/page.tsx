@@ -8,7 +8,7 @@ export default function Page() {
   const accountName = searchParams.get("accountName");
   const communityId = searchParams.get("communityId");
   return (
-    <div className="h-full mt-10">
+    <div className="h-full mt-8">
       <VirtualPassword communityId={communityId as string} tranAmt={amount as string} communityAccountName={accountName as string} />
     </div>
   );
