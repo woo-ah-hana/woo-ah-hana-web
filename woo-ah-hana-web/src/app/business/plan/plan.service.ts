@@ -4,6 +4,7 @@ import { APIResponseType, instance } from "@/app/utils/http";
 import { API_PATH } from "@/app/utils/http/api-query";
 import { Plan } from "./plan";
 import { InternetServerError } from "@/app/utils/http/http-error";
+import { FormState } from "@/app/ui/molecule/form/form-root";
 
 interface GetPlanListDto {
   id: string;
@@ -100,4 +101,25 @@ export async function getPlans(
       statusCode: response.status,
     });
   }
+}
+
+export async function deletePlan(
+  prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
+  const id = formData.get("id");
+  const response = await instance.delete(`${API_PATH}/plan/${id}`);
+  if (response.status === 500) {
+    throw new InternetServerError({
+      message: "서버가 불안정합니다. 잠시 후 다시 시도해주세요.",
+      statusCode: response.status,
+      response: response.data,
+    });
+  }
+  return {
+    isSuccess: true,
+    isFailure: false,
+    validationError: {},
+    message: "삭제 성공",
+  };
 }
