@@ -33,7 +33,7 @@ export function MemoryListItem({
   return (
     <main>
       <Link href={`memory/detail?community=${communityId}&id=${planId}`}>
-        <Card className={`${bgColor} p-4`}>
+        <Card className={`${bgColor} p-4 cursor-pointer shadow-md hover:shadow-lg`}>
           <div className="flex justify-between">
             <div className="flex gap-5">
               <div className="flex flex-row justify-center items-start">

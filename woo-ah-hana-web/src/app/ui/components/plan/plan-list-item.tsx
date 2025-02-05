@@ -29,7 +29,7 @@ export function PlanListItem({
   return (
     <main>
       <Link href={`plan/detail?community=${communityId}&id=${planId}`}>
-        <Card className={`${bgColor} rounded-full border-none p-1`}>
+        <Card className={`${bgColor} rounded-full border-none p-1 cursor-pointer shadow-md hover:shadow-lg`}>
           <div className="flex justify-between">
             <div className="flex">
               <div className="flex flex-row justify-center items-center ml-2 mr-1">
