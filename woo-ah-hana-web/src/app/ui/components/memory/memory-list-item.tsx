@@ -33,40 +33,49 @@ export function MemoryListItem({
   return (
     <main>
       <Link href={`memory/detail?community=${communityId}&id=${planId}`}>
-        <Card className={`${bgColor} p-3 cursor-pointer shadow-md hover:shadow-lg`}>
-          <div className="flex justify-between">
-            <div className="flex gap-5">
-              <div className="flex flex-row justify-center items-start">
-                <Image
-                  src={iconSrc}
-                  alt={category}
-                  style={{ width: 60 }}
-                  height={50}
-                  width={50}
-                  priority={true}
-                />
-              </div>
-
-              <div className="flex flex-col justify-center items-start gap-3 py-2">
-                <div className="flex flex-col gap-3 text-slate-700 text-[17px]">
-                  <div className="">
-                    {startDate.substring(5, 10) == endDate.substring(5, 10)
-                      ? startDate.substring(5, 10)
-                      : `${startDate.substring(5, 10)}부터 ${endDate.substring(
-                          5,
-                          10
-                        )}까지`}
+        <Card
+          className={`${bgColor} rounded-2xl border-none p-1 cursor-pointer shadow-md hover:shadow-lg`}
+        >
+          <div>
+            <div className="flex justify-between p-1">
+              <div className="flex flex-row">
+                <div className="flex flex-row justify-center items-center ml-2 mr-1">
+                  <Image
+                    src={iconSrc}
+                    alt={category}
+                    style={{ width: 60 }}
+                    height={50}
+                    width={50}
+                    priority={true}
+                    className="p-1"
+                  />
+                </div>
+                <div className="flex flex-col justify-center items-start py-2 gap-2">
+                  <div className="text-[20px] font-semibold">{title}</div>
+                  <div className="flex flex-col text-base">
+                    <div>
+                      {startDate.substring(5, 10) == endDate.substring(5, 10)
+                        ? startDate.substring(5, 10)
+                        : `${startDate.substring(2, 4)}.${startDate.substring(
+                            5,
+                            7
+                          )}.${startDate.substring(2, 4)}
+                      
+                      
+                      ~ ${endDate.substring(2, 4)}.${endDate.substring(
+                            5,
+                            7
+                          )}.${endDate.substring(8, 10)}
+                      `}
+                    </div>
                   </div>
                 </div>
-                <div className="text-xl">
-                  <strong>{title}</strong>
-                </div>
-                <div className="text-slate-600 font-medium text-[15px]">
-                  {locations.map((location, index) => (
-                    <span key={index}>{`#${location}  `}</span>
-                  ))}
-                </div>
               </div>
+            </div>
+            <div className="text-slate-600 text-base font-medium text-center pb-1">
+              {locations.map((location, index) => (
+                <span key={index}>{`#${location}  `}</span>
+              ))}
             </div>
           </div>
         </Card>
