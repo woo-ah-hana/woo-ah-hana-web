@@ -15,7 +15,7 @@ export default function InquiryAccount() {
       <Header title='거래내역을 조회해봅시다.' link='/home' />
       <div className="p-5 flex flex-col gap-5">
         <TextInput placeholder="조회할 계좌번호 입력" ref={accountNumberRef}/>
-        <TextInput placeholder="비밀번호 입력" ref={accountPasswordRef}/>
+        <TextInput placeholder="비밀번호 입력" type="password" ref={accountPasswordRef}/>
         <AchromaticButton onClick={async ()=>{
           inquiryAccountTransferLog("001",accountNumberRef.current?.value as string, "2022-12-01", "2025-12-01").then((res)=>{
             console.log(res.data?.data.res_list);
