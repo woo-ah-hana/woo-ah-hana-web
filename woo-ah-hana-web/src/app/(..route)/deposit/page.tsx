@@ -95,21 +95,21 @@ export default function Deposit() {
                 <div className="text-2xl font-semibold">내 통장</div>
                 <div className="text-xl">에서</div>
               </div>
-              <p className="text-sm text-gray-400">
+              <p className="text-base text-gray-400">
                 출금 가능 금액{" "}
                 {depositInfoData?.memberAccountBalance.toLocaleString("ko-KR")}
                 원
               </p>
             </div>
             <div className="border-none shadow-none">
-              <span className="text-md">
+              <span className="text-base">
                 {depositInfoData?.communityAccountName}{" "}
               </span>
               <h1 className="text-2xl">
                 {depositInfoData?.communityAccountBank} 모임통장
                 <span className="text-lg">으로</span>
               </h1>
-              <p className="text-sm text-gray-400">
+              <p className="text-base text-gray-400">
                 계좌번호 {depositInfoData?.communityAccountNumber}
               </p>
             </div>

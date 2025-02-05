@@ -72,7 +72,7 @@ export function PlanDetail({
             height={40}
           />
           <div>
-            <div className="text-sm text-gray-500">참여 인원</div>
+            <div className="text-base text-gray-500">참여 인원</div>
             <div className="text-base">{`${memberIds.length} 명 참여`}</div>
           </div>
           <MemberDetailDilog

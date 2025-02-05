@@ -34,9 +34,9 @@ export default function VirtualPassword({communityId, tranAmt, communityAccountN
   );
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+      <div className="text-center mb-24 text-xl"> 계좌 비밀번호를 입력해주세요</div>
       <div className="p-6 w-fit mx-auto bg-gray-100 rounded-xl shadow-lg">
-        <div className="text-center mb-5"> 계좌 비밀번호를 입력해주세요</div>
         <div className="grid grid-cols-4 mb-5">
           {pwArr.map((item, index)=>{return (<div key={index} className="text-center text-xl font-bold text-gray-800"> {'*'}</div>)})}
         </div>
