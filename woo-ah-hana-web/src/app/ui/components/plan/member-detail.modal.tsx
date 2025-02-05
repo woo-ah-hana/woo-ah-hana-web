@@ -98,48 +98,46 @@ export function MemberDetailDilog({
         <div className="text-start text-xl font-semibold mb-2 pl-3 pr-3">
           참여 인원 변경
         </div>
-        <div className="grid grid-cols1 gap-7 p-3">
-          <div>
-            <div className="flex flex-row">
-              <Image
-                src={IconClosing}
-                width={30}
-                height={30}
-                alt="Robot Icon"
-              />
-              <div className="text-start font-semibold mb-2 mt-2 ml-1">
-                현재 참여하는 사람들
-              </div>
+        <div className="grid grid-cols1 gap-2 p-3">
+          <div className="flex flex-row">
+            <Image
+              src={IconClosing}
+              width={30}
+              height={30}
+              alt="Robot Icon"
+            />
+            <div className="text-start font-semibold mb-2 mt-2 ml-1">
+              현재 참여하는 사람들
             </div>
-            <hr></hr>
-            <div className="grid grid-cols-1 gap-3 mx-3">
-              {planMembers.map((member, index) => {
-                return (
-                  <div key={index} className="grid grid-cols-[9fr_1fr]">
-                    <div className="mt-2">{member.name}</div>
-                    <AchromaticButton
-                      variant={"ghost"}
-                      onClick={() => {
-                        handleRemoveMember(member);
-                      }}
-                    >
-                      삭제
-                    </AchromaticButton>
-                  </div>
-                );
-              })}
-            </div>
+          </div>
+          <hr></hr>
+          <div className="grid grid-cols-1 gap-3 mx-3">
+            {planMembers.map((member, index) => {
+              return (
+                <div key={index} className="grid grid-cols-[9fr_1fr]">
+                  <div className="mt-2">{member.name}</div>
+                  <AchromaticButton
+                    variant={"outline"}
+                    onClick={() => {
+                      handleRemoveMember(member);
+                    }}
+                  >
+                    삭제
+                  </AchromaticButton>
+                </div>
+              );
+            })}
           </div>
 
           <div>
             <hr></hr>
-            <div className="flex flex-row mt-2">
+            <div className="flex flex-row my-3">
               <BsPlusLg className="text-gray-600 bg-gray-100 rounded-full text-2xl mt-1 p-1 mx-1" />
               <div className="text-start font-semibold mb-2 ml-1 mx-2 mt-2">
                 초대하기
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-3 mx-3">
+            <div className="grid grid-cols-1 gap-2 mx-3">
               {communityMembers.map((member, index) => {
                 if (
                   !planMembers
@@ -152,7 +150,7 @@ export function MemberDetailDilog({
                     <div key={index} className="grid grid-cols-[9fr_1fr]">
                       <div className="mt-2">{member.name}</div>
                       <AchromaticButton
-                        variant={"ghost"}
+                        variant={"outline"}
                         onClick={() => {
                           handleAddMember(member);
                         }}

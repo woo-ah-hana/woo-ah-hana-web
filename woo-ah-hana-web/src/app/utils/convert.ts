@@ -8,7 +8,7 @@ export function convertTommdd(date:string) : string{
 }
 
 export function convertDateWithoutYear(date: string): string{
-  return `${date.substring(5,7)}월${date.substring(8,10)}일`
+  return `${date.substring(5,7)}월 ${date.substring(8,10)}일`
 }
 
 export function convertBankNameToCode(name: BankName): BankCode | undefined{
