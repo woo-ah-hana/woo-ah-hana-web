@@ -92,31 +92,36 @@ export default function Deposit() {
           <div className="flex flex-col gap-10">
             <div className="border-none shadow-none">
               <div className="flex items-end gap-1">
-                <div className="text-2xl font-semibold">내 통장</div>
-                <div className="text-xl">에서</div>
+                <div className="text-3xl font-semibold">내 통장</div>
+                <div className="text-2xl">에서</div>
               </div>
-              <p className="text-sm text-gray-400">
+              <p className="text-lg text-gray-400">
                 출금 가능 금액{" "}
                 {depositInfoData?.memberAccountBalance.toLocaleString("ko-KR")}
                 원
               </p>
             </div>
-            <div className="border-none shadow-none">
-              <span className="text-md">
+            <div className="border-none shadow-none mb-28">
+              <span className="text-lg">
                 {depositInfoData?.communityAccountName}{" "}
               </span>
-              <h1 className="text-2xl">
-                {depositInfoData?.communityAccountBank} 모임통장
-                <span className="text-lg">으로</span>
-              </h1>
-              <p className="text-sm text-gray-400">
-                계좌번호 {depositInfoData?.communityAccountNumber}
-              </p>
+              <div className="text-3xl mt-2">
+                <div className="flex flex-row items-end">
+                  <div className="font-semibold">
+                    {depositInfoData?.communityAccountBank} 모임통장
+                  </div>
+                  <span className="text-xl">으로</span>
+                </div>
+                <p className="text-lg text-gray-400 font-light">
+                  계좌번호 {depositInfoData?.communityAccountNumber}
+                </p>
+              </div>
             </div>
+
             <Card className="border-none shadow-none">
               <TextInput
                 placeholder="얼마나 옮길까요?"
-                className="border-none w-full"
+                className="w-full"
                 type={"number"}
                 onValueChange={handleAmountChange}
               ></TextInput>

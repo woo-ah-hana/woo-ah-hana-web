@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { Suspense, useState } from 'react';
-import RecapContent from './content';
+import React, { Suspense, useState } from "react";
+import RecapContent from "./content";
 
 export default function RecapCarousel() {
   const now = new Date();
@@ -26,7 +26,10 @@ export default function RecapCarousel() {
       const newQuarter = prev.quarter === 4 ? 1 : prev.quarter + 1;
       const newYear = prev.quarter === 4 ? prev.year + 1 : prev.year;
 
-      if (newYear > currentYear || (newYear === currentYear && newQuarter > currentQuarter)) {
+      if (
+        newYear > currentYear ||
+        (newYear === currentYear && newQuarter > currentQuarter)
+      ) {
         return prev;
       }
       return { year: newYear, quarter: newQuarter };
@@ -35,20 +38,26 @@ export default function RecapCarousel() {
 
   return (
     <div>
-      <div className='h-full flex flex-col p-5 bg-[#bed0fc]'>
-        <div className='flex justify-between items-center mb-3'>
-          <button onClick={handleLeftClick} className='px-4 py-2 rounded'>
+      <div className="h-full flex flex-col bg-gray-100">
+        <div className="flex justify-between items-center bg-white p-5">
+          <button
+            onClick={handleLeftClick}
+            className="px-4 py-2 rounded text-gray-400 focus:text-black"
+          >
             ◀
           </button>
-          <div className='text-xl'>
+          <div className="text-xl">
             {currentPeriod.year}년 {currentPeriod.quarter}분기
           </div>
-          <button onClick={handleRightClick} className='px-4 py-2 rounded'>
+          <button
+            onClick={handleRightClick}
+            className="px-4 py-2 rounded  text-gray-400 focus:text-black"
+          >
             ▶
           </button>
         </div>
 
-        <div className='flex flex-col items-center justify-center border-t pt-5'>
+        <div className="flex flex-col items-center justify-center border-t">
           <Suspense>
             <RecapContent
               year={currentPeriod.year}
