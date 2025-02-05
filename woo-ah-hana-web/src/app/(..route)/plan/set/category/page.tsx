@@ -57,7 +57,7 @@ export default function SetCategory() {
       <div className="flex flex-col p-6">
         <div className="flex flex-col gap-20 min-h-[calc(100vh-10rem)]">
           <div className="mb-6 gap-4">
-            <TitleDisplay mainTitle="일정의 목적을" subTitle="선택해주세요." />
+            <TitleDisplay mainTitle="일정의 목적을" subTitle="선택해 주세요." />
             <CategoryMenu
               categories={categories}
               selectedCategory={selectedCategory}

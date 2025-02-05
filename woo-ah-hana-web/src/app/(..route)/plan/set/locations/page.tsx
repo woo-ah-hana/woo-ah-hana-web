@@ -9,6 +9,7 @@ import { useState } from "react";
 import AchromaticButton from "@/app/ui/atom/button/achromatic-button";
 import Link from "next/link";
 import TitleDisplay from "@/app/ui/components/plan/set-title-display";
+import Header from "@/app/ui/components/header";
 
 export default function SetLocation() {
   const { plan, updatePlan } = usePlanContext();
@@ -54,64 +55,70 @@ export default function SetLocation() {
   };
 
   return (
-    <div className="flex flex-col p-6">
-      <div className="flex flex-col gap-20 min-h-[calc(100vh-10rem)]">
-        <div className="mb-6 gap-4">
-          <TitleDisplay
-            mainTitle="만나고 싶은 지역, 장소를"
-            subTitle="입력해주세요."
-          />
-          <div className="text-gray-600 flex gap-2 text-xs">
-            <HiLightBulb />
-            최소 1개 이상 입력해야 하며, 최대 3개까지 가능합니다.
-          </div>
+    <div>
+      <Header
+          title="모임 일정 생성"
+          link={`/plan?id=${plan.getCommunityId()}`}
+      />
+      <div className="flex flex-col p-6">
+        <div className="flex flex-col gap-20 min-h-[calc(100vh-10rem)]">
+          <div className="mb-6 gap-4">
+            <TitleDisplay
+              mainTitle="만나고 싶은 지역, 장소를"
+              subTitle="입력해 주세요."
+            />
+            <div className="text-gray-600 flex gap-2 text-xs">
+              <HiLightBulb />
+              최소 1개 이상 입력해야 하며, 최대 3개까지 가능합니다.
+            </div>
 
-          {/* 장소 입력 필드 */}
-          <div className="flex flex-col gap-4 mb-6">
-            {locations.map((location, index) => (
-              <div key={index} className="flex items-center gap-4">
-                <TextInput
-                  value={location}
-                  onValueChange={(value) => handleLocationChange(index, value)}
-                  placeholder={`장소 ${index + 1}`}
-                  className="flex-1"
-                />
-                {locations.length > 1 && (
-                  <button
-                    onClick={() => handleRemoveLocation(index)}
-                    className="text-white bg-gray-400 rounded-full p-2 shadow-md"
-                    title="삭제"
-                  >
-                    <FiMinus />
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
+            {/* 장소 입력 필드 */}
+            <div className="flex flex-col gap-4 mb-6">
+              {locations.map((location, index) => (
+                <div key={index} className="flex items-center gap-4">
+                  <TextInput
+                    value={location}
+                    onValueChange={(value) => handleLocationChange(index, value)}
+                    placeholder={`장소 ${index + 1}`}
+                    className="flex-1"
+                  />
+                  {locations.length > 1 && (
+                    <button
+                      onClick={() => handleRemoveLocation(index)}
+                      className="text-white bg-gray-400 rounded-full p-2 shadow-md"
+                      title="삭제"
+                    >
+                      <FiMinus />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
 
-          {/* 추가 버튼 */}
-          {locations.length < 3 && (
-            <AchromaticButton onClick={handleAddLocation} className="mb-6">
-              장소 추가
-            </AchromaticButton>
-          )}
+            {/* 추가 버튼 */}
+            {locations.length < 3 && (
+              <AchromaticButton onClick={handleAddLocation} className="mb-6">
+                장소 추가
+              </AchromaticButton>
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* 다음 버튼 */}
-      <Link
-        href={{
-          pathname: "/plan/set/members",
-          query: { id: plan.getCommunityId() }, // communityId는 해당 아이디 값
-        }}
-      >
-        <AchromaticButton
-          onClick={handleUpdate}
-          className="w-full h-12 flex justify-center items-center"
+        {/* 다음 버튼 */}
+        <Link
+          href={{
+            pathname: "/plan/set/members",
+            query: { id: plan.getCommunityId() }, // communityId는 해당 아이디 값
+          }}
         >
-          다음
-        </AchromaticButton>
-      </Link>
+          <AchromaticButton
+            onClick={handleUpdate}
+            className="w-full h-12 flex justify-center items-center"
+          >
+            다음
+          </AchromaticButton>
+        </Link>
+      </div>
     </div>
   );
 }
