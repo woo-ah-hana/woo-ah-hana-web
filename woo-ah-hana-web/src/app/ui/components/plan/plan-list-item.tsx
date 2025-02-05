@@ -50,7 +50,7 @@ export function PlanListItem({
                     className="p-1"
                   />
                 </div>
-                <div className="flex flex-col justify-center items-start py-2 gap-2">
+                <div className="flex flex-col justify-center items-start py-2 gap-2 ml-2">
                   <div className="text-[20px] font-semibold">{title}</div>
                   <div className="flex flex-col text-base">
                     <div>
@@ -69,6 +69,11 @@ export function PlanListItem({
                       `}
                     </div>
                   </div>
+                  <div className="text-slate-600 text-base font-medium text-start pb-1">
+              {locations.map((location, index) => (
+                <span key={index}>{`#${location}  `}</span>
+              ))}
+            </div>
                 </div>
               </div>
               <div className="flex justify-center items-start">
@@ -96,11 +101,6 @@ export function PlanListItem({
                   </div>
                 </Form>
               </div>
-            </div>
-            <div className="text-slate-600 text-base font-medium text-center pb-1">
-              {locations.map((location, index) => (
-                <span key={index}>{`#${location}  `}</span>
-              ))}
             </div>
           </div>
         </Card>
