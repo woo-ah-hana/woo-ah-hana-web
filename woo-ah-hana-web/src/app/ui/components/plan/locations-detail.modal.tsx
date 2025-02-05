@@ -92,12 +92,12 @@ export function LocationsDetailDilog({
 
           <div>
             <div className="mb-5">
-              <div className="mt-3 font-bold mb-1">모임 장소 추가</div>
+              <div className="mt-3 font-bold mb-1 text-lg">모임 장소 추가</div>
 
-              <div className="text-xs text-gray-600">
+              <div className="text-[15px] text-gray-600">
                 여러분의 특별한 공간을 추가해 보세요.
               </div>
-              <div className="text-xs text-gray-600">
+              <div className="text-[15px] text-gray-600">
                 모임 장소를 추가하면 참석자들과 더 쉽게 공유할 수 있어요.
               </div>
             </div>

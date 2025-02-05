@@ -5,7 +5,6 @@ import { Card } from "../../molecule/card/card";
 import { categoryColors, categoryIcons } from "../../atom/category/category";
 import React from "react";
 import Image from "next/image";
-import IconDelete from "../../../assets/img/icon-delete.svg";
 import Form from "../../molecule/form/form-index";
 import { deletePlan } from "@/app/business/plan/plan.service";
 
@@ -31,12 +30,10 @@ export function PlanListItem({
   const iconSrc = categoryIcons[category];
   const bgColor = categoryColors[category];
 
-  const today = new Date();
-  const isPast = new Date(endDate) < today;
   return (
     <main>
       <Link href={`plan/detail?community=${communityId}&id=${planId}`}>
-        <Card className={`${bgColor} rounded-full border-none p-1`}>
+        <Card className={`${bgColor} rounded-full border-none p-1 cursor-pointer shadow-md hover:shadow-lg`}>
           <div className="flex justify-between">
             <div className="flex">
               <div className="flex flex-row justify-center items-center ml-2 mr-1">
@@ -71,14 +68,13 @@ export function PlanListItem({
                       `}
                   </div>
                 </div>
-                <div className="text-slate-600 text-base font-light">
+                <div className="text-slate-600 text-base font-medium">
                   {locations.map((location, index) => (
                     <span key={index}>{`#${location}  `}</span>
                   ))}
                 </div>
               </div>
             </div>
-            {!isPast && (
               <div className="flex justify-center items-center py-7 px-2">
                 <Form
                   id={"delete-post"}
@@ -104,7 +100,6 @@ export function PlanListItem({
                   </div>
                 </Form>
               </div>
-            )}
           </div>
         </Card>
       </Link>
