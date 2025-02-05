@@ -56,7 +56,7 @@ export function PlanDetail({
           />
           <div>
             <div className="text-xs text-gray-500">일정</div>
-            <div className="text-sm">
+            <div className="text-base">
               {convertDateWithoutYear(startDate)} ~{" "}
               {convertDateWithoutYear(endDate)}
             </div>
@@ -93,9 +93,14 @@ export function PlanDetail({
           />
           <div>
             <div className="text-xs text-gray-500">장소</div>
-            <div className="text-base">{`${locations[0]} 외 ${
-              locations.length - 1
-            }`}</div>
+            <div className="text-base">
+              {locations.length > 0 ? (
+                  locations.length > 1
+                      ? `${locations[0]} 외 ${locations.length - 1}`
+                      : `${locations[0]}`
+              ) : (
+                  '장소를 추가해 주세요.'
+              )}</div>
           </div>
           <LocationsDetailDilog id={id} locations={locations} />
         </CardContent>
