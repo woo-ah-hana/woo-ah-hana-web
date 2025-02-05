@@ -82,6 +82,19 @@ body {
   visibility: hidden !important;
 }
 
+.ant-picker-panels > *:first-child button.ant-picker-header-next-btn {
+  visibility: visible !important;
+}
+.ant-picker-panels > *:first-child button.ant-picker-header-super-next-btn {
+  visibility: visible !important;
+}
+.ant-picker-panels > *:last-child {
+  display: none;
+}
+.ant-picker-footer-extra > div {
+  flex-wrap: wrap !important;
+}
+
 .ant-message {
   position: absolute;
   top: 35px !important;

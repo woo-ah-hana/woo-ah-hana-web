@@ -4,7 +4,7 @@ import dayjs, { Dayjs } from "dayjs";
 
 interface CalendarProps {
   label?: string;
-  placeholder?: string;
+  placeholder?: string[];
   className?: string;
   value?: [Date | null, Date | null];
   onChange?: (value: [Date | null, Date | null]) => void;
@@ -12,7 +12,7 @@ interface CalendarProps {
 
 export function Calendar({
   label,
-  placeholder = "Select date",
+  placeholder = ['시작일', '종료일'],
   className,
   value,
   onChange,
@@ -51,7 +51,7 @@ export function Calendar({
             : null
         }
         onChange={handleDateChange}
-        placeholder={[placeholder, placeholder]}
+        placeholder={[placeholder[0], placeholder[1]]}
         className={`w-full rounded-lg border border-gray-300 p-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${className}`}
         format="YYYY-MM-DD"
         allowClear={true}

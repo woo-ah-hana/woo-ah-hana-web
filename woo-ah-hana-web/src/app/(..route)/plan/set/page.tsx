@@ -50,7 +50,7 @@ export default function SetTitle() {
         >
           <div className="flex flex-col gap-20 min-h-[calc(100vh-10rem)]">
             <div className="mb-6">
-              <TitleDisplay mainTitle="일정 제목을" subTitle="입력해주세요." />
+              <TitleDisplay mainTitle="일정 제목을" subTitle="입력해 주세요." />
               <Form.TextInput
                 id="title"
                 placeholder="ex) 성수 맛집 탐방"

@@ -67,7 +67,7 @@ export default function SetMembers({ members }: { members: GetMembersDto[] }) {
           <div className='mb-6 gap-4'>
             <TitleDisplay
               mainTitle='해당 일정에 참여할 인원을'
-              subTitle='선택해주세요.'
+              subTitle='선택해 주세요.'
             />
 
             {selectedMembers.length > 0 && (

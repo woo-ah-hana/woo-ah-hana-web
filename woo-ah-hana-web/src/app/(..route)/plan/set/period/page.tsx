@@ -48,7 +48,7 @@ export default function SetPeriod() {
       <div className="flex flex-col p-6">
         <div className="flex flex-col gap-20 min-h-[calc(100vh-10rem)]">
           <div>
-            <TitleDisplay mainTitle="일정 기간을" subTitle="설정 해주세요" />
+            <TitleDisplay mainTitle="일정 기간을" subTitle="설정해 주세요." />
             <div className="p-0 rounded-xl shadow-md border-none">
               <Calendar value={dates} onChange={handleDateChange} />
             </div>
