@@ -68,7 +68,7 @@ export function PlanListItem({
                       `}
                   </div>
                 </div>
-                <div className="text-slate-600 text-base">
+                <div className="text-slate-600 text-base font-medium">
                   {locations.map((location, index) => (
                     <span key={index}>{`#${location}  `}</span>
                   ))}
