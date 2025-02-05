@@ -52,21 +52,21 @@ export function DateDetailDilog({ id }: DateDetailDilogProps) {
             />
             <div className="grid grid-cols-1 gap-2 text-lg text-slate-500">
               <div className="grid grid-cols-[2fr_4fr]">
-                <div className="text-left p-3 text-sm">시작 일:</div>
+                <div className="text-left p-3 text-base">시작 일:</div>
                 <input
                   type="date"
                   name="start-date"
                   id="start-date"
-                  className="border-none text-sm"
+                  className="border-none text-base"
                 />
               </div>
               <div className="grid grid-cols-[2fr_4fr]">
-                <div className="text-left p-3 text-sm">종료 일:</div>
+                <div className="text-left p-3 text-base">종료 일:</div>
                 <input
                   type="date"
                   name="end-date"
                   id="end-date"
-                  className="border-none text-sm"
+                  className="border-none text-base"
                 />
               </div>
             </div>
