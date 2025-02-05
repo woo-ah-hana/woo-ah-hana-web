@@ -98,7 +98,7 @@ export function MemberDetailDilog({
         <div className="text-start text-xl font-semibold mb-2 pl-3 pr-3">
           참여 인원 변경
         </div>
-        <div className="grid grid-cols1 gap-2 p-3">
+        <div className="grid grid-cols1 gap-3 p-3">
           <div className="flex flex-row">
             <Image
               src={IconClosing}
@@ -111,7 +111,7 @@ export function MemberDetailDilog({
             </div>
           </div>
           <hr></hr>
-          <div className="grid grid-cols-1 gap-3 mx-3">
+          <div className="grid grid-cols-1 gap-2 mx-3">
             {planMembers.map((member, index) => {
               return (
                 <div key={index} className="grid grid-cols-[9fr_1fr]">
@@ -137,7 +137,7 @@ export function MemberDetailDilog({
                 초대하기
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-2 mx-3">
+            <div className="grid grid-cols-1 gap-3 mx-3">
               {communityMembers.map((member, index) => {
                 if (
                   !planMembers
