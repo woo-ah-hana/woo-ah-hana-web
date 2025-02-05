@@ -174,16 +174,14 @@ export default function RecapContent({ year, quarter }: Props) {
   };
 
   return (
-    <div className="flex flex-col w-screen text-xl gap-6 mb-20">
+    <div className="flex flex-col w-screen text-xl gap-6">
       <div className="flex flex-col gap-10 bg-white p-5 pb-20">
         <div className="text-center font-medium text-2xl mt-10">
-          {year}년 {quarter}분기에 함께한 일정
-        </div>
-        <div className="w-full justify-center flex">
+          {year}년 {quarter}분기에 함께한 일정{" "}
           <Image src={TotalPlan} width={500} alt="" className="rounded-full" />
         </div>
         <div className="text-center text-[28px] font-semibold">
-          {recapData?.numberOfPlans}회
+          총 {recapData?.numberOfPlans}회
         </div>
         <FadeInCard className="py-5 px-8 flex flex-col gap-3">
           {recapData?.planInfoList?.map(
