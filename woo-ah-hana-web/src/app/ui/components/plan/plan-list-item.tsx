@@ -55,7 +55,10 @@ export function PlanListItem({
                   <div className="flex flex-col text-base">
                     <div>
                       {startDate.substring(5, 10) == endDate.substring(5, 10)
-                        ? startDate.substring(5, 10)
+                        ? `${startDate.substring(2, 4)}.${startDate.substring(
+                              5,
+                              7
+                          )}.${startDate.substring(8, 10)}`
                         : `${startDate.substring(2, 4)}.${startDate.substring(
                             5,
                             7
