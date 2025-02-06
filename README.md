@@ -26,8 +26,6 @@
 7. [API 명세](#api-명세)
 8. [시스템 아키텍처](#시스템-아키텍처)
 9. [기능 소개](#기능-소개)
-    - [예시1](#예시1)
-    - [예시2](#예시2)
 <br>
 
 ## :orange_book: 프로젝트 개요
@@ -63,9 +61,12 @@
 - 여행
 - 동호회(취미, 관심사, 종교 등)
 - 가족 / 친척
+<br>
 
 ### 목적
-
+- 액티브 시니어들이 여가와 취미를 즐기며, 그들의 모임을 보다 체계적이고 효율적으로 관리할 수 있도록 도울 수 있습니다. <br>
+- 모임의 일정 조율이 쉽고, AI 기반 플래너로 계획을 세우는 데 도움을 주어 시니어들이 더 즐겁고 편리한 사회적 활동을 할 수 있도록 지원합니다.<br>
+- 추억 앨범 기능을 통해 소중한 순간들을 기록하고 공유할 수 있게 하고, 모임 결산 기능을 통해 재정적으로도 투명하게 모임을 관리할 수 있습니다.<br>
 
 ### 기대 효과
 | **은행** | **고객** |
@@ -210,11 +211,31 @@
 - 일정별 영수증 조회
 <br>
 
-## :link: 링크
-:framed_picture: PPT : 
+### 모임 결산
+<img src="https://github.com/user-attachments/assets/7cad62cf-ea38-4fae-b4f4-283d606b0a3f" width="250">
+<img src="https://github.com/user-attachments/assets/b9cac689-e678-47f9-9127-907e86c3235c" width="250">
+<img src="https://github.com/user-attachments/assets/395992e0-2e57-44c7-85c2-809475474ea0" width="250">
 <br>
 
-:computer: 시연 영상 : https://youtu.be/C0O5_kJQFg4
+- 분기별 데이터 정리
+- 일정 및 추억 조회
+- 월별 사용 금액 조회
+<br>
+
+
+## :link: 링크
+:framed_picture: **PPT** : [우아하나 최종발표(PDF)](https://drive.google.com/file/d/1QNQQ7JWas---r99LsDRg2g5SinX_QyVw/view?usp=drive_link)
+<br>
+
+:computer: **시연 영상** : [우아하나 시연영상(YouTube)](https://youtu.be/C0O5_kJQFg4)
+
+<br>
+<br>
+
+
+
+:1st_place_medal: **팀 우아한 남매들 정말 고생 많으셨습니다! - 상현**
+
 
 
 ---
