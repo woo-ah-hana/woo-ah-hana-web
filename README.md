@@ -144,23 +144,81 @@
 
 
 ## :memo: 기능 소개 
+### 로그인, 회원가입
+<img src="https://github.com/user-attachments/assets/38d910d8-3e7b-4ca1-b78a-c7c0742b07ce" width="250">
+<img src="https://github.com/user-attachments/assets/f3d5a4cf-c1bd-431c-9ea2-25b56414944b" width="265">
 <br>
 
-### 기능 소개 여러개
-- 🏠 **예시1**  
-  - 예시1
-    
+- 전화번호, 비밀번호로 로그인
+- 전화번호로 SMS 인증, 계좌번호 1원 입금자명으로 계좌 인증을 수행
+<br>
 
+### 랜딩 페이지
+<img src="https://github.com/user-attachments/assets/db40f487-0cfb-4c94-8334-e71be5e5aa89" width="250">
+<br>
 
+- 최상단에 사용자가 속한 모임 목록이 헤더에 표시
+- 헤더에서 선택한 모임의 모임통장 정보
+- 모임을 새로 추가할 수 있는 '추가하기' 버튼
+<br>
 
+### 모임 통장 관리
+![image](https://github.com/user-attachments/assets/ed6033f7-f24a-4446-9063-1396b8da4ab7)
+<br>
 
+- Dropdown으로 거래내역 조회 단위 설정(1개월, 3개월, 6개월)
+- 이번 달 회원들의 회비 입금 누적 금액 / 미납 회원에게 회비 요청 알림 전송(FCM)
+- 계주에게 회비 금액/주기 설정 권한, 새로운 회원 초대 가능
+<br>
+
+### 개인 통장 관리
+![image](https://github.com/user-attachments/assets/e3bbdcfa-cafc-461f-9046-baf74202ef6b)
+<br>
+
+- 계주가 설정한 회비 금액/주기로 자동이체 설정
+- 개인 계좌 변경(인증 필요)
+<br>
+
+### 모임 일정 관리
+- **모임 생성**
+  <br>
+  <img src="https://github.com/user-attachments/assets/9fc2f4e4-66de-44c5-b20f-7ab602102144" width="260">
+  <img src="https://github.com/user-attachments/assets/a6247c3f-ea7c-42cf-964a-780c23b762e7" width="250">
+  <br>
+  
+  ![image](https://github.com/user-attachments/assets/52463e05-9aad-4df3-8b88-a85a29324625)
+  <br>
+  
+- **모임 일정 목록**
+  <br>
+  <img src="https://github.com/user-attachments/assets/ceed0870-5811-4dd6-95a4-86c2f3fcf82a" width="250">
+
+### AI 플래너
+![image](https://github.com/user-attachments/assets/78871b53-5718-4b21-99c7-a7b7e18196ab)
+<br>
+
+- 음성으로 일정 계획 요청사항을 입력(STT)
+- 생성된 AI 계획을 수락하여 저장하거나, 다시 명령(credit 소진)
+- AI 계획에서 방문하는 장소가 네이버 지도에 pin 됨
+
+### 추억 앨범
+![image](https://github.com/user-attachments/assets/b5a22743-c4c4-4390-bdc8-7731880359e0)
+<br>
+
+- 지난 모임 일정(추억) 조회
+- 게시글 작성 및 이미지 업로드 기능
+- 일정별 영수증 조회
+<br>
+
+## :link: 링크
+:framed_picture: PPT : 
+<br>
+
+:computer: 시연 영상 : https://youtu.be/C0O5_kJQFg4
 
 
 ---
 
-### 예시2
-- 💳 **예시2**  
-  - 예시2
 
 
 
